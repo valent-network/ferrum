@@ -59,9 +59,8 @@ buck-out/
 /ios/Pods/
 
 # https://github.com/ueno-llc/react-native-starter/blob/master/appcenter-pre-build.sh#L19-L25
-# This should be encoded as base64 and set as ENV variable for codepush/appcenter
+# These files should be encoded as base64 and set as ENV variable for codepush/appcenter
 android/app/google-services.json
-
 android/app/src/main/assets/appcenter-config.json
 android/app/src/main/res/values/strings.xml
 ios/recario/AppCenter-Config.plist
