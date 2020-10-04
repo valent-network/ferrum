@@ -1,6 +1,6 @@
 {
   "name": "recario",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -22,7 +22,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-fast-compare": "^3.2.0",
-    "react-native": "0.63.2",
+    "react-native": "0.63.3",
     "react-native-code-push": "^6.3.0",
     "react-native-contacts": "^5.2.5",
     "react-native-device-info": "^5.6.2",
