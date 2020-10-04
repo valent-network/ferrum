@@ -1,0 +1,12 @@
+platform :ios, '10.0'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+
+target 'recario' do
+
+  config = use_native_modules!
+  pod 'Permission-Contacts', :path => "../node_modules/react-native-permissions/ios//Contacts.podspec"
+  use_react_native!(:path => config["reactNativePath"])
+
+end
+

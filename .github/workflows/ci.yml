@@ -1,0 +1,41 @@
+name: Main
+
+on:
+  push:
+    branches: [ codepush ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Copy android/app/google-services.json
+      run: echo ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }} | base64 --decode > android/app/google-services.json
+
+    - name: Copy android/app/src/main/assets/appcenter-config.json
+      run: echo ${{ secrets.APP_CENTER_CONFIG_JSON }} | base64 --decode > android/app/src/main/assets/appcenter-config.json
+
+    - name: Copy ios/recario/AppCenter-Config.plist
+      run: echo ${{ secrets.APP_CENTER_CONFIG_PLIST }} | base64 --decode > ios/recario/AppCenter-Config.plist
+
+    - name: Copy android/app/src/main/res/values/strings.xml
+      run: echo ${{ secrets.STRINGS_XML }} | base64 --decode > android/app/src/main/res/values/strings.xml
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Deploy to Codepush (Android)
+      uses: NishanthShankar/codepush-action@master
+      with:
+        args: release-react -d Production -a viktorvsk/recario-1
+      env:
+        APPCENTER_ACCESS_TOKEN: ${{ secrets.APP_CENTER_ACCESS_TOKEN }}
+
+    - name: Deploy to Codepush (iOS)
+      uses: NishanthShankar/codepush-action@master
+      with:
+        args: release-react -d Production -a viktorvsk/recario
+      env:
+        APPCENTER_ACCESS_TOKEN: ${{ secrets.APP_CENTER_ACCESS_TOKEN }}

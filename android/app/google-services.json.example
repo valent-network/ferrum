@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "${GOOGLE_SERVICES_PROJECT_NUMBER}",
+    "firebase_url": "https://recario.firebaseio.com",
+    "project_id": "recario",
+    "storage_bucket": "recario.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:${GOOGLE_SERVICES_PROJECT_NUMBER}:android:${GOOGLE_SERVICES_MOBILE_SDK_APP_ID_KEY}",
+        "android_client_info": {
+          "package_name": "com.viktorvsk.recario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "${GOOGLE_SERVICES_PROJECT_NUMBER}-${GOOGLE_SERVICES_CLIENT_ID_KEY}.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "${GOOGLE_SERVICES_CURRENT_KEY}"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "${GOOGLE_SERVICES_PROJECT_NUMBER}-${GOOGLE_SERVICES_CLIENT_ID_KEY}.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

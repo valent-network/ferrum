@@ -1,0 +1,421 @@
+Searching 1156 files for "com.viktorvsk.com" (case sensitive)
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/BUCK:
+   36  android_build_config(
+   37      name = "build_config",
+   38:     package = "com.viktorvsk.com",
+   39  )
+   40  
+   41  android_resource(
+   42      name = "res",
+   43:     package = "com.viktorvsk.com",
+   44      res = "src/main/res",
+   45  )
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build.gradle:
+  130  
+  131      defaultConfig {
+  132:         applicationId "com.viktorvsk.com"
+  133          minSdkVersion rootProject.ext.minSdkVersion
+  134          targetSdkVersion rootProject.ext.targetSdkVersion
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/generated/source/buildConfig/debug/com/recario/BuildConfig.java:
+    2   * Automatically generated file. DO NOT MODIFY
+    3   */
+    4: package com.viktorvsk.com;
+    5  
+    6  public final class BuildConfig {
+    7    public static final boolean DEBUG = Boolean.parseBoolean("true");
+    8:   public static final String APPLICATION_ID = "com.viktorvsk.com";
+    9    public static final String BUILD_TYPE = "debug";
+   10    public static final int VERSION_CODE = 1;
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/generated/source/buildConfig/release/com/viktorvsk/recario/BuildConfig.java:
+    6  public final class BuildConfig {
+    7    public static final boolean DEBUG = false;
+    8:   public static final String APPLICATION_ID = "com.viktorvsk.com";
+    9    public static final String BUILD_TYPE = "release";
+   10    public static final int VERSION_CODE = 1;
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/bundle_manifest/debug/bundle-manifest/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:versionCode="1"
+    5      android:versionName="1.0" >
+    .
+   42  
+   43      <application
+   44:         android:name="com.viktorvsk.com.MainApplication"
+   45          android:allowBackup="false"
+   46          android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+   ..
+   52          android:usesCleartextTraffic="true" >
+   53          <activity
+   54:             android:name="com.viktorvsk.com.MainActivity"
+   55              android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+   56              android:label="@string/app_name"
+   ..
+   83          <provider
+   84              android:name="com.imagepicker.FileProvider"
+   85:             android:authorities="com.viktorvsk.com.provider"
+   86              android:exported="false"
+   87              android:grantUriPermissions="true" >
+   ..
+  174          <provider
+  175              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  176:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  177              android:exported="false"
+  178              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/bundle_manifest/debug/bundle-manifest/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/bundle_manifest/release/bundle-manifest/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:versionCode="1"
+    5      android:versionName="1.0" >
+    .
+   82          <provider
+   83              android:name="com.imagepicker.FileProvider"
+   84:             android:authorities="com.viktorvsk.com.provider"
+   85              android:exported="false"
+   86              android:grantUriPermissions="true" >
+   ..
+  173          <provider
+  174              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  175:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  176              android:exported="false"
+  177              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/bundle_manifest/release/bundle-manifest/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/compatible_screen_manifest/debug/out/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": []
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/compatible_screen_manifest/release/out/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": []
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/dex/release/mergeDexRelease/classes.dex:
+    <binary>
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:targetSandboxVersion="2"
+    5      android:versionCode="1"
+    .
+   43  
+   44      <application
+   45:         android:name="com.viktorvsk.com.MainApplication"
+   46          android:allowBackup="false"
+   47          android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+   ..
+   53          android:usesCleartextTraffic="true" >
+   54          <activity
+   55:             android:name="com.viktorvsk.com.MainActivity"
+   56              android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+   57              android:label="@string/app_name"
+   ..
+   84          <provider
+   85              android:name="com.imagepicker.FileProvider"
+   86:             android:authorities="com.viktorvsk.com.provider"
+   87              android:exported="false"
+   88              android:grantUriPermissions="true" >
+   ..
+  175          <provider
+  176              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  177:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  178              android:exported="false"
+  179              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/instant_app_manifest/debug/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/instant_app_manifest/release/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:targetSandboxVersion="2"
+    5      android:versionCode="1"
+    .
+   83          <provider
+   84              android:name="com.imagepicker.FileProvider"
+   85:             android:authorities="com.viktorvsk.com.provider"
+   86              android:exported="false"
+   87              android:grantUriPermissions="true" >
+   ..
+  174          <provider
+  175              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  176:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  177              android:exported="false"
+  178              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/instant_app_manifest/release/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/legacy_multidex_aapt_derived_proguard_rules/debug/manifest_keep.txt:
+    1  -keep class androidx.core.app.CoreComponentFactory { <init>(); }
+    2: -keep class com.viktorvsk.com.MainApplication { <init>(); }
+    3  
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt:
+    1  1<?xml version="1.0" encoding="utf-8"?>
+    2  2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3: 3    package="com.viktorvsk.com"
+    4  4    android:versionCode="1"
+    5  5    android:versionName="1.0" >
+    .
+   93  43    <application
+   94  43-->/Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:9:5-33:19
+   95: 44        android:name="com.viktorvsk.com.MainApplication"
+   96  44-->/Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:10:7-38
+   97  45        android:allowBackup="false"
+   ..
+  112  53        <activity
+  113  53-->/Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:16:7-31:18
+  114: 54            android:name="com.viktorvsk.com.MainActivity"
+  115  54-->/Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:17:9-37
+  116  55            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+  ...
+  172  84            android:name="com.imagepicker.FileProvider"
+  173  84-->[:react-native-image-picker] /Users/viktorvsk/dev/recario-project/recarioapp/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-56
+  174: 85            android:authorities="com.viktorvsk.com.provider"
+  175  85-->[:react-native-image-picker] /Users/viktorvsk/dev/recario-project/recarioapp/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-60
+  176  86            android:exported="false"
+  ...
+  339  175            android:name="com.google.firebase.provider.FirebaseInitProvider"
+  340  175-->[com.google.firebase:firebase-common:19.3.0] /Users/viktorvsk/.gradle/caches/transforms-2/files-2.1/249831f38ea311b2f78d24ed92733b44/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+  341: 176            android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  342  176-->[com.google.firebase:firebase-common:19.3.0] /Users/viktorvsk/.gradle/caches/transforms-2/files-2.1/249831f38ea311b2f78d24ed92733b44/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+  343  177            android:exported="false"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/manifest_merge_blame_file/release/manifest-merger-blame-release-report.txt:
+    1  1<?xml version="1.0" encoding="utf-8"?>
+    2  2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3: 3    package="com.viktorvsk.com"
+    4  4    android:versionCode="1"
+    5  5    android:versionName="1.0" >
+    .
+  170  83            android:name="com.imagepicker.FileProvider"
+  171  83-->[:react-native-image-picker] /Users/viktorvsk/dev/recario-project/recarioapp/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:13-56
+  172: 84            android:authorities="com.viktorvsk.com.provider"
+  173  84-->[:react-native-image-picker] /Users/viktorvsk/dev/recario-project/recarioapp/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:13-60
+  174  85            android:exported="false"
+  ...
+  337  174            android:name="com.google.firebase.provider.FirebaseInitProvider"
+  338  174-->[com.google.firebase:firebase-common:19.3.0] /Users/viktorvsk/.gradle/caches/transforms-2/files-2.1/249831f38ea311b2f78d24ed92733b44/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+  339: 175            android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  340  175-->[com.google.firebase:firebase-common:19.3.0] /Users/viktorvsk/.gradle/caches/transforms-2/files-2.1/249831f38ea311b2f78d24ed92733b44/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+  341  176            android:exported="false"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:versionCode="1"
+    5      android:versionName="1.0" >
+    .
+   42  
+   43      <application
+   44:         android:name="com.viktorvsk.com.MainApplication"
+   45          android:allowBackup="false"
+   46          android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+   ..
+   52          android:usesCleartextTraffic="true" >
+   53          <activity
+   54:             android:name="com.viktorvsk.com.MainActivity"
+   55              android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+   56              android:label="@string/app_name"
+   ..
+   83          <provider
+   84              android:name="com.imagepicker.FileProvider"
+   85:             android:authorities="com.viktorvsk.com.provider"
+   86              android:exported="false"
+   87              android:grantUriPermissions="true" >
+   ..
+  174          <provider
+  175              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  176:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  177              android:exported="false"
+  178              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/merged_manifests/debug/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:
+    1  <?xml version="1.0" encoding="utf-8"?>
+    2  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    3:     package="com.viktorvsk.com"
+    4      android:versionCode="1"
+    5      android:versionName="1.0" >
+    .
+   82          <provider
+   83              android:name="com.imagepicker.FileProvider"
+   84:             android:authorities="com.viktorvsk.com.provider"
+   85              android:exported="false"
+   86              android:grantUriPermissions="true" >
+   ..
+  173          <provider
+  174              android:name="com.google.firebase.provider.FirebaseInitProvider"
+  175:             android:authorities="com.viktorvsk.com.firebaseinitprovider"
+  176              android:exported="false"
+  177              android:initOrder="100" />
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/merged_manifests/release/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "AndroidManifest.xml",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/metadata_feature_manifest/debug/metadata-feature/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/metadata_feature_manifest/release/metadata-feature/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/processed_res/debug/out/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "resources-debug.ap_",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/processed_res/release/out/output.json:
+    1  {
+    2    "version": 1,
+    3:   "applicationId": "com.viktorvsk.com",
+    4    "variantType": "BASE_APK",
+    5    "elements": [
+    .
+   20        "path": "resources-release.ap_",
+   21        "properties": {
+   22:         "packageId": "com.viktorvsk.com",
+   23          "split": "",
+   24          "minSdkVersion": "16"
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/project_dex_archive/release/out/com/viktorvsk/recario/BuildConfig.dex:
+    <binary>
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt:
+    1: com.viktorvsk.com
+    2  anim abc_fade_in
+    3  anim abc_fade_out
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/intermediates/symbol_list_with_package_name/release/package-aware-r.txt:
+    1: com.viktorvsk.com
+    2  anim abc_fade_in
+    3  anim abc_fade_out
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/outputs/apk/debug/output-metadata.json:
+    5      "kind": "Directory"
+    6    },
+    7:   "applicationId": "com.viktorvsk.com",
+    8    "variantName": "debug",
+    9    "elements": [
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/outputs/apk/release/output-metadata.json:
+    5      "kind": "Directory"
+    6    },
+    7:   "applicationId": "com.viktorvsk.com",
+    8    "variantName": "release",
+    9    "elements": [
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/build/outputs/logs/manifest-merger-debug-report.txt:
+  247  		ADDED from /Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:10:7-38
+  248  		ADDED from /Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:10:7-38
+  249: activity#com.viktorvsk.com.MainActivity
+  250  ADDED from /Users/viktorvsk/dev/recario-project/recarioapp/android/app/src/main/AndroidManifest.xml:16:7-31:18
+  251  	android:label
+
+/Users/viktorvsk/dev/recario-project/recarioapp/android/app/google-services.json:
+   11          "mobilesdk_app_id": "1:560444610829:android:9c3cb51f22cae985677844",
+   12          "android_client_info": {
+   13:           "package_name": "com.viktorvsk.com"
+   14          }
+   15        },
+
+67 matches across 33 files
