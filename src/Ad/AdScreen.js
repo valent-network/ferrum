@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl,
-  Linking,
   ScrollView,
   SafeAreaView,
   Share
@@ -33,8 +32,6 @@ import { styles } from './Styles';
 import CSS from '../Styles';
 
 export default class AdScreen extends React.PureComponent {
-  goToAdSource = () => Linking.openURL(this.props.ad.url)
-
   shareAction = () => {
     const { ad } = this.props;
 
@@ -67,14 +64,10 @@ export default class AdScreen extends React.PureComponent {
             <Text style={styles.title}>{ad.title}</Text>
 
             <View style={styles.oldPricesContainer}>
-
               {ad.prices.map((v, index) => (
                 <Text key={v[1]} style={styles.priceVersion}>{v[1]} $</Text>
               ))}
-
             </View>
-
-            <Text style={styles.price}>{ad.price} $</Text>
 
             {ad.deleted && (
               <View>
@@ -83,30 +76,18 @@ export default class AdScreen extends React.PureComponent {
               </View>
             )}
 
-            { currentAdFriends && currentAdFriends.length > 0 && <React.Fragment>
-                <View style={styles.separator}></View>
-                {askFriendsIsLoading ? <Spinner color={CSS.activeColor} /> : <AskFriend ad={ad} currentAdFriends={currentAdFriends} />}
-                <View style={styles.separator}></View>
-              </React.Fragment>
+            {currentAdFriends && currentAdFriends.length > 0 &&
+                (askFriendsIsLoading ?
+                  <Spinner color={CSS.activeColor} /> :
+                  <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
+                )
             }
-
 
             <OptionsList ad={ad} />
 
-            <View style={styles.separator}></View>
-
             <View style={styles.descriptionContainer}>
-              <H3>Описание</H3>
               <Text style={styles.descriptionText}>{ad.description}</Text>
             </View>
-          </View>
-
-          <View style={styles.separator}></View>
-
-
-          <View style={styles.sourceContainer} >
-            <Text onPress={this.goToAdSource}>Источник</Text>
-            <Icon onPress={this.goToAdSource} name='ios-open' style={styles.openIcon}/>
           </View>
         </ScrollView>
 

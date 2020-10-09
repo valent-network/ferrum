@@ -110,7 +110,7 @@ class ProfileScreen extends React.PureComponent {
 
               <ListItem noIndent>
                 <Left><Text>Книга контактов</Text></Left>
-                <Right><Text onPress={deleteContactsDispatched} style={{color: 'red'}}>Удалить</Text></Right>
+                <Right><Text onPress={deleteContactsDispatched} style={{color: CSS.activeColor}}>Удалить</Text></Right>
               </ListItem>
 
               <ListItem noIndent noBorder style={{backgroundColor: '#000'}}>
@@ -135,9 +135,9 @@ class ProfileScreen extends React.PureComponent {
                 </Right>
               </ListItem>
               <ListItem noIndent onPress={onSignOutDispatched}>
-                <Left><Text style={{color: 'red'}}>Выход</Text></Left>
+                <Left><Text style={{color: CSS.activeColor}}>Выход</Text></Left>
                 <Right>
-                  <Icon name='log-out-outline' style={{color: 'red'}} />
+                  <Icon name='log-out-outline' style={{color: CSS.activeColor}} />
                 </Right>
               </ListItem>
             </List>

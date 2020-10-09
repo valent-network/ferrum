@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   descriptionContainer: {
+    margin: 4,
     marginBottom: 16
   },
   contentContainer: {
@@ -29,14 +30,14 @@ export const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 24,
     marginBottom: 6,
     marginTop: 6,
     fontWeight: 'bold',
   },
   price: {
     color: '#85bb65',
-    fontSize: 24,
+    fontSize: 18,
     marginTop: 0,
     fontWeight: 'bold',
   },
@@ -85,5 +86,8 @@ export const styles = StyleSheet.create({
   },
   mainColor: {
     color: 'white'
+  },
+  image: {
+    height: 350
   }
 });

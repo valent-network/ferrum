@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, H3 } from 'native-base';
+import { Text, View } from 'native-base';
 
 export default class AskFriend extends React.PureComponent {
   render() {
@@ -16,10 +16,9 @@ export default class AskFriend extends React.PureComponent {
         {direct_friend && <Text>Разместил(а) {direct_friend.name}</Text>}
 
         {hasMutualFriends && notHand1FriendsOfFriends &&
-          <View>
-            <H3>Общие друзья</H3>
-            {notHand1FriendsOfFriends.map(f => <Text key={f.id}>{f.name}</Text>)}
-          </View>
+          <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 16, marginBottom: 12}}>
+            Общие друзья: {notHand1FriendsOfFriends.map(f => f.name).join(', ')}
+          </Text>
         }
       </View>
     );

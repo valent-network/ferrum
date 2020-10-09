@@ -11,12 +11,9 @@ export default class OptionsList extends React.PureComponent {
 
     return (
       <View style={{flexDirection:'row', flexWrap:'wrap', marginTop: 12, marginBottom: 12}}>
-
-
         {Object.keys(options).map((opt, index) => (
           <Text key={index} style={{borderWidth: 1, borderColor: '#fff', margin: 4, borderRadius: 2, fontSize: 12, padding: 6}} >{options[opt][0]}: {options[opt][1]}</Text>
         ))}
-
       </View>
     );
   }

@@ -72,27 +72,31 @@ const FeedFilters = (props) => {
     applyFilterDispatched('contacts_mode', valueToSet);
   }
 
+  const filterQueryResetDispatched = () => {
+    applyFilterDispatched('query', '');
+  }
+
   return (
     <View>
       {Platform.OS === 'android' &&
         <Fab direction="right" position="topRight" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
-          <Icon name='options' onPress={openContactsModeModal} />
+          <Icon name='funnel-outline' onPress={openContactsModeModal} />
+        </Fab>
+      }
+      {Platform.OS === 'android' && filtersPresent &&
+        <Fab direction="right" position="topLeft" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
+          <Icon name='close-outline' onPress={filterResetDispatched} />
         </Fab>
       }
       <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar rounded>
-        <Item>
-          <Icon name='ios-search' />
+        <Item style={{borderRadius: 8, backgroundColor: '#111'}}>
+          <Icon name='ios-search' style={{color: CSS.activeColor}}/>
           <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
+          {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}
         </Item>
         {Platform.OS == 'ios' && <Button transparent>
-          <Icon name='options' style={styles.activeColor} onPress={openContactsModeModal}/>
-          {filtersPresent && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterResetDispatched} />}
+          <Icon name={filtersPresent ? 'funnel' : 'funnel-outline'} style={styles.activeColor} onPress={openContactsModeModal}/>
         </Button>}
-        {Platform.OS === 'android' && filtersPresent &&
-          <Fab direction="right" position="topLeft" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
-            <Icon name='close-outline' onPress={filterResetDispatched} />
-          </Fab>
-        }
 
       </Header>
 
@@ -102,7 +106,12 @@ const FeedFilters = (props) => {
             <View style={styles.modalContainer}>
               <Content>
                 <Icon name='close-outline' onPress={closeContactsModeModal} style={styles.closeIcon}/>
-                <H1>Фильтры</H1>
+                <Item style={{borderBottomWidth: 0, marginTop: 12}}>
+                  <Left><H1>Фильтры</H1></Left>
+                  <Right>
+                    {filtersPresent && <Text onPress={filterResetDispatched}>Сбросить</Text>}
+                  </Right>
+                </Item>
 
                 <Form style={{paddingBottom: 96}}>
                  <H2 style={styles.filterTitle}>Цена, $</H2>
@@ -160,7 +169,7 @@ const FeedFilters = (props) => {
             </View>
           </KeyboardAwareScrollView>
           <View style={styles.submitButtonWrapper} >
-            <Button block light onPress={closeContactsModeModal}><Text>Поиск</Text></Button>
+            <Button block onPress={closeContactsModeModal} style={{ backgroundColor: CSS.activeColor }}><Text>Поиск</Text></Button>
           </View>
         </SafeAreaView>
       </Modal>
@@ -179,6 +188,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     filterResetDispatched: () => dispatch(resetFilters()),
+    filterQueryResetDispatched: () => dispatch(resetFilters()),
     applyFilterDispatched: (filterKey, filterValue) => dispatch(applyFilter(filterKey, filterValue))
   };
 }
@@ -239,7 +249,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   closeIcon: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    color: CSS.activeColor
   },
   switchFilter: {
     flexDirection: 'row',
