@@ -30,22 +30,17 @@ class UserContactsScreen extends React.PureComponent {
                                   userContactsAreUploading;
     const onUpdateQuery = (query) => {
       clearTimeout(this.typingTimer);
-      this.typingTimer = setTimeout(() => updateQueryDispatched(query), 500);
+      this.typingTimer = setTimeout(() => updateQueryDispatched(query), 200);
     }
 
     return (
       <Container>
         <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar>
-          <Item style={{borderRadius: 8, backgroundColor: '#111'}}>
+          <Item style={{borderRadius: 8, backgroundColor: '#111', marginTop: (Platform.OS === 'android' ? 16 : 0)}}>
             <Icon name='ios-search' style={{color: CSS.activeColor}}/>
             <Input placeholder='Имя...' style={styles.activeColor} onChangeText={onUpdateQuery} defaultValue={query}/>
-            {Platform.OS === 'ios' && query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
+            {query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
           </Item>
-          {Platform.OS === 'android' && query.length > 0 &&
-            <Fab direction="right" position="topRight" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
-              <Icon name='close-outline' onPress={this.resetQuery} />
-            </Fab>
-          }
         </Header>
         {showInitialProcessing ?
           <ContactsUploading />

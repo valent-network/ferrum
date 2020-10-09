@@ -18,6 +18,7 @@ export default function userReducer(state = initialState, action = {}) {
         ...state,
         name: action.name,
         avatar: action.avatar,
+        phoneNumber: action.phone_number,
         isLoading: false
       }
     case ActionTypes.GET_PROFILE_FAILED:

@@ -194,7 +194,7 @@ const bottomNavStyles = {
 
 const adCarStyles = {
   title: {
-    marginBottom: 12,
+    marginBottom: 2,
     color: '#fff',
     fontSize: 24,
   },
@@ -203,7 +203,7 @@ const adCarStyles = {
   },
   imagePreview: {
     height: '100%',
-    borderRadius: 3,
+    borderRadius: 12,
   },
   detailsContainer: {
     padding: 10,

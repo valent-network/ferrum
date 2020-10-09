@@ -84,7 +84,7 @@ class ProfileScreen extends React.PureComponent {
   }
 
   render() {
-    const { onSignOutDispatched, deleteContactsDispatched, userName, userAvatar, onRefreshDispatched } = this.props;
+    const { onSignOutDispatched, deleteContactsDispatched, userName, userAvatar, phoneNumber, onRefreshDispatched } = this.props;
     const refreshControl = <RefreshControl refreshing={false} tintColor={CSS.activeColor} onRefresh={onRefreshDispatched} />;
 
     return (
@@ -97,9 +97,9 @@ class ProfileScreen extends React.PureComponent {
                   <TouchableOpacity onPress={this.onAvatarPress}>
                     {userAvatar ? <Thumbnail source={{ uri: userAvatar }} /> : <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />}
                   </TouchableOpacity>
+                  <Text style={{color: '#666', fontSize: 14, marginTop: 12}}>{phoneNumber}</Text>
                 </Body>
               </ListItem>
-
               <ListItem noIndent>
                 <Left>
                   <Input textAlign={'center'} placeholder='Имя' defaultValue={userName} onEndEditing={this.handleNameChange} />
@@ -107,16 +107,12 @@ class ProfileScreen extends React.PureComponent {
               </ListItem>
             </List>
             <List style={{backgroundColor: '#222'}}>
-
               <ListItem noIndent>
                 <Left><Text>Книга контактов</Text></Left>
                 <Right><Text onPress={deleteContactsDispatched} style={{color: CSS.activeColor}}>Удалить</Text></Right>
               </ListItem>
-
-              <ListItem noIndent noBorder style={{backgroundColor: '#000'}}>
-                <Left><Text style={{fontSize: 12, color: '#c9c9c9'}}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text></Left>
-              </ListItem>
             </List>
+            <Text style={{fontSize: 12, color: '#c9c9c9', padding: 16}}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text>
           </View>
 
 
@@ -151,7 +147,8 @@ class ProfileScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     userName: state.user.name,
-    userAvatar: state.user.avatar
+    userAvatar: state.user.avatar,
+    phoneNumber: state.user.phoneNumber
   };
 }
 

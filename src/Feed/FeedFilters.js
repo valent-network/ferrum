@@ -63,7 +63,7 @@ const FeedFilters = (props) => {
 
   const onChangeQueryWithDelay = (text) => {
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(() => applyFilterDispatched('query', text), 500);
+    typingTimer = setTimeout(() => applyFilterDispatched('query', text), 200);
   }
 
   const onContactsModeChange = () => {
@@ -79,17 +79,12 @@ const FeedFilters = (props) => {
   return (
     <View>
       {Platform.OS === 'android' &&
-        <Fab direction="right" position="topRight" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
+        <Fab direction="right" position="topRight" style={{top: 48, zIndex: 100, backgroundColor: CSS.activeColor}}>
           <Icon name='funnel-outline' onPress={openContactsModeModal} />
         </Fab>
       }
-      {Platform.OS === 'android' && filtersPresent &&
-        <Fab direction="right" position="topLeft" style={{zIndex: 100, backgroundColor: CSS.activeColor}}>
-          <Icon name='close-outline' onPress={filterResetDispatched} />
-        </Fab>
-      }
       <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar rounded>
-        <Item style={{borderRadius: 8, backgroundColor: '#111'}}>
+        <Item style={{borderRadius: 8, backgroundColor: '#111', marginTop: (Platform.OS === 'android' ? 16 : 0)}}>
           <Icon name='ios-search' style={{color: CSS.activeColor}}/>
           <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
           {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}

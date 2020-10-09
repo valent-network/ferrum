@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
 import CSS from '../Styles';
 
@@ -37,19 +37,19 @@ export default class UserContactsListItem extends React.PureComponent {
     const phoneStyle = this.user ? { color: CSS.activeColor, fontWeight: 'bold' } : {}
 
     return (
-      <ListItem thumbnail>
-        <Left>
-          {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} />}
-          {(!this.user || !this.user.avatar)&& <Image style={{width: 64, height: 64, borderRadius: 32, borderColor: '#555', borderWidth: 2}} source={require('../assets/default_avatar.png')} />}
-        </Left>
-        <Body>
-          <Text style={phoneStyle}>{contact.name}</Text>
-          <Text note>{contact.phone}</Text>
-        </Body>
-        <Right>
-          <Icon onPress={this.openMore} name='ellipsis-horizontal-outline' />
-        </Right>
-      </ListItem>
+        <ListItem thumbnail noBorder activeOpacity={1} underlayColor='transparent' onPress={this.openMore}>
+          <Left>
+            {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} style={{width: 36, height: 36, borderRadius: 18, borderColor: CSS.activeColor, borderWidth: 2}}/>}
+            {(!this.user || !this.user.avatar)&& <Image style={{width: 36, height: 36, borderRadius: 18, borderColor: '#555', borderWidth: 2}} source={require('../assets/default_avatar.png')} />}
+          </Left>
+          <Body>
+            <Text style={phoneStyle}>{contact.name}</Text>
+            <Text note>{contact.phone}</Text>
+          </Body>
+          <Right>
+            <Icon name='ellipsis-horizontal-outline' />
+          </Right>
+        </ListItem>
     );
   }
 }

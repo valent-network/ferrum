@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
   header: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0,
   },
   sourceContainer: {
     margin: 12,
@@ -31,9 +32,6 @@ export const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     fontSize: 24,
-    marginBottom: 6,
-    marginTop: 6,
-    fontWeight: 'bold',
   },
   price: {
     color: '#85bb65',

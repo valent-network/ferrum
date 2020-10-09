@@ -62,6 +62,7 @@ export default class AdScreen extends React.PureComponent {
           <ImageGallery ad={ad} />
           <View style={styles.contentContainer}>
             <Text style={styles.title}>{ad.title}</Text>
+            <Text style={styles.price}>{ad.price} $</Text>
 
             <View style={styles.oldPricesContainer}>
               {ad.prices.map((v, index) => (
@@ -94,7 +95,7 @@ export default class AdScreen extends React.PureComponent {
         <View style={styles.headerBackground}>
           <SafeAreaView style={styles.headerSafeArea}>
             <Header iosBarStyle={"light-content"} style={styles.header}>
-              <Left >
+              <Left>
                 <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
               </Left>
               <Right style={styles.actionButtonsContainer}>

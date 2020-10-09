@@ -41,7 +41,7 @@ class MyAdsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={{backgroundColor: CSS.mainColor}} iosBarStyle={"light-content"}>
+        <Header style={{backgroundColor: CSS.mainColor, borderBottomWidth: 0}} iosBarStyle={"light-content"}>
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={{color: CSS.activeColor}}>
               Мои объявления&nbsp;
