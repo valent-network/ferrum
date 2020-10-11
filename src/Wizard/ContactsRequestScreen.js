@@ -8,7 +8,7 @@ import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 class ContactsRequestScreen extends React.PureComponent {
   goTo = () => {
@@ -62,7 +62,7 @@ class ContactsRequestScreen extends React.PureComponent {
             В любой момент можно полностью удалить все контакты с серверов Рекарио.
           </Text>
         </View>
-        <Button block dark onPress={this.requestContacts} style={{ backgroundColor: CSS.activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
+        <Button block dark onPress={this.requestContacts} style={{ backgroundColor: activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
           <Text>Предоставить доступ</Text>
         </Button>
         <Button transparent block onPress={this.goTo} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>

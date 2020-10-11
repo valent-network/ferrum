@@ -16,7 +16,7 @@ import FavoriteAdsScreen from '../FavoriteAds/FavoriteAdsScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import CSS from '../Styles';
+import { darkColor, activeColor } from '../Colors';
 
 function iconFor(iconName) {
   return ({ tintColor }) => <Icon name={iconName} style={{fontSize: 24, color: tintColor}} />
@@ -116,11 +116,11 @@ const bottomTabsNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: '#000',
+        backgroundColor: darkColor,
         borderTopWidth: 0,
         marginBottom: 12,
       },
-      activeTintColor: CSS.activeColor,
+      activeTintColor: activeColor,
       inactiveTintColor: 'grey'
     }
   }

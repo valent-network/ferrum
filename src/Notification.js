@@ -2,8 +2,6 @@ import React from 'react';
 import { Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text } from 'native-base';
 
-import CSS from './Styles';
-
 export default class Notification extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -60,7 +58,7 @@ export default class Notification extends React.PureComponent {
 
   render() {
     const { show, message } = this.state;
-    const styles = CSS.notification;
+
     return (
       show && (
         <Animated.View style={[styles.notificationWrapper, { top: this.animatedPosition }]}>
@@ -75,3 +73,32 @@ export default class Notification extends React.PureComponent {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  notificationWrapper: {
+    marginTop: 50,
+    position: 'absolute',
+    left: 16,
+    backgroundColor: '#eee',
+    zIndex: 100000,
+    width: '90%',
+    paddingHorizontal: 16,
+    paddingVertical: 21,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  notificationBody: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  notificationBodyText: {
+    color: '#111111',
+    paddingRight: 12,
+    textAlign: 'justify',
+  },
+  close: { color: '#111111' },
+});

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
 
 import { Text } from 'native-base';
-
-import { adCar as styles } from './Styles';
 
 export default class AdsListItem extends React.PureComponent {
   render() {
@@ -50,3 +48,44 @@ export default class AdsListItem extends React.PureComponent {
 }
 
 AdsListItem.propTypes = {};
+
+const styles = StyleSheet.create({
+  title: {
+    marginBottom: 2,
+    color: '#fff',
+    fontSize: 24,
+  },
+  imagePreviewContainer: {
+    flex: 1,
+  },
+  imagePreview: {
+    height: '100%',
+    borderRadius: 12,
+  },
+  detailsContainer: {
+    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    width: '100%',
+    justifyContent: 'flex-end',
+    bottom: 0,
+    position: 'absolute',
+    'zIndex': 100000
+  },
+  option: {
+    marginBottom: 12,
+    color: '#aaa',
+    fontSize: 14,
+  },
+  price: {
+    color: '#85bb65',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 12
+  },
+  mainContainer: {
+    height: 500,
+    marginTop: 6,
+    padding: 16,
+    borderRadius: 214,
+  }
+});

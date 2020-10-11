@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native';
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 export const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: '#000'
-  },
   oldPricesContainer: {
     flexDirection:'row',
     flexWrap:'wrap',
@@ -14,6 +11,17 @@ export const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent',
     borderBottomWidth: 0,
+    paddingTop: 0,
+    padding: 0,
+    margin: 0
+  },
+  headerBackground: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    width: '100%',
+    color: '#fff',
+    position: 'absolute',
+    zIndex: 10,
+    margin: 0
   },
   sourceContainer: {
     margin: 12,
@@ -62,12 +70,6 @@ export const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 12
   },
-  headerBackground: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    width: '100%',
-    color: '#fff',
-    position: 'absolute',
-  },
   actionButtonsContainer: {
     flexDirection: 'row',
   },
@@ -76,7 +78,7 @@ export const styles = StyleSheet.create({
     marginLeft: 16
   },
   activeColor: {
-    color: CSS.activeColor
+    color: activeColor
   },
   mainColor: {
     color: 'white'

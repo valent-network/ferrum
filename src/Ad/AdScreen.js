@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RefreshControl,
-  ScrollView,
-  SafeAreaView,
-  Share
-} from 'react-native';
+import { RefreshControl, ScrollView, Share } from 'react-native';
 
 import { Text,
   Container,
@@ -29,7 +25,7 @@ import OptionsList from './OptionsList';
 import NavigationService from '../services/NavigationService';
 
 import { styles } from './Styles';
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 export default class AdScreen extends React.PureComponent {
   shareAction = () => {
@@ -49,16 +45,27 @@ export default class AdScreen extends React.PureComponent {
 
   render() {
     const { ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
-    const refreshControl = <RefreshControl tintColor={CSS.activeColor} refreshing={isLoading} onRefresh={onRefresh} />;
+    const refreshControl = <RefreshControl tintColor={activeColor} refreshing={isLoading} onRefresh={onRefresh} />;
     const colorStyle = ad.is_favorite ? styles.activeColor : styles.mainColor;
 
     if (isLoading && typeof ad.id === 'undefined') {
-      return <Container><Content><Spinner color={CSS.activeColor}/></Content></Container>
+      return <Container><Content><Spinner color={activeColor}/></Content></Container>
     }
 
     return (
       <Container>
-        <ScrollView style={styles.mainContainer} refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
+        <View style={styles.headerBackground}>
+          <Header iosBarStyle={"light-content"} style={styles.header}>
+            <Left>
+              <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
+            </Left>
+            <Right style={styles.actionButtonsContainer}>
+              <Icon onPress={this.shareAction} name='share-outline' />
+              <Icon onPress={this.favAction} style={[styles.icon, colorStyle]} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
+            </Right>
+          </Header>
+        </View>
+        <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
           <ImageGallery ad={ad} />
           <View style={styles.contentContainer}>
             <Text style={styles.title}>{ad.title}</Text>
@@ -79,7 +86,7 @@ export default class AdScreen extends React.PureComponent {
 
             {currentAdFriends && currentAdFriends.length > 0 &&
                 (askFriendsIsLoading ?
-                  <Spinner color={CSS.activeColor} /> :
+                  <Spinner color={activeColor} /> :
                   <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
                 )
             }
@@ -91,18 +98,6 @@ export default class AdScreen extends React.PureComponent {
             </View>
           </View>
         </ScrollView>
-
-        <View style={styles.headerBackground}>
-          <Header iosBarStyle={"light-content"} style={styles.header}>
-            <Left>
-              <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
-            </Left>
-            <Right style={styles.actionButtonsContainer}>
-              <Icon onPress={this.shareAction} name='share-outline' />
-              <Icon onPress={this.favAction} style={[styles.icon, colorStyle]} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
-            </Right>
-          </Header>
-        </View>
       </Container>
     );
   }

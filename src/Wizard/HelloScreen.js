@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Text, Button, H1, View } from 'native-base';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 export default class HelloScreen extends React.PureComponent {
   nextStep = () => {
@@ -36,7 +36,7 @@ export default class HelloScreen extends React.PureComponent {
             рекомендацию о продавце интересующего автомобиля.
           </Text>
         </View>
-        <Button block dark onPress={this.nextStep} style={{backgroundColor: CSS.activeColor, margin: 24, marginTop: 0, marginBottom: 48 }}>
+        <Button block dark onPress={this.nextStep} style={{backgroundColor: activeColor, margin: 24, marginTop: 0, marginBottom: 48 }}>
           <Text>Продолжить</Text>
         </Button>
       </Container>

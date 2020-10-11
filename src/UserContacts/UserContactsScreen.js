@@ -12,7 +12,7 @@ import { filterByContact } from '../Feed/feedActions';
 
 import ContactsUploading from '../Feed/ContactsUploading';
 
-import CSS from '../Styles';
+import { darkColor, activeColor, mainColor } from '../Colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -37,7 +37,7 @@ class UserContactsScreen extends React.PureComponent {
       <Container>
         <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar>
           <Item style={styles.searchBar}>
-            <Icon name='ios-search' style={{color: CSS.activeColor}}/>
+            <Icon name='ios-search' style={{color: activeColor}}/>
             <Input placeholder='Имя...' style={styles.activeColor} onChangeText={onUpdateQuery} defaultValue={query}/>
             {query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
           </Item>
@@ -83,17 +83,17 @@ UserContactsScreen.propTypes = {
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: '#000',
+    backgroundColor: darkColor,
     borderBottomWidth: 0,
     paddingBottom: 16,
     paddingLeft: 12
   },
   activeColor: {
-    color: CSS.activeColor
+    color: activeColor
   },
   searchBar: {
     borderRadius: 8,
-    backgroundColor: CSS.mainColor,
+    backgroundColor: mainColor,
     marginTop: (Platform.OS === 'android' ? 32 : 0)
   }
 });

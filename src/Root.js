@@ -26,7 +26,7 @@ import { getAll as getVisitedAds } from './VisitedAds/visitedAdsActions';
 import { getAll as getFavoriteAds } from './FavoriteAds/favoriteAdsActions';
 import { getProfile } from './Profile/profileActions';
 
-import CSS from './Styles'
+import { activeColor } from './Colors';
 
 import { getAccessToken, getWizardDone } from './AsyncStorage';
 
@@ -97,7 +97,7 @@ class Root extends React.Component {
       return (
         <Container>
           <Content>
-            <Spinner color={CSS.activeColor} />
+            <Spinner color={activeColor} />
           </Content>
         </Container>
       );

@@ -3,7 +3,7 @@ import { StyleSheet, Switch, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text, Input, Button, Container, Content, Item, Icon, Spinner, View, Left, Right } from 'native-base';
 
-import CSS, { login as styles } from '../Styles';
+import { darkColor, activeColor, mainColor } from '../Colors';
 
 import { onTosPress } from '../Utils';
 
@@ -34,7 +34,7 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <Item style={styles.codeInput} rounded>
-        <Icon name="ios-key" style={{color: CSS.activeColor}} />
+        <Icon name="ios-key" style={{color: activeColor}} />
         <Input
           style={styles.input}
           placeholder="Код"
@@ -45,8 +45,8 @@ export default class LoginScreen extends React.Component {
       </Item>
     );
     const phoneInput = (
-      <Item rounded style={{borderRadius: 4, backgroundColor: '#000', borderColor: CSS.activeColor}}>
-        <Icon name="ios-phone-portrait" style={{color: CSS.activeColor}} />
+      <Item rounded style={{borderRadius: 4, backgroundColor: darkColor, borderColor: activeColor}}>
+        <Icon name="ios-phone-portrait" style={{color: activeColor}} />
         <Text style={styles.phoneCountryText}>+380</Text>
         <Input
           placeholderTextColor="#aaaaaa"
@@ -61,7 +61,7 @@ export default class LoginScreen extends React.Component {
       return (
         <Container>
           <Content>
-            <Spinner color={CSS.activeColor} />
+            <Spinner color={activeColor} />
           </Content>
         </Container>
       );
@@ -89,7 +89,7 @@ export default class LoginScreen extends React.Component {
                 </View>
               </Left>
               <Right style={{ flex: 0 }}>
-                <Switch thumbColor={'#fff'} trackColor={{true: CSS.activeColor, false: CSS.mainColor}} ios_backgroundColor={CSS.mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
+                <Switch thumbColor={'#fff'} trackColor={{true: activeColor, false: mainColor}} ios_backgroundColor={mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
               </Right>
             </Item>
           )}
@@ -117,3 +117,42 @@ LoginScreen.propTypes = {
   onInputCode: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    padding: 0,
+    paddingLeft: 48,
+    paddingRight: 48,
+    margin: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputField: {},
+  button: {
+    marginTop: 12,
+    backgroundColor: activeColor,
+  },
+  input: {
+    fontSize: 18,
+    color: '#ffffff',
+  },
+  phoneCountryText: {
+    fontSize: 17,
+    color: '#aaa',
+    fontStyle: 'italic',
+  },
+  codeInput: {
+    marginTop: 12,
+    borderRadius: 4,
+    backgroundColor: darkColor,
+    borderColor: activeColor
+  },
+  helperActions: {
+    marginTop: 24,
+    color: '#00a8ff',
+    textAlign: 'right',
+    alignSelf: 'stretch',
+  },
+  errorText: { color: '#ff0000' },
+});

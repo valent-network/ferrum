@@ -31,7 +31,7 @@ import { deleteContacts } from '../UserContacts/userContactsActions';
 
 import { onTosPress, onPrivacyPress } from '../Utils';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -85,7 +85,7 @@ class ProfileScreen extends React.PureComponent {
 
   render() {
     const { onSignOutDispatched, deleteContactsDispatched, userName, userAvatar, phoneNumber, onRefreshDispatched } = this.props;
-    const refreshControl = <RefreshControl refreshing={false} tintColor={CSS.activeColor} onRefresh={onRefreshDispatched} />;
+    const refreshControl = <RefreshControl refreshing={false} tintColor={activeColor} onRefresh={onRefreshDispatched} />;
 
     return (
       <Container>
@@ -109,7 +109,7 @@ class ProfileScreen extends React.PureComponent {
             <List style={{backgroundColor: '#222'}}>
               <ListItem noIndent>
                 <Left><Text>Книга контактов</Text></Left>
-                <Right><Text onPress={deleteContactsDispatched} style={{color: CSS.activeColor}}>Удалить</Text></Right>
+                <Right><Text onPress={deleteContactsDispatched} style={{color: activeColor}}>Удалить</Text></Right>
               </ListItem>
             </List>
             <Text style={{fontSize: 12, color: '#c9c9c9', padding: 16}}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text>
@@ -131,9 +131,9 @@ class ProfileScreen extends React.PureComponent {
                 </Right>
               </ListItem>
               <ListItem noIndent onPress={onSignOutDispatched} activeOpacity={1} underlayColor='transparent'>
-                <Left><Text style={{color: CSS.activeColor}}>Выход</Text></Left>
+                <Left><Text style={{color: activeColor}}>Выход</Text></Left>
                 <Right>
-                  <Icon name='log-out-outline' style={{color: CSS.activeColor}} />
+                  <Icon name='log-out-outline' style={{color: activeColor}} />
                 </Right>
               </ListItem>
             </List>

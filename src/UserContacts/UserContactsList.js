@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl, Linking,Platform } from 'react-native';
 import { Spinner } from 'native-base';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 import UserContactsListItem from './UserContactsListItem';
 import ListNotFound from '../ListNotFound';
@@ -31,10 +31,10 @@ class UserContactsList extends React.PureComponent {
 
   render() {
     const { userContacts, isLoading, onRefresh, filterByContactDispatched } = this.props;
-    const refreshControl = <RefreshControl refreshing={isLoading} tintColor={CSS.activeColor} onRefresh={onRefresh} />;
+    const refreshControl = <RefreshControl refreshing={isLoading} tintColor={activeColor} onRefresh={onRefresh} />;
 
     if (userContacts.length === 0) {
-      return isLoading ? <Spinner color={CSS.activeColor} /> : <ListNotFound refreshControl={refreshControl} />;
+      return isLoading ? <Spinner color={activeColor} /> : <ListNotFound refreshControl={refreshControl} />;
     }
 
     return (

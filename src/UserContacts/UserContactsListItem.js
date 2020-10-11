@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
 import { Image, TouchableOpacity } from 'react-native';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 export default class UserContactsListItem extends React.PureComponent {
   user = this.props.contact.user
@@ -34,12 +34,12 @@ export default class UserContactsListItem extends React.PureComponent {
 
   render() {
     const { contact } = this.props;
-    const phoneStyle = this.user ? { color: CSS.activeColor, fontWeight: 'bold' } : {}
+    const phoneStyle = this.user ? { color: activeColor, fontWeight: 'bold' } : {}
 
     return (
         <ListItem thumbnail noBorder activeOpacity={1} underlayColor='transparent' onPress={this.openMore}>
           <Left>
-            {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} style={{width: 36, height: 36, borderRadius: 18, borderColor: CSS.activeColor, borderWidth: 2}}/>}
+            {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} style={{width: 36, height: 36, borderRadius: 18, borderColor: activeColor, borderWidth: 2}}/>}
             {(!this.user || !this.user.avatar)&& <Image style={{width: 36, height: 36, borderRadius: 18, borderColor: '#555', borderWidth: 2}} source={require('../assets/default_avatar.png')} />}
           </Left>
           <Body>

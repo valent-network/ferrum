@@ -9,7 +9,7 @@ import PushNotification from 'react-native-push-notification';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import CSS from '../Styles';
+import { activeColor } from '../Colors';
 
 class NotificationsRequestScreen extends React.PureComponent {
   nextStep = () => {
@@ -49,7 +49,7 @@ class NotificationsRequestScreen extends React.PureComponent {
           block
           dark
           onPress={this.requestPushNotifications}
-          style={{backgroundColor: CSS.activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
+          style={{backgroundColor: activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
           <Text>Предоставить доступ</Text>
         </Button>
         <Button transparent block onPress={this.nextStep} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>

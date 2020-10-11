@@ -8,7 +8,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './visitedAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import CSS from '../Styles'
+import { darkColor, activeColor } from '../Colors'
 
 class VisitedAdsScreen extends React.PureComponent {
 
@@ -41,11 +41,11 @@ class VisitedAdsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={{backgroundColor: '#000', borderBottomWidth: 0}} iosBarStyle={"light-content"}>
+        <Header style={{backgroundColor: darkColor, borderBottomWidth: 0}} iosBarStyle={"light-content"}>
           <Body>
-            <Title onPress={this.showChangeStarredScreen} style={{color: CSS.activeColor}}>
+            <Title onPress={this.showChangeStarredScreen} style={{color: activeColor}}>
               Просмотренные&nbsp;
-              <Icon name="chevron-down-outline" style={{fontSize: 18, color: CSS.activeColor}}/>
+              <Icon name="chevron-down-outline" style={{fontSize: 18, color: activeColor}}/>
             </Title>
           </Body>
         </Header>

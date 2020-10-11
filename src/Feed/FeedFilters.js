@@ -31,7 +31,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import CSS from '../Styles';
+import { activeColor, darkColor, mainColor } from '../Colors';
 
 const FeedFilters = (props) => {
   let typingTimer;
@@ -43,7 +43,7 @@ const FeedFilters = (props) => {
 
   const filterBox = (filterValue, filterType) => {
     const isActive = filters[filterType].filter(f => f === filterValue).length;
-    const maybeActiveStyle = { backgroundColor: (isActive ? CSS.activeColor : '#333') };
+    const maybeActiveStyle = { backgroundColor: (isActive ? activeColor : '#333') };
 
     return <View key={filterValue} style={[styles.filterBox, maybeActiveStyle]}>
       <Text onPress={() => applyFilterDispatched(filterType, filterValue)}>
@@ -79,13 +79,13 @@ const FeedFilters = (props) => {
   return (
     <View>
       {Platform.OS === 'android' &&
-        <Fab direction="right" position="topRight" style={{top: 48, zIndex: 100, backgroundColor: CSS.activeColor}}>
+        <Fab direction="right" position="topRight" style={{top: 48, zIndex: 100, backgroundColor: activeColor}}>
           <Icon name='funnel-outline' onPress={openContactsModeModal} />
         </Fab>
       }
       <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar rounded>
         <Item style={styles.searchBar}>
-          <Icon name='ios-search' style={{color: CSS.activeColor}}/>
+          <Icon name='ios-search' style={{color: activeColor}}/>
           <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
           {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}
         </Item>
@@ -155,7 +155,7 @@ const FeedFilters = (props) => {
                    <View style={styles.switchFilter}>
                      <Left><H2 style={styles.filterTitle}>Только друзья</H2></Left>
                      <Right>
-                       <Switch thumbColor={'#fff'} trackColor={{true: CSS.activeColor, false: CSS.mainColor}} ios_backgroundColor={CSS.mainColor} onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
+                       <Switch thumbColor={'#fff'} trackColor={{true: activeColor, false: mainColor}} ios_backgroundColor={mainColor} onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
                      </Right>
                    </View>
 
@@ -164,7 +164,7 @@ const FeedFilters = (props) => {
             </View>
           </KeyboardAwareScrollView>
           <View style={styles.submitButtonWrapper} >
-            <Button block onPress={closeContactsModeModal} style={{ backgroundColor: CSS.activeColor }}><Text>Поиск</Text></Button>
+            <Button block onPress={closeContactsModeModal} style={{ backgroundColor: activeColor }}><Text>Поиск</Text></Button>
           </View>
         </SafeAreaView>
       </Modal>
@@ -195,7 +195,7 @@ FeedFilters.propTypes = {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: '#000',
+    backgroundColor: darkColor,
     flex: 1,
     padding: 16
   },
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#333'
   },
   activeColor: {
-    color: CSS.activeColor
+    color: activeColor
   },
   rangeItem: {
     width: '40%'
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   safeArea: {
-    backgroundColor: '#000',
+    backgroundColor: darkColor,
     minHeight: '100%'
   },
   submitButtonWrapper: {
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-end',
-    color: CSS.activeColor
+    color: activeColor
   },
   switchFilter: {
     flexDirection: 'row',
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     borderRadius: 8,
-    backgroundColor: CSS.mainColor,
+    backgroundColor: mainColor,
     marginTop: (Platform.OS === 'android' ? 32 : 0)
   }
 });

@@ -29,6 +29,8 @@ import Root from './src/Root';
 import getTheme from './native-base-theme/components';
 import platform from './native-base-theme/variables/platform';
 
+import { darkColor } from './src/Colors';
+
 class App extends React.PureComponent {
   render() {
     return (
@@ -52,6 +54,6 @@ export default codePush(App);
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: darkColor,
   },
 });

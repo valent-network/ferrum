@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StyleSheet } from 'react-native';
 
 import { Icon, Text, Content } from 'native-base';
-
-import { feed as styles } from './Styles';
 
 export default class ListNotFound extends React.PureComponent {
   render() {
@@ -20,3 +19,13 @@ export default class ListNotFound extends React.PureComponent {
 ListNotFound.propTypes = {
   refreshControl: PropTypes.element.isRequired,
 };
+
+const styles = StyleSheet.create({
+  notFoundIcon: { fontSize: 256, color: '#444' },
+  notFoundText: { color: '#444' },
+  notFoundContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
