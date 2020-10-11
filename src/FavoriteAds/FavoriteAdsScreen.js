@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { StyleSheet } from 'react-native';
 import { Container, Header, Body, Title, Icon, ActionSheet } from 'native-base';
 
 import AdsList from '../AdsList';
@@ -39,11 +40,11 @@ class FavoriteAdsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={{backgroundColor: darkColor, borderBottomWidth: 0}} iosBarStyle={"light-content"}>
+        <Header style={styles.header} iosBarStyle="light-content">
           <Body>
-            <Title onPress={this.showChangeStarredScreen}  style={{color: activeColor}}>
+            <Title onPress={this.showChangeStarredScreen}  style={styles.headerTitle}>
               Избранные&nbsp;
-              <Icon name="chevron-down-outline" style={{fontSize: 18, color: activeColor}}/>
+              <Icon name="chevron-down-outline" style={styles.headerIcon}/>
             </Title>
           </Body>
         </Header>
@@ -73,3 +74,17 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteAdsScreen);
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0
+  },
+  headerIcon: {
+    fontSize: 18,
+    color: activeColor
+  },
+  headerTitle: {
+    color: activeColor
+  }
+});

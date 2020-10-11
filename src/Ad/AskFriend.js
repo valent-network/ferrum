@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 export default class AskFriend extends React.PureComponent {
   render() {
@@ -16,7 +17,7 @@ export default class AskFriend extends React.PureComponent {
         {direct_friend && <Text>Разместил(а) {direct_friend.name}</Text>}
 
         {hasMutualFriends && notHand1FriendsOfFriends &&
-          <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 16, marginBottom: 12}}>
+          <Text style={styles.mutualFriendsTextBlock}>
             Общие друзья: {notHand1FriendsOfFriends.map(f => f.name).join(', ')}
           </Text>
         }
@@ -28,3 +29,11 @@ export default class AskFriend extends React.PureComponent {
 AskFriend.propTypes = {
   ad: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+  mutualFriendsTextBlock: {
+    fontSize: 14,
+    marginTop: 16,
+    marginBottom: 12
+  }
+});

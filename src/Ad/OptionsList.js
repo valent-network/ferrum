@@ -10,7 +10,7 @@ export default class OptionsList extends React.PureComponent {
     const { options } = this.props.ad;
 
     return (
-      <View style={{flexDirection:'row', flexWrap:'wrap', marginTop: 12, marginBottom: 12}}>
+      <View style={styles.mainContainer}>
         {Object.keys(options).map((opt, index) => (
           <Text key={index} style={styles.optionContainer} >{options[opt][0]}: {options[opt][1]}</Text>
         ))}
@@ -28,6 +28,12 @@ OptionsList.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flexDirection:'row',
+    flexWrap:'wrap',
+    marginTop: 12,
+    marginBottom: 12
+  },
   optionContainer: {
     borderWidth: 1,
     borderColor: '#666',

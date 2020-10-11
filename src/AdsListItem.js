@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'rgba(0,0,0,0.75)',
     width: '100%',
     justifyContent: 'flex-end',
     bottom: 0,
+    borderRadius: 12,
     position: 'absolute',
     'zIndex': 100000
   },
@@ -86,6 +87,6 @@ const styles = StyleSheet.create({
     height: 500,
     marginTop: 6,
     padding: 16,
-    borderRadius: 214,
+    backgroundColor: 'transparent'
   }
 });

@@ -18,7 +18,10 @@ export default class ImageGallery extends React.Component {
     this.setState({
       imagesFullscreenOpened: !this.state.imagesFullscreenOpened,
     });
-  };
+  }
+
+  imageMapper = (image) => ({ url: image })
+  windowWidth = Dimensions.get('window').width
 
   _renderItem = ({item, index}) => {
     return (
@@ -33,15 +36,15 @@ export default class ImageGallery extends React.Component {
 
     return (
       <React.Fragment>
-        <Carousel data={images} renderItem={this._renderItem} itemWidth={Dimensions.get('window').width} sliderWidth={Dimensions.get('window').width}/>
-        <View style={{width: '100%', height: 30, marginTop: -30, flex: 1,justifyContent: 'flex-end', padding: 12}}>
-          <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
-            <Badge style={{backgroundColor: '#fff', flexDirection: 'row', borderColor: '#fff', borderWidth: 1, backgroundColor: 'transparent'}}>
-              <Icon name='images-outline' style={{ fontSize: 15, color: '#fff', lineHeight: 20 }}/>
-              <Text style={{color: '#fff'}}> {images.length}</Text>
+        <Carousel data={images} renderItem={this._renderItem} itemWidth={this.windowWidth} sliderWidth={this.windowWidth}/>
+
+        <View style={styles.imageGalleryBadgesContainer}>
+            <Badge style={styles.imageGalleryBadge}>
+              <Icon name='images-outline' style={styles.imageGalleryBadgeIcon}/>
+              <Text style={styles.ImageGalleryBadgeText}> {images.length}</Text>
             </Badge>
-          </View>
         </View>
+
         <Modal visible={this.state.imagesFullscreenOpened} transparent={false}>
           <ImageViewer
             enableSwipeDown={true}
@@ -49,7 +52,7 @@ export default class ImageGallery extends React.Component {
             saveToLocalByLongPress={false}
             maxOverflow={0}
             onCancel={this.changeImagesFullscreenOpened}
-            imageUrls={images.map(image => ({ url: image }))}
+            imageUrls={images.map(this.imageMapper)}
           />
         </Modal>
       </React.Fragment>

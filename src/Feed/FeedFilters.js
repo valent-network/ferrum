@@ -31,7 +31,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import { activeColor, darkColor, mainColor } from '../Colors';
+import { activeColor, darkColor, mainColor, trackColor } from '../Colors';
 
 const FeedFilters = (props) => {
   let typingTimer;
@@ -79,13 +79,13 @@ const FeedFilters = (props) => {
   return (
     <View>
       {Platform.OS === 'android' &&
-        <Fab direction="right" position="topRight" style={{top: 48, zIndex: 100, backgroundColor: activeColor}}>
+        <Fab direction="right" position="topRight" style={styles.androidFunnelFAB}>
           <Icon name='funnel-outline' onPress={openContactsModeModal} />
         </Fab>
       }
-      <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar rounded>
+      <Header style={styles.mainHeader} iosBarStyle='light-content' searchBar rounded>
         <Item style={styles.searchBar}>
-          <Icon name='ios-search' style={{color: activeColor}}/>
+          <Icon name='ios-search' style={styles.searchIcon}/>
           <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
           {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}
         </Item>
@@ -101,14 +101,14 @@ const FeedFilters = (props) => {
             <View style={styles.modalContainer}>
               <Content>
                 <Icon name='close-outline' onPress={closeContactsModeModal} style={styles.closeIcon}/>
-                <Item style={{borderBottomWidth: 0, marginTop: 12}}>
+                <Item style={styles.filtersHeader}>
                   <Left><H1>Фильтры</H1></Left>
                   <Right>
                     {filtersPresent && <Text onPress={filterResetDispatched}>Сбросить</Text>}
                   </Right>
                 </Item>
 
-                <Form style={{paddingBottom: 96}}>
+                <Form style={styles.filtersForm}>
                  <H2 style={styles.filterTitle}>Цена, $</H2>
                  <View style={styles.rangeItemWrapper}>
                    <Item floatingLabel style={styles.rangeItem}>
@@ -155,7 +155,7 @@ const FeedFilters = (props) => {
                    <View style={styles.switchFilter}>
                      <Left><H2 style={styles.filterTitle}>Только друзья</H2></Left>
                      <Right>
-                       <Switch thumbColor={'#fff'} trackColor={{true: activeColor, false: mainColor}} ios_backgroundColor={mainColor} onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
+                       <Switch thumbColor='#fff' trackColor={trackColor} ios_backgroundColor={mainColor} onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
                      </Right>
                    </View>
 
@@ -164,7 +164,7 @@ const FeedFilters = (props) => {
             </View>
           </KeyboardAwareScrollView>
           <View style={styles.submitButtonWrapper} >
-            <Button block onPress={closeContactsModeModal} style={{ backgroundColor: activeColor }}><Text>Поиск</Text></Button>
+            <Button block onPress={closeContactsModeModal} style={styles.submitButton}><Text>Поиск</Text></Button>
           </View>
         </SafeAreaView>
       </Modal>
@@ -244,6 +244,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 16,
   },
+  submitButton: {
+    backgroundColor: activeColor
+  },
   closeIcon: {
     alignSelf: 'flex-end',
     color: activeColor
@@ -256,5 +259,20 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: mainColor,
     marginTop: (Platform.OS === 'android' ? 32 : 0)
+  },
+  searchIcon: {
+    color: activeColor
+  },
+  filtersForm: {
+    paddingBottom: 96
+  },
+  filtersHeader: {
+    borderBottomWidth: 0,
+    marginTop: 12
+  },
+  androidFunnelFAB: {
+    top: 48,
+    zIndex: 100,
+    backgroundColor: activeColor
   }
 });

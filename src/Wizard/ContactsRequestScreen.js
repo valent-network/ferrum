@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Button, H1, View } from 'native-base';
 
@@ -8,7 +8,7 @@ import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import { activeColor } from '../Colors';
+import { activeColor, lightColor } from '../Colors';
 
 class ContactsRequestScreen extends React.PureComponent {
   goTo = () => {
@@ -34,39 +34,27 @@ class ContactsRequestScreen extends React.PureComponent {
   render() {
     return (
       <Container>
-        <H1
-          style={{
-            marginTop: 96,
-            paddingLeft: 24,
-            paddingRight: 24,
-            textAlign: 'center',
-          }}>
-          Доступ к контактам
-        </H1>
-        <View
-          style={{
-            justifyContent: 'center',
-            flex: 1,
-            paddingLeft: 24,
-            paddingRight: 24,
-          }}>
-          <Text style={{ marginBottom: 24 }}>
+        <H1 style={styles.h1}> Доступ к контактам</H1>
+
+        <View style={styles.mainContainer}>
+          <Text style={styles.textBlock}>
             Чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или знает одного из
             продавцов, ему нужен доступ к контактной книге.
           </Text>
-          <Text style={{ marginBottom: 24 }}>
+          <Text style={styles.textBlock}>
             Ваши контакты будут конфиденциальны, никто, кроме ваших друзей не узнает, кто есть у вас в контактах и под
             каким именем.
           </Text>
-          <Text style={{ marginBottom: 24 }}>
+          <Text style={styles.textBlock}>
             В любой момент можно полностью удалить все контакты с серверов Рекарио.
           </Text>
         </View>
-        <Button block dark onPress={this.requestContacts} style={{ backgroundColor: activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
+
+        <Button block dark onPress={this.requestContacts} style={styles.goButton}>
           <Text>Предоставить доступ</Text>
         </Button>
-        <Button transparent block onPress={this.goTo} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>
-          <Text style={{ color: '#fff' }}>Пропустить</Text>
+        <Button transparent block onPress={this.goTo} style={styles.skipButton}>
+          <Text style={styles.mainColor}>Пропустить</Text>
         </Button>
       </Container>
     );
@@ -86,3 +74,35 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsRequestScreen);
 
 ContactsRequestScreen.propTypes = {};
+
+const styles = StyleSheet.create({
+  h1: {
+    marginTop: 96,
+    paddingLeft: 24,
+    paddingRight: 24,
+    textAlign: 'center',
+  },
+  mainContainer: {
+    justifyContent: 'center',
+    flex: 1,
+    paddingLeft: 24,
+    paddingRight: 24,
+  },
+  textBlock: {
+    marginBottom: 24
+  },
+  mainColor: {
+    color: lightColor
+  },
+  skipButton: {
+    margin: 24,
+    marginTop: 0,
+    marginBottom: 48
+  },
+  goButton: {
+    backgroundColor: activeColor,
+    marginLeft: 24,
+    marginRight: 24,
+    marginBottom: 12
+  }
+});

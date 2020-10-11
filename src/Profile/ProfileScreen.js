@@ -31,7 +31,7 @@ import { deleteContacts } from '../UserContacts/userContactsActions';
 
 import { onTosPress, onPrivacyPress } from '../Utils';
 
-import { activeColor } from '../Colors';
+import { activeColor, lightColor, mainColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -93,31 +93,32 @@ class ProfileScreen extends React.PureComponent {
           <View>
             <List>
               <ListItem noBorder>
-                <Body style={{alignItems: 'center'}}>
+                <Body style={styles.avatarContainer}>
                   <TouchableOpacity onPress={this.onAvatarPress}>
                     {userAvatar ? <Thumbnail source={{ uri: userAvatar }} /> : <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />}
                   </TouchableOpacity>
-                  <Text style={{color: '#666', fontSize: 14, marginTop: 12}}>{phoneNumber}</Text>
+                  <Text style={styles.phoneNumberText}>{phoneNumber}</Text>
                 </Body>
               </ListItem>
               <ListItem noIndent>
                 <Left>
-                  <Input textAlign={'center'} placeholder='Имя' defaultValue={userName} onEndEditing={this.handleNameChange} />
+                  <Input textAlign='center' placeholder='Имя' defaultValue={userName} onEndEditing={this.handleNameChange} />
                 </Left>
               </ListItem>
             </List>
-            <List style={{backgroundColor: '#222'}}>
-              <ListItem noIndent>
+
+            <List>
+              <ListItem style={styles.itemContainer} noIndent>
                 <Left><Text>Книга контактов</Text></Left>
-                <Right><Text onPress={deleteContactsDispatched} style={{color: activeColor}}>Удалить</Text></Right>
+                <Right><Text onPress={deleteContactsDispatched} style={styles.activeColor}>Удалить</Text></Right>
               </ListItem>
             </List>
-            <Text style={{fontSize: 12, color: '#c9c9c9', padding: 16}}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text>
+            <Text style={styles.noteText}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text>
           </View>
 
 
-          <View style={{justifyContent: 'flex-end', flex: 1, marginBottom: 48}}>
-            <List style={{backgroundColor: '#222', borderTopWidth: 0.5, borderTopColor: '#c9c9c9'}}>
+          <View style={styles.bottomItemsContainer}>
+            <List style={styles.bottomList}>
               <ListItem noIndent onPress={onPrivacyPress} activeOpacity={1} underlayColor='transparent'>
                 <Left><Text style={styles.bottomLinks}>О конфиденциальности</Text></Left>
                 <Right>
@@ -131,9 +132,9 @@ class ProfileScreen extends React.PureComponent {
                 </Right>
               </ListItem>
               <ListItem noIndent onPress={onSignOutDispatched} activeOpacity={1} underlayColor='transparent'>
-                <Left><Text style={{color: activeColor}}>Выход</Text></Left>
+                <Left><Text style={styles.activeColor}>Выход</Text></Left>
                 <Right>
-                  <Icon name='log-out-outline' style={{color: activeColor}} />
+                  <Icon name='log-out-outline' style={styles.activeColor} />
                 </Right>
               </ListItem>
             </List>
@@ -180,5 +181,34 @@ styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingTop: 32
+  },
+  avatarContainer: {
+    alignItems: 'center'
+  },
+  phoneNumberText: {
+    color: '#666',
+    fontSize: 14,
+    marginTop: 12
+  },
+  noteText: {
+    fontSize: 12,
+    color: lightColor,
+    padding: 16
+  },
+  itemContainer: {
+    backgroundColor: mainColor
+  },
+  activeColor: {
+    color: activeColor
+  },
+  bottomItemsContainer: {
+    justifyContent: 'flex-end',
+    flex: 1,
+    marginBottom: 48
+  },
+  bottomList: {
+    backgroundColor: '#222',
+    borderTopWidth: 0.5,
+    borderTopColor: '#c9c9c9'
   }
 });

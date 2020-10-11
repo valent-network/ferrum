@@ -53,9 +53,9 @@ export default class AdScreen extends React.PureComponent {
     }
 
     return (
-      <Container>
+      <Container style={styles.mainContainer}>
         <View style={styles.headerBackground}>
-          <Header iosBarStyle={"light-content"} style={styles.header}>
+          <Header iosBarStyle="light-content" style={styles.header}>
             <Left>
               <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
             </Left>

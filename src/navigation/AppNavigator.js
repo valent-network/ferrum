@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import { StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
 import AdScreen from '../Ad/AdScreen';
@@ -19,7 +20,10 @@ import StarredAdScreen from '../Starred/AdScreenContainer';
 import { darkColor, activeColor } from '../Colors';
 
 function iconFor(iconName) {
-  return ({ tintColor }) => <Icon name={iconName} style={{fontSize: 24, color: tintColor}} />
+  return ({ tintColor }) => {
+    const styles = StyleSheet.create({ icon: {fontSize: 24, color: tintColor} });
+    return <Icon name={iconName} style={styles.icon} />
+  }
 }
 
 const defaultNavigationOptions = {

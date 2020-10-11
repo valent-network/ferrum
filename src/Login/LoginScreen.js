@@ -3,7 +3,7 @@ import { StyleSheet, Switch, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text, Input, Button, Container, Content, Item, Icon, Spinner, View, Left, Right } from 'native-base';
 
-import { darkColor, activeColor, mainColor } from '../Colors';
+import { darkColor, activeColor, mainColor, trackColor } from '../Colors';
 
 import { onTosPress } from '../Utils';
 
@@ -34,7 +34,7 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <Item style={styles.codeInput} rounded>
-        <Icon name="ios-key" style={{color: activeColor}} />
+        <Icon name="ios-key" style={styles.activeColor} />
         <Input
           style={styles.input}
           placeholder="Код"
@@ -45,12 +45,12 @@ export default class LoginScreen extends React.Component {
       </Item>
     );
     const phoneInput = (
-      <Item rounded style={{borderRadius: 4, backgroundColor: darkColor, borderColor: activeColor}}>
-        <Icon name="ios-phone-portrait" style={{color: activeColor}} />
+      <Item rounded style={styles.phoneInput}>
+        <Icon name="ios-phone-portrait" style={styles.activeColor} />
         <Text style={styles.phoneCountryText}>+380</Text>
         <Input
           placeholderTextColor="#aaaaaa"
-          placeholder="Телефон"
+          placeholder="Телефон..."
           keyboardType="numeric"
           style={styles.input}
           onChange={this.onInputPhone}
@@ -77,19 +77,19 @@ export default class LoginScreen extends React.Component {
 
           {step === 1 ? requestButton : signInButton}
           {step === 1 && (
-            <Item style={{ borderBottomWidth: 0, marginTop: 8 }}>
+            <Item style={styles.tosContainer}>
               <Left>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <Text onPress={onTosPress} style={{ fontSize: 11 }}>
-                    Ознакомлен(а) с{' '}
-                  </Text>
-                  <Text onPress={onTosPress} style={{ fontSize: 11, color: '#00a8ff' }}>
-                    условиями использования
+                <View style={styles.tosTextContainer}>
+                  <Text onPress={onTosPress} style={styles.smallFont}>
+                    Ознакомлен(а) с&nbsp;
+                    <Text style={[styles.activeColor, styles.smallFont]}>
+                      условиями использования
+                    </Text>
                   </Text>
                 </View>
               </Left>
-              <Right style={{ flex: 0 }}>
-                <Switch thumbColor={'#fff'} trackColor={{true: activeColor, false: mainColor}} ios_backgroundColor={mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
+              <Right style={styles.switchContainer}>
+                <Switch thumbColor='#fff' trackColor={trackColor} ios_backgroundColor={mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
               </Right>
             </Item>
           )}
@@ -134,13 +134,14 @@ const styles = StyleSheet.create({
     backgroundColor: activeColor,
   },
   input: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#ffffff',
+    marginTop: -3,
+    marginLeft: -6
   },
   phoneCountryText: {
     fontSize: 17,
-    color: '#aaa',
-    fontStyle: 'italic',
+    color: activeColor
   },
   codeInput: {
     marginTop: 12,
@@ -150,9 +151,29 @@ const styles = StyleSheet.create({
   },
   helperActions: {
     marginTop: 24,
-    color: '#00a8ff',
+    color: activeColor,
     textAlign: 'right',
     alignSelf: 'stretch',
   },
-  errorText: { color: '#ff0000' },
+  smallFont: {
+    fontSize: 11
+  },
+  errorText: {
+    color: '#ff0000'
+  },
+  activeColor: { color: activeColor },
+  phoneInput: {
+    borderRadius: 4,
+    backgroundColor: darkColor,
+    borderColor: activeColor
+  },
+  switchContainer: { flex: 0 },
+  tosContainer: {
+    borderBottomWidth: 0,
+    marginTop: 8
+  },
+  tosTextContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
 });

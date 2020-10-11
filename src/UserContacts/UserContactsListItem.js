@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor } from '../Colors';
+import { activeColor, darkColor } from '../Colors';
 
 export default class UserContactsListItem extends React.PureComponent {
   user = this.props.contact.user
@@ -37,10 +37,10 @@ export default class UserContactsListItem extends React.PureComponent {
     const phoneStyle = this.user ? { color: activeColor, fontWeight: 'bold' } : {}
 
     return (
-        <ListItem thumbnail noBorder activeOpacity={1} underlayColor='transparent' onPress={this.openMore}>
+        <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor='transparent' onPress={this.openMore}>
           <Left>
-            {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} style={{width: 36, height: 36, borderRadius: 18, borderColor: activeColor, borderWidth: 2}}/>}
-            {(!this.user || !this.user.avatar)&& <Image style={{width: 36, height: 36, borderRadius: 18, borderColor: '#555', borderWidth: 2}} source={require('../assets/default_avatar.png')} />}
+            {this.user && this.user.avatar && <Thumbnail source={{ uri: this.user.avatar }} style={styles.avatarThumbnail}/>}
+            {(!this.user || !this.user.avatar)&& <Image style={styles.defaultAvatar} source={require('../assets/default_avatar.png')} />}
           </Left>
           <Body>
             <Text style={phoneStyle}>{contact.name}</Text>
@@ -55,3 +55,20 @@ export default class UserContactsListItem extends React.PureComponent {
 }
 
 UserContactsListItem.propTypes = {};
+
+const styles = StyleSheet.create({
+  defaultAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderColor: '#555',
+    borderWidth: 2
+  },
+  avatarThumbnail: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderColor: activeColor,
+    borderWidth: 2
+  }
+});

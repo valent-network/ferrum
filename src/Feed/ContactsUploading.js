@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StyleSheet } from 'react-native';
 import { Spinner, Button, Text, Content, Icon } from 'native-base';
 
 import { activeColor } from '../Colors';
 
 export default class ContactsUploading extends React.PureComponent {
   render() {
-    return <Button iconLeft rounded light style={{margin: 16}}>
+    return <Button iconLeft rounded light style={styles.contactsUploadingButton}>
               <Icon name='people-sharp' />
               <Text>Обработка контактной книги...</Text>
               <Spinner size='small' color={activeColor} />
@@ -14,3 +15,9 @@ export default class ContactsUploading extends React.PureComponent {
             </Button>
   }
 }
+
+const styles = StyleSheet.create({
+  contactsUploadingButton: {
+    margin: 16
+  }
+});

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { activeColor } from '../Colors';
+import { activeColor, darkColor } from '../Colors';
 
 export const styles = StyleSheet.create({
   oldPricesContainer: {
@@ -83,7 +83,34 @@ export const styles = StyleSheet.create({
   mainColor: {
     color: 'white'
   },
+  mainContainer: {
+    backgroundColor: darkColor
+  },
   image: {
     height: 350
+  },
+  imageGalleryBadgesContainer: {
+    width: '100%',
+    height: 30,
+    marginTop: -30,
+    flex: 1,
+    justifyContent: 'flex-end',
+    padding: 12
+  },
+  imageGalleryBadge: {
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    borderColor: '#fff',
+    borderWidth: 1,
+    backgroundColor: 'transparent'
+  },
+  imageGalleryBadgeIcon: {
+    fontSize: 15,
+    color: '#fff',
+    lineHeight: 20
+  },
+  imageGalleryBadgeText: {
+    color: '#fff'
   }
 });
