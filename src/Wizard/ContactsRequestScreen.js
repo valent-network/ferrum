@@ -51,18 +51,18 @@ class ContactsRequestScreen extends React.PureComponent {
             paddingRight: 24,
           }}>
           <Text style={{ marginBottom: 24 }}>
-            Для того, чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или же знает одного из
-            продавцов, приложению нужен доступ к контактной книге
+            Чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или знает одного из
+            продавцов, ему нужен доступ к контактной книге.
           </Text>
           <Text style={{ marginBottom: 24 }}>
             Ваши контакты будут конфиденциальны, никто, кроме ваших друзей не узнает, кто есть у вас в контактах и под
             каким именем.
           </Text>
           <Text style={{ marginBottom: 24 }}>
-            В любой момент можно полностью удалить все контакты с серверов Рекарио
+            В любой момент можно полностью удалить все контакты с серверов Рекарио.
           </Text>
         </View>
-        <Button block onPress={this.requestContacts} style={{ marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
+        <Button block dark onPress={this.requestContacts} style={{ backgroundColor: CSS.activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
           <Text>Предоставить доступ</Text>
         </Button>
         <Button transparent block onPress={this.goTo} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>

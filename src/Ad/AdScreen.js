@@ -93,17 +93,15 @@ export default class AdScreen extends React.PureComponent {
         </ScrollView>
 
         <View style={styles.headerBackground}>
-          <SafeAreaView style={styles.headerSafeArea}>
-            <Header iosBarStyle={"light-content"} style={styles.header}>
-              <Left>
-                <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
-              </Left>
-              <Right style={styles.actionButtonsContainer}>
-                <Icon onPress={this.shareAction} name='share-outline' />
-                <Icon onPress={this.favAction} style={[styles.icon, colorStyle]} name='heart-outline' />
-              </Right>
-            </Header>
-          </SafeAreaView>
+          <Header iosBarStyle={"light-content"} style={styles.header}>
+            <Left>
+              <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
+            </Left>
+            <Right style={styles.actionButtonsContainer}>
+              <Icon onPress={this.shareAction} name='share-outline' />
+              <Icon onPress={this.favAction} style={[styles.icon, colorStyle]} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
+            </Right>
+          </Header>
         </View>
       </Container>
     );

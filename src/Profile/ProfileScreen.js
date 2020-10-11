@@ -118,19 +118,19 @@ class ProfileScreen extends React.PureComponent {
 
           <View style={{justifyContent: 'flex-end', flex: 1, marginBottom: 48}}>
             <List style={{backgroundColor: '#222', borderTopWidth: 0.5, borderTopColor: '#c9c9c9'}}>
-              <ListItem noIndent onPress={onPrivacyPress}>
+              <ListItem noIndent onPress={onPrivacyPress} activeOpacity={1} underlayColor='transparent'>
                 <Left><Text style={styles.bottomLinks}>О конфиденциальности</Text></Left>
                 <Right>
                   <Icon name='open-outline' />
                 </Right>
               </ListItem>
-              <ListItem noIndent onPress={onTosPress}>
+              <ListItem noIndent onPress={onTosPress} activeOpacity={1} underlayColor='transparent'>
                 <Left><Text style={styles.bottomLinks}>Условия использования</Text></Left>
                 <Right>
                   <Icon name='open-outline' />
                 </Right>
               </ListItem>
-              <ListItem noIndent onPress={onSignOutDispatched}>
+              <ListItem noIndent onPress={onSignOutDispatched} activeOpacity={1} underlayColor='transparent'>
                 <Left><Text style={{color: CSS.activeColor}}>Выход</Text></Left>
                 <Right>
                   <Icon name='log-out-outline' style={{color: CSS.activeColor}} />

@@ -36,7 +36,7 @@ export default class HelloScreen extends React.PureComponent {
             рекомендацию о продавце интересующего автомобиля.
           </Text>
         </View>
-        <Button block onPress={this.nextStep} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>
+        <Button block dark onPress={this.nextStep} style={{backgroundColor: CSS.activeColor, margin: 24, marginTop: 0, marginBottom: 48 }}>
           <Text>Продолжить</Text>
         </Button>
       </Container>

@@ -23,18 +23,18 @@ export default class LoginScreen extends React.Component {
     const { phone, code, step, errors, onRequest, onSignIn, onReset, isLoading } = this.props;
 
     const requestButton = (
-      <Button onPress={this.onRequest} style={styles.button} block light disabled={!this.state.tosAccespted} rounded>
+      <Button onPress={this.onRequest} style={styles.button} block disabled={!this.state.tosAccespted}>
         <Text>Получить код</Text>
       </Button>
     );
     const signInButton = (
-      <Button onPress={this.onSignIn} style={styles.button} block light rounded>
+      <Button onPress={this.onSignIn} style={styles.button} block>
         <Text>Войти</Text>
       </Button>
     );
     const codeInput = (
-      <Item rounded style={styles.codeInput}>
-        <Icon active name="ios-key" />
+      <Item style={styles.codeInput} rounded>
+        <Icon name="ios-key" style={{color: CSS.activeColor}} />
         <Input
           style={styles.input}
           placeholder="Код"
@@ -45,8 +45,8 @@ export default class LoginScreen extends React.Component {
       </Item>
     );
     const phoneInput = (
-      <Item rounded>
-        <Icon active name="ios-phone-portrait" />
+      <Item rounded style={{borderRadius: 4, backgroundColor: '#000', borderColor: CSS.activeColor}}>
+        <Icon name="ios-phone-portrait" style={{color: CSS.activeColor}} />
         <Text style={styles.phoneCountryText}>+380</Text>
         <Input
           placeholderTextColor="#aaaaaa"
@@ -68,7 +68,7 @@ export default class LoginScreen extends React.Component {
     }
 
     return (
-      <Container style={{backgroundColor: '#333'}}>
+      <Container>
         <Content contentContainerStyle={styles.mainContainer}>
           {step === 1 ? phoneInput : codeInput}
 
@@ -89,7 +89,7 @@ export default class LoginScreen extends React.Component {
                 </View>
               </Left>
               <Right style={{ flex: 0 }}>
-                <Switch onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
+                <Switch thumbColor={'#fff'} trackColor={{true: CSS.activeColor, false: CSS.mainColor}} ios_backgroundColor={CSS.mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
               </Right>
             </Item>
           )}

@@ -63,6 +63,7 @@ export default function authReducer(state = initialState, action = {}) {
     case ActionTypes.SIGN_IN_FAILED:
       return {
         ...state,
+        errors: {},
         isLoading: false,
       };
     case ActionTypes.SIGN_OUT_STARTED:

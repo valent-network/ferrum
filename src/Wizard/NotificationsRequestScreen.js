@@ -42,13 +42,14 @@ class NotificationsRequestScreen extends React.PureComponent {
             paddingRight: 24,
           }}>
           <Text style={{ marginBottom: 24 }}>
-            Получайте оперативные обновления о новых объявлениях друзей и много другого
+            Получайте оперативные обновления о новых объявлениях друзей и много другого.
           </Text>
         </View>
         <Button
           block
+          dark
           onPress={this.requestPushNotifications}
-          style={{ marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
+          style={{backgroundColor: CSS.activeColor, marginLeft: 24, marginRight: 24, marginBottom: 12 }}>
           <Text>Предоставить доступ</Text>
         </Button>
         <Button transparent block onPress={this.nextStep} style={{ margin: 24, marginTop: 0, marginBottom: 48 }}>

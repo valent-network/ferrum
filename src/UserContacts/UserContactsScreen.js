@@ -36,7 +36,7 @@ class UserContactsScreen extends React.PureComponent {
     return (
       <Container>
         <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar>
-          <Item style={{borderRadius: 8, backgroundColor: '#111', marginTop: (Platform.OS === 'android' ? 16 : 0)}}>
+          <Item style={styles.searchBar}>
             <Icon name='ios-search' style={{color: CSS.activeColor}}/>
             <Input placeholder='Имя...' style={styles.activeColor} onChangeText={onUpdateQuery} defaultValue={query}/>
             {query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
@@ -83,11 +83,17 @@ UserContactsScreen.propTypes = {
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: CSS.mainColor,
+    backgroundColor: '#000',
     borderBottomWidth: 0,
-    paddingBottom: 16
+    paddingBottom: 16,
+    paddingLeft: 12
   },
   activeColor: {
     color: CSS.activeColor
   },
+  searchBar: {
+    borderRadius: 8,
+    backgroundColor: CSS.mainColor,
+    marginTop: (Platform.OS === 'android' ? 32 : 0)
+  }
 });

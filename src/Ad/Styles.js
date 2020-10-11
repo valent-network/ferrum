@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import CSS from '../Styles';
 
 export const styles = StyleSheet.create({
   mainContainer: {
@@ -9,9 +10,6 @@ export const styles = StyleSheet.create({
     flexWrap:'wrap',
     marginTop: 0,
     marginBottom: 3
-  },
-  headerSafeArea: {
-    backgroundColor: 'rgba(0,0,0,0.5)'
   },
   header: {
     backgroundColor: 'transparent',
@@ -65,12 +63,10 @@ export const styles = StyleSheet.create({
     fontSize: 12
   },
   headerBackground: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     width: '100%',
     color: '#fff',
-    height: 72,
     position: 'absolute',
-    top: 0
   },
   actionButtonsContainer: {
     flexDirection: 'row',
@@ -80,7 +76,7 @@ export const styles = StyleSheet.create({
     marginLeft: 16
   },
   activeColor: {
-    color: 'gold'
+    color: CSS.activeColor
   },
   mainColor: {
     color: 'white'

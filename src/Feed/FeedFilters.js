@@ -84,7 +84,7 @@ const FeedFilters = (props) => {
         </Fab>
       }
       <Header style={styles.mainHeader} iosBarStyle={'light-content'} searchBar rounded>
-        <Item style={{borderRadius: 8, backgroundColor: '#111', marginTop: (Platform.OS === 'android' ? 16 : 0)}}>
+        <Item style={styles.searchBar}>
           <Icon name='ios-search' style={{color: CSS.activeColor}}/>
           <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
           {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}
@@ -155,7 +155,7 @@ const FeedFilters = (props) => {
                    <View style={styles.switchFilter}>
                      <Left><H2 style={styles.filterTitle}>Только друзья</H2></Left>
                      <Right>
-                       <Switch onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
+                       <Switch thumbColor={'#fff'} trackColor={{true: CSS.activeColor, false: CSS.mainColor}} ios_backgroundColor={CSS.mainColor} onValueChange={onContactsModeChange} value={filters.contacts_mode == 'directFriends'} />
                      </Right>
                    </View>
 
@@ -195,14 +195,15 @@ FeedFilters.propTypes = {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: '#333',
+    backgroundColor: '#000',
     flex: 1,
     padding: 16
   },
   mainHeader: {
-    backgroundColor: CSS.mainColor,
+    backgroundColor: 'transparent',
     borderBottomWidth: 0,
-    paddingBottom: 16
+    paddingBottom: 16,
+    paddingLeft: 12
   },
   filterTitle: {
     marginTop: 16,
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   safeArea: {
-    backgroundColor: '#333',
+    backgroundColor: '#000',
     minHeight: '100%'
   },
   submitButtonWrapper: {
@@ -250,5 +251,10 @@ const styles = StyleSheet.create({
   switchFilter: {
     flexDirection: 'row',
     marginTop: 12
+  },
+  searchBar: {
+    borderRadius: 8,
+    backgroundColor: CSS.mainColor,
+    marginTop: (Platform.OS === 'android' ? 32 : 0)
   }
 });

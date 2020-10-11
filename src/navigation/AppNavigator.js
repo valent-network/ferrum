@@ -116,7 +116,9 @@ const bottomTabsNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: CSS.mainColor
+        backgroundColor: '#000',
+        borderTopWidth: 0,
+        marginBottom: 12,
       },
       activeTintColor: CSS.activeColor,
       inactiveTintColor: 'grey'

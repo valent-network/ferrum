@@ -113,13 +113,13 @@ const loginStyles = {
     paddingLeft: 48,
     paddingRight: 48,
     margin: 0,
-    backgroundColor: '#333',
     alignItems: 'center',
     justifyContent: 'center',
   },
   inputField: {},
   button: {
     marginTop: 12,
+    backgroundColor: activeColor,
   },
   input: {
     fontSize: 18,
@@ -132,6 +132,9 @@ const loginStyles = {
   },
   codeInput: {
     marginTop: 12,
+    borderRadius: 4,
+    backgroundColor: '#000',
+    borderColor: activeColor
   },
   helperActions: {
     marginTop: 24,
