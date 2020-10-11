@@ -21,6 +21,7 @@ export default function feedAdReducer(state = initialState, action = {}) {
     case ActionTypes.GET_AD_STARTED:
       return {
         ...state,
+        currentAd: (action.reset ? {} : state.currentAd),
         isLoading: true,
       };
     case ActionTypes.GET_AD_FAILED:

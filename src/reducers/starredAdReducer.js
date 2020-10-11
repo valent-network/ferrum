@@ -21,6 +21,7 @@ export default function starredAdReducer(state = initialState, action = {}) {
     case ActionTypes.GET_STARRED_AD_STARTED:
       return {
         ...state,
+        currentAd: (action.reset ? {} : state.currentAd),
         isLoading: true,
       };
     case ActionTypes.GET_STARRED_AD_FAILED:

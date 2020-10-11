@@ -5,12 +5,14 @@ import { displayError } from '../actions/errorsActions';
 import NavigationService from '../services/NavigationService';
 
 export function loadAd(id) {
-  return function(dispatch) {
-    dispatch({ type: ActionTypes.GET_AD_STARTED });
+  return function(dispatch, getState) {
+    const shouldReset = getState().feedAd.currentAd.id !== id;
+
+    dispatch({ type: ActionTypes.GET_AD_STARTED, reset: shouldReset });
+    dispatch(getAdFriends(id));
     return API.getAd(id)
       .then(adPayload => {
         dispatch({ type: ActionTypes.GET_AD_SUCCESS, ad: adPayload.data });
-        dispatch(getAdFriends(adPayload.data.id));
       })
       .catch(error => {
         dispatch({ type: ActionTypes.GET_AD_FAILED });
@@ -21,12 +23,14 @@ export function loadAd(id) {
 }
 
 export function loadAdToStarred(id) {
-  return function(dispatch) {
-    dispatch({ type: ActionTypes.GET_STARRED_AD_STARTED });
+  return function(dispatch, getState) {
+    const shouldReset = getState().starredAd.currentAd.id !== id;
+
+    dispatch({ type: ActionTypes.GET_STARRED_AD_STARTED, reset: shouldReset });
+    dispatch(getAdFriendsToStarred(id));
     return API.getAd(id)
       .then(adPayload => {
         dispatch({ type: ActionTypes.GET_STARRED_AD_SUCCESS, ad: adPayload.data });
-        dispatch(getAdFriendsToStarred(adPayload.data.id));
       })
       .catch(error => {
         dispatch({ type: ActionTypes.GET_STARRED_AD_FAILED });
