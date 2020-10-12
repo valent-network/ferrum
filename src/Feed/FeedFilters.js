@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -33,23 +33,24 @@ import { applyFilter, resetFilters } from './feedActions';
 
 import { activeColor, darkColor, mainColor, trackColor } from '../Colors';
 
-const FeedFilters = (props) => {
+const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterResetDispatched }) => {
   let typingTimer;
-  const { filters, filtersValues, applyFilterDispatched, filterResetDispatched } = props;
   const [contactModeModalVisible, setContactModeModalVisible] = useState(false);
 
-  const openContactsModeModal = () => setContactModeModalVisible(true);
-  const closeContactsModeModal = () => setContactModeModalVisible(false);
+  const openContactsModeModal = useCallback(() => setContactModeModalVisible(true), []);
+  const closeContactsModeModal = useCallback(() => setContactModeModalVisible(false), []);
+  const filterQueryResetDispatched = useCallback(() => applyFilterDispatched('query', ''), []);
 
   const filterBox = (filterValue, filterType) => {
     const isActive = filters[filterType].filter(f => f === filterValue).length;
     const maybeActiveStyle = { backgroundColor: (isActive ? activeColor : '#333') };
+    const iconName = (filters[filterType].filter(f => f === filterValue)).length ? 'checkmark-circle-outline' : 'ellipse-outline'
 
-    return <View key={filterValue} style={[styles.filterBox, maybeActiveStyle]}>
+    return <View key={filterValue} style={isActive ? styles.activeFilterBox : styles.filterBox}>
       <Text onPress={() => applyFilterDispatched(filterType, filterValue)}>
         {filterValue}
         &nbsp;
-        <Icon name={(filters[filterType].filter(f => f === filterValue)).length ? 'checkmark-circle-outline' : 'ellipse-outline'} style={styles.filterItem} />
+        <Icon name={iconName} style={styles.filterItem} />
       </Text>
     </View>
   }
@@ -70,10 +71,6 @@ const FeedFilters = (props) => {
     const valueToSet = filters.contacts_mode == 'directFriends' ? '' : 'directFriends';
 
     applyFilterDispatched('contacts_mode', valueToSet);
-  }
-
-  const filterQueryResetDispatched = () => {
-    applyFilterDispatched('query', '');
   }
 
   return (
@@ -219,6 +216,15 @@ const styles = StyleSheet.create({
     padding: 6,
     flexDirection: 'row',
     backgroundColor: '#333'
+  },
+  activeFilterBox: {
+    borderColor: '#555',
+    borderWidth: 1,
+    borderRadius: 2,
+    marginRight: 12,
+    padding: 6,
+    flexDirection: 'row',
+    backgroundColor: activeColor
   },
   activeColor: {
     color: activeColor

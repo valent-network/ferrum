@@ -1,4 +1,5 @@
 import * as ActionTypes from '../actions/actionTypes';
+import equal from 'react-fast-compare';
 
 const initialState = {
   list: [],
@@ -29,7 +30,7 @@ export default function userContactsReducer(state = initialState, action = {}) {
       return {
         ...state,
         isLoading: false,
-        list: action.list
+        list: (equal(state.list, action.list) ? state.list : action.list)
       }
     case ActionTypes.GET_USER_CONTACTS_FAILED:
       return {
@@ -38,9 +39,10 @@ export default function userContactsReducer(state = initialState, action = {}) {
         isLoading: false,
       }
     case ActionTypes.GET_USER_CONTACTS_WITH_OFFSET_SUCCESS:
+      const newList = mergeArraysKeepNew([...state.list, ...action.list], it => it.id);
       return {
         ...state,
-        list:  mergeArraysKeepNew([...state.list, ...action.list], it => it.id)
+        list: (equal(state.list, newList) ? state.list : newList)
         
       }
     case ActionTypes.CONTACTS_PERMISSIONS_MAY_BE_REQUESTED:

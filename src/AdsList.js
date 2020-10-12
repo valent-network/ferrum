@@ -19,11 +19,15 @@ class AdsList extends React.PureComponent {
   // https://github.com/facebook/react-native/issues/26610
   flatListBugFix = { right: 1 }
 
-  _renderItem = ({ item, index }) => <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={() => this.props.onAdOpened(item)} />;
+  onRefresh = this.props.onRefresh
+  refreshControlLoading = <RefreshControl refreshing={true} tintColor={activeColor} onRefresh={this.onRefresh} />
+  refreshControlStable = <RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.onRefresh} />
+
+  _renderItem = ({ item, index }) => <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={this.props.onAdOpened} />;
 
   render() {
-    const { ads, isLoading, onRefresh } = this.props;
-    const refreshControl = <RefreshControl refreshing={isLoading} tintColor={activeColor} onRefresh={onRefresh} />;
+    const { ads, isLoading } = this.props;
+    const refreshControl = isLoading ? this.refreshControlLoading : this.refreshControlStable;
 
     if (ads.length === 0) {
       return isLoading ? <Spinner color={activeColor} /> : <ListNotFound refreshControl={refreshControl} />;

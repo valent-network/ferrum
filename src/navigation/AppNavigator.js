@@ -19,10 +19,18 @@ import StarredAdScreen from '../Starred/AdScreenContainer';
 
 import { darkColor, activeColor } from '../Colors';
 
+const styles = StyleSheet.create({
+  activeIcon: {
+    fontSize: 24, color: activeColor
+  },
+  inactiveIcon: {
+    fontSize: 24, color: 'grey'
+  }
+});
+
 function iconFor(iconName) {
   return ({ tintColor }) => {
-    const styles = StyleSheet.create({ icon: {fontSize: 24, color: tintColor} });
-    return <Icon name={iconName} style={styles.icon} />
+    return <Icon name={iconName} style={tintColor === 'grey' ? styles.inactiveIcon : styles.activeIcon} />
   }
 }
 

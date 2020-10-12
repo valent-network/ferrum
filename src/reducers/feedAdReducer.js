@@ -1,4 +1,5 @@
 import * as ActionTypes from '../actions/actionTypes';
+import equal from 'react-fast-compare';
 
 const initialAd = {
   images: [],
@@ -15,7 +16,7 @@ export default function feedAdReducer(state = initialState, action = {}) {
     case ActionTypes.GET_AD_SUCCESS:
       return {
         ...state,
-        currentAd: action.ad,
+        currentAd: (equal(state.currentAd, action.ad) ? state.currentAd : action.ad),
         isLoading: false,
       };
     case ActionTypes.GET_AD_STARTED:

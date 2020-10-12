@@ -25,7 +25,7 @@ export default function feedRedducer(state = initialSetting, action = {}) {
       return {
         ...state,
         isLoading: false,
-        ads: action.ads
+        ads: (equal(state.ads, action.ads) ? state.ads : action.ads)
       };
     case ActionTypes.GET_FEED_NEW_ADS:
       const newAds = action.ads.map(ad => {
@@ -35,7 +35,7 @@ export default function feedRedducer(state = initialSetting, action = {}) {
       return {
         ...state,
         isLoading: false,
-        ads: newAds,
+        ads: (equal(state.ads, newAds) ? state.ads : newAds),
       };
     case ActionTypes.GET_FEED_FAILED:
       return {
@@ -43,9 +43,11 @@ export default function feedRedducer(state = initialSetting, action = {}) {
         isLoading: false,
       };
     case ActionTypes.GET_AD_SUCCESS:
+      const t = mergeArraysKeepNew([...state.ads, action.ad], it => it.id).map(ad => (ad.id === action.ad.id ? (ad.visited ? ad : { ...ad, visited: true }) : ad));
+
       return {
         ...state,
-        ads: state.ads.map(ad => (ad.id === action.ad.id ? { ...ad, visited: true } : ad)),
+        ads: (equal(state.ads, t) ? state.ads : t),
       };
     case ActionTypes.GET_FEED_WITH_OFFSET_SUCCESS:
       return {

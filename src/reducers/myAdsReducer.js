@@ -33,7 +33,7 @@ export default function myAdsRedducer(state = initialSetting, action = {}) {
       });
       return {
         ...state,
-        list: newAds,
+        list: (equal(state.list, newAds) ? state.list : newAds),
       };
     case ActionTypes.GET_MY_ADS_FAILED:
       return {
@@ -41,14 +41,18 @@ export default function myAdsRedducer(state = initialSetting, action = {}) {
         isLoading: false,
       };
     case ActionTypes.GET_AD_SUCCESS:
+      const t = mergeArraysKeepNew([...state.list, action.ad], it => it.id).map(ad => (ad.id === action.ad.id ? (ad.visited ? ad : { ...ad, visited: true }) : ad));
+
       return {
         ...state,
-        list: state.list.map(ad => (ad.id === action.ad.id ? { ...ad, visited: true } : ad)),
+        list: (equal(state.list, t) ? state.list : t),
       };
     case ActionTypes.GET_MY_ADS_WITH_OFFSET_SUCCESS:
+      const newList = mergeArraysKeepNew([...state.list, ...action.list], it => it.id);
+
       return {
         ...state,
-        list:  mergeArraysKeepNew([...state.list, ...action.list], it => it.id)
+        list: (equal(state.list, newList) ? state.list : newList)
         
       }
     case ActionTypes.GET_MY_ADS_WITH_OFFSET_FAILED:

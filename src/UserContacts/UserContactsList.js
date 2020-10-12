@@ -29,9 +29,14 @@ class UserContactsList extends React.PureComponent {
 
   _renderItem = ({ item, index }) => <UserContactsListItem invitationalSMS={this.invitationalSMS} contact={item} filterByContactDispatched={this.props.filterByContactDispatched} />;
 
+  onRefresh = this.props.onRefresh
+  refreshControlLoading = <RefreshControl refreshing={true} tintColor={activeColor} onRefresh={this.onRefresh} />
+  refreshControlStable = <RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.onRefresh} />
+
+
   render() {
     const { userContacts, isLoading, onRefresh, filterByContactDispatched } = this.props;
-    const refreshControl = <RefreshControl refreshing={isLoading} tintColor={activeColor} onRefresh={onRefresh} />;
+    const refreshControl = isLoading ? this.refreshControlLoading : this.refreshControlStable;
 
     if (userContacts.length === 0) {
       return isLoading ? <Spinner color={activeColor} /> : <ListNotFound refreshControl={refreshControl} />;

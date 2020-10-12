@@ -5,10 +5,12 @@ import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Text } from 'native-base';
 
 export default class AdsListItem extends React.PureComponent {
+  onPress = () => this.props.onPress(this.props.ad)
+
   render() {
     const { title, image, price, short_description, friend_name_and_total } = this.props.ad;
 
-    const { ad, onPress } = this.props;
+    const { ad } = this.props;
 
     const imageURI = { uri: image };
 
@@ -25,7 +27,7 @@ export default class AdsListItem extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <TouchableOpacity activeOpacity={1} onPress={onPress}>
+        <TouchableOpacity activeOpacity={1} onPress={this.onPress}>
           <View style={styles.mainContainer}>
             <View style={styles.imagePreviewContainer}>
               <View style={styles.detailsContainer}>

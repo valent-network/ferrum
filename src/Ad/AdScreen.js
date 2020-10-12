@@ -43,10 +43,13 @@ export default class AdScreen extends React.PureComponent {
     ad.is_favorite ? unlikeAdDispatched(ad) : likeAdDispatched(ad)
   }
 
+  favIconActiveStyles = [styles.icon, styles.activeColor]
+  favIconDefaultStyles = [styles.icon, styles.mainColor]
+
   render() {
     const { ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
     const refreshControl = <RefreshControl tintColor={activeColor} refreshing={isLoading} onRefresh={onRefresh} />;
-    const colorStyle = ad.is_favorite ? styles.activeColor : styles.mainColor;
+    const colorStyle = ad.is_favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
 
     if (isLoading && typeof ad.id === 'undefined') {
       return <Container><Content><Spinner color={activeColor}/></Content></Container>
@@ -61,7 +64,7 @@ export default class AdScreen extends React.PureComponent {
             </Left>
             <Right style={styles.actionButtonsContainer}>
               <Icon onPress={this.shareAction} name='share-outline' />
-              <Icon onPress={this.favAction} style={[styles.icon, colorStyle]} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
+              <Icon onPress={this.favAction} style={colorStyle} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
             </Right>
           </Header>
         </View>
