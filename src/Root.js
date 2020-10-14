@@ -31,6 +31,7 @@ import { activeColor } from './Colors';
 import { getAccessToken, getWizardDone } from './AsyncStorage';
 
 import API from './services/API';
+import ServerChannel from './services/ServerChannel';
 
 class Root extends React.Component {
   constructor(props) {
@@ -38,60 +39,61 @@ class Root extends React.Component {
     this.state = { wizardLoading: true };
   }
 
+  onContactsProcessed = () => {
+    const { updateContactsFinishedDispatched, getFeedDispatched, getContactsDispatched, getProfileDispatched } = this.props;
+
+    updateContactsFinishedDispatched();
+    getFeedDispatched();
+    getContactsDispatched();
+    getProfileDispatched();
+  }
+
+  serverChannel = new ServerChannel({onContactsProcessed: this.onContactsProcessed})
+
   refreshApp = () => {
-    if (!(AppState.currentState === 'active')) return;
-    const {
-      accessToken,
-      getContactsDispatched,
-      getFeedDispatched,
-      getMyAdsDispatched,
-      getVisitedAdsDispatched,
-      getFavoriteAdsDispatched,
-      getProfileDispatched,
-      tryUpdateContactsDispatched,
-      updateFilterValuesDispatched,
-    } = this.props;
+    if (!(AppState.currentState === 'active') || !this.props.accessToken) { return; }
 
-    if (accessToken) {
+    const { tryUpdateContactsDispatched, updateFilterValuesDispatched } = this.props;
 
-      PushNotification.checkPermissions(permissions => {
-        if (permissions.alert || permissions.badge || permissions.sound) {
-          pushNotificationsSetup();
-        }
-      });
+    PushNotification.checkPermissions(permissions => {
+      if (permissions.alert || permissions.badge || permissions.sound) {
+        pushNotificationsSetup();
+      }
+    });
 
-      updateFilterValuesDispatched();
-      getContactsDispatched();
-      // getFeedDispatched();
-      getMyAdsDispatched();
-      getVisitedAdsDispatched();
-      getFavoriteAdsDispatched();
-      getProfileDispatched();
-      tryUpdateContactsDispatched();
-    }
+    updateFilterValuesDispatched();
+    tryUpdateContactsDispatched();
   };
 
   async componentDidMount() {
     const { accessToken, setCachedToken, getFeedDispatched } = this.props;
 
-    await getAccessToken().then(token => { setCachedToken(token || accessToken) });
+    let t;
 
-    this.refreshApp();
+    await getAccessToken().then(token => {
+      t = token || accessToken;
+      setCachedToken(t);
+    });
+
     getFeedDispatched();
+
     AppState.addEventListener('change', this.refreshApp);
 
     getWizardDone().then(done => {
       if (!!done) { this.props.setWizardDoneDispatched(); }
       this.setState({ wizardLoading: false });
     });
+
+    this.serverChannel.connect(t);
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.refreshApp);
+    this.serverChannel.disconnect();
   }
 
   render() {
-    const { isLoading, accessToken, wizardDone, getFeedDispatched } = this.props;
+    const { isLoading, accessToken, wizardDone, getFeedDispatched, getContactsDispatched, getMyAdsDispatched, getVisitedAdsDispatched, getFavoriteAdsDispatched, getProfileDispatched } = this.props;
 
     if (isLoading || this.state.wizardLoading) {
       return (
@@ -105,9 +107,13 @@ class Root extends React.Component {
 
     if (accessToken) {
       this.refreshApp();
-      getFeedDispatched();
-      return <AppNavigator uriPrefix="recarioapp://"
-                                  ref={navigatorRef => {NavigationService.setTopLevelNavigator(navigatorRef)}}/>;
+
+      getContactsDispatched();
+      getMyAdsDispatched();
+      getVisitedAdsDispatched();
+      getFavoriteAdsDispatched();
+      getProfileDispatched();
+      return <AppNavigator uriPrefix="recarioapp://" ref={navigatorRef => {NavigationService.setTopLevelNavigator(navigatorRef)}}/>;
     } else {
       return wizardDone ? <LoginNavigator /> : <WizardNavigator />;
     }
@@ -137,6 +143,7 @@ function mapDispatchToProps(dispatch) {
     setWizardDoneDispatched: () => dispatch(setWizardDone()),
     tryUpdateContactsDispatched: () => dispatch(tryUpdateContacts()),
     updateFilterValuesDispatched: () => dispatch(updateFilterValues()),
+    updateContactsFinishedDispatched: () => dispatch({ type: ActionTypes.UPDATE_CONTACTS_FINISHED })
   };
 }
 

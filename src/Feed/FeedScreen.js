@@ -11,7 +11,6 @@ import { loadAd } from '../actions/adsActions';
 
 import FeedFilters from './FeedFilters';
 import PermissionsBox from './PermissionsBox';
-import ContactsUploading from './ContactsUploading';
 
 class FeedScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -24,28 +23,18 @@ class FeedScreen extends React.PureComponent {
   }
 
   render() {
-    const { ads, loadMoreAdsDispatched, filters, isLoading, isUserContactsLoading, onRefreshDispatched, userContactsMissing, userContactsAreUploading } = this.props;
+    const { ads, loadMoreAdsDispatched, filters, isLoading, onRefreshDispatched } = this.props;
     const filtersPresent = Object.values(filters).filter(f => f.length > 0).length > 0;
-    // TODO: Ugly
-    const showInitialProcessing = !isLoading &&
-                                  !filtersPresent &&
-                                  !isUserContactsLoading &&
-                                  userContactsMissing &&
-                                  userContactsAreUploading;
 
     return (
       <Container>
         <FeedFilters />
         <PermissionsBox />
-        {showInitialProcessing ?
-          <ContactsUploading />
-          :
-          <AdsList ads={ads}
-                   isLoading={isLoading}
-                   onRefresh={onRefreshDispatched}
-                   loadMoreAdsDispatched={loadMoreAdsDispatched}
-                   onAdOpened={this.onAdOpened}/>
-        }
+        <AdsList ads={ads}
+                 isLoading={isLoading}
+                 onRefresh={onRefreshDispatched}
+                 loadMoreAdsDispatched={loadMoreAdsDispatched}
+                 onAdOpened={this.onAdOpened}/>
       </Container>
     );
   }
@@ -54,10 +43,7 @@ class FeedScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     ads: state.feed.ads,
-    userContactsAreUploading: state.userContacts.isUploading,
-    userContactsMissing: (state.userContacts.list.length === 0 && state.userContacts.query.length === 0),
     isLoading: state.feed.isLoading,
-    isUserContactsLoading: state.userContacts.isLoading,
     filters: state.filters
   };
 }

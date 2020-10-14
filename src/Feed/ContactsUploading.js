@@ -7,10 +7,10 @@ import { activeColor } from '../Colors';
 
 export default class ContactsUploading extends React.PureComponent {
   render() {
-    return <Button iconLeft rounded light style={styles.contactsUploadingButton}>
+    return <Button iconLeft style={styles.contactsUploadingButton}>
               <Icon name='people-sharp' />
               <Text>Обработка контактной книги...</Text>
-              <Spinner size='small' color={activeColor} />
+              <Spinner size='small' color='#fff' />
               <Text>&nbsp;</Text>
             </Button>
   }
@@ -18,6 +18,7 @@ export default class ContactsUploading extends React.PureComponent {
 
 const styles = StyleSheet.create({
   contactsUploadingButton: {
-    margin: 16
+    margin: 16,
+    backgroundColor: activeColor
   }
 });

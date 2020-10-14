@@ -5,11 +5,15 @@ import { StyleSheet } from 'react-native';
 
 import { View, Text, Button } from 'native-base';
 
+import ContactsUploading from './ContactsUploading';
+
 import { checkContactsPermissions, requestContactsPermissions } from '../actions/userContactsActions';
 
 import * as ActionTypes from '../actions/actionTypes.js';
 
 import { goToSettings } from '../Utils';
+
+import { activeColor, mainColor } from '../Colors';
 
 class PermissionsBox extends React.PureComponent {
   onPress = () => this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissionsDispatched()
@@ -18,10 +22,14 @@ class PermissionsBox extends React.PureComponent {
     this.props.checkContactsPermissionsDispatched();
   }
   render() {
-    const { permissionsGiven, permissionsRequested, checkContactsPermissionsDispatched } = this.props;
+    const { permissionsGiven, permissionsRequested, checkContactsPermissionsDispatched, userContactsCount, userContactsProcessed } = this.props;
 
     if (permissionsGiven && permissionsRequested) {
-      return null;
+      if (userContactsCount === 0 && !userContactsProcessed) {
+        return <ContactsUploading />;
+      } else {
+        return null;
+      }
     }
 
     return (
@@ -31,7 +39,7 @@ class PermissionsBox extends React.PureComponent {
           машину
         </Text>
         {
-          <Button full bordered light style={styles.button} onPress={this.onPress}>
+          <Button block style={styles.button} onPress={this.onPress}>
             <Text>Предоставить</Text>
           </Button>
         }
@@ -44,6 +52,8 @@ function mapStateToProps(state) {
   return {
     permissionsGiven: state.userContacts.permissionsGiven,
     permissionsRequested: state.userContacts.permissionsRequested,
+    userContactsCount: state.user.userContactsCount,
+    userContactsProcessed: state.user.contactsProcessed
   };
 }
 
@@ -59,6 +69,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(PermissionsBox);
 PermissionsBox.propTypes = {};
 
 const styles = StyleSheet.create({
-  mainContainer: { backgroundColor: '#500', margin: 12, padding: 12, borderColor: '#a11', borderWidth: 4 },
-  button: { marginTop: 12}
+  mainContainer: {
+    backgroundColor: mainColor,
+    margin: 12,
+    padding: 12,
+    borderColor: activeColor,
+    borderWidth: 2,
+    borderRadius: 4
+  },
+  button: {
+    marginTop: 12,
+    backgroundColor: activeColor
+  }
 })

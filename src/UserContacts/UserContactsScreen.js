@@ -9,8 +9,7 @@ import UserContactsList from './UserContactsList';
 import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions';
 
 import { filterByContact } from '../Feed/feedActions';
-
-import ContactsUploading from '../Feed/ContactsUploading';
+import PermissionsBox from '../Feed/PermissionsBox';
 
 import { darkColor, activeColor, mainColor } from '../Colors';
 
@@ -23,11 +22,7 @@ class UserContactsScreen extends React.PureComponent {
   resetQuery = () => this.props.updateQueryDispatched('')
 
   render() {
-    const { userContacts, isLoading, query, updateQueryDispatched, loadMoreUserContactsDispatched, onRefreshDispatched, filterByContactDispatched, userContactsAreUploading, userContactsMissing } = this.props;
-    // TODO: Ugly
-    const showInitialProcessing = !isLoading &&
-                                  userContactsMissing &&
-                                  userContactsAreUploading;
+    const { userContacts, isLoading, query, updateQueryDispatched, loadMoreUserContactsDispatched, onRefreshDispatched, filterByContactDispatched } = this.props;
     const onUpdateQuery = (query) => {
       clearTimeout(this.typingTimer);
       this.typingTimer = setTimeout(() => updateQueryDispatched(query), 200);
@@ -42,16 +37,13 @@ class UserContactsScreen extends React.PureComponent {
             {query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
           </Item>
         </Header>
-        {showInitialProcessing ?
-          <ContactsUploading />
-          :
-          <UserContactsList
-            userContacts={userContacts}
-            filterByContactDispatched={filterByContactDispatched}
-            isLoading={isLoading}
-            loadMoreUserContactsDispatched={loadMoreUserContactsDispatched}
-            onRefresh={onRefreshDispatched}/>
-        }
+        <PermissionsBox />
+        <UserContactsList
+          userContacts={userContacts}
+          filterByContactDispatched={filterByContactDispatched}
+          isLoading={isLoading}
+          loadMoreUserContactsDispatched={loadMoreUserContactsDispatched}
+          onRefresh={onRefreshDispatched}/>
       </Container>
     );
   }
@@ -60,8 +52,6 @@ class UserContactsScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     userContacts: state.userContacts.list,
-    userContactsAreUploading: state.userContacts.isUploading,
-    userContactsMissing: (state.userContacts.list.length === 0 && state.userContacts.query.length === 0),
     query: state.userContacts.query,
     isLoading: state.userContacts.isLoading
   };

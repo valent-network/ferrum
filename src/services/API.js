@@ -13,8 +13,6 @@ if (process.env.NODE_ENV === 'production') {
   baseURL = 'http://192.168.0.100:3000/api';
 }
 
-let cancel;
-
 const apiService = axios.create({
   baseURL: baseURL,
   headers: {},

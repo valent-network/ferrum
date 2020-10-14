@@ -87,15 +87,6 @@ export function updateContacts(contacts) {
   return function(dispatch, getState) {
     dispatch({ type: ActionTypes.UPDATE_CONTACTS_STARTED });
 
-    clearInterval(interval);
-
-    // TODO: 2 corner cases
-    // first - when there are some contacts BUT none of them are valid (non Ukrainian for example)
-    // second - when combined with no permission to contacts
-    if (contacts.length > 0) {
-      interval = setInterval(() => { manageInitialUpload(dispatch, getState) }, 5000)
-    }
-
     return API.updateContacts(contacts)
       .then(payload => {
         dispatch({ type: ActionTypes.UPDATE_CONTACTS_SUCCESS });
@@ -106,18 +97,3 @@ export function updateContacts(contacts) {
       });
   };
 }
-
-function manageInitialUpload(dispatch, getState) {
-      const state = getState();
-      const adsPresent = state.feed.ads.length > 0;
-      const filtersPresent = Object.values(state.filters).filter(f => f.length > 0).length > 0;
-
-      if (adsPresent && !filtersPresent) {
-        clearInterval(interval)
-        dispatch({type: ActionTypes.UPDATE_CONTACTS_INITIAL_FINISHED})
-      } else {
-        dispatch(getFeed());
-        dispatch(getContacts());
-      }
-    }
-

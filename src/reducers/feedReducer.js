@@ -60,6 +60,11 @@ export default function feedRedducer(state = initialSetting, action = {}) {
         ...state,
         isLoading: false,
       };
+    case ActionTypes.DELETE_CONTACTS_SUCCESS:
+      return {
+        ...state,
+        ads: []
+      }
     default:
       return state;
   }
