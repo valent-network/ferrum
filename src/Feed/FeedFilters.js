@@ -25,20 +25,18 @@ import {
   Content,
   Left,
   Right,
-  Fab
 } from 'native-base';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
 import { activeColor, darkColor, mainColor, trackColor } from '../Colors';
 
-const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterResetDispatched }) => {
+const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterResetDispatched, modalVisible, switchModalVisibleDispatched }) => {
   let typingTimer;
-  const [contactModeModalVisible, setContactModeModalVisible] = useState(false);
 
-  const openContactsModeModal = useCallback(() => setContactModeModalVisible(true), []);
-  const closeContactsModeModal = useCallback(() => setContactModeModalVisible(false), []);
   const filterQueryResetDispatched = useCallback(() => applyFilterDispatched('query', ''), []);
 
   const filterBox = (filterValue, filterType) => {
@@ -75,55 +73,47 @@ const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterRese
 
   return (
     <View>
-      {Platform.OS === 'android' &&
-        <Fab direction="right" position="topRight" style={styles.androidFunnelFAB}>
-          <Icon name='funnel-outline' onPress={openContactsModeModal} />
-        </Fab>
-      }
       <Header style={styles.mainHeader} iosBarStyle='light-content' searchBar rounded>
         <Item style={styles.searchBar}>
           <Icon name='ios-search' style={styles.searchIcon}/>
-          <Input placeholder='Марка или модель...' style={styles.activeColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
-          {filters.query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={filterQueryResetDispatched} />}
+          <Input placeholder='Поиск' style={styles.inputTextColor} onChangeText={onChangeQueryWithDelay} defaultValue={filters.query}/>
+          {filters.query.length > 0 && <Icon name='close-circle' style={styles.inputTextColor} onPress={filterQueryResetDispatched} />}
         </Item>
-        {Platform.OS == 'ios' && <Button transparent>
-          <Icon name={filtersPresent ? 'funnel' : 'funnel-outline'} style={styles.activeColor} onPress={openContactsModeModal}/>
-        </Button>}
 
       </Header>
 
-      <Modal animationType='slide' visible={contactModeModalVisible}>
+      <Modal animationType='slide' visible={modalVisible}>
         <SafeAreaView style={styles.safeArea}>
           <KeyboardAwareScrollView>
             <View style={styles.modalContainer}>
               <Content>
-                <Icon name='close-outline' onPress={closeContactsModeModal} style={styles.closeIcon}/>
+                <View style={styles.modalControlsContainer}>
+                  <Icon name='close-outline' onPress={switchModalVisibleDispatched} style={styles.closeIcon}/>
+                  {filtersPresent && <Text onPress={filterResetDispatched} style={styles.resetIcon}>Сбросить</Text>}
+                </View>
                 <Item style={styles.filtersHeader}>
                   <Left><H1>Фильтры</H1></Left>
-                  <Right>
-                    {filtersPresent && <Text onPress={filterResetDispatched}>Сбросить</Text>}
-                  </Right>
                 </Item>
 
                 <Form style={styles.filtersForm}>
                  <H2 style={styles.filterTitle}>Цена, $</H2>
                  <View style={styles.rangeItemWrapper}>
-                   <Item floatingLabel style={styles.rangeItem}>
+                   <Item style={styles.rangeItem}>
                     <Label>от</Label>
                     <Input keyboardType='numeric' defaultValue={filters.min_price.toString()} onEndEditing={(event) => applyFilterDispatched('min_price', event.nativeEvent.text)}/>
                    </Item>
-                   <Item floatingLabel style={styles.rangeItem}>
+                   <Item style={styles.rangeItem}>
                     <Label>до</Label>
                     <Input keyboardType='numeric' defaultValue={filters.max_price.toString()} onEndEditing={(event) => applyFilterDispatched('max_price', event.nativeEvent.text)}/>
                    </Item>
                   </View>
                   <H2 style={styles.filterTitle}>Год</H2>
                   <View style={styles.rangeItemWrapper}>
-                    <Item floatingLabel style={styles.rangeItem}>
+                    <Item style={styles.rangeItem}>
                       <Label>от</Label>
                       <Input keyboardType='numeric' defaultValue={filters.min_year.toString()} onEndEditing={(event) => applyFilterDispatched('min_year', event.nativeEvent.text)}/>
                     </Item>
-                    <Item floatingLabel style={styles.rangeItem}>
+                    <Item style={styles.rangeItem}>
                       <Label>до</Label>
                       <Input keyboardType='numeric' defaultValue={filters.max_year.toString()} onEndEditing={(event) => applyFilterDispatched('max_year', event.nativeEvent.text)}/>
                     </Item>
@@ -161,7 +151,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterRese
             </View>
           </KeyboardAwareScrollView>
           <View style={styles.submitButtonWrapper} >
-            <Button block onPress={closeContactsModeModal} style={styles.submitButton}><Text>Поиск</Text></Button>
+            <Button block onPress={switchModalVisibleDispatched} style={styles.submitButton}><Text>Поиск</Text></Button>
           </View>
         </SafeAreaView>
       </Modal>
@@ -173,12 +163,14 @@ const FeedFilters = ({ filters, filtersValues, applyFilterDispatched, filterRese
 function mapStateToProps(state) {
   return {
     filters: state.filters,
-    filtersValues: state.filtersValues
+    filtersValues: state.filtersValues,
+    modalVisible: state.feed.modalOpened,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    switchModalVisibleDispatched: () => dispatch({type: ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY}),
     filterResetDispatched: () => dispatch(resetFilters()),
     filterQueryResetDispatched: () => dispatch(resetFilters()),
     applyFilterDispatched: (filterKey, filterValue) => dispatch(applyFilter(filterKey, filterValue))
@@ -195,6 +187,10 @@ const styles = StyleSheet.create({
     backgroundColor: darkColor,
     flex: 1,
     padding: 16
+  },
+  modalControlsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   mainHeader: {
     backgroundColor: 'transparent',
@@ -254,8 +250,14 @@ const styles = StyleSheet.create({
     backgroundColor: activeColor
   },
   closeIcon: {
-    alignSelf: 'flex-end',
-    color: activeColor
+    alignSelf: 'flex-start',
+    color: '#c9c9c9',
+    fontSize: 48,
+    fontWeight: 'bold',
+  },
+  resetIcon: {
+    alignSelf: 'center',
+
   },
   switchFilter: {
     flexDirection: 'row',
@@ -267,7 +269,7 @@ const styles = StyleSheet.create({
     marginTop: (Platform.OS === 'android' ? 32 : 0)
   },
   searchIcon: {
-    color: activeColor
+    color: '#666'
   },
   filtersForm: {
     paddingBottom: 96
@@ -276,9 +278,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     marginTop: 12
   },
-  androidFunnelFAB: {
-    top: 48,
-    zIndex: 100,
-    backgroundColor: activeColor
+  inputTextColor: {
+    color: '#c9c9c9'
   }
 });

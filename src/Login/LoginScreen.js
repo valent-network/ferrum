@@ -34,7 +34,7 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <Item style={styles.codeInput} rounded>
-        <Icon name="ios-key" style={styles.activeColor} />
+        <Icon name="ios-key" />
         <Input
           style={styles.input}
           placeholder="Код"
@@ -46,7 +46,7 @@ export default class LoginScreen extends React.Component {
     );
     const phoneInput = (
       <Item rounded style={styles.phoneInput}>
-        <Icon name="ios-phone-portrait" style={styles.activeColor} />
+        <Icon name="ios-phone-portrait" />
         <Text style={styles.phoneCountryText}>+380</Text>
         <Input
           placeholderTextColor="#aaaaaa"
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   phoneCountryText: {
     fontSize: 17,
-    color: activeColor
+    color: '#c9c9c9'
   },
   codeInput: {
     marginTop: 12,

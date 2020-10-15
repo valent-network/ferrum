@@ -11,7 +11,7 @@ import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions
 import { filterByContact } from '../Feed/feedActions';
 import PermissionsBox from '../Feed/PermissionsBox';
 
-import { darkColor, activeColor, mainColor } from '../Colors';
+import { darkColor, mainColor } from '../Colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -32,9 +32,9 @@ class UserContactsScreen extends React.PureComponent {
       <Container>
         <Header style={styles.mainHeader} iosBarStyle='light-content' searchBar>
           <Item style={styles.searchBar}>
-            <Icon name='ios-search' style={styles.activeColor}/>
-            <Input placeholder='Имя...' style={styles.activeColor} onChangeText={onUpdateQuery} defaultValue={query}/>
-            {query.length > 0 && <Icon name='close-circle-outline' style={styles.activeColor} onPress={this.resetQuery}/>}
+            <Icon name='ios-search' style={styles.searchIcon}/>
+            <Input placeholder='Поиск' style={styles.inputTextColor} onChangeText={onUpdateQuery} defaultValue={query}/>
+            {query.length > 0 && <Icon name='close-circle' style={styles.inputTextColor} onPress={this.resetQuery}/>}
           </Item>
         </Header>
         <PermissionsBox />
@@ -78,15 +78,15 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     paddingLeft: 12
   },
-  activeColor: {
-    color: activeColor
-  },
   searchBar: {
     borderRadius: 8,
     backgroundColor: mainColor,
     marginTop: (Platform.OS === 'android' ? 32 : 0)
   },
-  activeColor: {
-    color: activeColor
+  searchIcon: {
+    color: '#666'
+  },
+  inputTextColor: {
+    color: '#c9c9c9'
   }
 });

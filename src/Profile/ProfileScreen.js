@@ -108,9 +108,9 @@ class ProfileScreen extends React.PureComponent {
             </List>
 
             <List>
-              <ListItem style={styles.itemContainer} noIndent>
+              <ListItem style={styles.itemContainer} noIndent onPress={deleteContactsDispatched} activeOpacity={1} underlayColor='transparent'>
                 <Left><Text>Книга контактов</Text></Left>
-                <Right><Text onPress={deleteContactsDispatched} style={styles.activeColor}>Удалить</Text></Right>
+                <Right><Text style={styles.activeColor}>Удалить</Text></Right>
               </ListItem>
             </List>
             <Text style={styles.noteText}>Не забудьте отключить доступ к контактам в настройках телефона, если хотите чтобы контакты не были синхронизированы повторно после удаления.</Text>

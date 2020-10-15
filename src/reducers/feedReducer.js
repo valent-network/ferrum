@@ -12,6 +12,7 @@ function mergeArraysKeepNew(data, key) {
 const initialSetting = {
   ads: [],
   isLoading: true,
+  modalOpened: false,
 };
 
 export default function feedRedducer(state = initialSetting, action = {}) {
@@ -64,6 +65,11 @@ export default function feedRedducer(state = initialSetting, action = {}) {
       return {
         ...state,
         ads: []
+      }
+    case ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY:
+      return {
+        ...state,
+        modalOpened: !state.modalOpened
       }
     default:
       return state;
