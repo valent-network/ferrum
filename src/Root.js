@@ -66,7 +66,7 @@ class Root extends React.Component {
   };
 
   async componentDidMount() {
-    const { accessToken, setCachedToken, getFeedDispatched } = this.props;
+    const { accessToken, setCachedToken } = this.props;
 
     let t;
 
@@ -74,8 +74,6 @@ class Root extends React.Component {
       t = token || accessToken;
       setCachedToken(t);
     });
-
-    getFeedDispatched();
 
     AppState.addEventListener('change', this.refreshApp);
 
@@ -108,6 +106,7 @@ class Root extends React.Component {
     if (accessToken) {
       this.refreshApp();
 
+      getFeedDispatched();
       getContactsDispatched();
       getMyAdsDispatched();
       getVisitedAdsDispatched();
