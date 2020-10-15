@@ -51,9 +51,16 @@ class Root extends React.Component {
   serverChannel = new ServerChannel({onContactsProcessed: this.onContactsProcessed})
 
   refreshApp = () => {
-    if (!(AppState.currentState === 'active') || !this.props.accessToken) { return; }
+    const { accessToken, tryUpdateContactsDispatched, updateFilterValuesDispatched } = this.props;
 
-    const { tryUpdateContactsDispatched, updateFilterValuesDispatched } = this.props;
+    if (AppState.currentState === 'active') {
+      if (!accessToken) { return; }
+    } else {
+      this.serverChannel.disconnect();
+      return;
+    }
+
+    this.serverChannel.connect(accessToken);
 
     PushNotification.checkPermissions(permissions => {
       if (permissions.alert || permissions.badge || permissions.sound) {
