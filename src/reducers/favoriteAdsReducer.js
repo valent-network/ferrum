@@ -1,13 +1,7 @@
 import * as ActionTypes from '../actions/actionTypes';
 import equal from 'react-fast-compare';
 
-function mergeArraysKeepNew(data, key) {
-  return [
-    ...new Map(
-      data.map(x => [key(x), x])
-    ).values()
-  ]
-}
+import { mergeArraysKeepNew } from '../Utils';
 
 const initialSetting = {
   list: [],

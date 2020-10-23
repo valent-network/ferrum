@@ -7,7 +7,7 @@ export function getProfile () {
     dispatch({ type: ActionTypes.GET_PROFILE_STARTED });
     return API.getProfile()
       .then(payload => {
-        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, name: payload.data.name, avatar: payload.data.avatar, phone_number: payload.data.phone_number, user_contacts_count: payload.data.user_contacts_count });
+        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, user: payload.data });
       })
       .catch(error => {
         dispatch({ type: ActionTypes.GET_PROFILE_FAILED });
@@ -21,7 +21,7 @@ export function updateUserName(name) {
     dispatch({ type: ActionTypes.UPDATE_PROFILE_STARTED });
     return API.updateProfile({ name: name })
       .then(payload => {
-        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, name: payload.data.name, avatar: payload.data.avatar, phone_number: payload.data.phone_number, user_contacts_count: payload.data.user_contacts_count });
+        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, user: payload.data });
       })
       .catch(error => {
         dispatch({ type: ActionTypes.UPDATE_PROFILE_FAILED });
@@ -38,7 +38,7 @@ export function updateUserAvatar(base64ImageData) {
 
     return API.updateProfile(params)
       .then(payload => {
-        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, name: payload.data.name, avatar: payload.data.avatar, phone_number: payload.data.phone_number, user_contacts_count: payload.data.user_contacts_count });
+        dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, user: payload.data });
       })
       .catch(error => {
         dispatch({ type: ActionTypes.UPDATE_PROFILE_FAILED });

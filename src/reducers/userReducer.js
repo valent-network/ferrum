@@ -17,10 +17,11 @@ export default function userReducer(state = initialState, action = {}) {
     case ActionTypes.GET_PROFILE_SUCCESS:
       return {
         ...state,
-        name: action.name,
-        avatar: action.avatar,
-        phoneNumber: action.phone_number,
-        userContactsCount: action.user_contacts_count,
+        _id: action.user.id,
+        name: action.user.name,
+        avatar: action.user.avatar,
+        phoneNumber: action.user.phone_number,
+        userContactsCount: action.user.user_contacts_count,
         isLoading: false
       }
     case ActionTypes.GET_PROFILE_FAILED:

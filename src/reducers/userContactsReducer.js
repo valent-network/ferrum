@@ -10,13 +10,7 @@ const initialState = {
   permissionsRequested: true,
 };
 
-function mergeArraysKeepNew(data, key) {
-  return [
-    ...new Map(
-      data.map(x => [key(x), x])
-    ).values()
-  ]
-}
+import { mergeArraysKeepNew } from '../Utils';
 
 export default function userContactsReducer(state = initialState, action = {}) {
   switch (action.type) {
