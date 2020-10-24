@@ -4,6 +4,8 @@ import { StyleSheet, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, View, Icon } from 'native-base';
 
+import { mainColor } from '../Colors';
+
 export default class OptionsList extends React.PureComponent {
   goToAdSource = () => Linking.openURL(this.props.ad.url)
   render() {
@@ -32,12 +34,13 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     flexWrap:'wrap',
     marginTop: 12,
-    marginBottom: 12
+    marginBottom: 12,
   },
   optionContainer: {
     borderWidth: 1,
-    borderColor: '#666',
-    margin: 4,
+    borderColor: mainColor,
+    marginRight: 4,
+    marginBottom: 4,
     borderRadius: 4,
     fontSize: 14,
     padding: 6
