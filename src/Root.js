@@ -38,18 +38,13 @@ class Root extends React.Component {
   }
 
   onContactsProcessed = () => {
-    const {
-      updateContactsFinished,
-      getFeed,
-      getContacts,
-      getProfile
-    } = this.props;
+    const { updateContactsFinished, getFeed, getContacts, getProfile } = this.props;
 
     updateContactsFinished();
     getFeed();
     getContacts();
     getProfile();
-  }
+  };
 
   userChannelCallbacks = {
     onContactsProcessed: this.onContactsProcessed,
@@ -57,20 +52,15 @@ class Root extends React.Component {
     onReadUpdate: this.props.readUpdate,
     onUnreadMessage: this.props.updateUnreadMessagesCount,
     onDeleteMessage: this.props.deleteMessage,
-  }
+  };
 
   refreshApp = () => {
-    const {
-      accessToken,
-      tryUpdateContacts,
-      updateFilterValues,
-      getChatRooms,
-      getProfile,
-      newMessage
-    } = this.props;
+    const { accessToken, tryUpdateContacts, updateFilterValues, getChatRooms, getProfile, newMessage } = this.props;
 
     if (AppState.currentState === 'active') {
-      if (!accessToken) { return; }
+      if (!accessToken) {
+        return;
+      }
     } else {
       serverChannel.disconnect();
       return;
@@ -86,24 +76,21 @@ class Root extends React.Component {
   };
 
   async componentDidMount() {
-    const {
-      accessToken,
-      setCachedToken,
-      setWizardDone,
-      newMessage
-    } = this.props;
+    const { accessToken, setCachedToken, setWizardDone, newMessage } = this.props;
 
     let t;
 
-    await getAccessToken().then(token => {
+    await getAccessToken().then((token) => {
       t = token || accessToken;
       setCachedToken(t);
     });
 
     AppState.addEventListener('change', this.refreshApp);
 
-    getWizardDone().then(done => {
-      if (!!done) { setWizardDone(); }
+    getWizardDone().then((done) => {
+      if (!!done) {
+        setWizardDone();
+      }
       this.setState({ wizardLoading: false });
     });
 
@@ -127,7 +114,7 @@ class Root extends React.Component {
       getVisitedAds,
       getFavoriteAds,
       getProfile,
-      getChatRooms
+      getChatRooms,
     } = this.props;
 
     const appNavigatorRef = (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef);
@@ -145,9 +132,9 @@ class Root extends React.Component {
     if (accessToken) {
       this.refreshApp();
 
-      getPushToken().then(pushToken => {
+      getPushToken().then((pushToken) => {
         API.updateProfile({}, JSON.parse(pushToken));
-      })
+      });
       getChatRooms();
       getFeed();
       getContacts();
@@ -155,7 +142,7 @@ class Root extends React.Component {
       getVisitedAds();
       getFavoriteAds();
       getProfile();
-      return <AppNavigator uriPrefix="recarioapp://" ref={appNavigatorRef}/>;
+      return <AppNavigator uriPrefix="recarioapp://" ref={appNavigatorRef} />;
     } else {
       return wizardDone ? <LoginNavigator /> : <WizardNavigator />;
     }
@@ -172,7 +159,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setCachedToken: token => {
+    setCachedToken: (token) => {
       API.setAccessToken(token);
       dispatch({ type: ActionTypes.SIGN_IN_SUCCESS, token: token });
     },

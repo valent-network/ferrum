@@ -21,7 +21,7 @@ export default function starredAdReducer(state = initialState, action = {}) {
     case ActionTypes.GET_STARRED_AD_STARTED:
       return {
         ...state,
-        currentAd: (action.reset ? {} : state.currentAd),
+        currentAd: action.reset ? {} : state.currentAd,
         isLoading: true,
       };
     case ActionTypes.GET_STARRED_AD_FAILED:
@@ -29,35 +29,35 @@ export default function starredAdReducer(state = initialState, action = {}) {
     case ActionTypes.GET_STARRED_AD_FRIENDS_STARTED:
       return {
         ...state,
-        askFriendsIsLoading: true
-      }
+        askFriendsIsLoading: true,
+      };
     case ActionTypes.GET_STARRED_AD_FRIENDS_FAILED:
       return {
         ...state,
-        askFriendsIsLoading: false
-      }
+        askFriendsIsLoading: false,
+      };
     case ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS:
       return {
         ...state,
         currentAdFriends: action.adFriends,
-        askFriendsIsLoading: false
-      }
+        askFriendsIsLoading: false,
+      };
     case ActionTypes.LIKE_AD:
       return {
         ...state,
         currentAd: {
           ...action.ad,
-          is_favorite: true
-        }
-      }
+          is_favorite: true,
+        },
+      };
     case ActionTypes.UNLIKE_AD:
       return {
         ...state,
         currentAd: {
           ...action.ad,
-          is_favorite: false
-        }
-      }
+          is_favorite: false,
+        },
+      };
     default:
       return state;
   }

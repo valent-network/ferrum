@@ -9,31 +9,33 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './visitedAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { darkColor, activeColor } from '../Colors'
+import { darkColor, activeColor } from '../Colors';
 
 class VisitedAdsScreen extends React.PureComponent {
-
   static navigationOptions = ({ navigation }) => {
-    return({ headerShown: false });
-  }
+    return { headerShown: false };
+  };
 
   onAdOpened = (ad) => {
     const { navigation, loadAd } = this.props;
     navigation.navigate('VisitedAdScreen', { id: ad.id });
-  }
+  };
 
-  showChangeStarredScreen = () => ActionSheet.show(
-    {
-      options: ['Избранные', 'Мои объявления', 'Отменить'],
-      cancelButtonIndex: 2,
-    },
-    buttonIndex => {
-      switch(buttonIndex) {
-        case 0: return this.props.navigation.navigate('FavoriteAdsScreen')
-        case 1: return this.props.navigation.navigate('MyAdsScreen')
-      }
-    }
-  )
+  showChangeStarredScreen = () =>
+    ActionSheet.show(
+      {
+        options: ['Избранные', 'Мои объявления', 'Отменить'],
+        cancelButtonIndex: 2,
+      },
+      (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            return this.props.navigation.navigate('FavoriteAdsScreen');
+          case 1:
+            return this.props.navigation.navigate('MyAdsScreen');
+        }
+      },
+    );
 
   render() {
     const { ads, loadMoreAds, isLoading, onRefresh } = this.props;
@@ -44,17 +46,21 @@ class VisitedAdsScreen extends React.PureComponent {
       <Container>
         <Header style={styles.header} iosBarStyle="light-content">
           <Body>
-            <Title onPress={this.showChangeStarredScreen}  style={styles.headerTitle}>
+            <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
               Просмотренные&nbsp;
-              <Icon name="chevron-down-outline" style={styles.headerIcon}/>
+              <Icon name="chevron-down-outline" style={styles.headerIcon} />
             </Title>
           </Body>
         </Header>
-        {<AdsList ads={ads}
-                  isLoading={isLoading}
-                  onRefresh={onRefresh}
-                  loadMoreAds={loadMoreAds}
-                  onAdOpened={this.onAdOpened}/>}
+        {
+          <AdsList
+            ads={ads}
+            isLoading={isLoading}
+            onRefresh={onRefresh}
+            loadMoreAds={loadMoreAds}
+            onAdOpened={this.onAdOpened}
+          />
+        }
       </Container>
     );
   }
@@ -63,7 +69,7 @@ class VisitedAdsScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     ads: state.visitedAds.list,
-    isLoading: state.visitedAds.isLoading
+    isLoading: state.visitedAds.isLoading,
   };
 }
 
@@ -80,13 +86,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(VisitedAdsScreen);
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent',
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
   },
   headerIcon: {
     fontSize: 18,
-    color: activeColor
+    color: activeColor,
   },
   headerTitle: {
-    color: activeColor
-  }
+    color: activeColor,
+  },
 });

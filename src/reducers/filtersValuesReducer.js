@@ -4,8 +4,8 @@ const initialState = {
   gears: [],
   wheels: [],
   carcasses: [],
-  fuels: []
-}
+  fuels: [],
+};
 
 export default function filtersValuesReducer(state = initialState, action = {}) {
   switch (action.type) {

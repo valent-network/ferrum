@@ -17,20 +17,20 @@ const contactsPermissionName = Platform.select({
 let interval;
 
 export function tryUpdateContacts() {
-  return function(dispatch, getState) {
-    check(contactsPermissionName).then(result => {
+  return function (dispatch, getState) {
+    check(contactsPermissionName).then((result) => {
       switch (result) {
         case RESULTS.GRANTED:
           Contacts.getAll((err, contacts) => {
-            const contactsNormalizer = c => {
+            const contactsNormalizer = (c) => {
               const normalizedName = [c.givenName, c.middleName, c.familyName, c.company].filter(Boolean).join(' ');
 
               return {
                 name: normalizedName,
-                phoneNumbers: c.phoneNumbers.map(p => p.digits || p.number),
+                phoneNumbers: c.phoneNumbers.map((p) => p.digits || p.number),
               };
             };
-            const normalizedContacts = contacts.filter(c => c.phoneNumbers).map(contactsNormalizer);
+            const normalizedContacts = contacts.filter((c) => c.phoneNumbers).map(contactsNormalizer);
             dispatch(updateContacts(normalizedContacts));
           });
           dispatch({ type: ActionTypes.CONTACTS_PERMISSIONS_GIVEN });
@@ -46,8 +46,8 @@ export function tryUpdateContacts() {
 }
 
 export function checkContactsPermissions() {
-  return function(dispatch) {
-    check(contactsPermissionName).then(result => {
+  return function (dispatch) {
+    check(contactsPermissionName).then((result) => {
       switch (result) {
         case RESULTS.GRANTED:
           dispatch({ type: ActionTypes.CONTACTS_PERMISSIONS_GIVEN });
@@ -65,8 +65,8 @@ export function checkContactsPermissions() {
 }
 
 export function requestContactsPermissions() {
-  return function(dispatch) {
-    request(contactsPermissionName).then(result => {
+  return function (dispatch) {
+    request(contactsPermissionName).then((result) => {
       switch (result) {
         case RESULTS.GRANTED:
           dispatch({ type: ActionTypes.CONTACTS_PERMISSIONS_GIVEN });
@@ -84,14 +84,14 @@ export function requestContactsPermissions() {
 }
 
 export function updateContacts(contacts) {
-  return function(dispatch, getState) {
+  return function (dispatch, getState) {
     dispatch({ type: ActionTypes.UPDATE_CONTACTS_STARTED });
 
     return API.updateContacts(contacts)
-      .then(payload => {
+      .then((payload) => {
         dispatch({ type: ActionTypes.UPDATE_CONTACTS_SUCCESS });
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({ type: ActionTypes.UPDATE_CONTACTS_FAILED });
         displayError(error);
       });

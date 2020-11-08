@@ -1,6 +1,6 @@
 import React from 'react';
 
-import codePush from "react-native-code-push";
+import codePush from 'react-native-code-push';
 
 if (process.env.NODE_ENV === 'development') {
   const whyDidYouRender = require('@welldone-software/why-did-you-render');
@@ -36,7 +36,7 @@ class App extends React.PureComponent {
     return (
       <SafeAreaView style={styles.mainContainer}>
         <StatusBar barStyle="light-content" />
-        <Notification ref={ref => (notification.ref = ref)} />
+        <Notification ref={(ref) => (notification.ref = ref)} />
         <Provider store={store}>
           <NativeBaseRoot>
             <StyleProvider style={getTheme(platform)}>

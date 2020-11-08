@@ -3,10 +3,10 @@ import { activeColor, darkColor } from '../Colors';
 
 export const styles = StyleSheet.create({
   oldPricesContainer: {
-    flexDirection:'row',
-    flexWrap:'wrap',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: 0,
-    marginBottom: 3
+    marginBottom: 3,
   },
   header: {
     backgroundColor: 'transparent',
@@ -22,19 +22,19 @@ export const styles = StyleSheet.create({
     color: '#fff',
     position: 'absolute',
     zIndex: 10,
-    margin: 0
+    margin: 0,
   },
   sourceContainer: {
     margin: 12,
     marginBottom: 36,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   descriptionContainer: {
     margin: 4,
-    marginBottom: 16
+    marginBottom: 16,
   },
   contentContainer: {
-    padding: 12
+    padding: 12,
   },
   title: {
     textAlign: 'left',
@@ -50,42 +50,42 @@ export const styles = StyleSheet.create({
     color: '#555',
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
-    fontSize: 12
+    fontSize: 12,
   },
   openIcon: {
-    fontSize: 18
+    fontSize: 18,
   },
   separator: {
     borderWidth: 1,
     borderColor: '#111',
     marginTop: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   deleted: {
     textAlign: 'center',
     fontWeight: 'bold',
     marginTop: 16,
     marginBottom: 16,
-    color: '#533'
+    color: '#533',
   },
   descriptionText: {
-    fontSize: 12
+    fontSize: 12,
   },
   actionButtonsContainer: {
     flexDirection: 'row',
   },
   icon: {
     marginRight: 8,
-    marginLeft: 16
+    marginLeft: 16,
   },
   activeColor: {
-    color: activeColor
+    color: activeColor,
   },
   mainColor: {
-    color: 'white'
+    color: 'white',
   },
   mainContainer: {
-    backgroundColor: darkColor
+    backgroundColor: darkColor,
   },
   image: {
     height: 350,
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
     marginTop: -30,
     flex: 1,
     justifyContent: 'flex-end',
-    padding: 12
+    padding: 12,
   },
   imageGalleryBadge: {
     backgroundColor: '#fff',
@@ -105,14 +105,14 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     borderColor: '#fff',
     borderWidth: 1,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   imageGalleryBadgeIcon: {
     fontSize: 15,
     color: '#fff',
-    lineHeight: 20
+    lineHeight: 20,
   },
   imageGalleryBadgeText: {
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 });

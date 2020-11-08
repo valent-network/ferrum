@@ -1,6 +1,5 @@
 import { NavigationActions, StackActions } from 'react-navigation';
 
-
 let _navigator;
 
 function setTopLevelNavigator(navigatorRef) {
@@ -12,7 +11,7 @@ function navigate(routeName, params) {
     NavigationActions.navigate({
       routeName,
       params,
-    })
+    }),
   );
 }
 
@@ -21,7 +20,7 @@ function push(routeName, params) {
     StackActions.push({
       routeName,
       params,
-    })
+    }),
   );
 }
 

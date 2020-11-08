@@ -10,23 +10,25 @@ const initialState = {
   gears: [],
   wheels: [],
   carcasses: [],
-  fuels: []
-}
+  fuels: [],
+};
 
 export default function filtersReducer(state = initialState, action = {}) {
   switch (action.type) {
     case ActionTypes.FILTER_CHANGED:
       return {
         ...state,
-        [action.filterKey]: action.filterValue
+        [action.filterKey]: action.filterValue,
       };
     case ActionTypes.FILTER_CHANGED_ARRAY:
-      const isThere = state[action.filterKey].filter(f => f === action.filterValue).length === 1;
-      const newFilter = isThere ? state[action.filterKey].filter(f => f !== action.filterValue) : state[action.filterKey].concat(action.filterValue);
+      const isThere = state[action.filterKey].filter((f) => f === action.filterValue).length === 1;
+      const newFilter = isThere
+        ? state[action.filterKey].filter((f) => f !== action.filterValue)
+        : state[action.filterKey].concat(action.filterValue);
 
       return {
         ...state,
-        [action.filterKey]: newFilter
+        [action.filterKey]: newFilter,
       };
     case ActionTypes.FILTER_RESET:
       return initialState;

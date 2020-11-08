@@ -10,10 +10,12 @@ import NavigationService from '../services/NavigationService';
 const HeaderActions = ({ chat }) => {
   onPress = () => NavigationService.push('ChatRoomSettingsScreen', { chat: chat });
 
-  return <TouchableOpacity onPress={onPress}>
-    <Thumbnail style={styles.carPhoto} source={{ uri: chat.photo }} />
-  </TouchableOpacity>
-}
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Thumbnail style={styles.carPhoto} source={{ uri: chat.photo }} />
+    </TouchableOpacity>
+  );
+};
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -22,8 +24,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderActions);
@@ -33,5 +34,5 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     marginRight: 16,
-  }
-})
+  },
+});

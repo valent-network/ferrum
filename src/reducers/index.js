@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   filtersValues: filtersValuesReducer,
   starredAd: starredAdReducer,
   chats: chatsReducer,
-  currentChat: currentChatReducer
+  currentChat: currentChatReducer,
 });
 
 export default rootReducer;

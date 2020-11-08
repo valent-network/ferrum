@@ -14,23 +14,34 @@ import { commonGiftedChatOptions } from './commonGiftedChatOptions';
 import CurrentChatHeader from './CurrentChatHeader';
 import CurrentChatActions from './CurrentChatActions';
 
-function ChatRoomScreen({ user, currentChat, navigation, onSend, onDelete, getMessages, setCurrentChat, resetCurrentChat }) {
+function ChatRoomScreen({
+  user,
+  currentChat,
+  navigation,
+  onSend,
+  onDelete,
+  getMessages,
+  setCurrentChat,
+  resetCurrentChat,
+}) {
   const chatId = navigation.state.params.chatId;
   const chat = currentChat.chatMetaData;
 
-  if (!chatId) { return <SpinnerScreen /> }
+  if (!chatId) {
+    return <SpinnerScreen />;
+  }
 
-  useEffect( () => {
+  useEffect(() => {
     const focusListener = navigation.addListener('didFocus', onConnect);
     const blurListener = navigation.addListener('didBlur', onDisconnect);
 
     return () => {
       focusListener.remove();
       blurListener.remove();
-    }
+    };
   }, []);
 
-  useEffect( () => {
+  useEffect(() => {
     resetCurrentChat();
     onConnect();
     AppState.addEventListener('change', appStateHandle);
@@ -39,21 +50,21 @@ function ChatRoomScreen({ user, currentChat, navigation, onSend, onDelete, getMe
     return () => {
       onDisconnect();
       AppState.removeEventListener('change', appStateHandle);
-    }
+    };
   }, [chatId]);
 
   const onConnect = () => {
     setCurrentChat(chatId);
     serverChannel.connectToChatRoomChannel(chatId);
     getMessages(chatId);
-  }
+  };
   const onDisconnect = () => {
     resetCurrentChat();
     serverChannel.disconnectChatRoomChannel();
-  }
+  };
 
   const appStateHandle = () => {
-    switch(AppState.currentState) {
+    switch (AppState.currentState) {
       case 'inactive':
         onDisconnect();
         break;
@@ -61,26 +72,28 @@ function ChatRoomScreen({ user, currentChat, navigation, onSend, onDelete, getMe
         onConnect();
         break;
     }
+  };
+
+  if (!chat.id) {
+    return <SpinnerScreen />;
   }
 
-  if (!chat.id) { return <SpinnerScreen /> }
-
-  const userName = chat.chat_room_users.filter(cru => cru.user_id === user._id)[0].name;
+  const userName = chat.chat_room_users.filter((cru) => cru.user_id === user._id)[0].name;
 
   const giftedChatOptions = {
-    user: {_id: user._id, name: userName},
+    user: { _id: user._id, name: userName },
     messages: currentChat.messages,
     onLoadEarlier: () => getMessages(chatId, currentChat.messages.length),
     loadEarlier: !currentChat.lastLoaded,
     onSend: (message) => onSend(message[0], chatId),
     onLongPress: (context, message) => onMessageLongPress(user, message, onDelete),
-  }
+  };
 
   return (
     <Container style={styles.mainContainer}>
       <GiftedChat {...commonGiftedChatOptions} {...giftedChatOptions} />
     </Container>
-  )
+  );
 }
 
 function mapStateToProps(state, ownProps) {
@@ -101,10 +114,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 ChatRoomScreen.navigationOptions = ({ navigation }) => {
-  return({
+  return {
     headerStyle: {
       backgroundColor: darkColor,
-      shadowColor: 'transparent'
+      shadowColor: 'transparent',
     },
     headerTitle: () => <CurrentChatHeader />,
     headerTitleStyle: { color: lightColor },
@@ -112,9 +125,9 @@ ChatRoomScreen.navigationOptions = ({ navigation }) => {
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
     headerTintColor: lightColor,
-    headerRight: () => <CurrentChatActions />
-  });
-}
+    headerRight: () => <CurrentChatActions />,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomScreen);
 
@@ -128,9 +141,11 @@ const styles = StyleSheet.create({
 });
 
 const SpinnerScreen = () => {
-  return <Container style={styles.spinnerContainer}>
-    <Content>
-      <Spinner color={activeColor} />
-    </Content>
-  </Container>
-}
+  return (
+    <Container style={styles.spinnerContainer}>
+      <Content>
+        <Spinner color={activeColor} />
+      </Content>
+    </Container>
+  );
+};

@@ -8,7 +8,6 @@ import { loadAd } from '../actions/adsActions';
 import { likeAd, unlikeAd } from '../FavoriteAds/favoriteAdsActions';
 
 class AdScreenContainer extends React.PureComponent {
-
   static navigationOptions = ({ navigation }) => {
     return { headerShown: false };
   };
@@ -39,16 +38,20 @@ class AdScreenContainer extends React.PureComponent {
     loadAd(navigation.state.params.id);
   }
 
-  render () {
+  render() {
     const { ad, currentAdFriends, askFriendsIsLoading, isLoading, likeAd, unlikeAd } = this.props;
 
-    return <AdScreen ad={ad}
-                     likeAd={likeAd}
-                     unlikeAd={unlikeAd}
-                     currentAdFriends={currentAdFriends}
-                     askFriendsIsLoading={askFriendsIsLoading}
-                     isLoading={isLoading}
-                     onRefresh={this.onRefresh} />
+    return (
+      <AdScreen
+        ad={ad}
+        likeAd={likeAd}
+        unlikeAd={unlikeAd}
+        currentAdFriends={currentAdFriends}
+        askFriendsIsLoading={askFriendsIsLoading}
+        isLoading={isLoading}
+        onRefresh={this.onRefresh}
+      />
+    );
   }
 }
 
@@ -65,7 +68,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loadAd: (id) => dispatch(loadAd(id)),
     likeAd: (adId) => dispatch(likeAd(adId)),
-    unlikeAd: (adId) => dispatch(unlikeAd(adId))
+    unlikeAd: (adId) => dispatch(unlikeAd(adId)),
   };
 }
 

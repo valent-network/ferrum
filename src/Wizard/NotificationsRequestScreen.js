@@ -18,10 +18,10 @@ class NotificationsRequestScreen extends React.PureComponent {
   };
 
   requestPushNotifications = () => {
-    PushNotification.requestPermissions().then(result => {
+    PushNotification.requestPermissions().then((result) => {
       this.nextStep();
     });
-  }
+  };
 
   render() {
     return (
@@ -71,20 +71,20 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   textBlock: {
-    marginBottom: 24
+    marginBottom: 24,
   },
   goButton: {
     backgroundColor: activeColor,
     marginLeft: 24,
     marginRight: 24,
-    marginBottom: 12
+    marginBottom: 12,
   },
   skipButton: {
     margin: 24,
     marginTop: 0,
-    marginBottom: 48
+    marginBottom: 48,
   },
   skipButtonText: {
-    color: lightColor
-  }
+    color: lightColor,
+  },
 });

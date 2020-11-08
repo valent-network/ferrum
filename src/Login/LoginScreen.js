@@ -8,8 +8,8 @@ import { darkColor, activeColor, mainColor, trackColor } from '../Colors';
 import { onTosPress } from '../Utils';
 
 export default class LoginScreen extends React.Component {
-  onInputPhone = event => this.props.onInputPhone(event.nativeEvent.text);
-  onInputCode = event => this.props.onInputCode(event.nativeEvent.text);
+  onInputPhone = (event) => this.props.onInputPhone(event.nativeEvent.text);
+  onInputCode = (event) => this.props.onInputCode(event.nativeEvent.text);
   onRequest = () => this.props.onRequest(this.props.phone);
   onSignIn = () => this.props.onSignIn(this.props.phone, this.props.code);
   changeTosAcceptance = () => this.setState({ tosAccespted: !this.state.tosAccespted });
@@ -82,14 +82,18 @@ export default class LoginScreen extends React.Component {
                 <View style={styles.tosTextContainer}>
                   <Text onPress={onTosPress} style={styles.smallFont}>
                     Ознакомлен(а) с&nbsp;
-                    <Text style={[styles.activeColor, styles.smallFont]}>
-                      условиями использования
-                    </Text>
+                    <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
                   </Text>
                 </View>
               </Left>
               <Right style={styles.switchContainer}>
-                <Switch thumbColor='#fff' trackColor={trackColor} ios_backgroundColor={mainColor} onValueChange={this.changeTosAcceptance} value={this.state.tosAccespted} />
+                <Switch
+                  thumbColor="#fff"
+                  trackColor={trackColor}
+                  ios_backgroundColor={mainColor}
+                  onValueChange={this.changeTosAcceptance}
+                  value={this.state.tosAccespted}
+                />
               </Right>
             </Item>
           )}
@@ -137,17 +141,17 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#ffffff',
     marginTop: -3,
-    marginLeft: -6
+    marginLeft: -6,
   },
   phoneCountryText: {
     fontSize: 17,
-    color: '#c9c9c9'
+    color: '#c9c9c9',
   },
   codeInput: {
     marginTop: 12,
     borderRadius: 4,
     backgroundColor: darkColor,
-    borderColor: activeColor
+    borderColor: activeColor,
   },
   helperActions: {
     marginTop: 24,
@@ -156,24 +160,24 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   smallFont: {
-    fontSize: 11
+    fontSize: 11,
   },
   errorText: {
-    color: '#ff0000'
+    color: '#ff0000',
   },
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 4,
     backgroundColor: darkColor,
-    borderColor: activeColor
+    borderColor: activeColor,
   },
   switchContainer: { flex: 0 },
   tosContainer: {
     borderBottomWidth: 0,
-    marginTop: 8
+    marginTop: 8,
   },
   tosTextContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
+    flexWrap: 'wrap',
+  },
 });

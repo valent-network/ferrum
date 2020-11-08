@@ -6,7 +6,7 @@ import { TouchableOpacity, Image, Modal, Dimensions } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
 
-import { styles } from './Styles'
+import { styles } from './Styles';
 
 export default class ImageGallery extends React.Component {
   constructor(props) {
@@ -18,31 +18,36 @@ export default class ImageGallery extends React.Component {
     this.setState({
       imagesFullscreenOpened: !this.state.imagesFullscreenOpened,
     });
-  }
+  };
 
-  imageMapper = (image) => ({ url: image })
-  windowWidth = Dimensions.get('window').width
+  imageMapper = (image) => ({ url: image });
+  windowWidth = Dimensions.get('window').width;
 
-  _renderItem = ({item, index}) => {
+  _renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.changeImagesFullscreenOpened}>
-        <Image style={styles.image} source={{ uri: item }} onPress={this.changeImagesFullscreenOpened}/>
+        <Image style={styles.image} source={{ uri: item }} onPress={this.changeImagesFullscreenOpened} />
       </TouchableOpacity>
     );
-  }
+  };
 
   render() {
     const { images } = this.props.ad;
 
     return (
       <React.Fragment>
-        <Carousel data={images} renderItem={this._renderItem} itemWidth={this.windowWidth} sliderWidth={this.windowWidth}/>
+        <Carousel
+          data={images}
+          renderItem={this._renderItem}
+          itemWidth={this.windowWidth}
+          sliderWidth={this.windowWidth}
+        />
 
         <View style={styles.imageGalleryBadgesContainer}>
-            <Badge style={styles.imageGalleryBadge}>
-              <Icon name='images-outline' style={styles.imageGalleryBadgeIcon}/>
-              <Text style={styles.ImageGalleryBadgeText}> {images.length}</Text>
-            </Badge>
+          <Badge style={styles.imageGalleryBadge}>
+            <Icon name="images-outline" style={styles.imageGalleryBadgeIcon} />
+            <Text style={styles.ImageGalleryBadgeText}> {images.length}</Text>
+          </Badge>
         </View>
 
         <Modal visible={this.state.imagesFullscreenOpened} transparent={false}>

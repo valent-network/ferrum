@@ -29,17 +29,24 @@ class ServerChannel {
 
   connectToUsersChannel(callbacks) {
     //this.cable = this.cable || this.authenticate(cachedToken);
-    this.usersChannel = this.usersChannel || this.cable.subscriptions.create('ApplicationCable::UserChannel', {
-      received: (data) => this.processMessage(data, callbacks),
-    });
+    this.usersChannel =
+      this.usersChannel ||
+      this.cable.subscriptions.create('ApplicationCable::UserChannel', {
+        received: (data) => this.processMessage(data, callbacks),
+      });
   }
 
   connectToChatRoomChannel(chatRoomId) {
     this.cable = this.cable || this.authenticate(cachedToken);
-    this.chatRoomChannel = this.chatRoomChannel || this.cable.subscriptions.create({ channel: 'ApplicationCable::ChatRoomChannel', chat_room_id: chatRoomId }, {
-      received: (data) => console.warn(data),
-      subscribed: (data) => console.warn(data)
-    });
+    this.chatRoomChannel =
+      this.chatRoomChannel ||
+      this.cable.subscriptions.create(
+        { channel: 'ApplicationCable::ChatRoomChannel', chat_room_id: chatRoomId },
+        {
+          received: (data) => console.warn(data),
+          subscribed: (data) => console.warn(data),
+        },
+      );
   }
 
   disconnectChatRoomChannel() {
@@ -58,7 +65,7 @@ class ServerChannel {
   processMessage = (payload, callbacks) => {
     const { onContactsProcessed, onNewMessage, onReadUpdate, onUnreadMessage, onDeleteMessage } = callbacks;
 
-    switch(payload.type) {
+    switch (payload.type) {
       case 'contacts':
         onContactsProcessed();
         break;
@@ -67,11 +74,11 @@ class ServerChannel {
         break;
       case 'initiate_chat':
         onNewMessage(payload.chat, true);
-        NavigationService.navigate('ChatRoomScreen', { chatId: payload.chat.id, title: payload.chat.title })
+        NavigationService.navigate('ChatRoomScreen', { chatId: payload.chat.id, title: payload.chat.title });
         break;
       case 'read_update':
         onReadUpdate(payload.chat);
-        break
+        break;
       case 'unread_update':
         onUnreadMessage(payload.count);
         break;
@@ -79,7 +86,7 @@ class ServerChannel {
         onDeleteMessage(payload.id, payload.chat_room_id, payload.updated_at);
         break;
       default:
-        console.warn(payload)
+        console.warn(payload);
     }
   };
 }

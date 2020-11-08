@@ -65,15 +65,22 @@ export default class Notification extends React.PureComponent {
     const { show, message } = this.state;
     const text = message.message ? message.message : message;
 
-    if (!show) { return null };
+    if (!show) {
+      return null;
+    }
 
     return (
-      <FlingGestureHandler direction={Directions.UP} onHandlerStateChange={this.hide} >
+      <FlingGestureHandler direction={Directions.UP} onHandlerStateChange={this.hide}>
         <Animated.View style={[styles.notificationWrapper, { top: this.animatedPosition }]}>
-          {message.photo && <Thumbnail style={styles.messagePhoto} source={{ uri: message.photo }}/>}
+          {message.photo && <Thumbnail style={styles.messagePhoto} source={{ uri: message.photo }} />}
           <TouchableOpacity activeOpacity={1} onPress={this.onBodyPress} style={styles.notificationBody}>
             <Text numberOfLines={2} style={styles.notificationBodyText}>
-              {message.name && <Text style={{color: lightColor}}>{message.name}{"\n"}</Text>}
+              {message.name && (
+                <Text style={{ color: lightColor }}>
+                  {message.name}
+                  {'\n'}
+                </Text>
+              )}
               {text.replace(/\n/g, ' ')}
             </Text>
           </TouchableOpacity>

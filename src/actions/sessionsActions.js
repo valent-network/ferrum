@@ -4,19 +4,19 @@ import { displayError } from '../actions/errorsActions';
 import { setAccessToken, clearAccessToken, setWizardDoneValue, setAuthPhone, clearAuthPhone } from '../AsyncStorage';
 
 export function signIn(phone, code) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({ type: ActionTypes.SIGN_IN_STARTED });
 
     return API.signIn(phone, code)
-      .then(signInPayload => {
+      .then((signInPayload) => {
         const token = signInPayload.data.access_token;
         setAccessToken(token);
         API.setAccessToken(token);
-        clearAuthPhone().then(phone => {
+        clearAuthPhone().then((phone) => {
           dispatch({ type: ActionTypes.SIGN_IN_SUCCESS, token: token });
-        })
+        });
       })
-      .catch(error => {
+      .catch((error) => {
         clearAccessToken();
         API.clearAccessToken();
         clearAuthPhone();
@@ -27,17 +27,17 @@ export function signIn(phone, code) {
 }
 
 export function requestCode(phone) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({ type: ActionTypes.REQUEST_CODE_STARTED });
 
     return API.requestCode(phone)
-      .then(requestCodePayload => {
+      .then((requestCodePayload) => {
         if (requestCodePayload.data.message === 'ok') {
           setAuthPhone(phone);
           dispatch({ type: ActionTypes.REQUEST_CODE_SUCCESS });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({ type: ActionTypes.REQUEST_CODE_FAILED });
         displayError(error);
       });
@@ -45,20 +45,20 @@ export function requestCode(phone) {
 }
 
 export function signOut(all) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({ type: ActionTypes.SIGN_OUT_STARTED });
 
     return API.signOut(all)
-      .then(signOutPayload => {
+      .then((signOutPayload) => {
         if (signOutPayload.data.message === 'ok') {
           clearAccessToken();
           API.clearAccessToken();
-          clearAuthPhone().then(phone => {
+          clearAuthPhone().then((phone) => {
             dispatch({ type: ActionTypes.SIGN_OUT_SUCCESS });
-          })
+          });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({ type: ActionTypes.SIGN_OUT_FAILED });
         setAuthPhone(undefined);
         displayError(error);
@@ -89,15 +89,15 @@ export function codeIsInvalidFormat() {
 }
 
 export function onReset() {
-  return function(dispatch) {
+  return function (dispatch) {
     clearAuthPhone().then(() => {
       dispatch({ type: ActionTypes.AUTH_RESET });
     });
-  }
+  };
 }
 
 export function setWizardDone() {
-  return function(dispatch) {
+  return function (dispatch) {
     setWizardDoneValue('true');
     dispatch({ type: ActionTypes.SET_WIZARD_DONE });
   };

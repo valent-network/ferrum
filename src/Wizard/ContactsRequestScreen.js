@@ -26,7 +26,7 @@ class ContactsRequestScreen extends React.PureComponent {
       android: PERMISSIONS.ANDROID.READ_CONTACTS,
       ios: PERMISSIONS.IOS.CONTACTS,
     });
-    return request(permName).then(status => {
+    return request(permName).then((status) => {
       this.goTo();
     });
   };
@@ -38,16 +38,14 @@ class ContactsRequestScreen extends React.PureComponent {
 
         <View style={styles.mainContainer}>
           <Text style={styles.textBlock}>
-            Чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или знает одного из
-            продавцов, ему нужен доступ к контактной книге.
+            Чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или знает одного из продавцов, ему
+            нужен доступ к контактной книге.
           </Text>
           <Text style={styles.textBlock}>
             Ваши контакты будут конфиденциальны, никто, кроме ваших друзей не узнает, кто есть у вас в контактах и под
             каким именем.
           </Text>
-          <Text style={styles.textBlock}>
-            В любой момент можно полностью удалить все контакты с серверов Рекарио.
-          </Text>
+          <Text style={styles.textBlock}>В любой момент можно полностью удалить все контакты с серверов Рекарио.</Text>
         </View>
 
         <Button block dark onPress={this.requestContacts} style={styles.goButton}>
@@ -89,20 +87,20 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   textBlock: {
-    marginBottom: 24
+    marginBottom: 24,
   },
   mainColor: {
-    color: lightColor
+    color: lightColor,
   },
   skipButton: {
     margin: 24,
     marginTop: 0,
-    marginBottom: 48
+    marginBottom: 48,
   },
   goButton: {
     backgroundColor: activeColor,
     marginLeft: 24,
     marginRight: 24,
-    marginBottom: 12
-  }
+    marginBottom: 12,
+  },
 });

@@ -5,7 +5,7 @@ import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Text } from 'native-base';
 
 export default class AdsListItem extends React.PureComponent {
-  onPress = () => this.props.onPress(this.props.ad)
+  onPress = () => this.props.onPress(this.props.ad);
 
   render() {
     const { title, image, price, short_description, friend_name_and_total } = this.props.ad;
@@ -19,9 +19,14 @@ export default class AdsListItem extends React.PureComponent {
     if (friend_name_and_total) {
       if (friend_name_and_total.friend_hands === 1) {
         knowsText =
-          friend_name_and_total.count > 0 ? `Разместил ${friend_name_and_total.name}, знают еще ${friend_name_and_total.count}...` : `Разместил ${friend_name_and_total.name}`;
+          friend_name_and_total.count > 0
+            ? `Разместил ${friend_name_and_total.name}, знают еще ${friend_name_and_total.count}...`
+            : `Разместил ${friend_name_and_total.name}`;
       } else {
-        knowsText = friend_name_and_total.count > 0 ? `Знает ${friend_name_and_total.name} и еще ${friend_name_and_total.count}...` : `Знает ${friend_name_and_total.name}`;
+        knowsText =
+          friend_name_and_total.count > 0
+            ? `Знает ${friend_name_and_total.name} и еще ${friend_name_and_total.count}...`
+            : `Знает ${friend_name_and_total.name}`;
       }
     }
 
@@ -33,15 +38,12 @@ export default class AdsListItem extends React.PureComponent {
               <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.price}>{price} $</Text>
-                <Text style={styles.option}>
-                  {short_description}
-                </Text>
+                <Text style={styles.option}>{short_description}</Text>
 
                 <Text style={styles.option}>{knowsText}</Text>
               </View>
               <Image style={styles.imagePreview} source={imageURI} />
             </View>
-
           </View>
         </TouchableOpacity>
       </React.Fragment>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderRadius: 12,
     position: 'absolute',
-    'zIndex': 100000
+    zIndex: 100000,
   },
   option: {
     marginBottom: 12,
@@ -83,12 +85,12 @@ const styles = StyleSheet.create({
     color: '#85bb65',
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 12
+    marginBottom: 12,
   },
   mainContainer: {
     height: 500,
     marginTop: 6,
     padding: 16,
-    backgroundColor: 'transparent'
-  }
+    backgroundColor: 'transparent',
+  },
 });

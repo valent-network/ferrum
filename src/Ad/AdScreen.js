@@ -2,19 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, Share } from 'react-native';
 
-import { Text,
-  Container,
-  Content,
-  Spinner,
-  View,
-  Icon,
-  H3,
-  Header,
-  Title,
-  Body,
-  Left,
-  Right
-} from 'native-base';
+import { Text, Container, Content, Spinner, View, Icon, H3, Header, Title, Body, Left, Right } from 'native-base';
 
 import { loadAd } from '../actions/adsActions';
 
@@ -33,18 +21,18 @@ export default class AdScreen extends React.PureComponent {
 
     Share.share({
       message: `Посмотри, ты можешь знать продавца: https://recar.io/ads/${ad.id}`,
-      title: ad.title
-    })
-  }
+      title: ad.title,
+    });
+  };
 
   favAction = () => {
     const { ad, likeAd, unlikeAd } = this.props;
 
-    ad.is_favorite ? unlikeAd(ad) : likeAd(ad)
-  }
+    ad.is_favorite ? unlikeAd(ad) : likeAd(ad);
+  };
 
-  favIconActiveStyles = [styles.icon, styles.activeColor]
-  favIconDefaultStyles = [styles.icon, styles.mainColor]
+  favIconActiveStyles = [styles.icon, styles.activeColor];
+  favIconDefaultStyles = [styles.icon, styles.mainColor];
 
   render() {
     const { ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
@@ -52,7 +40,13 @@ export default class AdScreen extends React.PureComponent {
     const colorStyle = ad.is_favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
 
     if (isLoading && typeof ad.id === 'undefined') {
-      return <Container><Content><Spinner color={activeColor}/></Content></Container>
+      return (
+        <Container>
+          <Content>
+            <Spinner color={activeColor} />
+          </Content>
+        </Container>
+      );
     }
 
     return (
@@ -60,10 +54,10 @@ export default class AdScreen extends React.PureComponent {
         <View style={styles.headerBackground}>
           <Header iosBarStyle="light-content" style={styles.header}>
             <Left>
-              <Icon name='chevron-back-outline' onPress={NavigationService.popToTop} />
+              <Icon name="chevron-back-outline" onPress={NavigationService.popToTop} />
             </Left>
             <Right style={styles.actionButtonsContainer}>
-              <Icon onPress={this.shareAction} name='share-outline' />
+              <Icon onPress={this.shareAction} name="share-outline" />
               <Icon onPress={this.favAction} style={colorStyle} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
             </Right>
           </Header>
@@ -76,7 +70,9 @@ export default class AdScreen extends React.PureComponent {
 
             <View style={styles.oldPricesContainer}>
               {ad.prices.map((v, index) => (
-                <Text key={v[1]} style={styles.priceVersion}>{v[1]} $</Text>
+                <Text key={v[1]} style={styles.priceVersion}>
+                  {v[1]} $
+                </Text>
               ))}
             </View>
 
@@ -88,11 +84,11 @@ export default class AdScreen extends React.PureComponent {
             )}
 
             {typeof currentAdFriends !== 'undefined' &&
-                (askFriendsIsLoading ?
-                  <Spinner color={activeColor} /> :
-                  <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
-                )
-            }
+              (askFriendsIsLoading ? (
+                <Spinner color={activeColor} />
+              ) : (
+                <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
+              ))}
 
             <OptionsList ad={ad} />
 

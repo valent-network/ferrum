@@ -19,26 +19,25 @@ export default function userContactsReducer(state = initialState, action = {}) {
         ...state,
         isUploading: true,
         isLoading: true,
-      }
+      };
     case ActionTypes.GET_USER_CONTACTS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        list: (equal(state.list, action.list) ? state.list : action.list)
-      }
+        list: equal(state.list, action.list) ? state.list : action.list,
+      };
     case ActionTypes.GET_USER_CONTACTS_FAILED:
       return {
         ...state,
         isUploading: false,
         isLoading: false,
-      }
+      };
     case ActionTypes.GET_USER_CONTACTS_WITH_OFFSET_SUCCESS:
-      const newList = mergeArraysKeepNew([...state.list, ...action.list], it => it.id);
+      const newList = mergeArraysKeepNew([...state.list, ...action.list], (it) => it.id);
       return {
         ...state,
-        list: (equal(state.list, newList) ? state.list : newList)
-        
-      }
+        list: equal(state.list, newList) ? state.list : newList,
+      };
     case ActionTypes.CONTACTS_PERMISSIONS_MAY_BE_REQUESTED:
       return {
         ...state,
@@ -53,7 +52,7 @@ export default function userContactsReducer(state = initialState, action = {}) {
       return {
         ...state,
         permissionsGiven: true,
-        permissionsRequested: true
+        permissionsRequested: true,
       };
     case ActionTypes.CONTACTS_PERMISSIONS_DENIED:
       return {
@@ -64,28 +63,28 @@ export default function userContactsReducer(state = initialState, action = {}) {
       return {
         ...state,
         list: [],
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case ActionTypes.DELETE_CONTACTS:
       return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     case ActionTypes.DELETE_CONTACTS_FAILED:
       return {
         ...state,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case ActionTypes.USER_CONTACTS_UPDATE_QUERY:
       return {
         ...state,
-        query: action.query
-      }
+        query: action.query,
+      };
     case ActionTypes.UPDATE_CONTACTS_INITIAL_FINISHED:
       return {
         ...state,
-        isUploading: false
-      }
+        isUploading: false,
+      };
     default:
       return state;
   }

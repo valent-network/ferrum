@@ -19,19 +19,9 @@ import {
 
 import { activeColor, mainColor } from '../Colors';
 
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { FlatList, Image, StyleSheet } from 'react-native';
 
-import {
-  getAdFriendsToChat,
-  addUserToChat,
-  leaveChat,
-  openFriendPrepare,
-  closeFriendPrepare,
-} from './chatActions';
+import { getAdFriendsToChat, addUserToChat, leaveChat, openFriendPrepare, closeFriendPrepare } from './chatActions';
 
 import { mergeArraysKeepNew } from '../Utils';
 
@@ -40,26 +30,38 @@ import NavigationService from '../services/NavigationService';
 import InvitationModal from './InvitationModal';
 import AdFriend from './AdFriend';
 
-function ChatRoomsSettingsScreen({ chat, currentChat, navigation, addUserToChat, leaveChat, closeFriendPrepare, openFriendPrepare, getAdFriendsToChat }) {
-  if (!chat) { return null }
+function ChatRoomsSettingsScreen({
+  chat,
+  currentChat,
+  navigation,
+  addUserToChat,
+  leaveChat,
+  closeFriendPrepare,
+  openFriendPrepare,
+  getAdFriendsToChat,
+}) {
+  if (!chat) {
+    return null;
+  }
 
   const initializeChat = () => {
     getAdFriendsToChat(chat.ad_id);
     const onShow = () => navigation.navigate('VisitedAdScreen', { id: chat.ad_id });
     const onLeave = () => {
-
-      ActionSheet.show({
-        options: ['Покинуть чат', 'Отменить'],
-        cancelButtonIndex: 1,
-        destructiveButtonIndex: 0,
-        title: `Покинув чат вы потеряете доступ ко всем его сообщениям, пока вас не пригласят обратно оставшиеся участники`
-      }, (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id));
-
+      ActionSheet.show(
+        {
+          options: ['Покинуть чат', 'Отменить'],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0,
+          title: `Покинув чат вы потеряете доступ ко всем его сообщениям, пока вас не пригласят обратно оставшиеся участники`,
+        },
+        (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
+      );
     };
     navigation.setParams({ onLeave: onLeave, onShow: onShow });
   };
 
-  useEffect( initializeChat, [chat.id]);
+  useEffect(initializeChat, [chat.id]);
 
   const { friends, isLoadingSettings } = currentChat;
   const [friendToInvite, setFriendToInvite] = useState({});
@@ -69,28 +71,28 @@ function ChatRoomsSettingsScreen({ chat, currentChat, navigation, addUserToChat,
   const openInviteFriendModal = (friend) => {
     setFriendToInvite(friend);
     setModalVisible(true);
-  }
+  };
 
-  const toDisplay = mergeArraysKeepNew([...friends, ...chat.chat_room_users], it => it.user_id);
+  const toDisplay = mergeArraysKeepNew([...friends, ...chat.chat_room_users], (it) => it.user_id);
   const keyExtractor = (item) => item.user_id.toString();
-  const renderItem = ({ item }) => <AdFriend friend={item} chat={chat} openInviteFriendModal={openInviteFriendModal} />
+  const renderItem = ({ item }) => <AdFriend friend={item} chat={chat} openInviteFriendModal={openInviteFriendModal} />;
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
-  return(
+  return (
     <Container>
-      <Image source={{uri: chat.photo}} style={styles.adPhoto}/>
-      {isLoadingSettings ? <Spinner color={activeColor} />
-                         : <FlatList data={toDisplay}
-                                     refreshing={isLoadingSettings}
-                                     keyExtractor={keyExtractor}
-                                     renderItem={renderItem} />}
-      {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={addUser}/>}
+      <Image source={{ uri: chat.photo }} style={styles.adPhoto} />
+      {isLoadingSettings ? (
+        <Spinner color={activeColor} />
+      ) : (
+        <FlatList data={toDisplay} refreshing={isLoadingSettings} keyExtractor={keyExtractor} renderItem={renderItem} />
+      )}
+      {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={addUser} />}
     </Container>
   );
 }
 
 function mapStateToProps(state, ownProps) {
-  const chat = state.chats.list.filter(chat => chat.id === ownProps.navigation.state.params.chat.id)[0];
+  const chat = state.chats.list.filter((chat) => chat.id === ownProps.navigation.state.params.chat.id)[0];
 
   return {
     currentChat: state.currentChat,
@@ -111,7 +113,7 @@ function mapDispatchToProps(dispatch) {
 ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
   const { onShow, onLeave } = navigation.state.params;
 
-  return({
+  return {
     title: '',
     headerTitleStyle: { color: '#fff' },
     headerBackTitle: () => null,
@@ -120,12 +122,14 @@ ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
     headerTintColor: '#fff',
     headerShown: true,
     headerTransparent: true,
-    headerRight: () => <View style={styles.actionButtons}>
-      <Icon name='car-sport' style={styles.adActionButton} onPress={onShow}/>
-      <Icon name='log-out-outline' style={styles.leaveActionButton} onPress={onLeave}/>
-    </View>
-  });
-}
+    headerRight: () => (
+      <View style={styles.actionButtons}>
+        <Icon name="car-sport" style={styles.adActionButton} onPress={onShow} />
+        <Icon name="log-out-outline" style={styles.leaveActionButton} onPress={onLeave} />
+      </View>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -149,15 +153,15 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   actionButtons: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   adActionButton: {
     paddingRight: 16,
-    color: '#fff'
+    color: '#fff',
   },
   leaveActionButton: {
     paddingRight: 16,
-    color: activeColor
+    color: activeColor,
   },
 });
 

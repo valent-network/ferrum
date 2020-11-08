@@ -16,13 +16,19 @@ import { goToSettings } from '../Utils';
 import { activeColor, mainColor } from '../Colors';
 
 class PermissionsBox extends React.PureComponent {
-  onPress = () => this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions()
+  onPress = () => (this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions());
 
   componentDidMount() {
     this.props.checkContactsPermissions();
   }
   render() {
-    const { permissionsGiven, permissionsRequested, checkContactsPermissions, userContactsCount, userContactsProcessed } = this.props;
+    const {
+      permissionsGiven,
+      permissionsRequested,
+      checkContactsPermissions,
+      userContactsCount,
+      userContactsProcessed,
+    } = this.props;
 
     if (permissionsGiven && permissionsRequested) {
       if (userContactsCount === 0 && !userContactsProcessed) {
@@ -53,7 +59,7 @@ function mapStateToProps(state) {
     permissionsGiven: state.userContacts.permissionsGiven,
     permissionsRequested: state.userContacts.permissionsRequested,
     userContactsCount: state.user.userContactsCount,
-    userContactsProcessed: state.user.contactsProcessed
+    userContactsProcessed: state.user.contactsProcessed,
   };
 }
 
@@ -75,10 +81,10 @@ const styles = StyleSheet.create({
     padding: 12,
     borderColor: activeColor,
     borderWidth: 2,
-    borderRadius: 4
+    borderRadius: 4,
   },
   button: {
     marginTop: 12,
-    backgroundColor: activeColor
-  }
-})
+    backgroundColor: activeColor,
+  },
+});

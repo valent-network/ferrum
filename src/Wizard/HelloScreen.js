@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   textBlock: {
-    marginBottom: 24
+    marginBottom: 24,
   },
   goButton: {
     backgroundColor: activeColor,
     margin: 24,
     marginTop: 0,
-    marginBottom: 48
-  }
+    marginBottom: 48,
+  },
 });

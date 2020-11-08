@@ -7,23 +7,25 @@ import { Text, View, Icon } from 'native-base';
 import { mainColor } from '../Colors';
 
 export default class OptionsList extends React.PureComponent {
-  goToAdSource = () => Linking.openURL(this.props.ad.url)
+  goToAdSource = () => Linking.openURL(this.props.ad.url);
   render() {
     const { options } = this.props.ad;
 
     return (
       <View style={styles.mainContainer}>
         {Object.keys(options).map((opt, index) => (
-          <Text key={index} style={styles.optionContainer} >{options[opt][0]}: {options[opt][1]}</Text>
+          <Text key={index} style={styles.optionContainer}>
+            {options[opt][0]}: {options[opt][1]}
+          </Text>
         ))}
         <Text style={styles.optionContainer} onPress={this.goToAdSource}>
-          Источник&nbsp;<Icon name='ios-open-outline' style={styles.sourceIcon}/>
+          Источник&nbsp;
+          <Icon name="ios-open-outline" style={styles.sourceIcon} />
         </Text>
       </View>
     );
   }
 }
-
 
 OptionsList.propTypes = {
   ad: PropTypes.object.isRequired,
@@ -31,8 +33,8 @@ OptionsList.propTypes = {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flexDirection:'row',
-    flexWrap:'wrap',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: 12,
     marginBottom: 12,
   },
@@ -43,10 +45,10 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     borderRadius: 4,
     fontSize: 14,
-    padding: 6
+    padding: 6,
   },
   sourceIcon: {
     fontSize: 15,
-    lineHeight: 20
-  }
-})
+    lineHeight: 20,
+  },
+});

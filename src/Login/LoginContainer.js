@@ -25,14 +25,14 @@ class LoginContainer extends React.PureComponent {
   checkCachedAuth = () => {
     if (!(AppState.currentState === 'active')) return;
 
-    getAuthPhone().then(phone => {
+    getAuthPhone().then((phone) => {
       if (phone && phone !== this.props.phone) {
         this.props.onReturnWhileAuthInProgress(phone);
       }
     });
   };
 
-  componentDidMount () {
+  componentDidMount() {
     AppState.addEventListener('change', this.checkCachedAuth);
   }
 
@@ -83,16 +83,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInputPhone: phone => dispatch(changePhone(phone)),
-    onInputCode: code => dispatch(changeCode(code)),
-    onReturnWhileAuthInProgress: phone => dispatch({ type: ActionTypes.PHONE_FROM_CACHE, phone: phone }),
+    onInputPhone: (phone) => dispatch(changePhone(phone)),
+    onInputCode: (code) => dispatch(changeCode(code)),
+    onReturnWhileAuthInProgress: (phone) => dispatch({ type: ActionTypes.PHONE_FROM_CACHE, phone: phone }),
     onReset: () => dispatch(onReset()),
     onSignIn: (phone, code) => {
       const valid = !!code.toString().match(/^\d{4}$/);
 
       valid ? dispatch(signIn(phone, code)) : dispatch(codeIsInvalidFormat());
     },
-    onRequest: phone => {
+    onRequest: (phone) => {
       const valid = !!phone.toString().match(/^\d{9}$/);
 
       valid ? dispatch(requestCode(phone)) : dispatch(phoneIsInvalidFormat());

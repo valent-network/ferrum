@@ -8,7 +8,7 @@ export const getAccessToken = async () => {
   }
 };
 
-export const setAccessToken = async accessToken => {
+export const setAccessToken = async (accessToken) => {
   try {
     return await AsyncStorage.setItem('@AsyncStore:accessToken', accessToken);
   } catch (error) {
@@ -32,7 +32,7 @@ export const getWizardDone = async () => {
   }
 };
 
-export const setWizardDoneValue = async status => {
+export const setWizardDoneValue = async (status) => {
   try {
     return await AsyncStorage.setItem('@AsyncStorage:wizardDone', status);
   } catch (error) {
@@ -48,7 +48,7 @@ export const getAuthPhone = async () => {
   }
 };
 
-export const setAuthPhone = async phone => {
+export const setAuthPhone = async (phone) => {
   try {
     return await AsyncStorage.setItem('@AsyncStorage:authPhone', phone);
   } catch (error) {
@@ -70,13 +70,16 @@ export const getPushToken = async () => {
   } catch (error) {
     return false;
   }
-}
+};
 
 export const setPushToken = async (pushToken) => {
   try {
     // return await AsyncStorage.setItem('@AsyncStorage:pushToken', JSON.stringify({ token: pushToken.token, os: pushToken.os}));
-    return await AsyncStorage.setItem('@AsyncStorage:pushToken', JSON.stringify({ push_token: pushToken.token, os: pushToken.os}));
+    return await AsyncStorage.setItem(
+      '@AsyncStorage:pushToken',
+      JSON.stringify({ push_token: pushToken.token, os: pushToken.os }),
+    );
   } catch (error) {
     return false;
   }
-}
+};

@@ -9,7 +9,7 @@ import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
 
 class AdsList extends React.PureComponent {
-  _keyExtractor = item => item.id.toString();
+  _keyExtractor = (item) => item.id.toString();
 
   _onEndReached = async () => {
     this.props.loadMoreAds();

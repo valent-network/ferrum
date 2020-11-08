@@ -8,34 +8,35 @@ import ru from 'dayjs/locale/ru';
 
 import { activeColor, darkColor, mainColor, lightColor } from '../Colors';
 
+const renderLoadEarlier = (props) => <LoadEarlier label="Загрузить еще..." {...props} />;
 
-const renderLoadEarlier = (props) => <LoadEarlier label='Загрузить еще...' {...props}/>
+const renderInputToolbar = (props) => (
+  <InputToolbar {...props} textInputStyle={styles.textInput} containerStyle={styles.inputToolbarContainer} />
+);
 
-const renderInputToolbar = (props) => <InputToolbar {...props} textInputStyle={styles.textInput} containerStyle={styles.inputToolbarContainer}/>
-
-const renderSend = (props) => <Send {...props} containerStyle={styles.sendContainer}>
-    <Icon name='paper-plane' style={styles.sendButton} />
+const renderSend = (props) => (
+  <Send {...props} containerStyle={styles.sendContainer}>
+    <Icon name="paper-plane" style={styles.sendButton} />
   </Send>
-
+);
 
 export const commonGiftedChatOptions = {
-    ...(Platform.OS === 'ios' && { bottomOffset: 31.5 }),
-    infiniteScroll: true,
-    maxInputLength: 200,
-    placeholder: 'Сообщение...',
-    renderUsernameOnMessage: true,
-    locale: ru,
-    listViewProps: {
-      style: {
-        backgroundColor: mainColor
-      },
-      keyboardDismissMode: 'on-drag',
+  ...(Platform.OS === 'ios' && { bottomOffset: 31.5 }),
+  infiniteScroll: true,
+  maxInputLength: 200,
+  placeholder: 'Сообщение...',
+  renderUsernameOnMessage: true,
+  locale: ru,
+  listViewProps: {
+    style: {
+      backgroundColor: mainColor,
     },
-    renderLoadEarlier,
-    renderInputToolbar,
-    renderSend,
-}
-
+    keyboardDismissMode: 'on-drag',
+  },
+  renderLoadEarlier,
+  renderInputToolbar,
+  renderSend,
+};
 
 const styles = StyleSheet.create({
   inputToolbarContainer: {
@@ -43,19 +44,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopWidth: 0.2,
     borderBottomColor: mainColor,
-    borderTopColor: lightColor
+    borderTopColor: lightColor,
   },
   textInput: {
-    color: lightColor
+    color: lightColor,
   },
-    sendContainer: {
+  sendContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    paddingRight: 12
+    paddingRight: 12,
   },
-    sendButton: {
+  sendButton: {
     color: activeColor,
     fontWeight: 'bold',
   },
-})
+});

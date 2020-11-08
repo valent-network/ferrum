@@ -20,11 +20,11 @@ const apiService = axios.create({
 
 apiService.defaults.headers.common['X-User-Access-Token'] = null;
 
-apiService.interceptors.request.use(config => {
-  config.paramsSerializer = params => {
+apiService.interceptors.request.use((config) => {
+  config.paramsSerializer = (params) => {
     return Qs.stringify(params, {
       arrayFormat: 'brackets',
-      encode: false
+      encode: false,
     });
   };
 
@@ -32,10 +32,10 @@ apiService.interceptors.request.use(config => {
 });
 
 apiService.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response;
   },
-  function(error) {
+  function (error) {
     if (401 === error.response.status) {
       clearAccessToken();
       API.clearAccessToken();
@@ -91,27 +91,28 @@ export default class API {
     return apiService.put('/v1/contact_book', { contacts: contacts });
   }
 
-  static getFeed(offset=0, filters={}) {
-    return apiService.get('/v1/feed_ads', { params: {
+  static getFeed(offset = 0, filters = {}) {
+    return apiService.get('/v1/feed_ads', {
+      params: {
         offset: offset,
-        filters: filters
-      }
+        filters: filters,
+      },
     });
   }
 
-  static getVisitedAds(offset=0) {
+  static getVisitedAds(offset = 0) {
     return apiService.get(`/v1/visited_ads?offset=${offset}`);
   }
 
-  static getFavoriteAds(offset=0) {
+  static getFavoriteAds(offset = 0) {
     return apiService.get(`/v1/favorite_ads?offset=${offset}`);
   }
 
-  static getMyAds(offset=0) {
+  static getMyAds(offset = 0) {
     return apiService.get(`/v1/my_ads?offset=${offset}`);
   }
 
-  static getUserContacts(offset=0, query='') {
+  static getUserContacts(offset = 0, query = '') {
     return apiService.get(`/v1/user_contacts?offset=${offset}&query=${query}`);
   }
 
@@ -127,7 +128,7 @@ export default class API {
     return apiService.get('/filters');
   }
 
-  static updateProfile(userParams={}, deviceParams={}) {
+  static updateProfile(userParams = {}, deviceParams = {}) {
     return apiService.put('/v1/user', { user: userParams, device: deviceParams });
   }
 
@@ -139,7 +140,7 @@ export default class API {
     return apiService.delete(`/v1/favorite_ads/${adId}`);
   }
 
-  static getChatRooms(offset=0) {
+  static getChatRooms(offset = 0) {
     return apiService.get(`/v1/chat_rooms?offset=${offset}`);
   }
 
@@ -156,6 +157,6 @@ export default class API {
   }
 
   static getMessages(chatId, offset) {
-    return apiService.get(`/v1/messages?chat_id=${chatId}&offset=${offset}`)
+    return apiService.get(`/v1/messages?chat_id=${chatId}&offset=${offset}`);
   }
 }
