@@ -48,6 +48,10 @@ export function initiateChatRoom(adId, userId, name) {
     API.initiateChatRoom(adId, userId, name).then(({ data }) => {
       dispatch({ type: ActionTypes.GET_AD_FRIENDS_SUCCESS, adFriends: data });
       dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS, adFriends: data });
+
+      dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: data.chat_room.id });
+      serverChannel.connectToChatRoomChannel(data.chat_room.id);
+      dispatch(getMessages(data.chat_room.id));
     });
   };
 }

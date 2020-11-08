@@ -54,9 +54,7 @@ class AskFriend extends React.PureComponent {
                   block
                   dark
                   style={styles.button}
-                  onPress={() =>
-                    NavigationService.navigate('ChatRoomScreen', { chatId: c.id, title: c.title, friends: friends })
-                  }>
+                  onPress={() => NavigationService.navigate('ChatRoomScreen', { chatId: c.id })}>
                   <Text>Продолжить</Text>
                 </Button>
               </View>
