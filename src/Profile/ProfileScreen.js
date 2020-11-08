@@ -205,6 +205,7 @@ styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingTop: 32,
+    minHeight: '100%',
   },
   avatarContainer: {
     alignItems: 'center',
@@ -226,9 +227,8 @@ styles = StyleSheet.create({
     color: activeColor,
   },
   bottomItemsContainer: {
-    justifyContent: 'flex-end',
     flex: 1,
-    marginBottom: 48,
+    justifyContent: 'flex-end',
   },
   bottomList: {
     backgroundColor: '#222',

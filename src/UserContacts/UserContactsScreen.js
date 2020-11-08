@@ -38,7 +38,7 @@ class UserContactsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={styles.mainHeader} iosBarStyle="light-content" searchBar>
+        <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar>
           <Item style={styles.searchBar}>
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input

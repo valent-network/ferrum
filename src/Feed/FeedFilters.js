@@ -70,7 +70,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
 
   return (
     <View>
-      <Header style={styles.mainHeader} iosBarStyle="light-content" searchBar rounded>
+      <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar rounded>
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input

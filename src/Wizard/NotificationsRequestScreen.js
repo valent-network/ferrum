@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
-import { Container, Text, Button, H1, View } from 'native-base';
+import { Container, Content, Text, Button, H1, View } from 'native-base';
 
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
@@ -26,18 +26,20 @@ class NotificationsRequestScreen extends React.PureComponent {
   render() {
     return (
       <Container>
-        <H1 style={styles.h1}>Оповещения</H1>
-        <View style={styles.mainContainer}>
-          <Text style={styles.textBlock}>
-            Получайте оперативные обновления о новых объявлениях друзей и много другого.
-          </Text>
-        </View>
-        <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
-          <Text>Предоставить доступ</Text>
-        </Button>
-        <Button transparent block onPress={this.nextStep} style={styles.skipButton}>
-          <Text style={styles.skipButtonText}>Пропустить</Text>
-        </Button>
+        <Content contentContainerStyle={styles.contentContainer}>
+          <H1 style={styles.h1}>Оповещения</H1>
+          <View style={styles.mainContainer}>
+            <Text style={styles.textBlock}>
+              Получайте оперативные обновления о новых объявлениях друзей и много другого.
+            </Text>
+          </View>
+          <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
+            <Text>Предоставить доступ</Text>
+          </Button>
+          <Button transparent block onPress={this.nextStep} style={styles.skipButton}>
+            <Text style={styles.skipButtonText}>Пропустить</Text>
+          </Button>
+        </Content>
       </Container>
     );
   }
@@ -59,16 +61,13 @@ NotificationsRequestScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   h1: {
-    marginTop: 94,
-    paddingLeft: 24,
-    paddingRight: 24,
+    padding: 24,
     textAlign: 'center',
   },
   mainContainer: {
     justifyContent: 'center',
     flex: 1,
-    paddingLeft: 24,
-    paddingRight: 24,
+    paddingHorizontal: 24,
   },
   textBlock: {
     marginBottom: 24,
@@ -86,5 +85,9 @@ const styles = StyleSheet.create({
   },
   skipButtonText: {
     color: lightColor,
+  },
+  contentContainer: {
+    justifyContent: 'space-between',
+    flex: 1,
   },
 });

@@ -42,7 +42,7 @@ class FavoriteAdsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={styles.header} iosBarStyle="light-content">
+        <Header style={styles.header} noShadow={true} iosBarStyle="light-content">
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
               Избранные&nbsp;

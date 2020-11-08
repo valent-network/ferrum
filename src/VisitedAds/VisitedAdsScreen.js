@@ -44,7 +44,7 @@ class VisitedAdsScreen extends React.PureComponent {
 
     return (
       <Container>
-        <Header style={styles.header} iosBarStyle="light-content">
+        <Header style={styles.header} iosBarStyle="light-content" noShadow={true}>
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
               Просмотренные&nbsp;

@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   headerBackground: {
-    backgroundColor: 'rgba(0,0,0,0.0)',
+    backgroundColor: 'transparent',
     width: '100%',
     color: '#fff',
     position: 'absolute',
