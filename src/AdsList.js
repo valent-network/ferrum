@@ -9,21 +9,22 @@ import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
 
 class AdsList extends React.PureComponent {
-
   _keyExtractor = item => item.id.toString();
 
   _onEndReached = async () => {
-    this.props.loadMoreAdsDispatched();
-  }
+    this.props.loadMoreAds();
+  };
 
   // https://github.com/facebook/react-native/issues/26610
-  flatListBugFix = { right: 1 }
+  flatListBugFix = { right: 1 };
 
-  onRefresh = this.props.onRefresh
-  refreshControlLoading = <RefreshControl refreshing={true} tintColor={activeColor} onRefresh={this.onRefresh} />
-  refreshControlStable = <RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.onRefresh} />
+  onRefresh = this.props.onRefresh;
+  refreshControlLoading = (<RefreshControl refreshing={true} tintColor={activeColor} onRefresh={this.onRefresh} />);
+  refreshControlStable = (<RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.onRefresh} />);
 
-  _renderItem = ({ item, index }) => <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={this.props.onAdOpened} />;
+  _renderItem = ({ item, index }) => (
+    <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={this.props.onAdOpened} />
+  );
 
   render() {
     const { ads, isLoading } = this.props;
@@ -34,12 +35,14 @@ class AdsList extends React.PureComponent {
     }
 
     return (
-      <FlatList data={ads}
-                scrollIndicatorInsets={this.flatListBugFix}
-                refreshControl={refreshControl}
-                keyExtractor={this._keyExtractor}
-                onEndReached={this._onEndReached}
-                renderItem={this._renderItem} />
+      <FlatList
+        data={ads}
+        scrollIndicatorInsets={this.flatListBugFix}
+        refreshControl={refreshControl}
+        keyExtractor={this._keyExtractor}
+        onEndReached={this._onEndReached}
+        renderItem={this._renderItem}
+      />
     );
   }
 }
