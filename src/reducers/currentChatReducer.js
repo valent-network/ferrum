@@ -1,4 +1,5 @@
 import * as ActionTypes from '../actions/actionTypes';
+import equal from 'react-fast-compare';
 
 import { mergeArraysKeepNew } from '../Utils';
 
@@ -6,7 +7,7 @@ const initialState = {
   friends: [],
   isLoadingSettings: false,
   messages: [],
-  lastLoaded: false,
+  lastLoaded: true,
   chatMetaData: {
     chat_room_users: [],
   },
@@ -27,24 +28,14 @@ export default function currentChatReducer(state = initialState, action = {}) {
     case ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS:
       return {
         ...state,
-        friends: action.friends,
+        friends: equal(state.friends, action.friends) ? state.friends : action.friends,
         isLoadingSettings: false,
       };
-    case ActionTypes.CLOSE_FRIEND_PREPARE:
-      return {
-        ...state,
-        friendToInvite: {},
-        inviteModalOpened: false,
-        isInvitingFriendLoading: false,
-      };
-    case ActionTypes.OPEN_FRIEND_PREPARE:
-      return {
-        ...state,
-        friendToInvite: action.friend,
-        inviteModalOpened: true,
-        isInvitingFriendLoading: false,
-      };
     case ActionTypes.SET_CURRENT_CHAT:
+      if (action.chatRoomId === state.id) {
+        return state;
+      }
+
       return {
         ...state,
         id: action.chatRoomId,
@@ -72,13 +63,14 @@ export default function currentChatReducer(state = initialState, action = {}) {
         ),
       };
     case ActionTypes.SYNC_MESSAGES_SUCCESS:
+      const newMessages = mergeArraysKeepNew([...state.messages, ...action.messages], (it) => it._id).sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      );
       return {
         ...state,
         lastLoaded: action.messages.length < 20,
-        chatMetaData: action.chat,
-        messages: mergeArraysKeepNew([...state.messages, ...action.messages], (it) => it._id).sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-        ),
+        chatMetaData: equal(state.chatMetaData, action.chat) ? state.chatMetaData : action.chat,
+        messages: equal(state.messages, newMessages) ? state.messages : newMessages,
       };
     case ActionTypes.MESSAGE_WAS_DELETED:
       if (state.id !== action.chat_room_id) {

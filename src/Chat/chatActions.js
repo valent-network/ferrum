@@ -131,18 +131,6 @@ export function deleteMessageFinished(id, chat_room_id, updated_at) {
   };
 }
 
-export function openFriendPrepare(friend) {
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.OPEN_FRIEND_PREPARE, friend: friend });
-  };
-}
-
-export function closeFriendPrepare() {
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.CLOSE_FRIEND_PREPARE });
-  };
-}
-
 export function updateUnread(count) {
   return (dispatch) => {
     PushNotification.setApplicationIconBadgeNumber(count);

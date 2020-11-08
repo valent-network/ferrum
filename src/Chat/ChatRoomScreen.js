@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, TouchableOpacity, AppState } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -15,8 +15,10 @@ import CurrentChatHeader from './CurrentChatHeader';
 import CurrentChatActions from './CurrentChatActions';
 
 function ChatRoomScreen({
-  user,
-  currentChat,
+  userId,
+  messages,
+  chat,
+  shouldLoadEarlier,
   navigation,
   onSend,
   onDelete,
@@ -25,7 +27,6 @@ function ChatRoomScreen({
   resetCurrentChat,
 }) {
   const chatId = navigation.state.params.chatId;
-  const chat = currentChat.chatMetaData;
 
   if (!chatId) {
     return <SpinnerScreen />;
@@ -34,34 +35,26 @@ function ChatRoomScreen({
   useEffect(() => {
     const focusListener = navigation.addListener('didFocus', onConnect);
     const blurListener = navigation.addListener('didBlur', onDisconnect);
+    AppState.addEventListener('change', appStateHandle);
 
     return () => {
       focusListener.remove();
       blurListener.remove();
-    };
-  }, []);
-
-  useEffect(() => {
-    resetCurrentChat();
-    onConnect();
-    AppState.addEventListener('change', appStateHandle);
-    getMessages(chatId);
-
-    return () => {
       onDisconnect();
       AppState.removeEventListener('change', appStateHandle);
     };
-  }, [chatId]);
+  }, []);
 
-  const onConnect = () => {
+  const onConnect = useCallback(() => {
     setCurrentChat(chatId);
     serverChannel.connectToChatRoomChannel(chatId);
     getMessages(chatId);
-  };
-  const onDisconnect = () => {
+  }, [chatId]);
+
+  const onDisconnect = useCallback(() => {
     resetCurrentChat();
     serverChannel.disconnectChatRoomChannel();
-  };
+  }, []);
 
   const appStateHandle = () => {
     switch (AppState.currentState) {
@@ -78,13 +71,13 @@ function ChatRoomScreen({
     return <SpinnerScreen />;
   }
 
-  const userName = chat.chat_room_users.filter((cru) => cru.user_id === user._id)[0].name;
+  const userName = chat.chat_room_users.filter((cru) => cru.user_id === userId)[0].name;
 
   const giftedChatOptions = {
-    user: { _id: user._id, name: userName },
-    messages: currentChat.messages,
-    onLoadEarlier: () => getMessages(chatId, currentChat.messages.length),
-    loadEarlier: !currentChat.lastLoaded,
+    user: { _id: userId, name: userName },
+    messages: messages,
+    onLoadEarlier: () => getMessages(chatId, messages.length),
+    loadEarlier: shouldLoadEarlier,
     onSend: (message) => onSend(message[0], chatId),
     onLongPress: (context, message) => onMessageLongPress(user, message, onDelete),
   };
@@ -98,8 +91,10 @@ function ChatRoomScreen({
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.user,
-    currentChat: state.currentChat,
+    userId: state.user._id,
+    shouldLoadEarlier: !state.currentChat.lastLoaded,
+    chat: state.currentChat.chatMetaData,
+    messages: state.currentChat.messages,
   };
 }
 

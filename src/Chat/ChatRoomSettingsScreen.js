@@ -21,7 +21,7 @@ import { activeColor, mainColor } from '../Colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
-import { getAdFriendsToChat, addUserToChat, leaveChat, openFriendPrepare, closeFriendPrepare } from './chatActions';
+import { getAdFriendsToChat, addUserToChat, leaveChat } from './chatActions';
 
 import { mergeArraysKeepNew } from '../Utils';
 
@@ -30,16 +30,7 @@ import NavigationService from '../services/NavigationService';
 import InvitationModal from './InvitationModal';
 import AdFriend from './AdFriend';
 
-function ChatRoomsSettingsScreen({
-  chat,
-  currentChat,
-  navigation,
-  addUserToChat,
-  leaveChat,
-  closeFriendPrepare,
-  openFriendPrepare,
-  getAdFriendsToChat,
-}) {
+function ChatRoomsSettingsScreen({ chat, currentChat, navigation, addUserToChat, leaveChat, getAdFriendsToChat }) {
   if (!chat) {
     return null;
   }
@@ -105,8 +96,6 @@ function mapDispatchToProps(dispatch) {
     getAdFriendsToChat: (adId) => dispatch(getAdFriendsToChat(adId)),
     addUserToChat: (chatId, userId, name) => dispatch(addUserToChat(chatId, userId, name)),
     leaveChat: (chatRoomId) => dispatch(leaveChat(chatRoomId)),
-    openFriendPrepare: (friend) => dispatch(openFriendPrepare(friend)),
-    closeFriendPrepare: () => dispatch(closeFriendPrepare()),
   };
 }
 
