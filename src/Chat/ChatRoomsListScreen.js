@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, SafeAreaView, RefreshControl } from 'react-native';
+import { FlatList, SafeAreaView, RefreshControl, StyleSheet } from 'react-native';
 
 import { Text, Container, List } from 'native-base';
 
@@ -31,7 +31,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
 
   return (
     <Container>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.safeContainer}>
         <FlatList
           data={chats}
           refreshing={isLoading}
@@ -62,3 +62,9 @@ ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomsListScreen);
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+  },
+});

@@ -20,7 +20,7 @@ const HeaderTitle = ({ chat, navigation }) => {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={{ alignItems: 'center' }}>
+      <View style={styles.centered}>
         <Text>{chat.title}</Text>
         {chatRoomUsersCount > 0 && (
           <Text>

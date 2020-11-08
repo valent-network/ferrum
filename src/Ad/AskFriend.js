@@ -41,10 +41,10 @@ class AskFriend extends React.PureComponent {
             {chats.map((c) => (
               <View style={styles.mutualFriendBox} key={c.id}>
                 <Thumbnail source={{ uri: (c.chat_room_users[1] || c.chat_room_users[0]).avatar }} />
-                <Text note style={{ fontSize: 10 }}>
+                <Text note style={styles.smallFont}>
                   {c.chat_room_users.map((cru) => cru.name).join(', ')}
                 </Text>
-                <Text note style={{ fontSize: 10 }}>
+                <Text note style={styles.smallFont}>
                   {!c.messages[0].system && `${c.messages[0].user.name}: `}
                   {c.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
                   {c.messages[0].text.length > 15 && '...'}
@@ -68,10 +68,10 @@ class AskFriend extends React.PureComponent {
                 ) : (
                   <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
                 )}
-                <Text note style={{ fontSize: 10 }}>
+                <Text note style={styles.smallFont}>
                   {f.name}
                 </Text>
-                <Text note style={{ fontSize: 10 }}>
+                <Text note style={styles.smallFont}>
                   {f.phone_number}
                 </Text>
                 <Button
@@ -146,5 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: activeColor,
     marginTop: 16,
     alignSelf: 'center',
+  },
+  smallFont: {
+    fontSize: 10,
   },
 });

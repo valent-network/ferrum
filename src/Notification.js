@@ -76,7 +76,7 @@ export default class Notification extends React.PureComponent {
           <TouchableOpacity activeOpacity={1} onPress={this.onBodyPress} style={styles.notificationBody}>
             <Text numberOfLines={2} style={styles.notificationBodyText}>
               {message.name && (
-                <Text style={{ color: lightColor }}>
+                <Text style={styles.lightColor}>
                   {message.name}
                   {'\n'}
                 </Text>
@@ -124,5 +124,8 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     marginRight: 12,
+  },
+  lightColor: {
+    color: lightColor,
   },
 });

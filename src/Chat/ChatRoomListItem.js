@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import NavigationService from '../services/NavigationService';
 
@@ -21,20 +22,27 @@ export default function ChatRoomListItem({ chat }) {
   messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
 
   return (
-    <ListItem noIndent thumbnail activeOpacity={1} underlayColor="transparent" onPress={onPress}>
+    <ListItem
+      noBorder
+      noIndent
+      thumbnail
+      activeOpacity={1}
+      underlayColor="transparent"
+      onPress={onPress}
+      style={styles.chatRow}>
       <Left>
-        <Thumbnail source={{ uri: chat.photo }} style={{ borderColor: activeColor, borderWidth: 1 }} />
+        <Thumbnail source={{ uri: chat.photo }} style={styles.carPhoto} />
       </Left>
-      <Body style={{ backgroundColor: 'transparent' }}>
+      <Body style={styles.previewBody}>
         <Text>{chat.title}</Text>
-        {lastMessage?.user?._id && <Text>{lastMessage.user.name}</Text>}
+        <Text>{lastMessage?.user?._id && lastMessage.user.name}</Text>
 
         <Text note>{messagePreview}</Text>
       </Body>
-      <Right>
+      <Right style={styles.centered}>
         <Text note>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
-          <Badge style={{ backgroundColor: activeColor }}>
+          <Badge style={styles.unreadBadge}>
             <Text>{chat.new_messages_count}</Text>
           </Badge>
         )}
@@ -42,3 +50,26 @@ export default function ChatRoomListItem({ chat }) {
     </ListItem>
   );
 }
+
+const styles = StyleSheet.create({
+  carPhoto: {
+    borderColor: activeColor,
+    borderWidth: 1,
+  },
+  previewBody: {
+    backgroundColor: 'transparent',
+  },
+  unreadBadge: {
+    backgroundColor: activeColor,
+    transform: [{ scale: 0.8 }],
+    alignItems: 'center',
+  },
+  chatRow: {
+    marginBottom: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
+  },
+  centered: {
+    alignItems: 'center',
+  },
+});

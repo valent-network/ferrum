@@ -27,15 +27,15 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
             <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />
           </View>
 
-          <View style={{ paddingHorizontal: 12, flexDirection: 'column' }}>
-            <Thumbnail source={{ uri: friend.avatar }} style={{ alignSelf: 'center' }} />
-            <Text style={{ color: lightColor, alignSelf: 'center', textAlign: 'center' }}>
+          <View style={styles.contentContainer}>
+            <Thumbnail source={{ uri: friend.avatar }} style={styles.avatar} />
+            <Text style={styles.friendInfo}>
               {friend.name}
               {'\n'}
               {friend.phone_number}
             </Text>
             {!userNamePresent && (
-              <View style={{ backgroundColor: '#8D021F', padding: 8, borderRadius: 8, marginTop: 16 }}>
+              <View style={styles.emptyUserNameContainer}>
                 <Text>Чтобы начать чать, пожалуйста, укажите, как другие участники могут к вам обращаться:</Text>
                 <Item>
                   <Input
@@ -50,17 +50,17 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                   block
                   light
                   onPress={() => updateUserName(userName)}
-                  style={{ marginTop: 16 }}>
+                  style={styles.userNameSubmitButton}>
                   <Text>Готово</Text>
                 </Button>
               </View>
             )}
-            <Text style={{ marginVertical: 16 }}>Имя для других участников чата:</Text>
+            <Text style={styles.introHeader}>Имя для других участников чата:</Text>
 
             {possibleIntroNames.map((n) => (
               <TouchableOpacity key={n} onPress={() => setName(n)}>
-                <View style={{ flexDirection: 'row', paddingVertical: 8 }}>
-                  <Icon name={name === n ? 'ellipse' : 'ellipse-outline'} style={{ fontSize: 18, marginRight: 8 }} />
+                <View style={styles.introduceNameContainer}>
+                  <Icon name={name === n ? 'ellipse' : 'ellipse-outline'} style={styles.introduceOption} />
                   <Text>{n}</Text>
                 </View>
               </TouchableOpacity>
@@ -79,7 +79,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               disabled={!userNamePresent}
               block
               dark
-              style={{ backgroundColor: userNamePresent ? activeColor : 'grey', marginVertical: 36 }}
+              style={userNamePresent ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}>
               <Text>Добавить</Text>
             </Button>
@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  contentContainer: {
+    paddingHorizontal: 12,
+    flexDirection: 'column',
   },
   closeIcon: {
     alignSelf: 'flex-start',
@@ -116,6 +120,15 @@ const styles = StyleSheet.create({
   emptyArea: {
     height: '100%',
   },
+  introduceOption: { fontSize: 18, marginRight: 8 },
+  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 36 },
+  disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 36 },
+  avatar: { alignSelf: 'center' },
+  friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
+  userNameSubmitButton: { marginTop: 16 },
+  emptyUserNameContainer: { backgroundColor: '#8D021F', padding: 8, borderRadius: 8, marginTop: 16 },
+  introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
+  introHeader: { marginVertical: 16 },
 });
 
 function mapStateToProps(state) {
