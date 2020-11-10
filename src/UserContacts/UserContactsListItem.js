@@ -14,6 +14,7 @@ export default class UserContactsListItem extends React.PureComponent {
   openMore = () =>
     ActionSheet.show(
       {
+        title: this.props.contact.name,
         options: this.actions,
         cancelButtonIndex: this.cancelIndex,
       },
@@ -42,7 +43,14 @@ export default class UserContactsListItem extends React.PureComponent {
     const phoneStyle = this.user ? { color: activeColor, fontWeight: 'bold' } : {};
 
     return (
-      <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent" onPress={this.openMore}>
+      <ListItem
+        noIndent
+        thumbnail
+        noBorder
+        activeOpacity={1}
+        underlayColor="transparent"
+        onPress={this.openMore}
+        style={styles.mainContainer}>
         <Left>
           {this.user && this.user.avatar && (
             <Thumbnail source={{ uri: this.user.avatar }} style={styles.avatarThumbnail} />
@@ -66,17 +74,19 @@ export default class UserContactsListItem extends React.PureComponent {
 UserContactsListItem.propTypes = {};
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#666',
+  },
   defaultAvatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    borderColor: '#555',
-    borderWidth: 2,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
   },
   avatarThumbnail: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     borderColor: activeColor,
     borderWidth: 2,
   },

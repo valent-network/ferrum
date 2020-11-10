@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
-import { Container, Content, Text, Button, H1, View } from 'native-base';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { Container, Content, Text, Button, H1, View, Icon } from 'native-base';
 
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
@@ -25,22 +25,24 @@ class NotificationsRequestScreen extends React.PureComponent {
 
   render() {
     return (
-      <Container>
-        <Content contentContainerStyle={styles.contentContainer}>
-          <H1 style={styles.h1}>Оповещения</H1>
-          <View style={styles.mainContainer}>
-            <Text style={styles.textBlock}>
-              Получайте оперативные обновления о новых объявлениях друзей и много другого.
-            </Text>
-          </View>
-          <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
-            <Text>Предоставить доступ</Text>
-          </Button>
-          <Button transparent block onPress={this.nextStep} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>Пропустить</Text>
-          </Button>
-        </Content>
-      </Container>
+      <SafeAreaView style={styles.safeAreaView}>
+        <Container>
+          <Icon name="notifications-outline" style={styles.icon} />
+          <Content contentContainerStyle={styles.contentContainer}>
+            <H1 style={styles.h1}>Оповещения</H1>
+            <View style={styles.mainContainer}>
+              <Text style={styles.textBlock}>Моментально узнавай самое важное.</Text>
+              <Text style={styles.textBlock}>Рекарио постарается не отвлекать по пустякам!</Text>
+            </View>
+            <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
+              <Text>Предоставить доступ</Text>
+            </Button>
+            <Button transparent block onPress={this.nextStep} style={styles.skipButton}>
+              <Text style={styles.skipButtonText}>Пропустить</Text>
+            </Button>
+          </Content>
+        </Container>
+      </SafeAreaView>
     );
   }
 }
@@ -89,5 +91,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     justifyContent: 'space-between',
     flex: 1,
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
+  icon: {
+    alignSelf: 'center',
+    color: activeColor,
+    fontSize: 48,
   },
 });

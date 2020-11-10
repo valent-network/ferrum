@@ -50,7 +50,10 @@ export default class ImageGallery extends React.Component {
           </Badge>
         </View>
 
-        <Modal visible={this.state.imagesFullscreenOpened} transparent={false}>
+        <Modal
+          visible={this.state.imagesFullscreenOpened}
+          transparent={false}
+          onRequestClose={this.changeImagesFullscreenOpened}>
           <ImageViewer
             enableSwipeDown={true}
             enablePreload={true}

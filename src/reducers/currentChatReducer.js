@@ -29,6 +29,7 @@ export default function currentChatReducer(state = initialState, action = {}) {
       return {
         ...state,
         friends: equal(state.friends, action.friends) ? state.friends : action.friends,
+        chatMetaData: equal(state.chatMetaData, action.chat) ? state.chatMetaData : action.chat,
         isLoadingSettings: false,
       };
     case ActionTypes.SET_CURRENT_CHAT:
@@ -62,6 +63,11 @@ export default function currentChatReducer(state = initialState, action = {}) {
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         ),
       };
+    case ActionTypes.SYNC_MESSAGES_STARTED:
+      return {
+        ...state,
+        isLoadingSettings: true,
+      };
     case ActionTypes.SYNC_MESSAGES_SUCCESS:
       const newMessages = mergeArraysKeepNew([...state.messages, ...action.messages], (it) => it._id).sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
@@ -71,6 +77,7 @@ export default function currentChatReducer(state = initialState, action = {}) {
         lastLoaded: action.messages.length < 20,
         chatMetaData: equal(state.chatMetaData, action.chat) ? state.chatMetaData : action.chat,
         messages: equal(state.messages, newMessages) ? state.messages : newMessages,
+        isLoadingSettings: false,
       };
     case ActionTypes.MESSAGE_WAS_DELETED:
       if (state.id !== action.chat_room_id) {
@@ -93,10 +100,8 @@ export default function currentChatReducer(state = initialState, action = {}) {
     case ActionTypes.RESET_CURRENT_CHAT:
       return {
         ...state,
+        id: undefined,
         messages: [],
-        chatMetaData: {
-          chat_room_users: [],
-        },
       };
     default:
       return state;

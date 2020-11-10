@@ -26,5 +26,6 @@ export default function () {
         }
       }
     },
+    requestPermissions: Platform.OS === 'android',
   });
 }

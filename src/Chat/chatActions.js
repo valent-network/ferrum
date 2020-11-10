@@ -33,10 +33,10 @@ export function postMessage(message, chatId) {
   };
 }
 
-export function getMessages(chatId, offset = 0) {
+export function getMessages(chatRoomId, offset = 0) {
   return function (dispatch) {
-    // dispatch({ type: ActionTypes.SYNC_MESSAGES_STARTED, chat: chat });
-    API.getMessages(chatId, offset).then(({ data }) => {
+    dispatch({ type: ActionTypes.SYNC_MESSAGES_STARTED, chatRoomId: chatRoomId });
+    API.getMessages(chatRoomId, offset).then(({ data }) => {
       dispatch({ type: ActionTypes.SYNC_MESSAGES_SUCCESS, chat: data.chat, messages: data.messages });
     });
   };
@@ -56,13 +56,14 @@ export function initiateChatRoom(adId, userId, name) {
   };
 }
 
-export function getAdFriendsToChat(adId) {
+export function getAdFriendsToChat(adId, chatRoomId) {
   return (dispatch) => {
     dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_STARTED });
 
     return API.getAdFriends(adId)
       .then(({ data }) => {
-        dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS, friends: data.friends });
+        const chatMetaData = data.chats.filter((c) => c.id === chatRoomId)[0];
+        dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS, friends: data.friends, chat: chatMetaData });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_FAILED });
@@ -77,7 +78,7 @@ export function addUserToChat(chatId, userId, name) {
 
     return API.addUserToChat(chatId, userId, name)
       .then(({ data }) => {
-        dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS, friends: data });
+        dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS, friends: data.friends, chat: data.chat_room });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_FAILED });

@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Text, Icon, ListItem, Left, Body, Right, Thumbnail } from 'native-base';
+import { Text, Icon, ListItem, Left, Body, Right, Thumbnail, Button } from 'native-base';
+
+import { StyleSheet } from 'react-native';
 
 import { activeColor } from '../Colors';
 
@@ -15,7 +17,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
   };
 
   return (
-    <ListItem thumbnail activeOpacity={1} underlayColor="transparent" onPress={() => addUserToChatRoom(friend.user_id)}>
+    <ListItem style={styles.mainContainer} noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent">
       {friend.user_id && (
         <Left>{friend.avatar ? <Thumbnail source={{ uri: friend.avatar }} /> : <DefaultAvatar />}</Left>
       )}
@@ -27,7 +29,9 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
       </Body>
       {friend.user_id && !membersIds.includes(friend.user_id) && (
         <Right>
-          <Icon name="add-circle-outline" />
+          <Button small style={styles.addButton} onPress={() => addUserToChatRoom(friend.user_id)}>
+            <Text>Добавить</Text>
+          </Button>
         </Right>
       )}
     </ListItem>
@@ -35,3 +39,14 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
 }
 
 const DefaultAvatar = () => <Thumbnail source={require('../assets/default_avatar.png')} />;
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#666',
+    paddingVertical: 8,
+  },
+  addButton: {
+    backgroundColor: activeColor,
+  },
+});

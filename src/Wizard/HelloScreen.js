@@ -1,8 +1,8 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { StyleSheet, ScrollView } from 'react-native';
-import { Container, Content, Text, Button, H1, View } from 'native-base';
+import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { Container, Content, Text, Button, H1, View, Icon } from 'native-base';
 
 import { activeColor } from '../Colors';
 
@@ -13,22 +13,24 @@ export default class HelloScreen extends React.PureComponent {
 
   render() {
     return (
-      <Container>
-        <Content contentContainerStyle={styles.contentContainer}>
-          <H1 style={styles.h1}> Доброе пожаловать в Рекарио!</H1>
-          <View style={styles.mainContainer}>
-            <Text style={styles.textBlock}>Следите за объявлениями о продаже машин от ваших друзей.</Text>
-            <Text style={styles.textBlock}>Узнайте, кто из ваших друзей может знать других продавцов.</Text>
-            <Text style={styles.textBlock}>
-              Чем больше ваших друзей и друзей их друзей зарегистрируются в Рекарио – тем больше шанс получить реальную
-              рекомендацию о продавце интересующего автомобиля.
-            </Text>
-          </View>
-          <Button block dark onPress={this.nextStep} style={styles.goButton}>
-            <Text>Продолжить</Text>
-          </Button>
-        </Content>
-      </Container>
+      <SafeAreaView style={styles.safeAreaView}>
+        <Container>
+          <Icon name="fitness-outline" style={styles.icon} />
+          <Content contentContainerStyle={styles.contentContainer}>
+            <H1 style={styles.h1}>Держи руку на пульсе с Рекарио</H1>
+            <View style={styles.mainContainer}>
+              <Text style={styles.textBlock}>Узнай, кто из друзей сейчас продает автомобиль.</Text>
+              <Text style={styles.textBlock}>Найди общих друзей с продавцом.</Text>
+              <Text style={styles.textBlock}>
+                Предложи друзьям установить Рекарио и узнай еще больше об интересных машинах и их владельцах!
+              </Text>
+            </View>
+            <Button block dark onPress={this.nextStep} style={styles.goButton}>
+              <Text>Продолжить</Text>
+            </Button>
+          </Content>
+        </Container>
+      </SafeAreaView>
     );
   }
 }
@@ -56,5 +58,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
+  icon: {
+    alignSelf: 'center',
+    color: activeColor,
+    fontSize: 48,
   },
 });

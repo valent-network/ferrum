@@ -98,11 +98,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     </Text>
                   )}
                 </View>
-                <Item style={styles.filtersHeader}>
-                  <Left>
-                    <H1>Фильтры</H1>
-                  </Left>
-                </Item>
+                <H1 style={styles.filtersHeader}>Фильтры</H1>
 
                 <Form style={styles.filtersForm}>
                   <H2 style={styles.filterTitle}>Цена, $</H2>
@@ -308,6 +304,7 @@ const styles = StyleSheet.create({
   filtersHeader: {
     borderBottomWidth: 0,
     marginTop: 12,
+    width: '100%',
   },
   inputTextColor: {
     color: '#c9c9c9',

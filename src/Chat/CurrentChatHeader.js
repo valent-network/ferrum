@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
-import { View, Text } from 'native-base';
+import { View, Text, Spinner } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 
 import { decOfNum } from '../Utils';
+import { activeColor } from '../Colors';
 
 import NavigationService from '../services/NavigationService';
 
-const HeaderTitle = ({ chat, navigation }) => {
+const HeaderTitle = ({ chat, isLoading, navigation }) => {
   if (!chat.id) {
     return null;
   }
@@ -17,6 +18,10 @@ const HeaderTitle = ({ chat, navigation }) => {
   const chatRoomUsersCount = chat.chat_room_users?.length || 0;
   const membersWord = decOfNum(chatRoomUsersCount, ['участник', 'участника', 'участников']);
   onPress = () => NavigationService.push('ChatRoomSettingsScreen', { chat: chat });
+
+  if (isLoading) {
+    return <Spinner color={activeColor} />;
+  }
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -35,6 +40,7 @@ const HeaderTitle = ({ chat, navigation }) => {
 function mapStateToProps(state, ownProps) {
   return {
     chat: state.currentChat.chatMetaData,
+    isLoading: state.currentChat.isLoadingSettings,
   };
 }
 

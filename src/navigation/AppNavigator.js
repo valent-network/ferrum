@@ -170,7 +170,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
     tabBarOptions: {
       style: {
         backgroundColor: darkColor,
-        borderTopWidth: 0,
+        paddingTop: 4,
       },
       activeTintColor: activeColor,
       inactiveTintColor: 'grey',

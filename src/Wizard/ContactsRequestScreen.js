@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button, H1, View } from 'native-base';
+import { Container, Content, Text, Button, H1, View, Icon } from 'native-base';
 
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
@@ -33,32 +33,35 @@ class ContactsRequestScreen extends React.PureComponent {
 
   render() {
     return (
-      <Container>
-        <Content contentContainerStyle={styles.contentContainer}>
-          <H1 style={styles.h1}> Доступ к контактам</H1>
+      <SafeAreaView style={styles.safeAreaView}>
+        <Container>
+          <Icon name="people-circle-outline" style={styles.icon} />
+          <Content contentContainerStyle={styles.contentContainer}>
+            <H1 style={styles.h1}> Доступ к контактам</H1>
 
-          <View style={styles.mainContainer}>
-            <Text style={styles.textBlock}>
-              Чтобы Рекарио мог подсказать, кто из ваших друзей продает автомобиль или знает одного из продавцов, ему
-              нужен доступ к контактной книге.
-            </Text>
-            <Text style={styles.textBlock}>
-              Ваши контакты будут конфиденциальны, никто, кроме ваших друзей не узнает, кто есть у вас в контактах и под
-              каким именем.
-            </Text>
-            <Text style={styles.textBlock}>
-              В любой момент можно полностью удалить все контакты с серверов Рекарио.
-            </Text>
-          </View>
+            <View style={styles.mainContainer}>
+              <Text style={styles.textBlock}>
+                Поделись контактами с Рекарио, чтобы узнать всех друзей и знакомых, кто продает автомобиль или знает
+                продавца.
+              </Text>
+              <Text style={styles.textBlock}>
+                Контакты будут под защитой, никто, кроме твоих друзей не узнает, кто там есть. И совсем никто не узнает,
+                под каким именем он записан :)
+              </Text>
+              <Text style={styles.textBlock}>
+                В любой момент можно полностью удалить все контакты с серверов Рекарио.
+              </Text>
+            </View>
 
-          <Button block dark onPress={this.requestContacts} style={styles.goButton}>
-            <Text>Предоставить доступ</Text>
-          </Button>
-          <Button transparent block onPress={this.goTo} style={styles.skipButton}>
-            <Text style={styles.mainColor}>Пропустить</Text>
-          </Button>
-        </Content>
-      </Container>
+            <Button block dark onPress={this.requestContacts} style={styles.goButton}>
+              <Text>Предоставить доступ</Text>
+            </Button>
+            <Button transparent block onPress={this.goTo} style={styles.skipButton}>
+              <Text style={styles.mainColor}>Пропустить</Text>
+            </Button>
+          </Content>
+        </Container>
+      </SafeAreaView>
     );
   }
 }
@@ -108,5 +111,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     justifyContent: 'space-between',
     flex: 1,
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
+  icon: {
+    alignSelf: 'center',
+    color: activeColor,
+    fontSize: 48,
   },
 });
