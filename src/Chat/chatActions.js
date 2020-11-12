@@ -115,6 +115,7 @@ export function newMessage(chat, myMessage = false) {
             dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });
             dispatch(getMessages(chat.id));
 
+            serverChannel.disconnectChatRoomChannel();
             serverChannel.connectToChatRoomChannel(chat.id);
           },
         });
