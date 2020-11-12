@@ -13,11 +13,9 @@ export default function ChatRoomListItem({ chat }) {
   const lastMessage = chat.messages[0];
   const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatId: chat.id, title: chat.title });
 
-  const lastMessageDateString = dayjs(chat.updated_at).isBefore(dayjs())
-    ? dayjs(chat.updated_at).locale('ru').format('HH:mm')
-    : dayjs(chat.updated_at).locale('ru').format('DD MMM');
-  // TODO: something weird on Android when adding new member to chat
-  // console.warn(chat.updated_at, dayjs(chat.updated_at), dayjs(chat.updated_at).isBefore(dayjs())) // leads to false
+  const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
+    ? dayjs(lastMessage.createdAt).locale('ru').format('HH:mm')
+    : dayjs(lastMessage.createdAt).locale('ru').format('D MMM');
   let messagePreview = lastMessage ? lastMessage.text.replace(/\n/g, ' ') : '';
   messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
 

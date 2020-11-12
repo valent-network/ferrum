@@ -18,6 +18,7 @@ function ChatRoomScreen({
   userId,
   messages,
   chat,
+  currentChatId,
   shouldLoadEarlier,
   navigation,
   onSend,
@@ -33,9 +34,11 @@ function ChatRoomScreen({
   }
 
   useEffect(() => {
-    const focusListener = navigation.addListener('didFocus', onConnect);
-    const blurListener = navigation.addListener('didBlur', onDisconnect);
+    const focusListener = navigation.addListener('willFocus', onConnect);
+    const blurListener = navigation.addListener('willBlur', onDisconnect);
     AppState.addEventListener('change', appStateHandle);
+
+    if (!currentChatId) { onConnect(); }
 
     return () => {
       focusListener.remove();
@@ -95,6 +98,7 @@ function mapStateToProps(state, ownProps) {
     shouldLoadEarlier: !state.currentChat.lastLoaded,
     chat: state.currentChat.chatMetaData,
     messages: state.currentChat.messages,
+    currentChatId: state.currentChat.id,
   };
 }
 
