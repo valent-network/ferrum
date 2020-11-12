@@ -38,7 +38,9 @@ function ChatRoomScreen({
     const blurListener = navigation.addListener('willBlur', onDisconnect);
     AppState.addEventListener('change', appStateHandle);
 
-    if (!currentChatId) { onConnect(); }
+    if (!currentChatId) {
+      onConnect();
+    }
 
     return () => {
       focusListener.remove();

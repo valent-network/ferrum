@@ -108,7 +108,15 @@ export function newMessage(chat, myMessage = false) {
       if (!myMessage && chat.messages[0].user._id !== currentUserId) {
         UINotification.ref.show({
           message: { message: chat.messages[0].text, photo: chat.photo, name: chat.messages[0].user?.name },
-          onPress: () => NavigationService.navigate('ChatRoomScreen', { chat: chat, chatId: chat.id }),
+          onPress: () => {
+            NavigationService.navigate('ChatRoomScreen', { chat: chat, chatId: chat.id });
+
+            dispatch({ type: ActionTypes.RESET_CURRENT_CHAT });
+            dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });
+            dispatch(getMessages(chat.id));
+
+            serverChannel.connectToChatRoomChannel(chat.id);
+          },
         });
       }
     }
