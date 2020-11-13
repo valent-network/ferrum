@@ -41,18 +41,7 @@ class LoginContainer extends React.PureComponent {
   }
 
   render() {
-    const {
-      onReset,
-      onRequest,
-      onSignIn,
-      onInputCode,
-      onInputPhone,
-      phone,
-      code,
-      step,
-      errors,
-      isLoading,
-    } = this.props;
+    const { onReset, onRequest, onSignIn, onInputCode, onInputPhone, phone, code, step, isLoading } = this.props;
 
     return (
       <LoginScreen
@@ -64,7 +53,6 @@ class LoginContainer extends React.PureComponent {
         phone={phone}
         code={code}
         step={step}
-        errors={errors}
         isLoading={isLoading}
       />
     );
@@ -76,7 +64,6 @@ function mapStateToProps(state) {
     phone: state.auth.phone,
     code: state.auth.code,
     step: state.auth.step,
-    errors: state.auth.errors,
     isLoading: state.auth.isLoading,
   };
 }
@@ -88,14 +75,14 @@ function mapDispatchToProps(dispatch) {
     onReturnWhileAuthInProgress: (phone) => dispatch({ type: ActionTypes.PHONE_FROM_CACHE, phone: phone }),
     onReset: () => dispatch(onReset()),
     onSignIn: (phone, code) => {
-      const valid = !!code.toString().match(/^\d{4}$/);
+      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(4, 20);
 
-      valid ? dispatch(signIn(phone, code)) : dispatch(codeIsInvalidFormat());
+      dispatch(signIn(phoneShort, code));
     },
     onRequest: (phone) => {
-      const valid = !!phone.toString().match(/^\d{9}$/);
+      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(4, 20);
 
-      valid ? dispatch(requestCode(phone)) : dispatch(phoneIsInvalidFormat());
+      dispatch(requestCode(phoneShort));
     },
   };
 }
@@ -111,6 +98,5 @@ LoginContainer.propTypes = {
   phone: PropTypes.string,
   code: PropTypes.string,
   step: PropTypes.number,
-  errors: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

@@ -16,6 +16,8 @@ import {
   Thumbnail,
 } from 'native-base';
 
+import { TextInputMask } from 'react-native-masked-text';
+
 import { darkColor, activeColor, mainColor, trackColor } from '../Colors';
 
 import { onTosPress } from '../Utils';
@@ -33,8 +35,8 @@ export default class LoginScreen extends React.Component {
   }
 
   render() {
-    const { phone, code, step, errors, onRequest, onSignIn, onReset, isLoading } = this.props;
-    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 9;
+    const { phone, code, step, onRequest, onSignIn, onReset, isLoading } = this.props;
+    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 19;
     const step2IsDisabled = code.length !== 4;
 
     const requestButton = (
@@ -71,15 +73,25 @@ export default class LoginScreen extends React.Component {
     const phoneInput = (
       <Item rounded style={styles.phoneInput}>
         <Icon name="call-outline" style={styles.icon} />
-        <Text style={styles.phoneCountryText}>+380</Text>
-        <Input
-          placeholderTextColor="#666"
-          placeholder="Телефон"
-          keyboardType="numeric"
-          style={styles.input}
+        <TextInputMask
+          type={'custom'}
+          options={{
+            /**
+             * mask: (String | required | default '')
+             * the mask pattern
+             * 9 - accept digit.
+             * A - accept alpha.
+             * S - accept alphanumeric.
+             * * - accept all, EXCEPT white space.
+             */
+            mask: '+380 (99) 999-99-99',
+          }}
+          placeholder="+380 (00) 000-00-00"
           value={this.props.phone}
-          onChangeText={this.onInputPhone}
-          maxLength={9}
+          includeRawValueInChangeText={true}
+          keyboardType="numeric"
+          onChangeText={(maskedText, rawText) => this.onInputPhone(maskedText)}
+          style={{ fontSize: 18, height: '100%', width: '100%' }}
         />
       </Item>
     );
@@ -101,9 +113,6 @@ export default class LoginScreen extends React.Component {
               <View style={styles.contentContainer}>
                 <Text style={styles.header}>Вход</Text>
                 {step === 1 ? phoneInput : codeInput}
-
-                {errors.phone && <Text style={styles.errorText}>{errors.phone}</Text>}
-                {errors.code && <Text style={styles.errorText}>{errors.code}</Text>}
 
                 {step === 1 ? requestButton : signInButton}
                 {step === 1 && (
@@ -208,14 +217,12 @@ const styles = StyleSheet.create({
   smallFont: {
     fontSize: 11,
   },
-  errorText: {
-    color: '#ff0000',
-  },
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 4,
     backgroundColor: '#c9c9c9',
     borderColor: '#c9c9c9',
+    height: 42,
   },
   switchContainer: { flex: 0 },
   tosContainer: {

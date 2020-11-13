@@ -4,7 +4,6 @@ const initialState = {
   phone: '',
   code: '',
   step: 1,
-  errors: {},
   isLoading: true,
   wizardDone: false,
 };
@@ -36,18 +35,7 @@ export default function authReducer(state = initialState, action = {}) {
       return {
         ...state,
         step: 2,
-        errors: {},
         isLoading: false,
-      };
-    case ActionTypes.AUTH_PHONE_IS_INVALID_FORMAT:
-      return {
-        ...state,
-        errors: { phone: action.message },
-      };
-    case ActionTypes.AUTH_CODE_IS_INVALID_FORMAT:
-      return {
-        ...state,
-        errors: { code: action.message },
       };
     case ActionTypes.SIGN_IN_SUCCESS:
       return {
@@ -63,7 +51,6 @@ export default function authReducer(state = initialState, action = {}) {
     case ActionTypes.SIGN_IN_FAILED:
       return {
         ...state,
-        errors: {},
         isLoading: false,
       };
     case ActionTypes.SIGN_OUT_STARTED:
