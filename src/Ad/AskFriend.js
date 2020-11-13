@@ -28,62 +28,58 @@ class AskFriend extends React.PureComponent {
     const friends = currentAdFriends.friends;
     const chats = currentAdFriends.chats;
 
-    const notHand1FriendsOfFriends = friends.filter((friend) => friend.idx > 1);
     const direct_friend = friends.filter((friend) => friend.idx === 1)[0];
-    const hasMutualFriends = (friends.length > 1 && direct_friend) || (!direct_friend && friends.length > 0);
 
     return (
       <View>
         {direct_friend && <Text>Разместил(а) {direct_friend.name}</Text>}
 
-        {hasMutualFriends && notHand1FriendsOfFriends && (
-          <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.mutualFriendsContainer}>
-            {chats.map((c) => (
-              <View style={styles.mutualFriendBox} key={c.id}>
-                <Thumbnail source={{ uri: (c.chat_room_users[1] || c.chat_room_users[0]).avatar }} />
-                <Text note style={styles.smallFont}>
-                  {c.chat_room_users.map((cru) => cru.name).join(', ')}
-                </Text>
-                <Text note style={styles.smallFont}>
-                  {!c.messages[0].system && `${c.messages[0].user.name}: `}
-                  {c.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
-                  {c.messages[0].text.length > 15 && '...'}
-                </Text>
-                <Button
-                  small
-                  block
-                  dark
-                  style={styles.button}
-                  onPress={() => NavigationService.navigate('ChatRoomScreen', { chatId: c.id })}>
-                  <Text>Продолжить</Text>
-                </Button>
-              </View>
-            ))}
-            {notHand1FriendsOfFriends.map((f) => (
-              <View style={styles.mutualFriendBox} key={f.id}>
-                {f.avatar ? (
-                  <Thumbnail source={{ uri: f.avatar }} />
-                ) : (
-                  <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-                )}
-                <Text note style={styles.smallFont}>
-                  {f.name}
-                </Text>
-                <Text note style={styles.smallFont}>
-                  {f.phone_number}
-                </Text>
-                <Button
-                  small
-                  block
-                  dark
-                  style={styles.button}
-                  onPress={() => this.setState({ friendToInvite: f, modalVisible: true })}>
-                  <Text>Спросить</Text>
-                </Button>
-              </View>
-            ))}
-          </ScrollView>
-        )}
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.mutualFriendsContainer}>
+          {chats.map((c) => (
+            <View style={styles.mutualFriendBox} key={c.id}>
+              <Thumbnail source={{ uri: (c.chat_room_users[1] || c.chat_room_users[0]).avatar }} />
+              <Text note style={styles.smallFont}>
+                {c.chat_room_users.map((cru) => cru.name).join(', ')}
+              </Text>
+              <Text note style={styles.smallFont}>
+                {!c.messages[0].system && `${c.messages[0].user.name}: `}
+                {c.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
+                {c.messages[0].text.length > 15 && '...'}
+              </Text>
+              <Button
+                small
+                block
+                dark
+                style={styles.button}
+                onPress={() => NavigationService.navigate('ChatRoomScreen', { chatId: c.id })}>
+                <Text>Продолжить</Text>
+              </Button>
+            </View>
+          ))}
+          {friends.map((f) => (
+            <View style={styles.mutualFriendBox} key={f.id}>
+              {f.avatar ? (
+                <Thumbnail source={{ uri: f.avatar }} />
+              ) : (
+                <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
+              )}
+              <Text note style={styles.smallFont}>
+                {f.name}
+              </Text>
+              <Text note style={styles.smallFont}>
+                {f.phone_number}
+              </Text>
+              <Button
+                small
+                block
+                dark
+                style={styles.button}
+                onPress={() => this.setState({ friendToInvite: f, modalVisible: true })}>
+                <Text>Спросить</Text>
+              </Button>
+            </View>
+          ))}
+        </ScrollView>
 
         {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={this.onAsk} />}
       </View>
