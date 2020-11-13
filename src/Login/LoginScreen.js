@@ -84,7 +84,7 @@ export default class LoginScreen extends React.Component {
           includeRawValueInChangeText={true}
           keyboardType="numeric"
           onChangeText={this.onChangePhone}
-          style={style.phoneInputMasked}
+          style={styles.phoneInputMasked}
         />
       </Item>
     );
