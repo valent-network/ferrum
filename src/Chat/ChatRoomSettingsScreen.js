@@ -64,7 +64,7 @@ function ChatRoomsSettingsScreen({
     ? [{ separator: 'Участники' }, ...toDisplayMembers, { separator: 'Могут знать продавца' }, ...toDisplayFriends]
     : [{ separator: 'Участники' }, ...toDisplayMembers];
 
-  const keyExtractor = (item) => item.separator || item.user_id.toString();
+  const keyExtractor = (item) => (item.separator || item.user_id || item.id).toString();
   const renderItem = ({ item }) =>
     item.separator ? (
       <Separator bordered style={styles.separator}>

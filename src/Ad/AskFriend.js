@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Text, View, Button, Thumbnail, Left, Right, Body, Item, ActionSheet } from 'native-base';
 import { ScrollView, StyleSheet, Image } from 'react-native';
 import { mainColor, activeColor } from '../Colors';
+import { invitationalSMS } from '../Utils';
 import NavigationService from '../services/NavigationService';
 
 import { initiateChatRoom } from '../Chat/chatActions';
@@ -74,8 +75,12 @@ class AskFriend extends React.PureComponent {
                 block
                 dark
                 style={styles.button}
-                onPress={() => this.setState({ friendToInvite: f, modalVisible: true })}>
-                <Text>Спросить</Text>
+                onPress={
+                  f.user_id
+                    ? () => this.setState({ friendToInvite: f, modalVisible: true })
+                    : () => invitationalSMS(f.phone_number)
+                }>
+                <Text>{f.user_id ? 'Спросить' : 'Пригласить'}</Text>
               </Button>
             </View>
           ))}

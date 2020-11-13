@@ -28,6 +28,8 @@ export default class LoginScreen extends React.Component {
   onRequest = () => this.props.onRequest(this.props.phone);
   onSignIn = () => this.props.onSignIn(this.props.phone, this.props.code);
   changeTosAcceptance = () => this.setState({ tosAccespted: !this.state.tosAccespted });
+  onChangePhone = (maskedText, rawText) => this.onInputPhone(maskedText);
+  phoneMaskOptions = { mask: '+380 (99) 999-99-99' };
 
   constructor(props) {
     super(props);
@@ -75,23 +77,14 @@ export default class LoginScreen extends React.Component {
         <Icon name="call-outline" style={styles.icon} />
         <TextInputMask
           type={'custom'}
-          options={{
-            /**
-             * mask: (String | required | default '')
-             * the mask pattern
-             * 9 - accept digit.
-             * A - accept alpha.
-             * S - accept alphanumeric.
-             * * - accept all, EXCEPT white space.
-             */
-            mask: '+380 (99) 999-99-99',
-          }}
+          options={this.phoneMaskOptions}
           placeholder="+380 (00) 000-00-00"
+          placeholderTextColor="#aaaaaa"
           value={this.props.phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
-          onChangeText={(maskedText, rawText) => this.onInputPhone(maskedText)}
-          style={{ fontSize: 18, height: '100%', width: '100%' }}
+          onChangeText={this.onChangePhone}
+          style={style.phoneInputMasked}
         />
       </Item>
     );
@@ -223,6 +216,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#c9c9c9',
     borderColor: '#c9c9c9',
     height: 42,
+  },
+  phoneInputMasked: {
+    fontSize: 18,
+    height: '100%',
+    width: '100%',
   },
   switchContainer: { flex: 0 },
   tosContainer: {

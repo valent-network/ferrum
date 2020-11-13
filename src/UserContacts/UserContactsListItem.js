@@ -5,6 +5,7 @@ import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { activeColor, darkColor } from '../Colors';
+import { invitationalSMS } from '../Utils';
 
 export default class UserContactsListItem extends React.PureComponent {
   user = this.props.contact.user;
@@ -29,7 +30,7 @@ export default class UserContactsListItem extends React.PureComponent {
     );
 
   sendInvitation = () => {
-    const { invitationalSMS, contact } = this.props;
+    const { contact } = this.props;
 
     if (this.user) {
       return;

@@ -5,6 +5,7 @@ import { Text, Icon, ListItem, Left, Body, Right, Thumbnail, Button } from 'nati
 import { StyleSheet } from 'react-native';
 
 import { activeColor } from '../Colors';
+import { invitationalSMS } from '../Utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal }) {
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
@@ -27,10 +28,15 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
         </Text>
         <Text note>{friend.phone_number}</Text>
       </Body>
-      {friend.user_id && !membersIds.includes(friend.user_id) && (
+      {!membersIds.includes(friend.user_id) && (
         <Right>
-          <Button small style={styles.addButton} onPress={() => addUserToChatRoom(friend.user_id)}>
-            <Text>Добавить</Text>
+          <Button
+            small
+            style={styles.addButton}
+            onPress={
+              friend.user_id ? () => addUserToChatRoom(friend.user_id) : () => invitationalSMS(friend.phone_number)
+            }>
+            <Text>{friend.user_id ? 'Добавить' : 'Пригласить'}</Text>
           </Button>
         </Right>
       )}

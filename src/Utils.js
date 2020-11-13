@@ -1,4 +1,4 @@
-import { Linking } from 'react-native';
+import { Platform, Linking } from 'react-native';
 
 export const notification = { ref: {} };
 
@@ -17,4 +17,12 @@ export function decOfNum(number, titles) {
   if (!decCache[number])
     decCache[number] = number % 100 > 4 && number % 100 < 20 ? 2 : decCases[Math.min(number % 10, 5)];
   return titles[decCache[number]];
+}
+
+export function invitationalSMS(phoneNumber) {
+  const paramValue = Platform.OS === 'ios' ? '&' : '?';
+  const message = 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io';
+  const url = `sms:${phoneNumber}${paramValue}body=${message}`;
+
+  Linking.openURL(url);
 }

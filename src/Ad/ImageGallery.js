@@ -31,7 +31,9 @@ export default class ImageGallery extends React.Component {
     );
   };
 
-  setCarouseRef = (c) => { this._carousel = c; }
+  setCarouseRef = (c) => {
+    this._carousel = c;
+  };
 
   render() {
     const { images } = this.props.ad;
