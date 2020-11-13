@@ -1,17 +1,33 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
 import NavigationService from '../services/NavigationService';
 
-import { Text, ListItem, Left, Body, Right, Thumbnail, Badge } from 'native-base';
+import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from 'native-base';
 
 import dayjs from 'dayjs';
 
 import { activeColor } from '../Colors';
 
+import { leaveChat } from './chatActions';
+
 export default function ChatRoomListItem({ chat }) {
+  const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
   const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatId: chat.id, title: chat.title });
+  const onLongPress = () =>
+    ActionSheet.show(
+      {
+        title: chat.title,
+        options: ['Покинуть чат', 'Отменить'],
+        cancelButtonIndex: 1,
+        destructiveButtonIndex: 0,
+      },
+      (buttonIndex) => {
+        buttonIndex === 0 && dispatch(leaveChat(chat.id));
+      },
+    );
 
   const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
     ? dayjs(lastMessage.createdAt).locale('ru').format('HH:mm')
@@ -27,6 +43,7 @@ export default function ChatRoomListItem({ chat }) {
       activeOpacity={1}
       underlayColor="transparent"
       onPress={onPress}
+      onLongPress={onLongPress}
       style={styles.chatRow}>
       <Left>
         <Thumbnail source={{ uri: chat.photo }} style={styles.carPhoto} />
