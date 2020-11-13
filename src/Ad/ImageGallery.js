@@ -31,6 +31,8 @@ export default class ImageGallery extends React.Component {
     );
   };
 
+  setCarouseRef = (c) => { this._carousel = c; }
+
   render() {
     const { images } = this.props.ad;
 
@@ -41,6 +43,7 @@ export default class ImageGallery extends React.Component {
           renderItem={this._renderItem}
           itemWidth={this.windowWidth}
           sliderWidth={this.windowWidth}
+          ref={this.setCarouseRef}
         />
 
         <View style={styles.imageGalleryBadgesContainer}>
@@ -59,6 +62,7 @@ export default class ImageGallery extends React.Component {
             enablePreload={true}
             saveToLocalByLongPress={false}
             maxOverflow={0}
+            index={this._carousel?.currentIndex}
             onCancel={this.changeImagesFullscreenOpened}
             imageUrls={images.map(this.imageMapper)}
           />
