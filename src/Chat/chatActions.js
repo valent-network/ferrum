@@ -1,5 +1,5 @@
 import PushNotification from 'react-native-push-notification';
-import { Clipboard } from 'react-native';
+import { Clipboard, Platform } from 'react-native';
 import { ActionSheet } from 'native-base';
 import * as ActionTypes from '../actions/actionTypes.js';
 import API from '../services/API';
@@ -96,6 +96,17 @@ export function leaveChat(chatRoomId) {
   };
 }
 
+function goToChat(chat, dispatch) {
+  NavigationService.navigate('ChatRoomScreen', { chat: chat, chatId: chat.id });
+
+  dispatch({ type: ActionTypes.RESET_CURRENT_CHAT });
+  dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });
+  dispatch(getMessages(chat.id));
+
+  serverChannel.disconnectChatRoomChannel();
+  serverChannel.connectToChatRoomChannel(chat.id);
+}
+
 export function newMessage(chat, myMessage = false) {
   return (dispatch, getState) => {
     const currentChatId = getState().currentChat.id;
@@ -106,19 +117,27 @@ export function newMessage(chat, myMessage = false) {
       }
     } else {
       if (!myMessage && chat.messages[0].user._id !== currentUserId) {
-        UINotification.ref.show({
-          message: { message: chat.messages[0].text, photo: chat.photo, name: chat.messages[0].user?.name },
-          onPress: () => {
-            NavigationService.navigate('ChatRoomScreen', { chat: chat, chatId: chat.id });
-
-            dispatch({ type: ActionTypes.RESET_CURRENT_CHAT });
-            dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });
-            dispatch(getMessages(chat.id));
-
-            serverChannel.disconnectChatRoomChannel();
-            serverChannel.connectToChatRoomChannel(chat.id);
-          },
-        });
+        if (Platform.OS === 'ios') {
+          UINotification.ref.show({
+            message: {
+              message: chat.messages[0].text,
+              photo: chat.photo,
+              name: chat.messages[0].user?.name,
+              title: chat.title,
+            },
+            onPress: () => goToChat(chat, dispatch),
+          });
+        } else {
+          PushNotification.localNotification({
+            title: chat.title,
+            message: chat.messages[0].text,
+            largeIconUrl: chat.photo,
+            bigPictureUrl: chat.photo,
+            userInfo: {
+              chat_room_id: chat.id,
+            },
+          });
+        }
       }
     }
 

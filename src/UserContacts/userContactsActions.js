@@ -1,4 +1,6 @@
 import * as ActionTypes from '../actions/actionTypes.js';
+import PushNotification from 'react-native-push-notification';
+import { Platform } from 'react-native';
 import API from '../services/API';
 import { displayError } from '../actions/errorsActions';
 import equal from 'react-fast-compare';
@@ -46,8 +48,13 @@ export function deleteContacts() {
 
     return API.deleteContacts()
       .then((deleteContactsPayload) => {
+        const messageText = 'Контакты успешно удалены!';
         dispatch({ type: ActionTypes.DELETE_CONTACTS_SUCCESS });
-        UINotification.ref.show({ message: 'Контакты успешно удалены!' });
+        if (Platform.OS === 'ios') {
+          UINotification.ref.show({ message: messageText });
+        } else {
+          PushNotification.localNotification({ message: messageText, largeIcon: '', smallIcon: '' });
+        }
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.DELETE_CONTACTS_FAILED });

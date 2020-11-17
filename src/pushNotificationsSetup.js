@@ -10,22 +10,34 @@ export default function () {
 
   PushNotification.configure({
     onRegister: setPushToken,
-    onNotification: function (notification) {
-      if (notification.foreground) {
-        return;
-      }
-
-      if (Platform.OS === 'ios') {
-        NavigationService.navigate('ChatRoomScreen', { chatId: notification.data.chat_room_id });
-        notification.finish(PushNotificationIOS.FetchResult.NoData);
-      } else {
-        if (!notification.userInteraction) {
-          PushNotification.localNotification(notification.data);
-        } else {
-          NavigationService.navigate('ChatRoomScreen', { chatId: notification.chat_room_id });
-        }
-      }
-    },
+    onNotification: onNotification,
     requestPermissions: Platform.OS === 'android',
   });
+}
+
+function onNotification(notification) {
+  if (notification.foreground) {
+    if (Platform.OS === 'ios') {
+      return;
+    } else {
+      if (notification.userInteraction) {
+        if (notification.data.chat_room_id) {
+          NavigationService.navigate('ChatRoomScreen', { chatId: notification.data.chat_room_id });
+        }
+      }
+
+      return;
+    }
+  }
+
+  if (Platform.OS === 'ios') {
+    NavigationService.navigate('ChatRoomScreen', { chatId: notification.data.chat_room_id });
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
+  } else {
+    if (!notification.userInteraction) {
+      PushNotification.localNotification(notification.data);
+    } else {
+      NavigationService.navigate('ChatRoomScreen', { chatId: notification.chat_room_id });
+    }
+  }
 }
