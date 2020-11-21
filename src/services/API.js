@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Qs from 'qs';
-import { getUniqueId } from 'react-native-device-info';
+import { getUniqueId, getVersion } from 'react-native-device-info';
 import { store } from '../store';
 import * as ActionTypes from '../actions/actionTypes';
 import { clearAccessToken } from '../AsyncStorage';
@@ -129,7 +129,7 @@ export default class API {
   }
 
   static updateProfile(userParams = {}, deviceParams = {}) {
-    return apiService.put('/v1/user', { user: userParams, device: deviceParams });
+    return apiService.put('/v1/user', { user: userParams, device: { ...deviceParams, build_version: getVersion() } });
   }
 
   static likeAd(adId) {
