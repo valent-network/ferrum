@@ -22,13 +22,13 @@ export function getChatRooms(offset = 0) {
   };
 }
 
-export function postMessage(message, chatId) {
+export function postMessage(message, chatRoomId) {
   return function (dispatch) {
     message.pending = true;
-    message.chat_id = chatId;
+    message.chat_room_id = chatRoomId;
     // chat.messages = [message, ...chat.messages];
 
-    dispatch({ type: ActionTypes.POST_MESSAGE, chatId: chatId, message: message });
+    dispatch({ type: ActionTypes.POST_MESSAGE, chatRoomId: chatRoomId, message: message });
     serverChannel.chatRoomChannel.send({ message });
   };
 }
@@ -72,11 +72,11 @@ export function getAdFriendsToChat(adId, chatRoomId) {
   };
 }
 
-export function addUserToChat(chatId, userId, name) {
+export function addUserToChat(chatRoomId, userId, name) {
   return (dispatch) => {
     dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_STARTED });
 
-    return API.addUserToChat(chatId, userId, name)
+    return API.addUserToChat(chatRoomId, userId, name)
       .then(({ data }) => {
         dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_SUCCESS, friends: data.friends, chat: data.chat_room });
       })
@@ -97,7 +97,7 @@ export function leaveChat(chatRoomId) {
 }
 
 function goToChat(chat, dispatch) {
-  NavigationService.navigate('ChatRoomScreen', { chat: chat, chatId: chat.id });
+  NavigationService.navigate('ChatRoomScreen', { chat: chat, chatRoomId: chat.id });
 
   dispatch({ type: ActionTypes.RESET_CURRENT_CHAT });
   dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });

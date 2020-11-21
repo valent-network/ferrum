@@ -15,7 +15,7 @@ import { leaveChat } from './chatActions';
 export default function ChatRoomListItem({ chat }) {
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
-  const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatId: chat.id, title: chat.title });
+  const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
   const onLongPress = () =>
     ActionSheet.show(
       {

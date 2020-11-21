@@ -113,7 +113,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getAdFriendsToChat: (adId, chatRoomId) => dispatch(getAdFriendsToChat(adId, chatRoomId)),
-    addUserToChat: (chatId, userId, name) => dispatch(addUserToChat(chatId, userId, name)),
+    addUserToChat: (chatRoomId, userId, name) => dispatch(addUserToChat(chatRoomId, userId, name)),
     leaveChat: (chatRoomId) => dispatch(leaveChat(chatRoomId)),
   };
 }

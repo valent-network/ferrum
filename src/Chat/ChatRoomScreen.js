@@ -27,9 +27,9 @@ function ChatRoomScreen({
   setCurrentChat,
   resetCurrentChat,
 }) {
-  const chatId = navigation.state.params.chatId;
+  const chatRoomId = navigation.state.params.chatRoomId;
 
-  if (!chatId) {
+  if (!chatRoomId) {
     return <SpinnerScreen />;
   }
 
@@ -51,10 +51,10 @@ function ChatRoomScreen({
   }, []);
 
   const onConnect = useCallback(() => {
-    setCurrentChat(chatId);
-    serverChannel.connectToChatRoomChannel(chatId);
-    getMessages(chatId);
-  }, [chatId]);
+    setCurrentChat(chatRoomId);
+    serverChannel.connectToChatRoomChannel(chatRoomId);
+    getMessages(chatRoomId);
+  }, [chatRoomId]);
 
   const onDisconnect = useCallback(() => {
     resetCurrentChat();
@@ -81,9 +81,9 @@ function ChatRoomScreen({
   const giftedChatOptions = {
     user: { _id: userId, name: userName },
     messages: messages,
-    onLoadEarlier: () => getMessages(chatId, messages.length),
+    onLoadEarlier: () => getMessages(chatRoomId, messages.length),
     loadEarlier: shouldLoadEarlier,
-    onSend: (message) => onSend(message[0], chatId),
+    onSend: (message) => onSend(message[0], chatRoomId),
     onLongPress: (context, message) => onMessageLongPress(user, message, onDelete),
   };
 
@@ -106,10 +106,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSend: (message, chatId) => dispatch(postMessage(message, chatId)),
+    onSend: (message, chatRoomId) => dispatch(postMessage(message, chatRoomId)),
     onDelete: (message) => dispatch(deleteMessage(message)),
-    getMessages: (chatId, offset) => dispatch(getMessages(chatId, offset)),
-    setCurrentChat: (chatId) => dispatch({ type: SET_CURRENT_CHAT, chatRoomId: chatId }),
+    getMessages: (chatRoomId, offset) => dispatch(getMessages(chatRoomId, offset)),
+    setCurrentChat: (chatRoomId) => dispatch({ type: SET_CURRENT_CHAT, chatRoomId: chatRoomId }),
     resetCurrentChat: () => dispatch({ type: RESET_CURRENT_CHAT }),
   };
 }

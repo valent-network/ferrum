@@ -89,7 +89,7 @@ export default function currentChatReducer(state = initialState, action = {}) {
         };
       }
     case ActionTypes.MESSAGE_IS_DELETING:
-      if (action.message.chat_id !== state.id) {
+      if (action.message.chat_room_id !== state.id) {
         return state;
       } else {
         return {

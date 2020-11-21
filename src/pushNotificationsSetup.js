@@ -22,7 +22,7 @@ function onNotification(notification) {
     } else {
       if (notification.userInteraction) {
         if (notification.data.chat_room_id) {
-          NavigationService.navigate('ChatRoomScreen', { chatId: notification.data.chat_room_id });
+          NavigationService.navigate('ChatRoomScreen', { chatRoomId: notification.data.chat_room_id });
         }
       }
 
@@ -31,13 +31,13 @@ function onNotification(notification) {
   }
 
   if (Platform.OS === 'ios') {
-    NavigationService.navigate('ChatRoomScreen', { chatId: notification.data.chat_room_id });
+    NavigationService.navigate('ChatRoomScreen', { chatRoomId: notification.data.chat_room_id });
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   } else {
     if (!notification.userInteraction) {
       PushNotification.localNotification(notification.data);
     } else {
-      NavigationService.navigate('ChatRoomScreen', { chatId: notification.chat_room_id });
+      NavigationService.navigate('ChatRoomScreen', { chatRoomId: notification.chat_room_id });
     }
   }
 }

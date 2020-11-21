@@ -74,7 +74,7 @@ class ServerChannel {
         break;
       case 'initiate_chat':
         onNewMessage(payload.chat, true);
-        NavigationService.navigate('ChatRoomScreen', { chatId: payload.chat.id, title: payload.chat.title });
+        NavigationService.navigate('ChatRoomScreen', { chatRoomId: payload.chat.id, title: payload.chat.title });
         break;
       case 'read_update':
         onReadUpdate(payload.chat);

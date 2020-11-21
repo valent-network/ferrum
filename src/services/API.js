@@ -156,7 +156,7 @@ export default class API {
     return apiService.delete(`/v1/chat_room_users/${chatRoomId}`);
   }
 
-  static getMessages(chatId, offset) {
-    return apiService.get(`/v1/messages?chat_id=${chatId}&offset=${offset}`);
+  static getMessages(chatRoomId, offset) {
+    return apiService.get(`/v1/messages?chat_room_id=${chatRoomId}&offset=${offset}`);
   }
 }

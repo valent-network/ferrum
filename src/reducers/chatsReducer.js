@@ -42,7 +42,7 @@ export default function chatsReducer(state = initialState, action = {}) {
         list: newChatList(state.list, action.chat),
       };
     case ActionTypes.MESSAGE_IS_DELETING:
-      const chat = state.list.filter((c) => c.id === action.message.chat_id)[0];
+      const chat = state.list.filter((c) => c.id === action.message.chat_room_id)[0];
       chat.messages = chat.messages.map((m) => (m._id === action.message._id ? { ...m, pending: true } : m));
 
       return {
