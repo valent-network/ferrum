@@ -84,7 +84,7 @@ function ChatRoomScreen({
     onLoadEarlier: () => getMessages(chatRoomId, messages.length),
     loadEarlier: shouldLoadEarlier,
     onSend: (message) => onSend(message[0], chatRoomId),
-    onLongPress: (context, message) => onMessageLongPress(user, message, onDelete),
+    onLongPress: (context, message) => onMessageLongPress(userId, message, onDelete),
   };
 
   return (

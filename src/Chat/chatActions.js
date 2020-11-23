@@ -171,10 +171,10 @@ export function updateUnread(count) {
   };
 }
 
-export function onMessageLongPress(user, message, onDelete) {
+export function onMessageLongPress(userId, message, onDelete) {
   const actions = [{ title: 'Скопировать текст', callback: () => Clipboard.setString(message.text) }];
   let destructiveButtonIndex = null;
-  if (user._id === message.user._id) {
+  if (userId === message.user._id) {
     actions.push({ title: 'Удалить сообщение', callback: onDelete });
     destructiveButtonIndex = 1;
   }
