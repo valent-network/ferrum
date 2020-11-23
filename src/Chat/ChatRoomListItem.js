@@ -16,10 +16,19 @@ export default function ChatRoomListItem({ chat }) {
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
   const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
-  const onLongPress = () =>
+
+  const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
+    ? dayjs(lastMessage.createdAt).locale('ru').format('HH:mm')
+    : dayjs(lastMessage.createdAt).locale('ru').format('D MMM');
+  let messagePreview = lastMessage ? lastMessage.text.replace(/\n/g, ' ') : '';
+  messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
+
+  const onLongPress = () => {
+    const msg = lastMessage.user?._id ? `${lastMessage.user.name}: ${messagePreview}` : messagePreview;
+
     ActionSheet.show(
       {
-        title: chat.title,
+        title: `${chat.title}\n${lastMessageDateString} – ${msg}`,
         options: ['Покинуть чат', 'Отменить'],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
@@ -28,12 +37,7 @@ export default function ChatRoomListItem({ chat }) {
         buttonIndex === 0 && dispatch(leaveChat(chat.id));
       },
     );
-
-  const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
-    ? dayjs(lastMessage.createdAt).locale('ru').format('HH:mm')
-    : dayjs(lastMessage.createdAt).locale('ru').format('D MMM');
-  let messagePreview = lastMessage ? lastMessage.text.replace(/\n/g, ' ') : '';
-  messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
+  };
 
   return (
     <ListItem

@@ -19,9 +19,8 @@ export function decOfNum(number, titles) {
   return titles[decCache[number]];
 }
 
-export function invitationalSMS(phoneNumber) {
+export function invitationalSMS(phoneNumber, message) {
   const paramValue = Platform.OS === 'ios' ? '&' : '?';
-  const message = 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io';
   const url = `sms:${phoneNumber}${paramValue}body=${message}`;
 
   Linking.openURL(url);

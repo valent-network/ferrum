@@ -271,6 +271,7 @@ styles = StyleSheet.create({
   nameInput: {
     color: '#c9c9c9',
     fontSize: 14,
+    height: 14,
   },
   userInfoContainer: {
     alignItems: 'center',

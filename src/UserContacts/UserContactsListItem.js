@@ -9,13 +9,13 @@ import { invitationalSMS } from '../Utils';
 
 export default class UserContactsListItem extends React.PureComponent {
   user = this.props.contact.user;
-  actions = this.user ? ['Поиск', 'Отменить'] : ['Поиск', 'Пригласить', 'Отменить'];
+  actions = this.user ? ['Искать объявления', 'Отменить'] : ['Искать объявления', 'Пригласить', 'Отменить'];
   cancelIndex = this.user ? 1 : 2;
 
   openMore = () =>
     ActionSheet.show(
       {
-        title: this.props.contact.name,
+        title: `${this.props.contact.name}\n${this.props.contact.phone}`,
         options: this.actions,
         cancelButtonIndex: this.cancelIndex,
       },
@@ -36,7 +36,7 @@ export default class UserContactsListItem extends React.PureComponent {
       return;
     }
 
-    invitationalSMS(contact.phone);
+    invitationalSMS(contact.phone, 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io');
   };
 
   render() {

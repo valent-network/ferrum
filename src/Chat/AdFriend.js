@@ -34,7 +34,13 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
             small
             style={styles.addButton}
             onPress={
-              friend.user_id ? () => addUserToChatRoom(friend.user_id) : () => invitationalSMS(friend.phone_number)
+              friend.user_id
+                ? () => addUserToChatRoom(friend.user_id)
+                : () =>
+                    invitationalSMS(
+                      friend.phone_number,
+                      'Привет, нашел твою машину в продаже и есть вопрос, скачай, пожалуйста – https://recar.io',
+                    )
             }>
             <Text>{friend.user_id ? 'Добавить' : 'Пригласить'}</Text>
           </Button>

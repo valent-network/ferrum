@@ -13,6 +13,7 @@ import {
   Button,
   H1,
   H2,
+  H3,
   Form,
   Label,
   Content,
@@ -91,15 +92,14 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
             <View style={styles.modalContainer}>
               <Content>
                 <View style={styles.modalControlsContainer}>
-                  <Icon name="close-outline" onPress={switchModalVisible} style={styles.closeIcon} />
+                  <H1 style={styles.filtersHeader}>Фильтры</H1>
                   {filtersPresent && (
-                    <Text onPress={filterReset} style={styles.resetIcon}>
+                    <H3 onPress={filterReset} style={styles.resetControl}>
                       Сбросить
-                    </Text>
+                    </H3>
                   )}
+                  <Icon name="close-outline" onPress={switchModalVisible} style={styles.closeIcon} />
                 </View>
-                <H1 style={styles.filtersHeader}>Фильтры</H1>
-
                 <Form style={styles.filtersForm}>
                   <H2 style={styles.filterTitle}>Цена, $</H2>
                   <View style={styles.rangeItemWrapper}>
@@ -219,6 +219,23 @@ const styles = StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    height: 48,
+  },
+  closeIcon: {
+    color: '#c9c9c9',
+    fontSize: 48,
+    fontWeight: 'bold',
+    height: 48,
+  },
+  resetControl: {
+    color: '#c9c9c9',
+    alignSelf: 'center',
+    fontSize: 14,
+    height: 18,
+  },
+  filtersHeader: {
+    borderBottomWidth: 0,
+    alignSelf: 'center',
   },
   mainHeader: {
     backgroundColor: 'transparent',
@@ -277,15 +294,6 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: activeColor,
   },
-  closeIcon: {
-    alignSelf: 'flex-start',
-    color: '#c9c9c9',
-    fontSize: 48,
-    fontWeight: 'bold',
-  },
-  resetIcon: {
-    alignSelf: 'center',
-  },
   switchFilter: {
     flexDirection: 'row',
     marginTop: 12,
@@ -300,11 +308,6 @@ const styles = StyleSheet.create({
   },
   filtersForm: {
     paddingBottom: 96,
-  },
-  filtersHeader: {
-    borderBottomWidth: 0,
-    marginTop: 12,
-    width: '100%',
   },
   inputTextColor: {
     color: '#c9c9c9',

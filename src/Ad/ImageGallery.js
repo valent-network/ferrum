@@ -11,7 +11,7 @@ import { styles } from './Styles';
 export default class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { imagesFullscreenOpened: false };
+    this.state = { imagesFullscreenOpened: false, currentImageIndex: 0 };
   }
 
   changeImagesFullscreenOpened = () => {
@@ -22,6 +22,8 @@ export default class ImageGallery extends React.Component {
 
   imageMapper = (image) => ({ url: image });
   windowWidth = Dimensions.get('window').width;
+  syncCarousel = (index) => this._carousel?.snapToItem(index, false, true);
+  setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
 
   _renderItem = ({ item, index }) => {
     return (
@@ -31,7 +33,7 @@ export default class ImageGallery extends React.Component {
     );
   };
 
-  setCarouseRef = (c) => {
+  setCarouselRef = (c) => {
     this._carousel = c;
   };
 
@@ -45,13 +47,16 @@ export default class ImageGallery extends React.Component {
           renderItem={this._renderItem}
           itemWidth={this.windowWidth}
           sliderWidth={this.windowWidth}
-          ref={this.setCarouseRef}
+          ref={this.setCarouselRef}
+          onSnapToItem={this.setCurrentImageIndex}
         />
 
         <View style={styles.imageGalleryBadgesContainer}>
           <Badge style={styles.imageGalleryBadge}>
             <Icon name="images-outline" style={styles.imageGalleryBadgeIcon} />
-            <Text style={styles.ImageGalleryBadgeText}> {images.length}</Text>
+            <Text style={styles.ImageGalleryBadgeText}>
+              &nbsp;{this.state.currentImageIndex + 1} из {images.length}
+            </Text>
           </Badge>
         </View>
 
@@ -66,6 +71,7 @@ export default class ImageGallery extends React.Component {
             maxOverflow={0}
             index={this._carousel?.currentIndex}
             onCancel={this.changeImagesFullscreenOpened}
+            onChange={this.syncCarousel}
             imageUrls={images.map(this.imageMapper)}
           />
         </Modal>

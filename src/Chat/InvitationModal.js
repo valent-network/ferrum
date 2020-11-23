@@ -19,8 +19,8 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const userNamePresent = !!user.name?.length;
   useEffect(() => setName(friend.name), [friend.name]);
   return (
-    <Modal animationType="slide" transparent={true} visible={true}>
-      <KeyboardAwareScrollView contentContainerStyle={styles.modalWrapper}>
+    <Modal animationType="slide" transparent={true} visible={true} animationType="slide">
+      <KeyboardAwareScrollView contentContainerStyle={styles.modalWrapper} bounces={false} extraHeight={96}>
         <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
         <View style={styles.wrp}>
           <View style={styles.modalControlsContainer}>
@@ -106,8 +106,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   modalWrapper: {
-    backgroundColor: 'transparent',
-
     flex: 1,
     justifyContent: 'flex-end',
   },
@@ -121,8 +119,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   introduceOption: { fontSize: 18, marginRight: 8 },
-  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 36 },
-  disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 36 },
+  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24 },
+  disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
   avatar: { alignSelf: 'center' },
   friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
   userNameSubmitButton: { marginTop: 16 },

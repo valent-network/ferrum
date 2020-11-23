@@ -78,7 +78,8 @@ class AskFriend extends React.PureComponent {
                 onPress={
                   f.user_id
                     ? () => this.setState({ friendToInvite: f, modalVisible: true })
-                    : () => invitationalSMS(f.phone_number)
+                    : () =>
+                        invitationalSMS(f.phone_number, 'Привет, смотри, нашел твою машину здесь – https://recar.io')
                 }>
                 <Text>{f.user_id ? 'Спросить' : 'Пригласить'}</Text>
               </Button>

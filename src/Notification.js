@@ -76,14 +76,19 @@ export default class Notification extends React.PureComponent {
         <Animated.View style={[styles.notificationWrapper, { top: this.animatedPosition }]}>
           <TouchableOpacity activeOpacity={1} onPress={this.onBodyPress} style={styles.notificationBody}>
             {message.photo && <Thumbnail style={styles.messagePhoto} source={{ uri: message.photo }} />}
-            <Text numberOfLines={2} style={styles.notificationBodyText}>
+            <Text numberOfLines={3} style={styles.notificationBodyText}>
               {message.title && (
                 <Text style={styles.lightColor}>
                   {message.title}
                   {'\n'}
                 </Text>
               )}
-              {message.name && <Text style={styles.lightColor}>{message.name}: </Text>}
+              {message.name && (
+                <Text style={styles.lightColor}>
+                  {message.name}
+                  {'\n'}
+                </Text>
+              )}
               {text.replace(/\n/g, ' ')}
             </Text>
           </TouchableOpacity>

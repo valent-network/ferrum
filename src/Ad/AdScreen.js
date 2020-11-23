@@ -71,7 +71,7 @@ export default class AdScreen extends React.PureComponent {
             <View style={styles.oldPricesContainer}>
               {ad.prices.map((v, index) => (
                 <Text key={v[1]} style={styles.priceVersion}>
-                  {v[1]} $
+                  {v[1]} ${ad.prices.length === index + 1 ? null : ', '}
                 </Text>
               ))}
             </View>
