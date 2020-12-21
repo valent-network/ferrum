@@ -21,7 +21,7 @@ export function tryUpdateContacts() {
     check(contactsPermissionName).then((result) => {
       switch (result) {
         case RESULTS.GRANTED:
-          Contacts.getAll((err, contacts) => {
+          Contacts.getAll().then((contacts) => {
             const contactsNormalizer = (c) => {
               const normalizedName = [c.givenName, c.middleName, c.familyName, c.company].filter(Boolean).join(' ');
 
