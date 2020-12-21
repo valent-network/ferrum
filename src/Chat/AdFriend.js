@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 import { activeColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
-export default function AdFriend({ friend, chat, openInviteFriendModal }) {
+export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
   const addUserToChatRoom = (userId) => {
     if (!userId || membersIds.includes(userId)) {
@@ -26,7 +26,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal }) {
         <Text style={friend.user_id && membersIds.includes(friend.user_id) ? { color: activeColor } : {}}>
           {friend.name}
         </Text>
-        <Text note>{friend.phone_number}</Text>
+        <Text note>{friendPhoneNumber}</Text>
       </Body>
       {!membersIds.includes(friend.user_id) && (
         <Right>

@@ -71,7 +71,7 @@ function ChatRoomsSettingsScreen({
         <Text>{item.separator}</Text>
       </Separator>
     ) : (
-      <AdFriend friend={item} chat={chat} openInviteFriendModal={openInviteFriendModal} />
+      <AdFriend friend={item} chat={chat} openInviteFriendModal={openInviteFriendModal} friendPhoneNumber={friends.filter(f => f.user_id === item.user_id)[0]?.phone_number} />
     );
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
