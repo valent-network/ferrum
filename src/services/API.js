@@ -8,7 +8,7 @@ import { clearAccessToken } from '../AsyncStorage';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://recar.io/api';
+  baseURL = 'https://api.recar.io/api';
 } else {
   baseURL = 'http://192.168.0.100:3000/api';
 }
