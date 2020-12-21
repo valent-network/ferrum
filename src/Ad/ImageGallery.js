@@ -8,6 +8,8 @@ import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './Styles';
 
+const ImageViewerPageAnimationTimeoutMs = 300;
+
 export default class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ export default class ImageGallery extends React.Component {
 
   imageMapper = (image) => ({ url: image });
   windowWidth = Dimensions.get('window').width;
-  syncCarousel = (index) => this._carousel?.snapToItem(index, false, true);
+  syncCarousel = (index) => setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs)
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
 
   _renderItem = ({ item, index }) => {
@@ -72,6 +74,7 @@ export default class ImageGallery extends React.Component {
             index={this._carousel?.currentIndex}
             onCancel={this.changeImagesFullscreenOpened}
             onChange={this.syncCarousel}
+            pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
             imageUrls={images.map(this.imageMapper)}
           />
         </Modal>
