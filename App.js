@@ -31,6 +31,8 @@ import platform from './native-base-theme/variables/platform';
 
 import { darkColor } from './src/Colors';
 
+// console.disableYellowBox = true;
+
 class App extends React.PureComponent {
   render() {
     return (
