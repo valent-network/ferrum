@@ -34,15 +34,6 @@ export default function myAdsRedducer(state = initialSetting, action = {}) {
         ...state,
         isLoading: false,
       };
-    case ActionTypes.GET_AD_SUCCESS:
-      const t = mergeArraysKeepNew([...state.list, action.ad], (it) => it.id).map((ad) =>
-        ad.id === action.ad.id ? (ad.visited ? ad : { ...ad, visited: true }) : ad,
-      );
-
-      return {
-        ...state,
-        list: equal(state.list, t) ? state.list : t,
-      };
     case ActionTypes.GET_MY_ADS_WITH_OFFSET_SUCCESS:
       const newList = mergeArraysKeepNew([...state.list, ...action.list], (it) => it.id);
 
