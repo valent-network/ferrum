@@ -34,7 +34,7 @@ class UserContactsList extends React.PureComponent {
       <FlatList
         data={userContacts}
         refreshControl={refreshControl}
-        eyExtractor={this.keyExtractor}
+        keyExtractor={this.keyExtractor}
         onEndReached={this.onEndReached}
         renderItem={this.renderItem}
       />
