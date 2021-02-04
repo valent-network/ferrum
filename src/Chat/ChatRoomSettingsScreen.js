@@ -65,14 +65,21 @@ function ChatRoomsSettingsScreen({
     : [{ separator: 'Участники' }, ...toDisplayMembers];
 
   const keyExtractor = (item) => (item.separator || item.user_id || item.id).toString();
-  const renderItem = ({ item }) =>
-    item.separator ? (
+  const renderItem = ({ item }) => {
+    const friendPhoneNumber = friendsAndMembers.filter((f) => f.user_id === item.user_id)[0]?.phone_number;
+    return item.separator ? (
       <Separator bordered style={styles.separator}>
         <Text>{item.separator}</Text>
       </Separator>
     ) : (
-      <AdFriend friend={item} chat={chat} openInviteFriendModal={openInviteFriendModal} friendPhoneNumber={friends.filter(f => f.user_id === item.user_id)[0]?.phone_number} />
+      <AdFriend
+        friend={item}
+        chat={chat}
+        openInviteFriendModal={openInviteFriendModal}
+        friendPhoneNumber={friendPhoneNumber}
+      />
     );
+  };
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
   return (

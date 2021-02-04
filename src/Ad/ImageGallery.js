@@ -24,7 +24,8 @@ export default class ImageGallery extends React.Component {
 
   imageMapper = (image) => ({ url: image });
   windowWidth = Dimensions.get('window').width;
-  syncCarousel = (index) => setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs)
+  syncCarousel = (index) =>
+    setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs);
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
 
   _renderItem = ({ item, index }) => {

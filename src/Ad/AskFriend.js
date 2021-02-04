@@ -1,30 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, View, Button, Thumbnail, Left, Right, Body, Item, ActionSheet } from 'native-base';
+import { Text, View, Button } from 'native-base';
 import { ScrollView, StyleSheet, Image } from 'react-native';
 import { mainColor, activeColor } from '../Colors';
-import { invitationalSMS } from '../Utils';
-import NavigationService from '../services/NavigationService';
 
 import { initiateChatRoom } from '../Chat/chatActions';
 import InvitationModal from '../Chat/InvitationModal';
+import FriendPickerModal from '../FriendPicker/FriendPickerModal';
+
+import FriendToInvite from './FriendToInvite';
+import ChatToContinue from './ChatToContinue';
+import AnyFriendToInvite from './AnyFriendToInvite';
 
 class AskFriend extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
+      friendPickerModalVisible: false,
       friendToInvite: {},
     };
   }
 
   onAsk = (userId, name) => this.props.initiateChat(this.props.ad.id, userId, name);
+  openFriendPickerModal = () =>
+    this.setState({ modalVisible: false, friendPickerModalVisible: true, friendToInvite: {} });
+  prepareInvitation = (friend) =>
+    this.setState({ modalVisible: true, friendPickerModalVisible: false, friendToInvite: friend });
 
   render() {
     const { currentAdFriends } = this.props;
-    const { modalVisible, friendToInvite } = this.state;
+    const { modalVisible, friendPickerModalVisible, friendToInvite } = this.state;
     const closeModal = () => this.setState({ modalVisible: false });
+    const closeFriendPickerModal = () => this.setState({ friendPickerModalVisible: false });
 
     const friends = currentAdFriends.friends;
     const chats = currentAdFriends.chats;
@@ -36,58 +45,17 @@ class AskFriend extends React.PureComponent {
         {direct_friend && <Text>Разместил(а) {direct_friend.name}</Text>}
 
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.mutualFriendsContainer}>
+          <AnyFriendToInvite openFriendPickerModal={this.openFriendPickerModal} />
           {chats.map((c) => (
-            <View style={styles.mutualFriendBox} key={c.id}>
-              <Thumbnail source={{ uri: (c.chat_room_users[1] || c.chat_room_users[0]).avatar }} />
-              <Text note style={styles.smallFont}>
-                {c.chat_room_users.map((cru) => cru.name).join(', ')}
-              </Text>
-              <Text note style={styles.smallFont}>
-                {!c.messages[0].system && `${c.messages[0].user.name}: `}
-                {c.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
-                {c.messages[0].text.length > 15 && '...'}
-              </Text>
-              <Button
-                small
-                block
-                dark
-                style={styles.button}
-                onPress={() => NavigationService.navigate('ChatRoomScreen', { chatRoomId: c.id })}>
-                <Text>Продолжить</Text>
-              </Button>
-            </View>
+            <ChatToContinue chat={c} key={c.id} />
           ))}
           {friends.map((f) => (
-            <View style={styles.mutualFriendBox} key={f.id}>
-              {f.avatar ? (
-                <Thumbnail source={{ uri: f.avatar }} />
-              ) : (
-                <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-              )}
-              <Text note style={styles.smallFont}>
-                {f.name}
-              </Text>
-              <Text note style={styles.smallFont}>
-                {f.phone_number}
-              </Text>
-              <Button
-                small
-                block
-                dark
-                style={styles.button}
-                onPress={
-                  f.user_id
-                    ? () => this.setState({ friendToInvite: f, modalVisible: true })
-                    : () =>
-                        invitationalSMS(f.phone_number, 'Привет, смотри, нашел твою машину здесь – https://recar.io')
-                }>
-                <Text>{f.user_id ? 'Спросить' : 'Пригласить'}</Text>
-              </Button>
-            </View>
+            <FriendToInvite friend={f} key={f.id} prepareInvitation={this.prepareInvitation} />
           ))}
         </ScrollView>
 
         {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={this.onAsk} />}
+        {friendPickerModalVisible && <FriendPickerModal onUserPress={this.prepareInvitation} />}
       </View>
     );
   }
@@ -110,44 +78,9 @@ AskFriend.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  noAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-  },
-  mutualFriendsTextBlock: {
-    fontSize: 14,
-    marginTop: 16,
-    marginBottom: 12,
-  },
   mutualFriendsContainer: {
     marginTop: 6,
     marginBottom: 6,
     flexDirection: 'row',
-  },
-  mutualFriendBox: {
-    padding: 6,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: mainColor,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 0,
-    padding: 12,
-    marginRight: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  hand: {
-    fontSize: 12,
-    color: activeColor,
-  },
-  button: {
-    backgroundColor: activeColor,
-    marginTop: 16,
-    alignSelf: 'center',
-  },
-  smallFont: {
-    fontSize: 10,
   },
 });

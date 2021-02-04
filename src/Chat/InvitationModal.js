@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, View, Icon, Thumbnail, Item, Input, Button } from 'native-base';
 
@@ -28,7 +28,11 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
           </View>
 
           <View style={styles.contentContainer}>
-            <Thumbnail source={{ uri: friend.avatar }} style={styles.avatar} />
+            {friend.avatar ? (
+              <Thumbnail source={{ uri: friend.avatar }} style={styles.avatar} />
+            ) : (
+              <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
+            )}
             <Text style={styles.friendInfo}>
               {friend.name}
               {'\n'}
@@ -127,6 +131,12 @@ const styles = StyleSheet.create({
   emptyUserNameContainer: { backgroundColor: '#8D021F', padding: 8, borderRadius: 8, marginTop: 16 },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },
+  noAvatar: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignSelf: 'center',
+  },
 });
 
 function mapStateToProps(state) {
