@@ -7,9 +7,7 @@ import { mainColor, activeColor } from '../Colors';
 export default ({ openFriendPickerModal }) => (
   <View style={styles.mutualFriendBox}>
     <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-    <Text note style={styles.smallFont}>
-      Обсудить с другом
-    </Text>
+    <Text note style={styles.smallFont}>{"\n"}Обсудить с другом</Text>
     <Button small block dark style={styles.button} onPress={openFriendPickerModal}>
       <Text>Выбрать</Text>
     </Button>
