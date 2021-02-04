@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, Linking, SafeAreaView } from 'react-native';
+import { StyleSheet, Switch, Linking, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -18,7 +18,7 @@ import {
 
 import { TextInputMask } from 'react-native-masked-text';
 
-import { darkColor, activeColor, mainColor, trackColor } from '../Colors';
+import { darkColor, activeColor, mainColor, trackColor, lightColor } from '../Colors';
 
 import { onTosPress } from '../Utils';
 
@@ -33,7 +33,7 @@ export default class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { tosAccespted: false };
+    this.state = { tosAccespted: false, phone: '+380' };
   }
 
   render() {
@@ -61,7 +61,7 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <Item style={styles.codeInput} rounded>
-        <Icon name="ios-key" style={styles.icon} />
+        <Icon name="ios-key-outline" style={styles.icon} />
         <Input
           style={styles.input}
           placeholder="0000"
@@ -78,7 +78,7 @@ export default class LoginScreen extends React.Component {
         <TextInputMask
           type={'custom'}
           options={this.phoneMaskOptions}
-          placeholder="+380 (00) 000-00-00"
+          placeholder="+380 (77) 555-00-88"
           placeholderTextColor="#aaaaaa"
           value={this.props.phone}
           includeRawValueInChangeText={true}
@@ -99,59 +99,64 @@ export default class LoginScreen extends React.Component {
     }
 
     return (
-      <SafeAreaView style={styles.safeAreaView}>
-        <Container>
-          <Content contentContainerStyle={styles.mainContainer}>
-            <View style={styles.contentWrapper}>
-              <View style={styles.contentContainer}>
-                <Text style={styles.header}>Вход</Text>
-                {step === 1 ? phoneInput : codeInput}
+      <View style={styles.mainContainer}>
+        <View style={styles.contentWrapper}>
+          <ImageBackground source={require('../assets/bg.jpg')} style={{flex: 1, resizeMode: 'stretch', width: '100%', height: '100%'}} />
 
-                {step === 1 ? requestButton : signInButton}
-                {step === 1 && (
-                  <Item style={styles.tosContainer}>
-                    <Left>
-                      <View style={styles.tosTextContainer}>
-                        <Text onPress={onTosPress} style={styles.smallFont}>
-                          Ознакомлен(а) с&nbsp;
-                          <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
-                        </Text>
-                      </View>
-                    </Left>
-                    <Right style={styles.switchContainer}>
-                      <Switch
-                        thumbColor="#fff"
-                        trackColor={trackColor}
-                        ios_backgroundColor={mainColor}
-                        onValueChange={this.changeTosAcceptance}
-                        value={this.state.tosAccespted}
-                      />
-                    </Right>
-                  </Item>
-                )}
-              </View>
+          <Text style={styles.header}>ВОЙТИ</Text>
+          <View style={styles.contentContainer}>
+          <View>
+            {step === 1 ? phoneInput : codeInput}
 
-              <View>
-                {step === 2 && (
-                  <Text onPress={this.onRequest} style={styles.helperActions}>
-                    Отправить код еще раз
-                  </Text>
-                )}
-                {step === 2 && (
-                  <Text onPress={onReset} style={styles.helperActions}>
-                    Использовать другой номер телефона
-                  </Text>
-                )}
-              </View>
+            {step === 1 ? requestButton : signInButton}
+            {step === 1 && (
+              <Item style={styles.tosContainer}>
+                <Left>
+                  <View style={styles.tosTextContainer}>
+                    <Text onPress={onTosPress} style={styles.smallFont}>
+                      Ознакомлен(а) с&nbsp;
+                      <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
+                    </Text>
+                  </View>
+                </Left>
+                <Right style={styles.switchContainer}>
+                  <Switch
+                    thumbColor="#fff"
+                    trackColor={trackColor}
+                    ios_backgroundColor={mainColor}
+                    onValueChange={this.changeTosAcceptance}
+                    value={this.state.tosAccespted}
+                  />
+                </Right>
+              </Item>
+            )}
             </View>
+            <View>
+              {step === 2 && (
+                <Button light bordered style={{borderColor: '#363636'}}>
+                  <Icon name="refresh-outline" style={{color: '#727272'}} />
+                  <Text onPress={this.onRequest} style={{color: '#727272'}}>
+                    Отправить код ещё раз
+                  </Text>
+                </Button>
+              )}
+              {step === 2 && (
+                <Button light bordered style={{marginTop: 16, borderColor: '#363636'}}>
+                  <Icon name="arrow-back-outline" style={{color: '#727272'}} />
+                  <Text onPress={onReset} style={{color: '#727272'}}>
+                    Изменить телефон
+                  </Text>
+                </Button>
+              )}
+            </View>
+          </View>
 
-            <Thumbnail style={styles.topAbsolute} source={require('../assets/recario.png')} />
-            <Text note style={styles.bottomAbsolute}>
-              РЕКАРИО
-            </Text>
-          </Content>
-        </Container>
-      </SafeAreaView>
+        </View>
+
+        <Text note style={styles.bottomAbsolute}>
+          РЕКАРИО
+        </Text>
+      </View>
     );
   }
 }
@@ -169,27 +174,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    flex: 1,
-    paddingHorizontal: 24,
+    paddingVertical: 0,
+    margin: 0,
+    height: '100%'
   },
   button: {
     marginTop: 12,
     backgroundColor: activeColor,
+    height: 52,
+    borderRadius: 8
   },
   disabledButton: {
     marginTop: 12,
     backgroundColor: 'grey',
+    height: 52,
+    borderRadius: 8
   },
   input: {
     fontSize: 17,
     color: '#222',
-    justifyContent: 'flex-start',
-    alignSelf: 'flex-start',
-    alignItems: 'flex-start',
     padding: 0,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
     margin: 0,
   },
   phoneCountryText: {
@@ -197,9 +201,10 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   codeInput: {
-    borderRadius: 4,
+    borderRadius: 8,
     backgroundColor: '#c9c9c9',
     borderColor: '#c9c9c9',
+    height: 52,
   },
   helperActions: {
     marginTop: 24,
@@ -212,10 +217,11 @@ const styles = StyleSheet.create({
   },
   activeColor: { color: activeColor },
   phoneInput: {
-    borderRadius: 4,
+    borderRadius: 8,
     backgroundColor: '#c9c9c9',
     borderColor: '#c9c9c9',
-    height: 42,
+    height: 52,
+
   },
   phoneInputMasked: {
     fontSize: 18,
@@ -231,31 +237,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  safeAreaView: {
-    flex: 1,
-  },
-  topAbsolute: {
-    position: 'absolute',
-    top: 24,
-  },
   bottomAbsolute: {
     position: 'absolute',
-    bottom: 24,
+    bottom: 48,
   },
   contentWrapper: {
     width: '100%',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
+    padding: 0,
+    margin: 0,
+    width: '100%',
   },
   contentContainer: {
-    backgroundColor: '#222',
+    backgroundColor: mainColor,
     padding: 24,
-    borderRadius: 4,
+    paddingTop: 48,
+    paddingBottom: 0,
+    margin: 0,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    height: '60%',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingBottom: 96,
   },
   icon: {
     color: '#333',
   },
   header: {
-    marginBottom: 16,
-    fontSize: 24,
+    top: 96,
+    left: 24,
+    fontSize: 36,
+    position: 'absolute',
+    color: lightColor
   },
 });
