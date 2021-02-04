@@ -5,6 +5,7 @@ import { Container, Header, Item, Icon, Input, Text, Fab } from 'native-base';
 import { StyleSheet, Platform } from 'react-native';
 
 import UserContactsList from './UserContactsList';
+import UserContactsListItem from './UserContactsListItem';
 
 import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions';
 
@@ -18,6 +19,10 @@ class UserContactsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     return { header: () => null };
   };
+
+  renderItem = ({ item, index }) => (
+    <UserContactsListItem contact={item} filterByContact={this.props.filterByContact} />
+  );
 
   resetQuery = () => this.props.updateQuery('');
 
@@ -53,10 +58,10 @@ class UserContactsScreen extends React.PureComponent {
         <PermissionsBox />
         <UserContactsList
           userContacts={userContacts}
-          filterByContact={filterByContact}
           isLoading={isLoading}
           loadMoreUserContacts={loadMoreUserContacts}
           onRefresh={onRefresh}
+          renderItem={this.renderItem}
         />
       </Container>
     );

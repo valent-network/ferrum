@@ -6,7 +6,6 @@ import { Spinner } from 'native-base';
 import { activeColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
-import UserContactsListItem from './UserContactsListItem';
 import ListNotFound from '../ListNotFound';
 
 class UserContactsList extends React.PureComponent {
@@ -14,16 +13,12 @@ class UserContactsList extends React.PureComponent {
 
   onEndReached = async () => this.props.loadMoreUserContacts();
 
-  renderItem = ({ item, index }) => (
-    <UserContactsListItem contact={item} filterByContact={this.props.filterByContact} />
-  );
-
   onRefresh = this.props.onRefresh;
   refreshControlLoading = (<RefreshControl refreshing={true} tintColor={activeColor} onRefresh={this.onRefresh} />);
   refreshControlStable = (<RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.onRefresh} />);
 
   render() {
-    const { userContacts, isLoading, onRefresh, filterByContact } = this.props;
+    const { userContacts, isLoading, renderItem } = this.props;
     const refreshControl = isLoading ? this.refreshControlLoading : this.refreshControlStable;
 
     if (userContacts.length === 0) {
@@ -36,7 +31,7 @@ class UserContactsList extends React.PureComponent {
         refreshControl={refreshControl}
         keyExtractor={this.keyExtractor}
         onEndReached={this.onEndReached}
-        renderItem={this.renderItem}
+        renderItem={renderItem}
       />
     );
   }
