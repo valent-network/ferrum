@@ -26,7 +26,7 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import { activeColor, darkColor, mainColor, trackColor } from '../Colors';
+import { activeColor, darkColor, mainColor, trackColor, appearanceBgColor, lightColor, disabledColor } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
   let typingTimer;
@@ -35,14 +35,14 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
 
   const filterBox = (filterValue, filterType) => {
     const isActive = filters[filterType].filter((f) => f === filterValue).length;
-    const maybeActiveStyle = { backgroundColor: isActive ? activeColor : '#333' };
+    const maybeActiveStyle = { backgroundColor: isActive ? activeColor : disabledColor };
     const iconName = filters[filterType].filter((f) => f === filterValue).length
       ? 'checkmark-circle-outline'
       : 'ellipse-outline';
 
     return (
       <View key={filterValue} style={isActive ? styles.activeFilterBox : styles.filterBox}>
-        <Text onPress={() => applyFilter(filterType, filterValue)}>
+        <Text onPress={() => applyFilter(filterType, filterValue)} style={styles.filterBoxText}>
           {filterValue}
           &nbsp;
           <Icon name={iconName} style={styles.filterItem} />
@@ -166,7 +166,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     </Left>
                     <Right>
                       <Switch
-                        thumbColor="#fff"
+                        thumbColor={lightColor}
                         trackColor={trackColor}
                         ios_backgroundColor={mainColor}
                         onValueChange={onContactsModeChange}
@@ -212,7 +212,7 @@ FeedFilters.propTypes = {};
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
     flex: 1,
     padding: 16,
   },
@@ -222,13 +222,13 @@ const styles = StyleSheet.create({
     height: 48,
   },
   closeIcon: {
-    color: '#c9c9c9',
+    color: lightColor,
     fontSize: 48,
     fontWeight: 'bold',
     height: 48,
   },
   resetControl: {
-    color: '#c9c9c9',
+    color: lightColor,
     alignSelf: 'center',
     fontSize: 14,
     height: 18,
@@ -250,16 +250,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   filterBox: {
-    borderColor: '#555',
-    borderWidth: 1,
+    borderColor: lightColor,
+    borderWidth: 0.2,
     borderRadius: 2,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
-    backgroundColor: '#333',
+    backgroundColor: mainColor,
+  },
+  filterBoxText: {
+    color: lightColor,
   },
   activeFilterBox: {
-    borderColor: '#555',
+    borderColor: lightColor,
     borderWidth: 1,
     borderRadius: 2,
     marginRight: 12,
@@ -280,9 +283,10 @@ const styles = StyleSheet.create({
   },
   filterItem: {
     fontSize: 18,
+    color: lightColor,
   },
   safeArea: {
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
     minHeight: '100%',
   },
   submitButtonWrapper: {
@@ -304,12 +308,12 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
   searchIcon: {
-    color: '#666',
+    color: disabledColor,
   },
   filtersForm: {
     paddingBottom: 96,
   },
   inputTextColor: {
-    color: '#c9c9c9',
+    color: lightColor,
   },
 });

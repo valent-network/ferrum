@@ -6,7 +6,7 @@ import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
 import ru from 'dayjs/locale/ru';
 
-import { activeColor, darkColor, mainColor, lightColor } from '../Colors';
+import { activeColor, darkColor, mainColor, lightColor, appearanceBgColor } from '../Colors';
 
 const renderLoadEarlier = (props) => <LoadEarlier label="Загрузить еще..." {...props} />;
 
@@ -40,10 +40,10 @@ export const commonGiftedChatOptions = {
 
 const styles = StyleSheet.create({
   inputToolbarContainer: {
-    backgroundColor: darkColor,
-    borderBottomWidth: 1,
+    backgroundColor: mainColor,
+    borderBottomWidth: 0.2,
     borderTopWidth: 0.2,
-    borderBottomColor: mainColor,
+    borderBottomColor: lightColor,
     borderTopColor: lightColor,
   },
   textInput: {

@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
-import { activeColor } from '../Colors';
+import { activeColor, disabledColor } from '../Colors';
 import NavigationService from '../services/NavigationService';
 
 const ChatIcon = ({ tintColor, unreadMessagesCount }) => {
   const icon = (
-    <Icon name="chatbubbles-outline" style={tintColor === 'grey' ? styles.inactiveIcon : styles.activeIcon} />
+    <Icon name="chatbubbles-outline" style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon} />
   );
 
   if (unreadMessagesCount === 0) {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   inactiveIcon: {
     fontSize: 24,
-    color: 'grey',
+    color: disabledColor,
   },
   badge: {
     backgroundColor: activeColor,

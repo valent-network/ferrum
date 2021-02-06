@@ -21,7 +21,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { darkColor, activeColor } from '../Colors';
+import { darkColor, activeColor, appearanceBgColor, disabledColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
   },
   inactiveIcon: {
     fontSize: 24,
-    color: 'grey',
+    color: disabledColor,
   },
 });
 
 function iconFor(iconName) {
   return ({ tintColor }) => {
-    return <Icon name={iconName} style={tintColor === 'grey' ? styles.inactiveIcon : styles.activeIcon} />;
+    return <Icon name={iconName} style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon} />;
   };
 }
 
@@ -169,11 +169,11 @@ const bottomTabsNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: darkColor,
+        backgroundColor: appearanceBgColor,
         paddingTop: 4,
       },
       activeTintColor: activeColor,
-      inactiveTintColor: 'grey',
+      inactiveTintColor: disabledColor,
     },
   },
 );

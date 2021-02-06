@@ -12,7 +12,7 @@ import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions
 import { filterByContact } from '../Feed/feedActions';
 import PermissionsBox from '../Feed/PermissionsBox';
 
-import { darkColor, mainColor } from '../Colors';
+import { appearanceBgColor, mainColor, lightColor, darkColor, disabledColor } from '../Colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -91,7 +91,7 @@ UserContactsScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
     borderBottomWidth: 0,
     paddingBottom: 16,
     paddingLeft: 12,
@@ -102,9 +102,9 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
   searchIcon: {
-    color: '#666',
+    color: disabledColor,
   },
   inputTextColor: {
-    color: '#c9c9c9',
+    color: lightColor,
   },
 });

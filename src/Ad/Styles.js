@@ -1,5 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { activeColor, darkColor } from '../Colors';
+import {
+  activeColor,
+  darkColor,
+  appearanceBgColor,
+  priceColor,
+  deletedColor,
+  lightColor,
+  disabledColor,
+} from '../Colors';
 
 export const styles = StyleSheet.create({
   oldPricesContainer: {
@@ -19,7 +27,7 @@ export const styles = StyleSheet.create({
   headerBackground: {
     backgroundColor: 'transparent',
     width: '100%',
-    color: '#fff',
+    color: lightColor,
     position: 'absolute',
     zIndex: 10,
     margin: 0,
@@ -41,13 +49,13 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   price: {
-    color: '#85bb65',
+    color: priceColor,
     fontSize: 18,
     marginTop: 0,
     fontWeight: 'bold',
   },
   priceVersion: {
-    color: '#555',
+    color: disabledColor,
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
     fontSize: 12,
@@ -57,7 +65,7 @@ export const styles = StyleSheet.create({
   },
   separator: {
     borderWidth: 1,
-    borderColor: '#111',
+    borderColor: darkColor,
     marginTop: 8,
     marginBottom: 8,
   },
@@ -66,7 +74,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 16,
     marginBottom: 16,
-    color: '#533',
+    color: deletedColor,
   },
   descriptionText: {
     fontSize: 12,
@@ -82,10 +90,10 @@ export const styles = StyleSheet.create({
     color: activeColor,
   },
   mainColor: {
-    color: 'white',
+    color: lightColor,
   },
   mainContainer: {
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
   },
   image: {
     height: 350,
@@ -100,19 +108,19 @@ export const styles = StyleSheet.create({
     padding: 12,
   },
   imageGalleryBadge: {
-    backgroundColor: '#fff',
+    backgroundColor: lightColor,
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    borderColor: '#fff',
+    borderColor: lightColor,
     borderWidth: 1,
     backgroundColor: 'transparent',
   },
   imageGalleryBadgeIcon: {
     fontSize: 15,
-    color: '#fff',
+    color: lightColor,
     lineHeight: 20,
   },
   imageGalleryBadgeText: {
-    color: '#fff',
+    color: lightColor,
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text, Thumbnail } from 'native-base';
-import { darkColor, lightColor, mainColor } from './Colors';
+import { darkColor, lightColor, mainColor, shadowColor } from './Colors';
 
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   notificationWrapper: {
     marginTop: 20,
     position: 'absolute',
-    backgroundColor: '#222',
+    backgroundColor: darkColor,
     zIndex: 100000,
     width: '90%',
     alignSelf: 'center',
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowColor: '#000',
+    shadowColor: shadowColor,
     shadowOffset: {
       width: 0,
       height: 12,

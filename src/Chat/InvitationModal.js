@@ -6,7 +6,7 @@ import { Text, View, Icon, Thumbnail, Item, Input, Button } from 'native-base';
 
 import { updateUserName } from '../Profile/profileActions';
 
-import { lightColor, activeColor, mainColor } from '../Colors';
+import { lightColor, activeColor, mainColor, disabledColor, warningColor } from '../Colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const [name, setName] = useState(friend.name);
@@ -46,7 +46,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                     value={userName}
                     onChangeText={setUserName}
                     placeholder="Ваше имя"
-                    placeholderTextColor="#aaaaaa"
+                    placeholderTextColor={lightColor}
                   />
                 </Item>
                 <Button
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-start',
-    color: '#c9c9c9',
+    color: lightColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   avatar: { alignSelf: 'center' },
   friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
   userNameSubmitButton: { marginTop: 16 },
-  emptyUserNameContainer: { backgroundColor: '#8D021F', padding: 8, borderRadius: 8, marginTop: 16 },
+  emptyUserNameContainer: { backgroundColor: warningColor, padding: 16, borderRadius: 8, marginTop: 16 },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },
   noAvatar: {

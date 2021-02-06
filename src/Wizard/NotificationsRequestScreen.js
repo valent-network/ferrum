@@ -10,7 +10,7 @@ import PushNotification from 'react-native-push-notification';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import { activeColor, lightColor } from '../Colors';
+import { activeColor, lightColor, darkColor } from '../Colors';
 
 class NotificationsRequestScreen extends React.PureComponent {
   nextStep = () => {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: darkColor,
   },
   icon: {
     alignSelf: 'center',

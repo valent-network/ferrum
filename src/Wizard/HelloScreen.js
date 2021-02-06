@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { Container, Content, Text, Button, H1, View, Icon } from 'native-base';
 
-import { activeColor } from '../Colors';
+import { activeColor, darkColor } from '../Colors';
 
 export default class HelloScreen extends React.PureComponent {
   nextStep = () => {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: darkColor,
   },
   icon: {
     alignSelf: 'center',

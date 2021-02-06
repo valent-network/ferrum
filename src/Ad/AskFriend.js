@@ -55,7 +55,9 @@ class AskFriend extends React.PureComponent {
         </ScrollView>
 
         {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={this.onAsk} />}
-        {friendPickerModalVisible && <FriendPickerModal onClose={closeFriendPickerModal} onUserPress={this.prepareInvitation} />}
+        {friendPickerModalVisible && (
+          <FriendPickerModal onClose={closeFriendPickerModal} onUserPress={this.prepareInvitation} />
+        )}
       </View>
     );
   }

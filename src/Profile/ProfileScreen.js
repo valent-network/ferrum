@@ -33,7 +33,7 @@ import { deleteContacts } from '../UserContacts/userContactsActions';
 
 import { onTosPress, onPrivacyPress } from '../Utils';
 
-import { activeColor, lightColor, mainColor } from '../Colors';
+import { activeColor, lightColor, mainColor, disabledColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -161,7 +161,7 @@ class ProfileScreen extends React.PureComponent {
           </Text>
 
           <View style={styles.bottomItemsContainer}>
-            <List style={styles.bottomList}>
+            <List>
               <ListItem
                 noIndent
                 onPress={onPrivacyPress}
@@ -242,18 +242,17 @@ styles = StyleSheet.create({
     minHeight: '100%',
   },
   phoneNumberText: {
-    color: '#666',
+    color: disabledColor,
     fontSize: 14,
     marginTop: 12,
   },
   noteText: {
     fontSize: 12,
-    color: lightColor,
     padding: 16,
   },
   itemContainer: {
     backgroundColor: mainColor,
-    borderTopColor: '#666',
+    borderTopColor: disabledColor,
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
@@ -264,12 +263,8 @@ styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-  bottomList: {
-    backgroundColor: '#222',
-    borderTopWidth: 0,
-  },
   nameInput: {
-    color: '#c9c9c9',
+    color: lightColor,
     fontSize: 14,
     height: '100%',
     padding: 0,
@@ -281,7 +276,7 @@ styles = StyleSheet.create({
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,
-    borderBottomColor: '#666',
+    borderBottomColor: disabledColor,
   },
   changeAvatarButton: {
     marginTop: 12,

@@ -8,7 +8,7 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsActions';
 
-import { mainColor } from '../Colors';
+import { mainColor, lightColor } from '../Colors';
 
 function FriendPickerModal({ user, userContacts, isLoading, onRefresh, loadMoreUserContacts, onClose, onUserPress }) {
   const renderItem = ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />;
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-start',
-    color: '#c9c9c9',
+    color: lightColor,
     fontSize: 48,
     fontWeight: 'bold',
   },

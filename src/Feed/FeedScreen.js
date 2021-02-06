@@ -13,7 +13,7 @@ import * as ActionTypes from '../actions/actionTypes';
 import FeedFilters from './FeedFilters';
 import PermissionsBox from './PermissionsBox';
 
-import { activeColor, mainColor } from '../Colors';
+import { activeColor, mainColor, lightColor } from '../Colors';
 
 class FeedScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -74,7 +74,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);
 
 const styles = StyleSheet.create({
   fabIcon: {
-    color: '#c9c9c9',
+    color: lightColor,
   },
   fabContainer: {
     backgroundColor: activeColor,

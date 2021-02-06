@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Spinner, Button, Text, Content, Icon } from 'native-base';
 
-import { activeColor } from '../Colors';
+import { activeColor, lightColor } from '../Colors';
 
 export default class ContactsUploading extends React.PureComponent {
   render() {
@@ -11,7 +11,7 @@ export default class ContactsUploading extends React.PureComponent {
       <Button iconLeft style={styles.contactsUploadingButton}>
         <Icon name="people-sharp" />
         <Text>Обработка контактной книги...</Text>
-        <Spinner size="small" color="#fff" />
+        <Spinner size="small" color={lightColor} />
         <Text>&nbsp;</Text>
       </Button>
     );

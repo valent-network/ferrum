@@ -4,6 +4,8 @@ import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
 
 import { Text } from 'native-base';
 
+import { priceColor, disabledColor, darkColor, lightColor } from './Colors';
+
 export default class AdsListItem extends React.PureComponent {
   onPress = () => this.props.onPress(this.props.ad);
 
@@ -56,14 +58,14 @@ AdsListItem.propTypes = {};
 const styles = StyleSheet.create({
   title: {
     marginBottom: 2,
-    color: '#fff',
+    color: lightColor,
     fontSize: 24,
   },
   imagePreviewContainer: {
     flex: 1,
     backgroundColor: 'transparent',
     borderRadius: 12,
-    shadowColor: '#121212',
+    shadowColor: darkColor,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -89,11 +91,11 @@ const styles = StyleSheet.create({
   },
   option: {
     marginBottom: 12,
-    color: '#aaa',
+    color: disabledColor,
     fontSize: 14,
   },
   price: {
-    color: '#85bb65',
+    color: priceColor,
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 12,

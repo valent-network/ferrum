@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 
 import { Icon, Text, Content } from 'native-base';
 
+import { activeColor } from './Colors';
+
 export default class ListNotFound extends React.PureComponent {
   render() {
     const { refreshControl } = this.props;
@@ -21,8 +23,8 @@ ListNotFound.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  notFoundIcon: { fontSize: 256, color: '#444' },
-  notFoundText: { color: '#444' },
+  notFoundIcon: { fontSize: 256, color: activeColor },
+  notFoundText: { color: activeColor },
   notFoundContainer: {
     flex: 1,
     justifyContent: 'center',
