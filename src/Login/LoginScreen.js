@@ -18,9 +18,11 @@ import {
 
 import { TextInputMask } from 'react-native-masked-text';
 
-import { darkColor, activeColor, mainColor, trackColor, lightColor } from '../Colors';
+import { darkColor, activeColor, mainColor, trackColor, lightColor, appearanceBgColor, disabledColor } from '../Colors';
 
 import { onTosPress } from '../Utils';
+
+import LOGIN_BG_IMAGE from '../assets/bg.jpg';
 
 export default class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
@@ -65,7 +67,7 @@ export default class LoginScreen extends React.Component {
         <Input
           style={styles.input}
           placeholder="0000"
-          placeholderTextColor="#aaaaaa"
+          placeholderTextColor={disabledColor}
           keyboardType="numeric"
           onChangeText={this.onInputCode}
           maxLength={4}
@@ -79,7 +81,7 @@ export default class LoginScreen extends React.Component {
           type={'custom'}
           options={this.phoneMaskOptions}
           placeholder="+380 (77) 555-00-88"
-          placeholderTextColor="#aaaaaa"
+          placeholderTextColor={disabledColor}
           value={this.props.phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
@@ -101,56 +103,51 @@ export default class LoginScreen extends React.Component {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.contentWrapper}>
-          <ImageBackground source={require('../assets/bg.jpg')} style={{flex: 1, resizeMode: 'stretch', width: '100%', height: '100%'}} />
+          <ImageBackground source={LOGIN_BG_IMAGE} style={styles.bgImage} />
 
           <Text style={styles.header}>ВОЙТИ</Text>
           <View style={styles.contentContainer}>
-          <View>
-            {step === 1 ? phoneInput : codeInput}
-
-            {step === 1 ? requestButton : signInButton}
-            {step === 1 && (
-              <Item style={styles.tosContainer}>
-                <Left>
-                  <View style={styles.tosTextContainer}>
-                    <Text onPress={onTosPress} style={styles.smallFont}>
-                      Ознакомлен(а) с&nbsp;
-                      <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
-                    </Text>
-                  </View>
-                </Left>
-                <Right style={styles.switchContainer}>
-                  <Switch
-                    thumbColor="#fff"
-                    trackColor={trackColor}
-                    ios_backgroundColor={mainColor}
-                    onValueChange={this.changeTosAcceptance}
-                    value={this.state.tosAccespted}
-                  />
-                </Right>
-              </Item>
-            )}
-            </View>
             <View>
+              {step === 1 ? phoneInput : codeInput}
+
+              {step === 1 ? requestButton : signInButton}
+              {step === 1 && (
+                <Item style={styles.tosContainer}>
+                  <Left>
+                    <View style={styles.tosTextContainer}>
+                      <Text onPress={onTosPress} style={styles.smallFont}>
+                        Ознакомлен(а) с&nbsp;
+                        <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
+                      </Text>
+                    </View>
+                  </Left>
+                  <Right style={styles.switchContainer}>
+                    <Switch
+                      thumbColor={lightColor}
+                      trackColor={trackColor}
+                      ios_backgroundColor={mainColor}
+                      onValueChange={this.changeTosAcceptance}
+                      value={this.state.tosAccespted}
+                    />
+                  </Right>
+                </Item>
+              )}
+            </View>
+            <View style={styles.linksContainer}>
               {step === 2 && (
-                <Button light bordered style={{borderColor: '#363636'}}>
-                  <Icon name="refresh-outline" style={{color: '#727272'}} />
-                  <Text onPress={this.onRequest} style={{color: '#727272'}}>
-                    Отправить код ещё раз
-                  </Text>
-                </Button>
+                <Text onPress={this.onRequest} style={[styles.resendCodeText, styles.smallFont]}>
+                  <Icon name="refresh-outline" style={[styles.icon, styles.disabledColor, styles.smallFont]} />
+                  &nbsp; Отправить код ещё раз
+                </Text>
               )}
               {step === 2 && (
-                <Button light bordered style={{marginTop: 16, borderColor: '#363636'}}>
-                  <Icon name="arrow-back-outline" style={{color: '#727272'}} />
-                  <Text onPress={onReset} style={{color: '#727272'}}>
-                    Изменить телефон
-                  </Text>
-                </Button>
+                <Text onPress={onReset} style={[styles.disabledColor, styles.smallFont]}>
+                  <Icon name="arrow-back-outline" style={[styles.icon, styles.disabledColor, styles.smallFont]} />
+                  &nbsp; Изменить телефон
+                </Text>
               )}
             </View>
           </View>
-
         </View>
 
         <Text note style={styles.bottomAbsolute}>
@@ -176,34 +173,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 0,
     margin: 0,
-    height: '100%'
+    height: '100%',
   },
   button: {
     marginTop: 12,
     backgroundColor: activeColor,
     height: 52,
-    borderRadius: 8
+    borderRadius: 8,
   },
   disabledButton: {
     marginTop: 12,
-    backgroundColor: 'grey',
+    backgroundColor: disabledColor,
     height: 52,
-    borderRadius: 8
+    borderRadius: 8,
   },
   input: {
     fontSize: 17,
-    color: '#222',
+    color: darkColor,
     padding: 0,
     margin: 0,
   },
   phoneCountryText: {
     fontSize: 17,
-    color: '#666',
+    color: disabledColor,
   },
   codeInput: {
     borderRadius: 8,
-    backgroundColor: '#c9c9c9',
-    borderColor: '#c9c9c9',
+    backgroundColor: lightColor,
+    borderColor: lightColor,
     height: 52,
   },
   helperActions: {
@@ -218,10 +215,9 @@ const styles = StyleSheet.create({
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 8,
-    backgroundColor: '#c9c9c9',
-    borderColor: '#c9c9c9',
+    backgroundColor: lightColor,
+    borderColor: lightColor,
     height: 52,
-
   },
   phoneInputMasked: {
     fontSize: 18,
@@ -240,6 +236,7 @@ const styles = StyleSheet.create({
   bottomAbsolute: {
     position: 'absolute',
     bottom: 48,
+    color: activeColor,
   },
   contentWrapper: {
     width: '100%',
@@ -249,7 +246,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   contentContainer: {
-    backgroundColor: mainColor,
+    backgroundColor: appearanceBgColor,
     padding: 24,
     paddingTop: 48,
     paddingBottom: 0,
@@ -262,13 +259,22 @@ const styles = StyleSheet.create({
     paddingBottom: 96,
   },
   icon: {
-    color: '#333',
+    color: disabledColor,
   },
   header: {
     top: 96,
     left: 24,
     fontSize: 36,
     position: 'absolute',
-    color: lightColor
+    color: lightColor,
   },
+  bgImage: {
+    flex: 1,
+    resizeMode: 'stretch',
+    width: '100%',
+    height: '100%',
+  },
+  linksContainer: { alignItems: 'center' },
+  resendCodeText: { color: disabledColor, marginBottom: 36 },
+  disabledColor: { color: disabledColor },
 });
