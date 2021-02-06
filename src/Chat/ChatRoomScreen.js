@@ -125,7 +125,7 @@ ChatRoomScreen.navigationOptions = ({ navigation }) => {
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: mainColor,
+    headerTintColor: lightColor,
     headerRight: () => <CurrentChatActions />,
   };
 };

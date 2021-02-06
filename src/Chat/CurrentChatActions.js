@@ -9,7 +9,7 @@ import NavigationService from '../services/NavigationService';
 import { activeColor } from '../Colors';
 
 const HeaderActions = ({ chat, isLoading }) => {
-  if (isLoading) {
+  if (isLoading || chat.system) {
     return null;
   }
 
