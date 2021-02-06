@@ -11,8 +11,6 @@ import { getAdFriendsToChat, addUserToChat, leaveChat } from './chatActions';
 
 import { mergeArraysKeepNew } from '../Utils';
 
-import NavigationService from '../services/NavigationService';
-
 import InvitationModal from './InvitationModal';
 import AdFriend from './AdFriend';
 
@@ -38,7 +36,10 @@ function ChatRoomsSettingsScreen({
   const [friendToInvite, setFriendToInvite] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const onShow = () => navigation.navigate('VisitedAdScreen', { id: chat.ad_id });
+  const onShow = () => {
+    navigation.popToTop();
+    navigation.navigate('VisitedAdScreen', { id: chat.ad_id });
+  };
   const onLeave = () => {
     ActionSheet.show(
       {
