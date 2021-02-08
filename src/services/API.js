@@ -148,6 +148,10 @@ export default class API {
     return apiService.post('/v1/chat_rooms', { ad_id: adId, user_id: userId, name: name });
   }
 
+  static initiateSystemChatRoom() {
+    return apiService.get('/v1/system_chat_room');
+  }
+
   static addUserToChat(chatRoomId, userId, name) {
     return apiService.post('/v1/chat_room_users', { chat_room_id: chatRoomId, user_id: userId, name: name });
   }

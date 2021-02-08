@@ -26,6 +26,7 @@ import { TouchableOpacity, Image, StyleSheet, RefreshControl } from 'react-nativ
 import ImagePicker from 'react-native-image-crop-picker';
 
 import { updateUserName, updateUserAvatar, getProfile } from './profileActions';
+import { initiateSystemChatRoom } from '../Chat/chatActions';
 
 import { signOut } from '../actions/sessionsActions';
 
@@ -116,7 +117,7 @@ class ProfileScreen extends React.PureComponent {
   refreshControl = (<RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.props.onRefresh} />);
 
   render() {
-    const { onRefresh, user } = this.props;
+    const { onRefresh, onInitiateSystemChatRoom, user } = this.props;
 
     return (
       <Container>
@@ -132,76 +133,84 @@ class ProfileScreen extends React.PureComponent {
             <Text note style={styles.changeAvatarButton} onPress={this.onAvatarPress}>
               Изменить
             </Text>
-            <Text style={styles.phoneNumberText}>{user.phoneNumber}</Text>
           </View>
-          <List>
-            <ListItem noIndent style={styles.itemContainer}>
-              <Item style={styles.nameInputWrapper}>
-                <Label>Имя</Label>
-                <Input style={styles.nameInput} defaultValue={user.name} onEndEditing={this.handleNameChange} />
-              </Item>
-            </ListItem>
-            <ListItem
-              style={[styles.itemContainer, styles.withBorderBottom]}
-              noIndent
-              onPress={this.confirmDeleteContacts}
-              activeOpacity={1}
-              underlayColor="transparent">
-              <Left>
-                <Text>Книга контактов</Text>
-              </Left>
-              <Right>
-                <Text style={styles.activeColor}>Удалить</Text>
-              </Right>
-            </ListItem>
-          </List>
-          <Text style={styles.noteText}>
-            Не забудь отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы снова после
-            удаления.
-          </Text>
-
-          <View style={styles.bottomItemsContainer}>
-            <List>
-              <ListItem
-                noIndent
-                onPress={onPrivacyPress}
-                activeOpacity={1}
-                underlayColor="transparent"
-                style={styles.itemContainer}>
-                <Left>
-                  <Text style={styles.bottomLinks}>О конфиденциальности</Text>
-                </Left>
-                <Right>
-                  <Icon name="open-outline" />
-                </Right>
-              </ListItem>
-              <ListItem
-                noIndent
-                onPress={onTosPress}
-                activeOpacity={1}
-                underlayColor="transparent"
-                style={styles.itemContainer}>
-                <Left>
-                  <Text style={styles.bottomLinks}>Условия использования</Text>
-                </Left>
-                <Right>
-                  <Icon name="open-outline" />
-                </Right>
-              </ListItem>
-              <ListItem
-                noIndent
-                onPress={this.confirmSignOut}
-                activeOpacity={1}
-                underlayColor="transparent"
-                style={styles.itemContainer}>
-                <Left>
-                  <Text style={styles.activeColor}>Выход</Text>
-                </Left>
-                <Right>
-                  <Icon name="log-out-outline" style={styles.activeColor} />
-                </Right>
-              </ListItem>
-            </List>
+          <View style={styles.optionsContainer}>
+            <View>
+              <List>
+                <ListItem noIndent style={styles.itemContainer}>
+                  <Item style={styles.nameInputWrapper}>
+                    <Label>Имя</Label>
+                    <Input style={styles.nameInput} defaultValue={user.name} onEndEditing={this.handleNameChange} />
+                  </Item>
+                </ListItem>
+                <ListItem style={styles.itemContainer} noIndent activeOpacity={1} underlayColor="transparent">
+                  <Left>
+                    <Text>Телефон</Text>
+                  </Left>
+                  <Text style={styles.phoneNumberText}>{user.phoneNumber}</Text>
+                </ListItem>
+                <ListItem
+                  style={[styles.itemContainer, styles.withBorderBottom]}
+                  noIndent
+                  onPress={this.confirmDeleteContacts}
+                  activeOpacity={1}
+                  underlayColor="transparent">
+                  <Left>
+                    <Text>Книга контактов</Text>
+                  </Left>
+                  <Right>
+                    <Text style={styles.activeColor}>Удалить</Text>
+                  </Right>
+                </ListItem>
+                <Text style={styles.noteText}>
+                  Не забудь отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы снова
+                  после удаления.
+                </Text>
+              </List>
+            </View>
+            <View>
+              <List>
+                <ListItem
+                  noIndent
+                  onPress={onInitiateSystemChatRoom}
+                  activeOpacity={1}
+                  underlayColor="transparent"
+                  style={styles.itemContainer}>
+                  <Left>
+                    <Text style={styles.bottomLinks}>Написать в техподдержку</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="chatbubbles-outline" />
+                  </Right>
+                </ListItem>
+                <ListItem
+                  noIndent
+                  onPress={onTosPress}
+                  activeOpacity={1}
+                  underlayColor="transparent"
+                  style={styles.itemContainer}>
+                  <Left>
+                    <Text style={styles.bottomLinks}>Условия использования</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="open-outline" />
+                  </Right>
+                </ListItem>
+                <ListItem
+                  noIndent
+                  onPress={this.confirmSignOut}
+                  activeOpacity={1}
+                  underlayColor="transparent"
+                  style={styles.itemContainer}>
+                  <Left>
+                    <Text style={styles.activeColor}>Выход</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="log-out-outline" style={styles.activeColor} />
+                  </Right>
+                </ListItem>
+              </List>
+            </View>
           </View>
         </Content>
       </Container>
@@ -222,6 +231,7 @@ function mapDispatchToProps(dispatch) {
     onSignOut: () => dispatch(signOut(false)),
     deleteContacts: () => dispatch(deleteContacts()),
     onRefresh: () => dispatch(getProfile()),
+    onInitiateSystemChatRoom: () => dispatch(initiateSystemChatRoom()),
   };
 }
 
@@ -236,15 +246,14 @@ styles = StyleSheet.create({
     borderRadius: 32,
   },
   contentStyle: {
-    flex: 1,
+    flexGrow: 1,
+  },
+  optionsContainer: {
     justifyContent: 'space-between',
-    paddingTop: 32,
-    minHeight: '100%',
+    flex: 1,
   },
   phoneNumberText: {
     color: disabledColor,
-    fontSize: 14,
-    marginTop: 12,
   },
   noteText: {
     fontSize: 12,
@@ -259,10 +268,6 @@ styles = StyleSheet.create({
   activeColor: {
     color: activeColor,
   },
-  bottomItemsContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
   nameInput: {
     color: lightColor,
     fontSize: 14,
@@ -271,8 +276,7 @@ styles = StyleSheet.create({
   },
   userInfoContainer: {
     alignItems: 'center',
-    marginBottom: 0,
-    marginBottom: 32,
+    paddingVertical: 24,
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,

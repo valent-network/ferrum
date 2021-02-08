@@ -12,6 +12,8 @@ import { activeColor, darkColor, disabledColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
 
+import RECARIO_LOGO from '../assets/recario.png';
+
 export default function ChatRoomListItem({ chat }) {
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
@@ -25,7 +27,9 @@ export default function ChatRoomListItem({ chat }) {
 
   const onLongPress = () => {
     const msg = lastMessage.user?._id ? `${lastMessage.user.name}: ${messagePreview}` : messagePreview;
-    const title = chat.system ? "Системный чат\nВ него можно вернуться в любой момент" : `${chat.title}\n${lastMessageDateString} – ${msg}`
+    const title = chat.system
+      ? 'Системный чат\nВ него можно вернуться в любой момент'
+      : `${chat.title}\n${lastMessageDateString} – ${msg}`;
 
     ActionSheet.show(
       {
@@ -51,7 +55,7 @@ export default function ChatRoomListItem({ chat }) {
       onLongPress={onLongPress}
       style={styles.chatRow}>
       <Left>
-        <Thumbnail source={{ uri: chat.system ? 'https://recar.io/images/logo.png' : chat.photo }} style={styles.carPhoto} />
+        <Thumbnail source={chat.system ? RECARIO_LOGO : { uri: chat.photo }} style={styles.carPhoto} />
       </Left>
       <Body style={styles.previewBody}>
         <Text>{chat.system ? 'Рекарио' : chat.title}</Text>

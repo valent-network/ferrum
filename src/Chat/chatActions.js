@@ -56,6 +56,20 @@ export function initiateChatRoom(adId, userId, name) {
   };
 }
 
+export function initiateSystemChatRoom() {
+  return function (dispatch) {
+    NavigationService.navigate('ChatRoomScreen', { chat: {} });
+    // dispatch({ type: ActionTypes.GET_AD_FRIENDS_SUCCESS, adFriends: [] });
+    // dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS, adFriends: [] });
+    API.initiateSystemChatRoom().then(({ data }) => {
+      dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: data.chat_room_id });
+      serverChannel.connectToChatRoomChannel(data.chat_room_id);
+      dispatch(getMessages(data.chat_room_id));
+      NavigationService.navigate('ChatRoomScreen', { chat: {}, chatRoomId: data.chat_room_id });
+    });
+  };
+}
+
 export function getAdFriendsToChat(adId, chatRoomId) {
   return (dispatch) => {
     dispatch({ type: ActionTypes.GET_CHAT_AD_FRIENDS_STARTED });
@@ -111,16 +125,22 @@ export function newMessage(chat, myMessage = false) {
   return (dispatch, getState) => {
     const currentChatId = getState().currentChat.id;
     const currentUserId = getState().user._id;
+    const messageBody = chat.messages[0].text;
+    const messageUserId = chat.messages[0].user._id;
+
+    // # TODO: system notifications are not shown at all at the moment
+    const shouldShowUINoitifcation = !myMessage && messageUserId !== currentUserId && !messageUserId === null;
+
     if (currentChatId === chat.id) {
-      if (chat.messages[0].user._id !== currentUserId) {
+      if (messageUserId !== currentUserId) {
         serverChannel.chatRoomChannel.perform('read');
       }
     } else {
-      if (!myMessage && chat.messages[0].user._id !== currentUserId) {
+      if (shouldShowUINoitifcation) {
         if (Platform.OS === 'ios') {
           UINotification.ref.show({
             message: {
-              message: chat.messages[0].text,
+              message: messageBody,
               photo: chat.photo,
               name: chat.messages[0].user?.name,
               title: chat.title,
@@ -130,7 +150,7 @@ export function newMessage(chat, myMessage = false) {
         } else {
           PushNotification.localNotification({
             title: chat.title,
-            message: chat.messages[0].text,
+            message: messageBody,
             largeIconUrl: chat.photo,
             bigPictureUrl: chat.photo,
             userInfo: {

@@ -41,8 +41,8 @@ export const commonGiftedChatOptions = {
 const styles = StyleSheet.create({
   inputToolbarContainer: {
     backgroundColor: mainColor,
-    borderBottomWidth: 0.2,
-    borderTopWidth: 0.2,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     borderBottomColor: lightColor,
     borderTopColor: lightColor,
   },
