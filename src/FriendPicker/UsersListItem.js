@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
+import { Text, ListItem, Left, Right, Body, Thumbnail, Icon } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { activeColor, darkColor, disabledColor } from '../Colors';

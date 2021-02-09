@@ -166,6 +166,23 @@ class ProfileScreen extends React.PureComponent {
                   Не забудь отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы снова
                   после удаления.
                 </Text>
+                <ListItem
+                  style={[styles.itemContainer, styles.withBorderBottom]}
+                  noIndent
+                  onPress={() => this.props.navigation.push('InviteFriendsScreen')}
+                  activeOpacity={1}
+                  underlayColor="transparent">
+                  <Left>
+                    <Text>Пригласить друзей</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="chevron-forward-outline" />
+                  </Right>
+                </ListItem>
+                <Text style={styles.noteText}>
+                  Чем больше друзей в Рекарио — тем больше пользы вы получаете. Даже если друзья лично не заинтересованы
+                  в покупке или продаже авто, у них могут быть друзья, у которых вы можете захотеть купить машину.
+                </Text>
               </List>
             </View>
             <View>

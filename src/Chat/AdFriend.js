@@ -39,7 +39,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
                 : () =>
                     invitationalSMS(
                       friend.phone_number,
-                      'Привет, нашел твою машину в продаже и есть вопрос, скачай, пожалуйста – https://recar.io',
+                      'Привет, нашел твою машину в продаже и есть вопрос, скачай, пожалуйста – https://recar.io/get',
                     )
             }>
             <Text>{friend.user_id ? 'Добавить' : 'Пригласить'}</Text>

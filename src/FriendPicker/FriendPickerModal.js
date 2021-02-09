@@ -10,7 +10,7 @@ import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsAction
 
 import { mainColor, lightColor } from '../Colors';
 
-function FriendPickerModal({ user, userContacts, isLoading, onRefresh, loadMoreUserContacts, onClose, onUserPress }) {
+function FriendPickerModal({ userContacts, isLoading, onRefresh, loadMoreUserContacts, onClose, onUserPress }) {
   const renderItem = ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />;
 
   return (
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
     userContacts: state.userContacts.list.filter((u) => !!u.user),
     isLoading: state.userContacts.isLoading,
   };

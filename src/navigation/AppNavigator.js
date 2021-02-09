@@ -9,6 +9,7 @@ import { Icon } from 'native-base';
 import AdScreen from '../Ad/AdScreen';
 import UserContactsScreen from '../UserContacts/UserContactsScreen';
 import ProfileScreen from '../Profile/ProfileScreen';
+import InviteFriendsScreen from '../Profile/InviteFriendsScreen';
 import FeedScreen from '../Feed/FeedScreen';
 import FeedAdScreen from '../Feed/AdScreenContainer';
 import MyAdsScreen from '../MyAds/MyAdsScreen';
@@ -85,6 +86,7 @@ ChatStack.navigationOptions = ({ navigation }) => {
 const ProfileNavigator = createStackNavigator(
   {
     ProfileScreen: { screen: ProfileScreen },
+    InviteFriendsScreen: { screen: InviteFriendsScreen },
   },
   {
     initialRouteName: 'ProfileScreen',

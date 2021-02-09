@@ -39,6 +39,7 @@ class FeedScreen extends React.PureComponent {
           onRefresh={onRefresh}
           loadMoreAds={loadMoreAds}
           onAdOpened={this.onAdOpened}
+          fromFeed={true}
         />
         <Fab
           direction="left"

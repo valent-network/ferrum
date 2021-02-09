@@ -27,11 +27,15 @@ class AdsList extends React.PureComponent {
   );
 
   render() {
-    const { ads, isLoading } = this.props;
+    const { ads, isLoading, fromFeed } = this.props;
     const refreshControl = isLoading ? this.refreshControlLoading : this.refreshControlStable;
 
     if (ads.length === 0) {
-      return isLoading ? <Spinner color={activeColor} /> : <ListNotFound refreshControl={refreshControl} />;
+      return isLoading ? (
+        <Spinner color={activeColor} />
+      ) : (
+        <ListNotFound refreshControl={refreshControl} fromFeed={fromFeed} />
+      );
     }
 
     return (

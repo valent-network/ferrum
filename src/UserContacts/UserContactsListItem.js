@@ -36,7 +36,7 @@ export default class UserContactsListItem extends React.PureComponent {
       return;
     }
 
-    invitationalSMS(contact.phone, 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io');
+    invitationalSMS(contact.phone, 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io/get');
   };
 
   render() {
