@@ -72,7 +72,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
 
             <Item>
               <Input
-                defaultValue={name || friend.user_name || friend.name}
+                defaultValue={name}
                 name={name}
                 onChangeText={setName}
                 placeholder="Представьте друга..."
