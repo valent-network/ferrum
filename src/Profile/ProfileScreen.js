@@ -198,6 +198,19 @@ class ProfileScreen extends React.PureComponent {
                 </ListItem>
                 <ListItem
                   noIndent
+                  onPress={onPrivacyPress}
+                  activeOpacity={1}
+                  underlayColor="transparent"
+                  style={styles.itemContainer}>
+                  <Left>
+                    <Text style={styles.bottomLinks}>Политика конфеденциальности</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="open-outline" />
+                  </Right>
+                </ListItem>
+                <ListItem
+                  noIndent
                   onPress={this.confirmSignOut}
                   activeOpacity={1}
                   underlayColor="transparent"

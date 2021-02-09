@@ -70,6 +70,7 @@ export default class LoginScreen extends React.Component {
           placeholderTextColor={disabledColor}
           keyboardType="numeric"
           onChangeText={this.onInputCode}
+          returnKeyType="done"
           maxLength={4}
         />
       </Item>
@@ -85,6 +86,7 @@ export default class LoginScreen extends React.Component {
           value={this.props.phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
+          returnKeyType="done"
           onChangeText={this.onChangePhone}
           style={styles.phoneInputMasked}
         />
