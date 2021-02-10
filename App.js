@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-import { View as SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 
 import { Root as NativeBaseRoot, StyleProvider } from 'native-base';
 
@@ -27,29 +27,35 @@ import Notification from './src/Notification';
 import Root from './src/Root';
 
 import getTheme from './native-base-theme/components';
-import platform from './native-base-theme/variables/platform';
+import nativeBaseThemeVariables from './native-base-theme/variables/platform';
 
-import { darkColor } from './src/Colors';
+import { darkColor, lightColor } from './src/Colors';
 
 // console.disableYellowBox = true;
 
-class App extends React.PureComponent {
-  render() {
+const App = () => {
+    const notificationRef = (ref) => (notification.ref = ref);
+    const themeVariables = {
+      ...nativeBaseThemeVariables,
+      containerBgColor: darkColor,
+      textColor: lightColor,
+    }
+    const theme = getTheme(themeVariables);
+
     return (
-      <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.mainContainer}>
         <StatusBar barStyle="light-content" />
-        <Notification ref={(ref) => (notification.ref = ref)} />
+        <Notification ref={notificationRef} />
         <Provider store={store}>
           <NativeBaseRoot>
-            <StyleProvider style={getTheme(platform)}>
+            <StyleProvider style={theme}>
               <Root />
             </StyleProvider>
           </NativeBaseRoot>
         </Provider>
-      </SafeAreaView>
+      </View>
     );
   }
-}
 
 export default codePush(App);
 
