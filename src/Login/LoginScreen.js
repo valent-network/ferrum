@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, Linking, ImageBackground } from 'react-native';
+import { StyleSheet, Switch, Linking, ImageBackground, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -17,6 +17,8 @@ import {
 } from 'native-base';
 
 import { TextInputMask } from 'react-native-masked-text';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { darkColor, activeColor, mainColor, trackColor, lightColor, appearanceBgColor, disabledColor } from '../Colors';
 
@@ -70,7 +72,6 @@ export default class LoginScreen extends React.Component {
           placeholderTextColor={disabledColor}
           keyboardType="numeric"
           onChangeText={this.onInputCode}
-          returnKeyType="done"
           maxLength={4}
         />
       </Item>
@@ -86,7 +87,6 @@ export default class LoginScreen extends React.Component {
           value={this.props.phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
-          returnKeyType="done"
           onChangeText={this.onChangePhone}
           style={styles.phoneInputMasked}
         />
@@ -103,11 +103,12 @@ export default class LoginScreen extends React.Component {
     }
 
     return (
-      <View style={styles.mainContainer}>
-        <View style={styles.contentWrapper}>
-          <ImageBackground source={LOGIN_BG_IMAGE} style={styles.bgImage} />
+      <React.Fragment>
+        <Image source={LOGIN_BG_IMAGE} style={styles.bgImage} />
+        <Text style={styles.header}>ВОЙТИ</Text>
+        
 
-          <Text style={styles.header}>ВОЙТИ</Text>
+        <KeyboardAwareScrollView contentContainerStyle={styles.mainContainer} extraHeight={128} bounces={false}>
           <View style={styles.contentContainer}>
             <View>
               {step === 1 ? phoneInput : codeInput}
@@ -150,12 +151,9 @@ export default class LoginScreen extends React.Component {
               )}
             </View>
           </View>
-        </View>
-
-        <Text note style={styles.bottomAbsolute}>
-          РЕКАРИО
-        </Text>
-      </View>
+        </KeyboardAwareScrollView>
+        <Text note style={styles.bottomAbsolute}>РЕКАРИО</Text>
+      </React.Fragment>
     );
   }
 }
@@ -170,11 +168,11 @@ LoginScreen.propTypes = {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
+    flex: 1,
     flexDirection: 'row',
-    paddingVertical: 0,
-    margin: 0,
     height: '100%',
   },
   button: {
@@ -239,26 +237,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 48,
     color: activeColor,
-  },
-  contentWrapper: {
-    width: '100%',
-    alignSelf: 'flex-end',
-    padding: 0,
-    margin: 0,
-    width: '100%',
+    alignSelf: 'center'
   },
   contentContainer: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: darkColor,
     padding: 24,
     paddingTop: 48,
     paddingBottom: 0,
     margin: 0,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    height: '60%',
+    height: '40%',
     width: '100%',
+    alignSelf: 'flex-end',
     justifyContent: 'space-between',
-    paddingBottom: 96,
+    marginBottom: 96,
   },
   icon: {
     color: disabledColor,
@@ -269,12 +262,14 @@ const styles = StyleSheet.create({
     fontSize: 36,
     position: 'absolute',
     color: lightColor,
+
   },
   bgImage: {
-    flex: 1,
+    top: -200,
     resizeMode: 'stretch',
     width: '100%',
     height: '100%',
+    position: 'absolute',
   },
   linksContainer: { alignItems: 'center' },
   resendCodeText: { color: disabledColor, marginBottom: 36 },
