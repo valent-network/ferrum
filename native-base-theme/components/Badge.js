@@ -1,7 +1,6 @@
 // @flow
 
 import variable from './../variables/platform';
-import { PLATFORM } from './../variables/commonColor';
 
 export default (variables /* : * */ = variable) => {
   const badgeTheme = {
@@ -27,17 +26,11 @@ export default (variables /* : * */ = variable) => {
       textAlign: 'center',
       paddingHorizontal: 3,
     },
-    '.right': {
-      marginLeft: 14,
-      top: -4,
-      position: 'absolute',
-      right: -14,
-    },
     backgroundColor: variables.badgeBg,
     padding: variables.badgePadding,
     paddingHorizontal: 6,
     alignSelf: 'flex-start',
-    justifyContent: variables.platform === PLATFORM.IOS ? 'center' : undefined,
+    justifyContent: 'center',
     borderRadius: 13.5,
     height: 27,
   };

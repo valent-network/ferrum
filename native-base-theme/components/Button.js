@@ -379,6 +379,7 @@ export default (variables /* : * */ = variable) => {
     shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     alignItems: 'center',
     justifyContent: 'space-between',
+    alignSelf: 'flex-start',
   };
   return buttonTheme;
 };
