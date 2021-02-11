@@ -88,7 +88,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
 
       <Modal animationType="slide" visible={modalVisible}>
         <SafeAreaView style={styles.safeArea}>
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always" bounces={false} extraHeight={296}>
             <View style={styles.modalContainer}>
               <Content>
                 <View style={styles.modalControlsContainer}>
@@ -174,15 +174,16 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       />
                     </Right>
                   </View>
+                  <View style={styles.submitButtonWrapper}>
+                    <Button block onPress={switchModalVisible} style={styles.submitButton}>
+                      <Text>Поиск</Text>
+                    </Button>
+                  </View>
                 </Form>
               </Content>
             </View>
+
           </KeyboardAwareScrollView>
-          <View style={styles.submitButtonWrapper}>
-            <Button block onPress={switchModalVisible} style={styles.submitButton}>
-              <Text>Поиск</Text>
-            </Button>
-          </View>
         </SafeAreaView>
       </Modal>
     </View>
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 24,
     width: '100%',
-    padding: 16,
+    paddingVertical: 16,
   },
   submitButton: {
     backgroundColor: activeColor,

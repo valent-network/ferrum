@@ -108,7 +108,7 @@ export default class LoginScreen extends React.Component {
         <Text style={styles.header}>ВОЙТИ</Text>
         
 
-        <KeyboardAwareScrollView contentContainerStyle={styles.mainContainer} extraHeight={128} bounces={false}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.mainContainer} extraHeight={128} bounces={false} keyboardShouldPersistTaps='always'>
           <View style={styles.contentContainer}>
             <View>
               {step === 1 ? phoneInput : codeInput}

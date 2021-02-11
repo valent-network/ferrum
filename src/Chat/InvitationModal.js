@@ -20,7 +20,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   useEffect(() => setName(friend.name), [friend.name]);
   return (
     <Modal animationType="slide" transparent={true} visible={true} animationType="slide">
-      <KeyboardAwareScrollView contentContainerStyle={styles.modalWrapper} bounces={false} extraHeight={96}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.modalWrapper} bounces={false} extraHeight={96} keyboardShouldPersistTaps="always">
         <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
         <View style={styles.wrp}>
           <View style={styles.modalControlsContainer}>
@@ -71,7 +71,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
             ))}
 
             <Item>
-              <Input defaultValue={name} name={name} onChangeText={setName} placeholder="Представьте друга..." />
+              <Input style={styles.nameInput}defaultValue={name} name={name} onChangeText={setName} placeholder="Представьте друга..." />
             </Item>
 
             <Button
@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     alignSelf: 'center',
   },
+  nameInput: {
+    color: lightColor
+  }
 });
 
 function mapStateToProps(state) {
