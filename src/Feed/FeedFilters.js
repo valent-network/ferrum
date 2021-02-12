@@ -26,7 +26,7 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import { activeColor, darkColor, mainColor, trackColor, appearanceBgColor, lightColor, disabledColor } from '../Colors';
+import { activeColor, mainColor, trackColor, appearanceBgColor, lightColor, disabledColor } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
   let typingTimer;
@@ -106,6 +106,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     <Item style={styles.rangeItem}>
                       <Label>от</Label>
                       <Input
+                        style={styles.inputTextColor}
                         keyboardType="numeric"
                         defaultValue={filters.min_price.toString()}
                         onEndEditing={(event) => applyFilter('min_price', event.nativeEvent.text)}
@@ -114,6 +115,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     <Item style={styles.rangeItem}>
                       <Label>до</Label>
                       <Input
+                        style={styles.inputTextColor}
                         keyboardType="numeric"
                         defaultValue={filters.max_price.toString()}
                         onEndEditing={(event) => applyFilter('max_price', event.nativeEvent.text)}
@@ -125,6 +127,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     <Item style={styles.rangeItem}>
                       <Label>от</Label>
                       <Input
+                        style={styles.inputTextColor}
                         keyboardType="numeric"
                         defaultValue={filters.min_year.toString()}
                         onEndEditing={(event) => applyFilter('min_year', event.nativeEvent.text)}
@@ -133,6 +136,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     <Item style={styles.rangeItem}>
                       <Label>до</Label>
                       <Input
+                        style={styles.inputTextColor}
                         keyboardType="numeric"
                         defaultValue={filters.max_year.toString()}
                         onEndEditing={(event) => applyFilter('max_year', event.nativeEvent.text)}

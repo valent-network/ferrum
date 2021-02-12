@@ -43,6 +43,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                 <Text>Чтобы начать чать, пожалуйста, укажите, как другие участники могут к вам обращаться:</Text>
                 <Item>
                   <Input
+                    style={styles.nameInput}
                     value={userName}
                     onChangeText={setUserName}
                     placeholder="Ваше имя"
@@ -52,9 +53,8 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                 <Button
                   disabled={!userName || !userName.length}
                   block
-                  light
                   onPress={() => updateUserName(userName)}
-                  style={styles.userNameSubmitButton}>
+                  style={(!userName || !userName.length) ? styles.disabledSubmitButton : styles.activeSubmitButton}>
                   <Text>Готово</Text>
                 </Button>
               </View>
@@ -71,14 +71,14 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
             ))}
 
             <Item>
-              <Input style={styles.nameInput}defaultValue={name} name={name} onChangeText={setName} placeholder="Представьте друга..." />
+              <Input style={styles.nameInput} defaultValue={name} name={name} onChangeText={setName} placeholder="Представьте друга..." />
             </Item>
 
             <Button
-              disabled={!userNamePresent}
+              disabled={!userNamePresent || !name}
               block
               dark
-              style={userNamePresent ? styles.activeSubmitButton : styles.disabledSubmitButton}
+              style={(userNamePresent && name) ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}>
               <Text>Добавить</Text>
             </Button>
@@ -118,11 +118,10 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   introduceOption: { fontSize: 18, marginRight: 8 },
-  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24 },
+  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: lightColor },
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
   avatar: { alignSelf: 'center' },
   friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
-  userNameSubmitButton: { marginTop: 16 },
   emptyUserNameContainer: { backgroundColor: warningColor, padding: 16, borderRadius: 8, marginTop: 16 },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },

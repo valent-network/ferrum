@@ -18,7 +18,8 @@ export default class ListNotFound extends React.PureComponent {
         <Icon name="ios-sad" style={styles.notFoundIcon} />
         <Text style={styles.notFoundText}>Пусто</Text>
         {fromFeed && (
-          <Button onPress={this.inviteFriends} style={styles.activeColorButton}>
+          <Button onPress={this.inviteFriends} style={styles.inviteFriendsButton}>
+            <Icon name="happy-outline" />
             <Text>Пригласить друзей</Text>
             <Icon name="happy-outline" />
           </Button>
@@ -33,7 +34,7 @@ ListNotFound.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  activeColorButton: { backgroundColor: activeColor },
+  inviteFriendsButton: { backgroundColor: activeColor, alignSelf: 'center' },
   notFoundIcon: { fontSize: 256, color: activeColor },
   notFoundText: { color: activeColor, marginBottom: 24 },
   notFoundContainer: {
