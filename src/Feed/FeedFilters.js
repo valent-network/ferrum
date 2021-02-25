@@ -186,7 +186,6 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                 </Form>
               </Content>
             </View>
-
           </KeyboardAwareScrollView>
         </SafeAreaView>
       </Modal>

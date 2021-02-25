@@ -20,7 +20,11 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   useEffect(() => setName(friend.name), [friend.name]);
   return (
     <Modal animationType="slide" transparent={true} visible={true} animationType="slide">
-      <KeyboardAwareScrollView contentContainerStyle={styles.modalWrapper} bounces={false} extraHeight={96} keyboardShouldPersistTaps="always">
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.modalWrapper}
+        bounces={false}
+        extraHeight={96}
+        keyboardShouldPersistTaps="always">
         <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
         <View style={styles.wrp}>
           <View style={styles.modalControlsContainer}>
@@ -54,7 +58,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                   disabled={!userName || !userName.length}
                   block
                   onPress={() => updateUserName(userName)}
-                  style={(!userName || !userName.length) ? styles.disabledSubmitButton : styles.activeSubmitButton}>
+                  style={!userName || !userName.length ? styles.disabledSubmitButton : styles.activeSubmitButton}>
                   <Text>Готово</Text>
                 </Button>
               </View>
@@ -71,14 +75,20 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
             ))}
 
             <Item>
-              <Input style={styles.nameInput} defaultValue={name} name={name} onChangeText={setName} placeholder="Представьте друга..." />
+              <Input
+                style={styles.nameInput}
+                defaultValue={name}
+                name={name}
+                onChangeText={setName}
+                placeholder="Представьте друга..."
+              />
             </Item>
 
             <Button
               disabled={!userNamePresent || !name}
               block
               dark
-              style={(userNamePresent && name) ? styles.activeSubmitButton : styles.disabledSubmitButton}
+              style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}>
               <Text>Добавить</Text>
             </Button>
@@ -132,8 +142,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   nameInput: {
-    color: lightColor
-  }
+    color: lightColor,
+  },
 });
 
 function mapStateToProps(state) {
