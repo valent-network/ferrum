@@ -49,9 +49,11 @@ export function applyFilter(filterKey, filterValue) {
     ? ActionTypes.FILTER_CHANGED_ARRAY
     : ActionTypes.FILTER_CHANGED;
 
-  return function (dispatch) {
-    dispatch({ type: filterType, filterKey: filterKey, filterValue: filterValue });
-    dispatch(getAll());
+  return function (dispatch, getState) {
+    if (getState().filters[filterKey] !== filterValue) {
+      dispatch({ type: filterType, filterKey: filterKey, filterValue: filterValue });
+      dispatch(getAll());
+    }
   };
 }
 
