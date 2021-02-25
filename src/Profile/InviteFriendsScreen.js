@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'native-base';
+import { Text, Button, Icon } from 'native-base';
+import { Share, StyleSheet } from 'react-native';
 
 import UserContactsList from '../UserContacts/UserContactsList';
 
@@ -26,18 +27,31 @@ class InviteFriendsScreen extends React.PureComponent {
     };
   };
 
+  shareAction = () => {
+    Share.share({
+      message: 'Скачать Рекарио: https://recar.io/get',
+      title: 'Рекарио — покупка авто через друзей и знакомых',
+    });
+  };
+
   render() {
     const { isLoading, userContacts, loadMoreUserContacts, onRefresh } = this.props;
     const renderItem = ({ item, index }) => <UsersListItem contact={item} />;
 
     return (
-      <UserContactsList
-        userContacts={userContacts}
-        isLoading={isLoading}
-        loadMoreUserContacts={loadMoreUserContacts}
-        onRefresh={onRefresh}
-        renderItem={renderItem}
-      />
+      <React.Fragment>
+        <Button bordered light style={styles.socialShare} onPress={this.shareAction}>
+          <Text>Отправить ссылку</Text>
+          <Icon name="share-outline" />
+        </Button>
+        <UserContactsList
+          userContacts={userContacts}
+          isLoading={isLoading}
+          loadMoreUserContacts={loadMoreUserContacts}
+          onRefresh={onRefresh}
+          renderItem={renderItem}
+        />
+      </React.Fragment>
     );
   }
 }
@@ -57,3 +71,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteFriendsScreen);
+
+const styles = StyleSheet.create({
+  socialShare: { margin: 16, alignSelf: 'center' },
+});
