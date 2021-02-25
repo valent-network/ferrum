@@ -64,33 +64,39 @@ export default class LoginScreen extends React.Component {
       </Button>
     );
     const codeInput = (
-      <Item style={styles.codeInput} rounded>
-        <Icon name="ios-key-outline" style={styles.icon} />
-        <Input
-          style={styles.input}
-          placeholder="0000"
-          placeholderTextColor={disabledColor}
-          keyboardType="numeric"
-          onChangeText={this.onInputCode}
-          maxLength={4}
-        />
-      </Item>
+      <React.Fragment>
+        <Text style={styles.label}>Проверочный код:</Text>
+        <Item style={styles.codeInput} rounded>
+          <Icon name="ios-key-outline" style={styles.icon} />
+          <Input
+            style={styles.input}
+            placeholder="0000"
+            placeholderTextColor={disabledColor}
+            keyboardType="numeric"
+            onChangeText={this.onInputCode}
+            maxLength={4}
+          />
+        </Item>
+      </React.Fragment>
     );
     const phoneInput = (
-      <Item rounded style={styles.phoneInput}>
-        <Icon name="call-outline" style={styles.icon} />
-        <TextInputMask
-          type={'custom'}
-          options={this.phoneMaskOptions}
-          placeholder="+380 (77) 555-00-88"
-          placeholderTextColor={disabledColor}
-          value={this.props.phone}
-          includeRawValueInChangeText={true}
-          keyboardType="numeric"
-          onChangeText={this.onChangePhone}
-          style={styles.phoneInputMasked}
-        />
-      </Item>
+      <React.Fragment>
+        <Text style={styles.label}>Телефон:</Text>
+        <Item rounded style={styles.phoneInput}>
+          <Icon name="call-outline" style={styles.icon} />
+          <TextInputMask
+            type={'custom'}
+            options={this.phoneMaskOptions}
+            placeholder="+380 (77) 555-00-88"
+            placeholderTextColor={disabledColor}
+            value={this.props.phone}
+            includeRawValueInChangeText={true}
+            keyboardType="numeric"
+            onChangeText={this.onChangePhone}
+            style={styles.phoneInputMasked}
+          />
+        </Item>
+      </React.Fragment>
     );
     if (isLoading) {
       return (
@@ -106,9 +112,12 @@ export default class LoginScreen extends React.Component {
       <React.Fragment>
         <Image source={LOGIN_BG_IMAGE} style={styles.bgImage} />
         <Text style={styles.header}>ВОЙТИ</Text>
-        
 
-        <KeyboardAwareScrollView contentContainerStyle={styles.mainContainer} extraHeight={128} bounces={false} keyboardShouldPersistTaps='always'>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.mainContainer}
+          extraHeight={128}
+          bounces={false}
+          keyboardShouldPersistTaps="always">
           <View style={styles.contentContainer}>
             <View>
               {step === 1 ? phoneInput : codeInput}
@@ -138,21 +147,22 @@ export default class LoginScreen extends React.Component {
             </View>
             <View style={styles.linksContainer}>
               {step === 2 && (
-                <Text onPress={this.onRequest} style={[styles.resendCodeText, styles.smallFont]}>
-                  <Icon name="refresh-outline" style={[styles.icon, styles.disabledColor, styles.smallFont]} />
-                  &nbsp; Отправить код ещё раз
-                </Text>
-              )}
-              {step === 2 && (
-                <Text onPress={onReset} style={[styles.disabledColor, styles.smallFont]}>
-                  <Icon name="arrow-back-outline" style={[styles.icon, styles.disabledColor, styles.smallFont]} />
+                <Text onPress={onReset} style={styles.changePhoneText}>
                   &nbsp; Изменить телефон
                 </Text>
               )}
+              {step === 2 && (
+                <Text onPress={this.onRequest} style={styles.resendCodeText}>
+                  <Text>Не приходит код?</Text>
+                  &nbsp; Отправить код ещё раз
+                </Text>
+              )}
+              <Text note style={styles.bottomAbsolute}>
+                РЕКАРИО
+              </Text>
             </View>
           </View>
         </KeyboardAwareScrollView>
-        <Text note style={styles.bottomAbsolute}>РЕКАРИО</Text>
       </React.Fragment>
     );
   }
@@ -173,7 +183,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     flex: 1,
     flexDirection: 'row',
-    height: '100%',
   },
   button: {
     marginTop: 12,
@@ -234,24 +243,21 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   bottomAbsolute: {
-    position: 'absolute',
-    bottom: 48,
+    paddingTop: 48,
     color: activeColor,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   contentContainer: {
     backgroundColor: darkColor,
     padding: 24,
     paddingTop: 48,
-    paddingBottom: 0,
+    paddingBottom: 48,
     margin: 0,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    height: '40%',
     width: '100%',
     alignSelf: 'flex-end',
     justifyContent: 'space-between',
-    marginBottom: 96,
   },
   icon: {
     color: disabledColor,
@@ -262,7 +268,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     position: 'absolute',
     color: lightColor,
-
   },
   bgImage: {
     top: -200,
@@ -271,7 +276,12 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
   },
-  linksContainer: { alignItems: 'center' },
-  resendCodeText: { color: disabledColor, marginBottom: 36 },
+  linksContainer: {
+    alignItems: 'flex-end',
+    paddingTop: 16,
+  },
+  resendCodeText: { color: activeColor, paddingTop: 24 },
+  changePhoneText: { color: activeColor },
   disabledColor: { color: disabledColor },
+  label: { marginBottom: 8 },
 });
