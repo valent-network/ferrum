@@ -89,7 +89,7 @@ export default class LoginScreen extends React.Component {
             options={this.phoneMaskOptions}
             placeholder="+380 (77) 555-00-88"
             placeholderTextColor={disabledColor}
-            value={this.props.phone}
+            value={phone}
             includeRawValueInChangeText={true}
             keyboardType="numeric"
             onChangeText={this.onChangePhone}

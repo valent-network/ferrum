@@ -29,7 +29,7 @@ export default function authReducer(state = initialState, action = {}) {
       return {
         ...state,
         step: 2,
-        phone: action.phone,
+        phone: `+380${action.phone}`,
       };
     case ActionTypes.REQUEST_CODE_SUCCESS:
       return {
