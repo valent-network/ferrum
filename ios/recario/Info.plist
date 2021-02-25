@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>ru</string>
 	<key>CFBundleDisplayName</key>
-	<string>recario</string>
+	<string>Рекарио</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
@@ -65,7 +65,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Доступ к контактам необходим для того, чтобы находить друзей, использующих Рекарио, а так же для помощи друзьям при выборе ими машины</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<string>2018 Viktor Vsk</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Доступ к фото галеерее необходим для изменения фото профиля и добавления фотографий объявления</string>
 	<key>UIAppFonts</key>
