@@ -3,6 +3,14 @@ import * as ActionTypes from '../actions/actionTypes.js';
 import API from '../services/API';
 import { displayError } from '../actions/errorsActions';
 
+export function getReferrer(refcode) {
+  return API.getReferrer(refcode);
+}
+
+export function setReferrer(refcode) {
+  return API.setReferrer(refcode);
+}
+
 export function getProfile() {
   return function (dispatch) {
     dispatch({ type: ActionTypes.GET_PROFILE_STARTED });

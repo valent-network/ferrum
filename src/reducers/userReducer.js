@@ -2,6 +2,8 @@ import * as ActionTypes from '../actions/actionTypes';
 
 const initialState = {
   isLoading: false,
+  referrerModalVisible: false,
+  referrer: {},
   name: '',
   avatar: '',
   contactsProcessed: true,
@@ -22,6 +24,8 @@ export default function userReducer(state = initialState, action = {}) {
         name: action.user.name,
         avatar: action.user.avatar,
         phoneNumber: action.user.phone_number,
+        refcode: action.user.refcode,
+        referrer: action.user.referrer,
         userContactsCount: action.user.user_contacts_count,
         unreadMessagesCount: action.user.unread_messages_count,
         isLoading: false,

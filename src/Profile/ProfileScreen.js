@@ -21,6 +21,7 @@ import {
   Label,
 } from 'native-base';
 
+import Clipboard from '@react-native-community/clipboard';
 import { TouchableOpacity, Image, StyleSheet, RefreshControl } from 'react-native';
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -28,18 +29,27 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { updateUserName, updateUserAvatar, getProfile } from './profileActions';
 import { initiateSystemChatRoom } from '../Chat/chatActions';
 
+import SetReferrerModal from './SetReferrerModal';
+
 import { signOut } from '../actions/sessionsActions';
 
 import { deleteContacts } from '../UserContacts/userContactsActions';
 
-import { onTosPress, onPrivacyPress } from '../Utils';
+import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from '../Utils';
 
-import { activeColor, lightColor, mainColor, disabledColor } from '../Colors';
+import { activeColor, lightColor, mainColor, disabledColor, borderColor, menuItemColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     return { header: () => null };
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      referrerModalVisible: false,
+    };
+  }
 
   handleNameChange = ({ nativeEvent: { text } }) => this.props.onUserNameChanged(text);
 
@@ -95,7 +105,7 @@ class ProfileScreen extends React.PureComponent {
     ActionSheet.show(
       {
         title:
-          'Уверен, что хочешь удалить контакты с серверов Рекарио? Чтобы их восстановить, просто перезапусти приложение',
+          'Уверены, что хотите удалить контакты с серверов Рекарио? Чтобы их восстановить, просто перезапустите приложение',
         options: ['Удалить', 'Отменить'],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
@@ -116,8 +126,20 @@ class ProfileScreen extends React.PureComponent {
 
   refreshControl = (<RefreshControl refreshing={false} tintColor={activeColor} onRefresh={this.props.onRefresh} />);
 
+  openSetReferrerModal = () => this.setState({ referrerModalVisible: true });
+  closeSetReferrerModal = () => {
+    this.props.onRefresh();
+    this.setState({ referrerModalVisible: false });
+  };
+
+  copyRefcode = () => {
+    Clipboard.setString(this.props.user.refcode);
+    UINotification.ref.show({ message: 'Пригласительный код скопирован' });
+  };
+
   render() {
     const { onRefresh, onInitiateSystemChatRoom, user } = this.props;
+    const { referrerModalVisible } = this.state;
 
     return (
       <Container>
@@ -143,12 +165,53 @@ class ProfileScreen extends React.PureComponent {
                     <Input style={styles.nameInput} defaultValue={user.name} onEndEditing={this.handleNameChange} />
                   </Item>
                 </ListItem>
-                <ListItem style={styles.itemContainer} noIndent activeOpacity={1} underlayColor="transparent">
+                <ListItem
+                  style={styles.itemContainer}
+                  noIndent
+                  activeOpacity={1}
+                  underlayColor="transparent"
+                  onPress={this.copyRefcode}>
+                  <Left>
+                    <Text>Пригласительный код</Text>
+                  </Left>
+                  <Text style={styles.disabledText}>{user.refcode}</Text>
+                  <Icon style={styles.copyButton} name="copy" />
+                </ListItem>
+                <ListItem
+                  style={[styles.itemContainer, styles.withBorderBottom]}
+                  noIndent
+                  activeOpacity={1}
+                  underlayColor="transparent">
                   <Left>
                     <Text>Телефон</Text>
                   </Left>
-                  <Text style={styles.phoneNumberText}>{user.phoneNumber}</Text>
+                  <Text style={styles.disabledText}>{user.phoneNumber}</Text>
                 </ListItem>
+
+                {!user.referrer.refcode && (
+                  <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
+                    <Text>Ввести пригласительный код</Text>
+                  </Button>
+                )}
+
+                {user.referrer.refcode && (
+                  <React.Fragment>
+                    <ListItem
+                      style={[styles.itemContainer, styles.withBorderBottom]}
+                      noIndent
+                      activeOpacity={1}
+                      underlayColor="transparent">
+                      <Left>
+                        <Text>Меня пригласил</Text>
+                      </Left>
+                      <Right>
+                        <Text style={styles.disabledText}>{user.referrer.refcode}</Text>
+                      </Right>
+                    </ListItem>
+                    {user.referrer.name.length > 0 && <Text style={styles.noteText}>{user.referrer.name}</Text>}
+                  </React.Fragment>
+                )}
+
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
                   noIndent
@@ -163,8 +226,8 @@ class ProfileScreen extends React.PureComponent {
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>
-                  Не забудь отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы снова
-                  после удаления.
+                  Не забудьте отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы
+                  снова после удаления.
                 </Text>
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
@@ -210,7 +273,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text style={styles.bottomLinks}>Условия использования</Text>
                   </Left>
                   <Right>
-                    <Icon name="open-outline" />
+                    <Icon style={styles.activeColor} name="open-outline" />
                   </Right>
                 </ListItem>
                 <ListItem
@@ -223,7 +286,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text style={styles.bottomLinks}>Политика конфеденциальности</Text>
                   </Left>
                   <Right>
-                    <Icon name="open-outline" />
+                    <Icon style={styles.activeColor} name="open-outline" />
                   </Right>
                 </ListItem>
                 <ListItem
@@ -231,17 +294,18 @@ class ProfileScreen extends React.PureComponent {
                   onPress={this.confirmSignOut}
                   activeOpacity={1}
                   underlayColor="transparent"
-                  style={styles.itemContainer}>
+                  style={[styles.itemContainer, styles.withBorderBottom]}>
                   <Left>
-                    <Text style={styles.activeColor}>Выход</Text>
+                    <Text style={styles.importantColor}>Выход</Text>
                   </Left>
                   <Right>
-                    <Icon name="log-out-outline" style={styles.activeColor} />
+                    <Icon name="log-out-outline" style={styles.importantColor} />
                   </Right>
                 </ListItem>
               </List>
             </View>
           </View>
+          {referrerModalVisible && <SetReferrerModal onClose={this.closeSetReferrerModal} />}
         </Content>
       </Container>
     );
@@ -282,16 +346,16 @@ styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
-  phoneNumberText: {
+  disabledText: {
     color: disabledColor,
   },
   noteText: {
-    fontSize: 12,
+    fontSize: 14,
     padding: 16,
   },
   itemContainer: {
-    backgroundColor: mainColor,
-    borderTopColor: disabledColor,
+    backgroundColor: menuItemColor,
+    borderTopColor: borderColor,
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
@@ -310,12 +374,24 @@ styles = StyleSheet.create({
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,
-    borderBottomColor: disabledColor,
+    borderBottomColor: borderColor,
   },
   changeAvatarButton: {
     marginTop: 12,
   },
   nameInputWrapper: {
     borderBottomWidth: 0,
+  },
+  referrerButton: {
+    margin: 16,
+    backgroundColor: activeColor,
+  },
+  copyButton: {
+    fontSize: 16,
+    marginLeft: 16,
+    color: activeColor,
+  },
+  importantColor: {
+    color: '#e22',
   },
 });

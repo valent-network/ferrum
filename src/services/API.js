@@ -163,4 +163,12 @@ export default class API {
   static getMessages(chatRoomId, offset) {
     return apiService.get(`/v1/messages?chat_room_id=${chatRoomId}&offset=${offset}`);
   }
+
+  static getReferrer(refcode) {
+    return apiService.get(`/v1/referrers/${refcode}`);
+  }
+
+  static setReferrer(refcode) {
+    return apiService.post(`/v1/user/set_referrer`, { refcode: refcode });
+  }
 }
