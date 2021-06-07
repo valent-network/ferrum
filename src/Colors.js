@@ -21,3 +21,7 @@ export const deletedColor = '#533';
 export const shadowColor = '#000';
 
 export const warningColor = '#f55';
+
+export const borderColor = '#292929';
+
+export const menuItemColor = '#1c1c1c';

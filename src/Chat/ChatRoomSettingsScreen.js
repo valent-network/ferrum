@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, mainColor, lightColor, darkColor, disabledColor } from '../Colors';
+import { activeColor, mainColor, lightColor, darkColor, disabledColor, menuItemColor, borderColor } from '../Colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -70,7 +70,7 @@ function ChatRoomsSettingsScreen({
     const friendPhoneNumber = friendsAndMembers.filter((f) => f.user_id === item.user_id)[0]?.phone_number;
     return item.separator ? (
       <Separator bordered style={styles.separator}>
-        <Text>{item.separator}</Text>
+        <Text style={styles.separatorText}>{item.separator}</Text>
       </Separator>
     ) : (
       <AdFriend
@@ -155,7 +155,12 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   separator: {
-    backgroundColor: lightColor,
+    backgroundColor: menuItemColor,
+    borderColor: borderColor,
+    height: 48,
+  },
+  separatorText: {
+    fontSize: 16,
   },
   leaveIcon: {
     fontSize: 14,

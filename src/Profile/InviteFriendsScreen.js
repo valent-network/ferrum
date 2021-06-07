@@ -9,10 +9,17 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsActions';
 
-import { mainColor, lightColor } from '../Colors';
+import { mainColor, lightColor, activeColor } from '../Colors';
 
 class InviteFriendsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
+    shareAction = () => {
+      Share.share({
+        message: 'Скачать Рекарио: https://recar.io/get',
+        title: 'Рекарио — покупка авто через друзей и знакомых',
+      });
+    };
+
     return {
       headerStyle: {
         backgroundColor: mainColor,
@@ -23,15 +30,8 @@ class InviteFriendsScreen extends React.PureComponent {
       headerTruncatedBackTitle: () => null,
       headerBackTitleVisible: false,
       headerTintColor: lightColor,
-      headerRight: () => null,
+      headerRight: () => <Icon name="share-outline" style={styles.socialShare} onPress={shareAction} />,
     };
-  };
-
-  shareAction = () => {
-    Share.share({
-      message: 'Скачать Рекарио: https://recar.io/get',
-      title: 'Рекарио — покупка авто через друзей и знакомых',
-    });
   };
 
   render() {
@@ -40,10 +40,6 @@ class InviteFriendsScreen extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Button bordered light style={styles.socialShare} onPress={this.shareAction}>
-          <Text>Отправить ссылку</Text>
-          <Icon name="share-outline" />
-        </Button>
         <UserContactsList
           userContacts={userContacts}
           isLoading={isLoading}
@@ -73,5 +69,10 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(InviteFriendsScreen);
 
 const styles = StyleSheet.create({
-  socialShare: { margin: 16, alignSelf: 'center' },
+  socialShare: {
+    marginRight: 16,
+    alignSelf: 'center',
+    fontSize: 24,
+    color: activeColor,
+  },
 });

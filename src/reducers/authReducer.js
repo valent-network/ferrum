@@ -69,8 +69,8 @@ export default function authReducer(state = initialState, action = {}) {
         ...state,
         isLoading: false,
       };
-    case (ActionTypes.AUTH_RESET):
-    case (ActionTypes.REQUEST_CODE_FAILED):
+    case ActionTypes.AUTH_RESET:
+    case ActionTypes.REQUEST_CODE_FAILED:
       return {
         ...initialState,
         isLoading: false,

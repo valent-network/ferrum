@@ -22,7 +22,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { darkColor, activeColor, appearanceBgColor, disabledColor } from '../Colors';
+import { darkColor, activeColor, appearanceBgColor, disabledColor, borderColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -131,7 +131,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       screen: FeedNavigator,
       path: 'feed',
       navigationOptions: {
-        title: 'Поиск',
+        title: '',
         tabBarIcon: iconFor('search-outline'),
       },
     },
@@ -139,7 +139,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       screen: StarredNavigator,
       path: '',
       navigationOptions: {
-        title: 'Закладки',
+        title: '',
         tabBarIcon: iconFor('star-outline'),
       },
     },
@@ -147,7 +147,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       screen: ChatStack,
       path: '',
       navigationOptions: {
-        title: 'Чат',
+        title: '',
         tabBarIcon: (props) => <ChatIcon {...props} />,
       },
     },
@@ -155,7 +155,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       screen: UserContactsNavigator,
       path: 'user_contacts',
       navigationOptions: {
-        title: 'Друзья',
+        title: '',
         tabBarIcon: iconFor('people-circle-outline'),
       },
     },
@@ -163,7 +163,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       screen: ProfileNavigator,
       path: 'profile',
       navigationOptions: {
-        title: 'Настройки',
+        title: '',
         tabBarIcon: iconFor('settings-outline'),
       },
     },
@@ -172,6 +172,9 @@ const bottomTabsNavigator = createBottomTabNavigator(
     tabBarOptions: {
       style: {
         backgroundColor: appearanceBgColor,
+        borderTopWidth: 1,
+        borderTopColor: borderColor,
+        height: 64,
         paddingTop: 4,
       },
       activeTintColor: activeColor,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, Button } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor, darkColor, disabledColor } from '../Colors';
+import { activeColor, darkColor, disabledColor, borderColor } from '../Colors';
 
 import DEFAULT_AVATAR from '../assets/default_avatar.png';
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: disabledColor,
+    borderBottomColor: borderColor,
   },
   defaultAvatar: {
     width: 56,

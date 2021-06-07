@@ -26,7 +26,16 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import { activeColor, mainColor, trackColor, appearanceBgColor, lightColor, disabledColor } from '../Colors';
+import {
+  activeColor,
+  mainColor,
+  trackColor,
+  appearanceBgColor,
+  lightColor,
+  disabledColor,
+  borderColor,
+  menuItemColor,
+} from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
   let typingTimer;
@@ -254,13 +263,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   filterBox: {
-    borderColor: lightColor,
+    borderColor: borderColor,
     borderWidth: 0.2,
     borderRadius: 2,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
-    backgroundColor: mainColor,
+    backgroundColor: menuItemColor,
   },
   filterBoxText: {
     color: lightColor,

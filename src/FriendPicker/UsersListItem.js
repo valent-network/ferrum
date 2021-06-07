@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor, darkColor, disabledColor } from '../Colors';
+import { activeColor, darkColor, disabledColor, borderColor, menuItemColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default class UsersListItem extends React.PureComponent {
@@ -58,7 +58,8 @@ UsersListItem.propTypes = {};
 const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: disabledColor,
+    borderBottomColor: borderColor,
+    backgroundColor: menuItemColor,
   },
   defaultAvatar: {
     width: 56,
