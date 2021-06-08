@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.1.6",
     "@babel/runtime": "^7.7.4",
     "@welldone-software/why-did-you-render": "^4.0.5",
     "babel-jest": "^24.9.0",
@@ -61,7 +62,6 @@
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
     "prettier": "^1.19.1",
-    "@babel/preset-env": "^7.1.6",
     "react-test-renderer": "17.0.2"
   },
   "jest": {
