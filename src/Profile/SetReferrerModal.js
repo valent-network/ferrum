@@ -11,6 +11,8 @@ import { lightColor, darkColor, activeColor } from '../Colors';
 
 import { onReferralInfoPress } from '../Utils';
 
+import RECARIO_LOGO from '../assets/recario.png';
+
 function SetReferrerModal({ onClose }) {
   const [refcode, setRefcode] = useState('');
   const [user, setUser] = useState({});
@@ -134,6 +136,9 @@ function SetReferrerModal({ onClose }) {
 
           <View style={styles.contentContainer}>
             <KeyboardAwareScrollView bounces={false} keyboardShouldPersistTaps="always">
+              <View style={styles.header}>
+                <Thumbnail source={RECARIO_LOGO} />
+              </View>
               <View style={styles.refcodeInput}>
                 <View style={styles.singleInputWrapper}>
                   <TextInput
@@ -191,7 +196,7 @@ function SetReferrerModal({ onClose }) {
 
               {!user.refcode && (
                 <Text style={[styles.noteText, { color: activeColor }]} onPress={onReferralInfoPress}>
-                  <Text style={styles.noteText}>Читайте подробнее о том, зачем это, что это даст лично вам,</Text>
+                  <Text style={styles.noteText}>Читайте подробнее о том, что это даст лично вам,</Text>
                   &nbsp;здесь.
                 </Text>
               )}
@@ -291,6 +296,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginVertical: 32,
+  },
+  header: {
+    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
 
