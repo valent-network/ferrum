@@ -32,7 +32,9 @@ class NotificationsRequestScreen extends React.PureComponent {
             <H1 style={styles.h1}>Будьте в курсе самых свежих событий</H1>
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>Моментально узнавайте о новых автомобилях друзей 🆕</Text>
-              <Text style={styles.textBlock}>Общайтесь в чате со всеми общими друзьями между покупателем и продавцом по каждому объявлению 💬</Text>
+              <Text style={styles.textBlock}>
+                Общайтесь в чате со всеми общими друзьями между покупателем и продавцом по каждому объявлению 💬
+              </Text>
               <Text style={styles.textBlock}>Рекарио постарается не отвлекать по пустякам 🔕</Text>
             </View>
             <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>

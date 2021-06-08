@@ -47,21 +47,37 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
   const [maxYear, setMaxYear] = useState(null);
 
   const applyFilterLocally = (key, value) => {
-    switch(key) {
-      case 'min_price': setMinPrice(value); break;
-      case 'max_price': setMaxPrice(value); break;
-      case 'min_year': setMinYear(value); break;
-      case 'max_year': setMaxYear(value); break;
+    switch (key) {
+      case 'min_price':
+        setMinPrice(value);
+        break;
+      case 'max_price':
+        setMaxPrice(value);
+        break;
+      case 'min_year':
+        setMinYear(value);
+        break;
+      case 'max_year':
+        setMaxYear(value);
+        break;
     }
-  }
+  };
 
   const switchModalVisibleWithLocal = () => {
-    if (minPrice) { applyFilter('min_price', minPrice); }
-    if (maxPrice) { applyFilter('max_price', maxPrice); }
-    if (minYear) { applyFilter('min_year', minYear); }
-    if (maxYear) { applyFilter('max_year', maxYear); }
+    if (minPrice) {
+      applyFilter('min_price', minPrice);
+    }
+    if (maxPrice) {
+      applyFilter('max_price', maxPrice);
+    }
+    if (minYear) {
+      applyFilter('min_year', minYear);
+    }
+    if (maxYear) {
+      applyFilter('max_year', maxYear);
+    }
     switchModalVisible();
-  }
+  };
 
   const filterBox = (filterValue, filterType) => {
     const isActive = filters[filterType].filter((f) => f === filterValue).length;

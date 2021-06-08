@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, Linking, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Switch, Linking, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -20,11 +20,20 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { darkColor, activeColor, mainColor, trackColor, lightColor, appearanceBgColor, disabledColor } from '../Colors';
+import {
+  darkColor,
+  activeColor,
+  mainColor,
+  trackColor,
+  lightColor,
+  appearanceBgColor,
+  disabledColor,
+  borderColor,
+} from '../Colors';
 
 import { onTosPress } from '../Utils';
 
-import LOGIN_BG_IMAGE from '../assets/bg.jpg';
+import RECARIO_LOGO from '../assets/recario.png';
 
 export default class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
@@ -65,7 +74,7 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <React.Fragment>
-        <Text style={styles.label}>Проверочный код:</Text>
+        <Text style={styles.label}>Код из SMS:</Text>
         <Item style={styles.codeInput} rounded>
           <Icon name="ios-key-outline" style={styles.icon} />
           <Input
@@ -110,9 +119,10 @@ export default class LoginScreen extends React.Component {
 
     return (
       <React.Fragment>
-        <Image source={LOGIN_BG_IMAGE} style={styles.bgImage} />
-        <Text style={styles.header}>ВОЙТИ</Text>
-
+        <View style={styles.header}>
+          <Thumbnail source={RECARIO_LOGO} style={styles.mainLogo} />
+          <Text style={styles.headerText}>РЕКАРИО</Text>
+        </View>
         <KeyboardAwareScrollView
           contentContainerStyle={styles.mainContainer}
           extraHeight={128}
@@ -157,9 +167,6 @@ export default class LoginScreen extends React.Component {
                   &nbsp; Отправить код ещё раз
                 </Text>
               )}
-              <Text note style={styles.bottomAbsolute}>
-                РЕКАРИО
-              </Text>
             </View>
           </View>
         </KeyboardAwareScrollView>
@@ -204,12 +211,12 @@ const styles = StyleSheet.create({
   },
   phoneCountryText: {
     fontSize: 17,
-    color: disabledColor,
+    color: borderColor,
   },
   codeInput: {
     borderRadius: 8,
-    backgroundColor: lightColor,
-    borderColor: lightColor,
+    backgroundColor: '#fff',
+    borderWidth: 0,
     height: 52,
   },
   helperActions: {
@@ -224,8 +231,8 @@ const styles = StyleSheet.create({
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 8,
-    backgroundColor: lightColor,
-    borderColor: lightColor,
+    backgroundColor: '#fff',
+    borderWidth: 0,
     height: 52,
   },
   phoneInputMasked: {
@@ -248,33 +255,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   contentContainer: {
-    backgroundColor: darkColor,
+    backgroundColor: 'transparent',
     padding: 24,
-    paddingTop: 48,
-    paddingBottom: 48,
     margin: 0,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
     width: '100%',
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     justifyContent: 'space-between',
   },
   icon: {
     color: disabledColor,
-  },
-  header: {
-    top: 96,
-    left: 24,
-    fontSize: 36,
-    position: 'absolute',
-    color: lightColor,
-  },
-  bgImage: {
-    top: -200,
-    resizeMode: 'stretch',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
   },
   linksContainer: {
     alignItems: 'flex-end',
@@ -284,4 +273,16 @@ const styles = StyleSheet.create({
   changePhoneText: { color: activeColor },
   disabledColor: { color: disabledColor },
   label: { marginBottom: 8 },
+  mainLogo: {
+    marginBottom: 16,
+  },
+  header: {
+    position: 'absolute',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 48,
+  },
+  headerText: {
+    color: '#fff',
+  },
 });

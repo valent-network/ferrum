@@ -21,7 +21,9 @@ export default class HelloScreen extends React.PureComponent {
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>Посмотрите, кто из друзей сейчас продает автомобиль 🏎</Text>
               <Text style={styles.textBlock}>Найдите общих знакомых с продавцом 🤝</Text>
-              <Text style={styles.textBlock}>Пригласите друзей в Рекарио и получите доступ ко всем интересующим авто 🚗 🚙 🚕</Text>
+              <Text style={styles.textBlock}>
+                Пригласите друзей в Рекарио и получите доступ ко всем интересующим авто 🚗 🚙 🚕
+              </Text>
             </View>
             <Button block dark onPress={this.nextStep} style={styles.goButton}>
               <Text>Продолжить</Text>
