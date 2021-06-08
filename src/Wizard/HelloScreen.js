@@ -19,10 +19,10 @@ export default class HelloScreen extends React.PureComponent {
           <Content contentContainerStyle={styles.contentContainer}>
             <H1 style={styles.h1}>Держите руку на пульсе с Рекарио</H1>
             <View style={styles.mainContainer}>
-              <Text style={styles.textBlock}>Посмотрите, кто из друзей сейчас продает автомобиль 🏎</Text>
-              <Text style={styles.textBlock}>Найдите общих знакомых с продавцом 🤝</Text>
+              <Text style={styles.textBlock}>🏎 Посмотрите, кто из друзей сейчас продает автомобиль</Text>
+              <Text style={styles.textBlock}>🤝 Найдите общих знакомых с продавцом</Text>
               <Text style={styles.textBlock}>
-                Пригласите друзей в Рекарио и получите доступ ко всем интересующим авто 🚗 🚙 🚕
+                🚗 🚙 🚕 Пригласите друзей в Рекарио и получите доступ ко всем интересующим авто
               </Text>
             </View>
             <Button block dark onPress={this.nextStep} style={styles.goButton}>
