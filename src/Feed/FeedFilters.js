@@ -41,6 +41,27 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
   let typingTimer;
 
   const filterQueryReset = useCallback(() => applyFilter('query', ''), []);
+  const [minPrice, setMinPrice] = useState(null);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const [minYear, setMinYear] = useState(null);
+  const [maxYear, setMaxYear] = useState(null);
+
+  const applyFilterLocally = (key, value) => {
+    switch(key) {
+      case 'min_price': setMinPrice(value); break;
+      case 'max_price': setMaxPrice(value); break;
+      case 'min_year': setMinYear(value); break;
+      case 'max_year': setMaxYear(value); break;
+    }
+  }
+
+  const switchModalVisibleWithLocal = () => {
+    if (minPrice) { applyFilter('min_price', minPrice); }
+    if (maxPrice) { applyFilter('max_price', maxPrice); }
+    if (minYear) { applyFilter('min_year', minYear); }
+    if (maxYear) { applyFilter('max_year', maxYear); }
+    switchModalVisible();
+  }
 
   const filterBox = (filterValue, filterType) => {
     const isActive = filters[filterType].filter((f) => f === filterValue).length;
@@ -84,7 +105,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
-            placeholder="Поиск"
+            placeholder="BMW X6 2015..."
             style={styles.inputTextColor}
             onChangeText={onChangeQueryWithDelay}
             defaultValue={filters.query}
@@ -107,9 +128,23 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       Сбросить
                     </H3>
                   )}
-                  <Icon name="close-outline" onPress={switchModalVisible} style={styles.closeIcon} />
+                  <Icon name="close-outline" onPress={switchModalVisibleWithLocal} style={styles.closeIcon} />
                 </View>
                 <Form style={styles.filtersForm}>
+                  <View style={styles.switchFilter}>
+                    <Left>
+                      <H2 style={styles.filterTitle}>Только друзья</H2>
+                    </Left>
+                    <Right>
+                      <Switch
+                        thumbColor={lightColor}
+                        trackColor={trackColor}
+                        ios_backgroundColor={mainColor}
+                        onValueChange={onContactsModeChange}
+                        value={filters.contacts_mode == 'directFriends'}
+                      />
+                    </Right>
+                  </View>
                   <H2 style={styles.filterTitle}>Цена, $</H2>
                   <View style={styles.rangeItemWrapper}>
                     <Item style={styles.rangeItem}>
@@ -119,6 +154,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         keyboardType="numeric"
                         defaultValue={filters.min_price.toString()}
                         onEndEditing={(event) => applyFilter('min_price', event.nativeEvent.text)}
+                        onChangeText={(value) => applyFilterLocally('min_price', value)}
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
@@ -128,6 +164,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         keyboardType="numeric"
                         defaultValue={filters.max_price.toString()}
                         onEndEditing={(event) => applyFilter('max_price', event.nativeEvent.text)}
+                        onChangeText={(value) => applyFilterLocally('max_price', value)}
                       />
                     </Item>
                   </View>
@@ -140,6 +177,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         keyboardType="numeric"
                         defaultValue={filters.min_year.toString()}
                         onEndEditing={(event) => applyFilter('min_year', event.nativeEvent.text)}
+                        onChangeText={(value) => applyFilterLocally('min_year', value)}
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
@@ -149,6 +187,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         keyboardType="numeric"
                         defaultValue={filters.max_year.toString()}
                         onEndEditing={(event) => applyFilter('max_year', event.nativeEvent.text)}
+                        onChangeText={(value) => applyFilterLocally('max_year', value)}
                       />
                     </Item>
                   </View>
@@ -173,22 +212,8 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     {filtersValues.carcasses.map(filterBoxCarcasses)}
                   </ScrollView>
 
-                  <View style={styles.switchFilter}>
-                    <Left>
-                      <H2 style={styles.filterTitle}>Только друзья</H2>
-                    </Left>
-                    <Right>
-                      <Switch
-                        thumbColor={lightColor}
-                        trackColor={trackColor}
-                        ios_backgroundColor={mainColor}
-                        onValueChange={onContactsModeChange}
-                        value={filters.contacts_mode == 'directFriends'}
-                      />
-                    </Right>
-                  </View>
                   <View style={styles.submitButtonWrapper}>
-                    <Button block onPress={switchModalVisible} style={styles.submitButton}>
+                    <Button block onPress={switchModalVisibleWithLocal} style={styles.submitButton}>
                       <Text>Поиск</Text>
                     </Button>
                   </View>
@@ -306,7 +331,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 24,
     width: '100%',
-    paddingVertical: 16,
   },
   submitButton: {
     backgroundColor: activeColor,
