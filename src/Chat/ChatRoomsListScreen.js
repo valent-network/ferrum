@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, SafeAreaView, RefreshControl, StyleSheet } from 'react-native';
 
-import { Text, Container, List } from 'native-base';
+import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
@@ -22,7 +22,9 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
   const renderItem = ({ item, index }) => <ChatRoomListItem chat={item} />;
 
   if (chats.length === 0) {
-    return (
+    return isLoading ? (
+      <Container><Content><Spinner color={activeColor} /></Content></Container>
+    ) : (
       <ListNotFound
         refreshControl={<RefreshControl refreshing={isLoading} tintColor={activeColor} onRefresh={onEndReached} />}
       />
