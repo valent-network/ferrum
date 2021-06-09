@@ -46,6 +46,14 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
   const [minYear, setMinYear] = useState(null);
   const [maxYear, setMaxYear] = useState(null);
 
+  const filterResetWithLocal = () => {
+    setMinPrice(null);
+    setMaxPrice(null);
+    setMinYear(null);
+    setMaxYear(null);
+    filterReset();
+  }
+
   const applyFilterLocally = (key, value) => {
     switch (key) {
       case 'min_price':
@@ -140,7 +148,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                 <View style={styles.modalControlsContainer}>
                   <H1 style={styles.filtersHeader}>Фильтры</H1>
                   {filtersPresent && (
-                    <H3 onPress={filterReset} style={styles.resetControl}>
+                    <H3 onPress={filterResetWithLocal} style={styles.resetControl}>
                       Сбросить
                     </H3>
                   )}
