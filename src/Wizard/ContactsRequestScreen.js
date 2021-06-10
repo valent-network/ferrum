@@ -41,12 +41,12 @@ class ContactsRequestScreen extends React.PureComponent {
 
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>
-                🌀 Поделитесь контактами с Рекарио, чтобы узнать всех друзей и знакомых, кто продает автомобиль или знает
-                продавца
+                🌀 Поделитесь контактами с Рекарио, чтобы узнать всех друзей и знакомых, кто продает автомобиль или
+                знает продавца
               </Text>
               <Text style={styles.textBlock}>
-                🤫 Контакты будут под защитой, никто, кроме ваших друзей не узнает, кто там есть. И совсем никто не узнает,
-                под каким именем он записан
+                🤫 Контакты будут под защитой, никто, кроме ваших друзей не узнает, кто там есть. И совсем никто не
+                узнает, под каким именем он записан
               </Text>
               <Text style={styles.textBlock}>
                 ✅ В любой момент можно полностью удалить все контакты с серверов Рекарио
@@ -54,11 +54,11 @@ class ContactsRequestScreen extends React.PureComponent {
             </View>
 
             <Button block dark onPress={this.requestContacts} style={styles.goButton}>
-              <Text>Предоставить доступ</Text>
+              <Text>Продолжить</Text>
             </Button>
-            <Button transparent block onPress={this.goTo} style={styles.skipButton}>
+            {/*<Button transparent block onPress={this.goTo} style={styles.skipButton}>
               <Text style={styles.mainColor}>Пропустить</Text>
-            </Button>
+            </Button>*/}
           </Content>
         </Container>
       </SafeAreaView>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: activeColor,
     marginLeft: 24,
     marginRight: 24,
-    marginBottom: 12,
+    marginBottom: 48,
   },
   contentContainer: {
     justifyContent: 'space-between',

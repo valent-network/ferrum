@@ -23,7 +23,11 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
 
   if (chats.length === 0) {
     return isLoading ? (
-      <Container><Content><Spinner color={activeColor} /></Content></Container>
+      <Container>
+        <Content>
+          <Spinner color={activeColor} />
+        </Content>
+      </Container>
     ) : (
       <ListNotFound
         refreshControl={<RefreshControl refreshing={isLoading} tintColor={activeColor} onRefresh={onEndReached} />}

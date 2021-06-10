@@ -52,7 +52,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
     setMinYear(null);
     setMaxYear(null);
     filterReset();
-  }
+  };
 
   const applyFilterLocally = (key, value) => {
     switch (key) {

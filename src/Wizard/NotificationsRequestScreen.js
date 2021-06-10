@@ -38,11 +38,11 @@ class NotificationsRequestScreen extends React.PureComponent {
               <Text style={styles.textBlock}>🔕 Рекарио постарается не отвлекать по пустякам</Text>
             </View>
             <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
-              <Text>Предоставить доступ</Text>
+              <Text>Продолжить</Text>
             </Button>
-            <Button transparent block onPress={this.nextStep} style={styles.skipButton}>
+            {/*<Button transparent block onPress={this.nextStep} style={styles.skipButton}>
               <Text style={styles.skipButtonText}>Пропустить</Text>
-            </Button>
+            </Button>*/}
           </Content>
         </Container>
       </SafeAreaView>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: activeColor,
     marginLeft: 24,
     marginRight: 24,
-    marginBottom: 12,
+    marginBottom: 48,
   },
   skipButton: {
     margin: 24,
