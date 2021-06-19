@@ -35,31 +35,25 @@ class ContactsRequestScreen extends React.PureComponent {
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
-          <Icon name="people-circle-outline" style={styles.icon} />
           <Content contentContainerStyle={styles.contentContainer}>
-            <H1 style={styles.h1}>Постройте свою сеть друзей в Рекарио</H1>
+            <Icon name="people-circle-outline" style={styles.icon} />
+            <H1 style={styles.h1}>Соберите своих друзей в Рекарио</H1>
 
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>
-                🌀 Поделитесь контактами с Рекарио, чтобы узнать всех друзей и знакомых, кто продает автомобиль или
-                знает продавца
+                Рекарио будет периодически загружать вашу контактную книгу на свои сервера.
               </Text>
               <Text style={styles.textBlock}>
-                🤫 Контакты будут под защитой, никто, кроме ваших друзей не узнает, кто там есть. И совсем никто не
-                узнает, под каким именем он записан
+                Это нужно для того, чтобы показывать объявления ваших друзей и знакомых
               </Text>
               <Text style={styles.textBlock}>
-                ✅ В любой момент можно полностью удалить все контакты с серверов Рекарио
+                Вы в любой момент можете полностью удалить свои данные с наших серверов
               </Text>
             </View>
-
-            <Button block dark onPress={this.requestContacts} style={styles.goButton}>
-              <Text>Продолжить</Text>
-            </Button>
-            {/*<Button transparent block onPress={this.goTo} style={styles.skipButton}>
-              <Text style={styles.mainColor}>Пропустить</Text>
-            </Button>*/}
           </Content>
+          <Button block dark onPress={this.requestContacts} style={styles.goButton}>
+            <Text>Продолжить</Text>
+          </Button>
         </Container>
       </SafeAreaView>
     );
@@ -82,35 +76,25 @@ ContactsRequestScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   h1: {
-    padding: 24,
     textAlign: 'center',
+    paddingHorizontal: 16,
   },
   mainContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingLeft: 24,
-    paddingRight: 24,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
   },
   textBlock: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 24,
-  },
-  mainColor: {
-    color: lightColor,
-  },
-  skipButton: {
-    margin: 24,
-    marginTop: 0,
-    marginBottom: 48,
+    width: '100%',
   },
   goButton: {
     backgroundColor: activeColor,
-    marginLeft: 24,
-    marginRight: 24,
-    marginBottom: 48,
-  },
-  contentContainer: {
-    justifyContent: 'space-between',
-    flex: 1,
+    marginHorizontal: 24,
+    marginVertical: 16,
   },
   safeAreaView: {
     flex: 1,

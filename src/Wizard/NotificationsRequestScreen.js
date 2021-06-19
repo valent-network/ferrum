@@ -27,23 +27,18 @@ class NotificationsRequestScreen extends React.PureComponent {
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
-          <Icon name="notifications-outline" style={styles.icon} />
           <Content contentContainerStyle={styles.contentContainer}>
+            <Icon name="notifications-outline" style={styles.icon} />
             <H1 style={styles.h1}>Будьте в курсе самых свежих событий</H1>
             <View style={styles.mainContainer}>
-              <Text style={styles.textBlock}>🆕 Моментально узнавайте о новых автомобилях друзей</Text>
               <Text style={styles.textBlock}>
-                💬 Общайтесь в чате со всеми общими друзьями между покупателем и продавцом по каждому объявлению
+                Отправляем только самые важные оповещения, чтобы не беспокоить по пустякам
               </Text>
-              <Text style={styles.textBlock}>🔕 Рекарио постарается не отвлекать по пустякам</Text>
             </View>
-            <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
-              <Text>Продолжить</Text>
-            </Button>
-            {/*<Button transparent block onPress={this.nextStep} style={styles.skipButton}>
-              <Text style={styles.skipButtonText}>Пропустить</Text>
-            </Button>*/}
           </Content>
+          <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
+            <Text>Продолжить</Text>
+          </Button>
         </Container>
       </SafeAreaView>
     );
@@ -66,34 +61,25 @@ NotificationsRequestScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   h1: {
-    padding: 24,
     textAlign: 'center',
+    paddingHorizontal: 16,
   },
   mainContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: 24,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
   },
   textBlock: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    width: '100%',
     marginBottom: 24,
   },
   goButton: {
     backgroundColor: activeColor,
-    marginLeft: 24,
-    marginRight: 24,
-    marginBottom: 48,
-  },
-  skipButton: {
-    margin: 24,
-    marginTop: 0,
-    marginBottom: 48,
-  },
-  skipButtonText: {
-    color: lightColor,
-  },
-  contentContainer: {
-    justifyContent: 'space-between',
-    flex: 1,
+    marginHorizontal: 24,
+    marginVertical: 16,
   },
   safeAreaView: {
     flex: 1,

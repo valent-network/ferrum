@@ -208,7 +208,19 @@ class ProfileScreen extends React.PureComponent {
                         <Text style={styles.disabledText}>{user.referrer.refcode}</Text>
                       </Right>
                     </ListItem>
-                    {user.referrer.name.length > 0 && <Text style={styles.noteText}>{user.referrer.name}</Text>}
+                    {user.referrer && (
+                      <React.Fragment>
+                        <Text style={styles.noteText}>
+                          {user.referrer.contact_name || user.referrer.name || 'Имя не указано'}
+                          &nbsp;
+                          {user.referrer.phone}
+                        </Text>
+                        <Text style={[styles.noteText, { color: activeColor }]} onPress={onReferralInfoPress}>
+                          <Text style={styles.noteText}>Читайте подробнее о том, что это даст лично вам,</Text>
+                          &nbsp;здесь.
+                        </Text>
+                      </React.Fragment>
+                    )}
                   </React.Fragment>
                 )}
 

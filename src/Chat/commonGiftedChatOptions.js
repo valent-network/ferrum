@@ -21,7 +21,7 @@ const renderSend = (props) => (
 );
 
 export const commonGiftedChatOptions = {
-  ...(Platform.OS === 'ios' && { bottomOffset: 31.5 }),
+  ...(Platform.OS === 'ios' && { bottomOffset: 0 }),
   infiniteScroll: true,
   maxInputLength: 200,
   placeholder: 'Сообщение...',

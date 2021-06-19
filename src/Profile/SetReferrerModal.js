@@ -13,7 +13,7 @@ import { onReferralInfoPress } from '../Utils';
 
 import RECARIO_LOGO from '../assets/recario.png';
 
-function SetReferrerModal({ onClose }) {
+function SetReferrerModal({ onClose, selfRefcode }) {
   const [refcode, setRefcode] = useState('');
   const [user, setUser] = useState({});
   const charInputs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -206,7 +206,7 @@ function SetReferrerModal({ onClose }) {
                 </Text>
               )}
 
-              {user.refcode && (
+              {user.refcode && selfRefcode !== refcode && (
                 <View>
                   <Thumbnail source={{ uri: user.avatar }} style={styles.avatarThumbnail} />
                   <Text>{user.name} приглашает вас в Рекарио.</Text>
@@ -216,10 +216,17 @@ function SetReferrerModal({ onClose }) {
                 </View>
               )}
 
-              {user.notFound && (
+              {user.notFound && selfRefcode !== refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
                   <Text>Пользователь не найден</Text>
+                </View>
+              )}
+
+              {selfRefcode === refcode && (
+                <View style={styles.notFoundContainer}>
+                  <Icon name="ios-sad" style={styles.notFound} />
+                  <Text>Вы не можете пригласить сами себя</Text>
                 </View>
               )}
             </KeyboardAwareScrollView>
@@ -309,7 +316,9 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    selfRefcode: state.user.refcode,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
