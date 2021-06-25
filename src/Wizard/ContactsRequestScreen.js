@@ -41,7 +41,7 @@ class ContactsRequestScreen extends React.PureComponent {
 
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>
-                Рекарио будет периодически загружать вашу контактную книгу на свои сервера.
+                Рекарио будет периодически загружать вашу контактную книгу на свои сервера
               </Text>
               <Text style={styles.textBlock}>
                 Это нужно для того, чтобы показывать объявления ваших друзей и знакомых
