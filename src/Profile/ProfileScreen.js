@@ -295,7 +295,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={styles.itemContainer}>
                   <Left>
-                    <Text style={styles.bottomLinks}>Политика конфеденциальности</Text>
+                    <Text style={styles.bottomLinks}>Политика конфиденциальности</Text>
                   </Left>
                   <Right>
                     <Icon style={styles.activeColor} name="open-outline" />
