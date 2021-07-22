@@ -22,13 +22,22 @@ class ServerChannel {
   }
 
   authenticate(accessToken) {
+    if (typeof accessToken === 'undefined') {
+      return undefined;
+    }
+
     cachedToken = accessToken;
     this.cable = this.cable || createConsumer(`${baseURL}?access_token=${accessToken}`);
     return this.cable;
   }
 
   connectToUsersChannel(callbacks) {
-    //this.cable = this.cable || this.authenticate(cachedToken);
+    this.cable = this.cable || this.authenticate(cachedToken);
+
+    if (!this.cable) {
+      return undefined;
+    }
+
     this.usersChannel =
       this.usersChannel ||
       this.cable.subscriptions.create('ApplicationCable::UserChannel', {
@@ -38,6 +47,11 @@ class ServerChannel {
 
   connectToChatRoomChannel(chatRoomId) {
     this.cable = this.cable || this.authenticate(cachedToken);
+
+    if (!this.cable) {
+      return undefined;
+    }
+
     this.chatRoomChannel =
       this.chatRoomChannel ||
       this.cable.subscriptions.create(
