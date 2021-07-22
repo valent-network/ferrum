@@ -77,7 +77,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loadMoreAds: () => dispatch(loadMoreAds()),
     loadAd: (id) => dispatch(loadAd(id)),
-    onRefresh: (id, nav) => dispatch(getAll),
+    onRefresh: (id, nav) => dispatch(getAll()),
   };
 }
 
