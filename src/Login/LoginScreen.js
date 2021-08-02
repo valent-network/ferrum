@@ -84,6 +84,7 @@ export default class LoginScreen extends React.Component {
             keyboardType="numeric"
             onChangeText={this.onInputCode}
             maxLength={4}
+            returnKeyType={'done'}
           />
         </Item>
       </React.Fragment>
@@ -103,6 +104,7 @@ export default class LoginScreen extends React.Component {
             keyboardType="numeric"
             onChangeText={this.onChangePhone}
             style={styles.phoneInputMasked}
+            returnKeyType={'done'}
           />
         </Item>
       </React.Fragment>

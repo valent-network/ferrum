@@ -52,6 +52,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                     onChangeText={setUserName}
                     placeholder="Ваше имя"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </Item>
                 <Button
@@ -81,6 +82,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                 name={name}
                 onChangeText={setName}
                 placeholder="Представьте друга..."
+                returnKeyType={'done'}
               />
             </Item>
 

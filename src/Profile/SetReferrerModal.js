@@ -148,6 +148,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     onKeyPress={handleChar(0)}
                     placeholder="R"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </View>
                 <View style={styles.singleInputWrapper}>
@@ -158,6 +159,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     onKeyPress={handleChar(1)}
                     placeholder="E"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </View>
                 <View style={styles.singleInputWrapper}>
@@ -168,6 +170,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     onKeyPress={handleChar(2)}
                     placeholder="C"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </View>
                 <View style={styles.singleInputWrapper}>
@@ -178,6 +181,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     onKeyPress={handleChar(3)}
                     placeholder="A"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </View>
                 <View style={styles.singleInputWrapper}>
@@ -188,6 +192,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     onKeyPress={handleChar(4)}
                     placeholder="R"
                     placeholderTextColor={lightColor}
+                    returnKeyType={'done'}
                   />
                 </View>
               </View>

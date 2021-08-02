@@ -162,7 +162,12 @@ class ProfileScreen extends React.PureComponent {
                 <ListItem noIndent style={styles.itemContainer}>
                   <Item style={styles.nameInputWrapper}>
                     <Label>Имя</Label>
-                    <Input style={styles.nameInput} defaultValue={user.name} onEndEditing={this.handleNameChange} />
+                    <Input
+                      style={styles.nameInput}
+                      defaultValue={user.name}
+                      onEndEditing={this.handleNameChange}
+                      returnKeyType={'done'}
+                    />
                   </Item>
                 </ListItem>
                 <ListItem

@@ -51,6 +51,7 @@ class UserContactsScreen extends React.PureComponent {
               style={styles.inputTextColor}
               onChangeText={onUpdateQuery}
               defaultValue={query}
+              returnKeyType={'done'}
             />
             {query.length > 0 && <Icon name="close-circle" style={styles.inputTextColor} onPress={this.resetQuery} />}
           </Item>

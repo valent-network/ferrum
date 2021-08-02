@@ -133,6 +133,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
             style={styles.inputTextColor}
             onChangeText={onChangeQueryWithDelay}
             defaultValue={filters.query}
+            returnKeyType={'done'}
           />
           {filters.query.length > 0 && (
             <Icon name="close-circle" style={styles.inputTextColor} onPress={filterQueryReset} />
@@ -179,6 +180,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         defaultValue={filters.min_price.toString()}
                         onEndEditing={(event) => applyFilter('min_price', event.nativeEvent.text)}
                         onChangeText={(value) => applyFilterLocally('min_price', value)}
+                        returnKeyType={'done'}
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
@@ -189,6 +191,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         defaultValue={filters.max_price.toString()}
                         onEndEditing={(event) => applyFilter('max_price', event.nativeEvent.text)}
                         onChangeText={(value) => applyFilterLocally('max_price', value)}
+                        returnKeyType={'done'}
                       />
                     </Item>
                   </View>
@@ -202,6 +205,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         defaultValue={filters.min_year.toString()}
                         onEndEditing={(event) => applyFilter('min_year', event.nativeEvent.text)}
                         onChangeText={(value) => applyFilterLocally('min_year', value)}
+                        returnKeyType={'done'}
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
@@ -212,6 +216,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                         defaultValue={filters.max_year.toString()}
                         onEndEditing={(event) => applyFilter('max_year', event.nativeEvent.text)}
                         onChangeText={(value) => applyFilterLocally('max_year', value)}
+                        returnKeyType={'done'}
                       />
                     </Item>
                   </View>
