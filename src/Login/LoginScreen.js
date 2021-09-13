@@ -82,6 +82,7 @@ export default class LoginScreen extends React.Component {
             placeholder="0000"
             placeholderTextColor={disabledColor}
             keyboardType="numeric"
+            textContentType="oneTimeCode"
             onChangeText={this.onInputCode}
             maxLength={4}
             returnKeyType={'done'}
