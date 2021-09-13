@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Platform, StyleSheet, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button, H1, View, Icon } from 'native-base';
+import { Platform, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Container, Content, Text, Button, H1, View } from 'native-base';
 
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import { activeColor, lightColor, darkColor } from '../Colors';
+import { activeColor, lightColor, darkColor, disabledColor } from '../Colors';
+
+import PICTURE from '../assets/wizard2.png';
 
 class ContactsRequestScreen extends React.PureComponent {
   goTo = () => {
@@ -36,12 +38,12 @@ class ContactsRequestScreen extends React.PureComponent {
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
           <Content contentContainerStyle={styles.contentContainer}>
-            <Icon name="people-circle-outline" style={styles.icon} />
+            <Image style={styles.picture} source={PICTURE} />
             <H1 style={styles.h1}>Соберите своих друзей в Рекарио</H1>
 
             <View style={styles.mainContainer}>
               <Text style={styles.textBlock}>
-                Рекарио будет периодически загружать вашу контактную книгу на свои сервера
+                Мы будем периодически загружать вашу контактную книгу на свои сервера
               </Text>
               <Text style={styles.textBlock}>
                 Это нужно для того, чтобы показывать объявления ваших друзей и знакомых
@@ -52,7 +54,7 @@ class ContactsRequestScreen extends React.PureComponent {
             </View>
           </Content>
           <Button block dark onPress={this.requestContacts} style={styles.goButton}>
-            <Text>Продолжить</Text>
+            <Text style={styles.goButtonText}>Продолжить</Text>
           </Button>
         </Container>
       </SafeAreaView>
@@ -76,8 +78,9 @@ ContactsRequestScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   h1: {
-    textAlign: 'center',
+    textAlign: 'left',
     paddingHorizontal: 16,
+    fontWeight: 'bold',
   },
   mainContainer: {
     alignItems: 'center',
@@ -86,15 +89,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   textBlock: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 24,
     width: '100%',
+    marginBottom: 24,
+    color: disabledColor,
   },
   goButton: {
     backgroundColor: activeColor,
     marginHorizontal: 24,
     marginVertical: 16,
+    padding: 24,
+    height: 64,
+    borderRadius: 32,
+  },
+  goButtonText: {
+    fontWeight: 'bold',
   },
   safeAreaView: {
     flex: 1,
@@ -104,5 +114,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: activeColor,
     fontSize: 48,
+  },
+  picture: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: '25%',
+    marginBottom: '10%',
   },
 });
