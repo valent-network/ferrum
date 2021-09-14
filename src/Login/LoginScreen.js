@@ -64,7 +64,7 @@ export default class LoginScreen extends React.Component {
         style={step1IsDisabled ? styles.disabledButton : styles.button}
         block
         disabled={step1IsDisabled}>
-        <Text style={styles.buttonRequestCode}>Получить код</Text>
+        <Text style={styles.goButton}>Получить код</Text>
       </Button>
     );
     const signInButton = (
@@ -73,7 +73,7 @@ export default class LoginScreen extends React.Component {
         style={step2IsDisabled ? styles.disabledButton : styles.button}
         disabled={step2IsDisabled}
         block>
-        <Text>Войти</Text>
+        <Text style={styles.goButton}>Получить код</Text>
       </Button>
     );
     const codeInput = (
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: lightColor,
   },
-  buttonRequestCode: {
+  goButton: {
     fontWeight: 'bold',
   },
   flag: { marginLeft: 16 },
