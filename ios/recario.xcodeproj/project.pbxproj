@@ -347,7 +347,7 @@
 				INFOPLIST_FILE = recario/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -371,7 +371,7 @@
 				INFOPLIST_FILE = recario/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
