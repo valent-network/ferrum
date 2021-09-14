@@ -75,7 +75,7 @@ export default class LoginScreen extends React.Component {
         style={step2IsDisabled ? styles.disabledButton : styles.button}
         disabled={step2IsDisabled}
         block>
-        <Text style={styles.goButton}>Получить код</Text>
+        <Text style={styles.goButton}>Войти</Text>
       </Button>
     );
     const codeInput = (
