@@ -33,11 +33,13 @@ import {
   borderColor,
 } from '../Colors';
 
-import { onTosPress } from '../Utils';
+import { onTosPress, random } from '../Utils';
 
 import RECARIO_LOGO from '../assets/recario.png';
 
 import FLAG from '../assets/Flag.png';
+import UNION from '../assets/Union.png';
+import ELLIPSE from '../assets/Ellipse.png';
 
 export default class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
@@ -133,10 +135,12 @@ export default class LoginScreen extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <View>
         <View style={styles.header}>
           <Thumbnail source={RECARIO_LOGO} style={styles.mainLogo} />
-          <Text style={styles.headerText}>РЕКАРИО</Text>
+          <Text style={styles.headerText}>Р Е К А Р И О</Text>
+          <Image source={UNION} style={styles.union} />
+          <Image source={ELLIPSE} style={styles.ellipse} />
         </View>
         <KeyboardAwareScrollView
           contentContainerStyle={styles.mainContainer}
@@ -185,7 +189,7 @@ export default class LoginScreen extends React.Component {
             </View>
           </View>
         </KeyboardAwareScrollView>
-      </React.Fragment>
+      </View>
     );
   }
 }
@@ -201,10 +205,7 @@ LoginScreen.propTypes = {
 const styles = StyleSheet.create({
   mainContainer: {
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    alignSelf: 'flex-end',
-    flex: 1,
-    flexDirection: 'row',
+    minHeight: '100%'
   },
   h1: {
     fontWeight: 'bold',
@@ -309,7 +310,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: 48,
+    justifyContent: 'center',
+    marginTop: 0,
+    backgroundColor: '#3C3C5D',
+    height: '20%',
+    width: '100%',
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 0,
   },
   headerText: {
     color: lightColor,
@@ -322,4 +329,14 @@ const styles = StyleSheet.create({
   countryCodeNoteContainer: { marginRight: 16 },
   countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
   h2Container: { marginBottom: 8 },
+  union: {
+    position: 'absolute',
+    left: random(100,200),
+    bottom: 10
+  },
+  ellipse: {
+    position: 'absolute',
+    top: 40,
+    right: random(100,200)
+  }
 });
