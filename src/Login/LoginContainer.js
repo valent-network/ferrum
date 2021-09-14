@@ -75,12 +75,12 @@ function mapDispatchToProps(dispatch) {
     onReturnWhileAuthInProgress: (phone) => dispatch({ type: ActionTypes.PHONE_FROM_CACHE, phone: phone }),
     onReset: () => dispatch(onReset()),
     onSignIn: (phone, code) => {
-      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(4, 20);
+      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(0, 17);
 
       dispatch(signIn(phoneShort, code));
     },
     onRequest: (phone) => {
-      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(4, 20);
+      const phoneShort = phone.replace(/[\s-\(\)]/g, '').substr(0, 17);
 
       dispatch(requestCode(phoneShort));
     },

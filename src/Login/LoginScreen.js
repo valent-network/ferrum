@@ -14,6 +14,8 @@ import {
   Left,
   Right,
   Thumbnail,
+  H1,
+  H2,
 } from 'native-base';
 
 import { TextInputMask } from 'react-native-masked-text';
@@ -35,14 +37,16 @@ import { onTosPress } from '../Utils';
 
 import RECARIO_LOGO from '../assets/recario.png';
 
+import FLAG from '../assets/Flag.png';
+
 export default class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
   onInputCode = (text) => this.props.onInputCode(text);
-  onRequest = () => this.props.onRequest(this.props.phone);
+  onRequest = () => this.props.onRequest(`${this.props.phone}`);
   onSignIn = () => this.props.onSignIn(this.props.phone, this.props.code);
   changeTosAcceptance = () => this.setState({ tosAccespted: !this.state.tosAccespted });
   onChangePhone = (maskedText, rawText) => this.onInputPhone(maskedText);
-  phoneMaskOptions = { mask: '+380 (99) 999-99-99' };
+  phoneMaskOptions = { mask: '99 999-99-99' };
 
   constructor(props) {
     super(props);
@@ -51,7 +55,7 @@ export default class LoginScreen extends React.Component {
 
   render() {
     const { phone, code, step, onRequest, onSignIn, onReset, isLoading } = this.props;
-    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 19;
+    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 12;
     const step2IsDisabled = code.length !== 4;
 
     const requestButton = (
@@ -60,7 +64,7 @@ export default class LoginScreen extends React.Component {
         style={step1IsDisabled ? styles.disabledButton : styles.button}
         block
         disabled={step1IsDisabled}>
-        <Text>Получить код</Text>
+        <Text style={styles.buttonRequestCode}>Получить код</Text>
       </Button>
     );
     const signInButton = (
@@ -74,12 +78,16 @@ export default class LoginScreen extends React.Component {
     );
     const codeInput = (
       <React.Fragment>
-        <Text style={styles.label}>Код из SMS:</Text>
+        <H1 style={styles.h1}>Введите код из SMS</H1>
+        <View style={styles.h2Container}>
+          <Text style={styles.h2}>SMS с кодом было отправлено на номер</Text>
+          <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '')}</Text>
+        </View>
         <Item style={styles.codeInput} rounded>
           <Icon name="ios-key-outline" style={styles.icon} />
           <Input
             style={styles.input}
-            placeholder="0000"
+            placeholder="1 2 3 4"
             placeholderTextColor={disabledColor}
             keyboardType="numeric"
             textContentType="oneTimeCode"
@@ -92,13 +100,17 @@ export default class LoginScreen extends React.Component {
     );
     const phoneInput = (
       <React.Fragment>
-        <Text style={styles.label}>Телефон:</Text>
+        <H1 style={styles.h1}>Войдите с помощью мобильного телефона</H1>
+        <H2 style={styles.h2}>Мы отправим SMS с кодом, чтобы вы не придумывали очередной пароль</H2>
         <Item rounded style={styles.phoneInput}>
-          <Icon name="call-outline" style={styles.icon} />
+          <Image source={FLAG} style={styles.flag} />
+          <View style={styles.countryCodeNoteContainer}>
+            <Text style={styles.countryCodeNote}>+380</Text>
+          </View>
           <TextInputMask
             type={'custom'}
             options={this.phoneMaskOptions}
-            placeholder="+380 (77) 555-00-88"
+            placeholder="50 123-45-67"
             placeholderTextColor={disabledColor}
             value={phone}
             includeRawValueInChangeText={true}
@@ -194,6 +206,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
+  h1: {
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: lightColor,
+  },
+  h2: {
+    fontSize: 16,
+    marginBottom: 8,
+    color: disabledColor,
+  },
   button: {
     marginTop: 12,
     backgroundColor: activeColor,
@@ -208,7 +230,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 17,
-    color: darkColor,
+    color: lightColor,
     padding: 0,
     margin: 0,
   },
@@ -218,8 +240,9 @@ const styles = StyleSheet.create({
   },
   codeInput: {
     borderRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     borderWidth: 0,
+    borderColor: lightColor,
     height: 52,
   },
   helperActions: {
@@ -229,19 +252,22 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   smallFont: {
-    fontSize: 11,
+    fontSize: 12,
   },
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 8,
-    backgroundColor: '#fff',
-    borderWidth: 0,
+    backgroundColor: 'transparent',
+    borderColor: lightColor,
     height: 52,
   },
   phoneInputMasked: {
     fontSize: 18,
     height: '100%',
     width: '100%',
+    color: lightColor,
+    fontWeight: 'bold',
+    borderWidth: 0,
   },
   switchContainer: { flex: 0 },
   tosContainer: {
@@ -286,6 +312,14 @@ const styles = StyleSheet.create({
     marginTop: 48,
   },
   headerText: {
-    color: '#fff',
+    color: lightColor,
   },
+  buttonRequestCode: {
+    fontWeight: 'bold',
+  },
+  flag: { marginLeft: 16 },
+  h2Note: { color: lightColor, fontWeight: 'bold' },
+  countryCodeNoteContainer: { marginRight: 16 },
+  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
+  h2Container: { marginBottom: 8 },
 });
