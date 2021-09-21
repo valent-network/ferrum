@@ -22,7 +22,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { darkColor, activeColor, appearanceBgColor, disabledColor, borderColor } from '../Colors';
+import { darkColor, activeColor, appearanceBgColor, disabledColor, menuItemColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -173,7 +173,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       style: {
         backgroundColor: appearanceBgColor,
         borderTopWidth: 1,
-        borderTopColor: borderColor,
+        borderTopColor: menuItemColor,
         height: 64,
         paddingTop: 4,
       },

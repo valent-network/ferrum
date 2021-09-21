@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor, darkColor, disabledColor, borderColor } from '../Colors';
+import { activeColor, darkColor, disabledColor, menuItemColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default class UserContactsListItem extends React.PureComponent {
@@ -62,7 +62,7 @@ export default class UserContactsListItem extends React.PureComponent {
         </Left>
         <Body>
           <Text style={phoneStyle}>{contact.name}</Text>
-          <Text note>{contact.phone}</Text>
+          <Text style={styles.contactPhoneStyle}>{contact.phone}</Text>
         </Body>
         <Right>
           <Icon name="ellipsis-horizontal-outline" />
@@ -77,7 +77,7 @@ UserContactsListItem.propTypes = {};
 const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: borderColor,
+    borderBottomColor: menuItemColor,
   },
   defaultAvatar: {
     width: 56,
@@ -90,5 +90,9 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     borderColor: activeColor,
     borderWidth: 2,
+  },
+  contactPhoneStyle: {
+    fontSize: 12,
+    color: disabledColor,
   },
 });

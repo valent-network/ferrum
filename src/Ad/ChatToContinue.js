@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet } from 'react-native';
 import { Text, View, Button, Thumbnail } from 'native-base';
-import { mainColor, activeColor } from '../Colors';
+import { menuItemColor, activeColor } from '../Colors';
 import NavigationService from '../services/NavigationService';
 
 export default ({ chat }) => (
@@ -15,6 +15,7 @@ export default ({ chat }) => (
       {!chat.messages[0].system && `${chat.messages[0].user.name}: `}
       {chat.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
       {chat.messages[0].text.length > 15 && '...'}
+      {'\n'}
     </Text>
     <Button
       small
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    borderColor: mainColor,
+    borderColor: menuItemColor,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 0,
     padding: 12,

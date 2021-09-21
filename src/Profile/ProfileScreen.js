@@ -37,7 +37,16 @@ import { deleteContacts } from '../UserContacts/userContactsActions';
 
 import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from '../Utils';
 
-import { activeColor, lightColor, mainColor, disabledColor, borderColor, menuItemColor } from '../Colors';
+import {
+  activeColor,
+  lightColor,
+  mainColor,
+  disabledColor,
+  borderColor,
+  menuItemColor,
+  deletedColor,
+  appearanceBgColor,
+} from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -142,7 +151,7 @@ class ProfileScreen extends React.PureComponent {
     const { referrerModalVisible } = this.state;
 
     return (
-      <Container>
+      <Container style={styles.mainContainer}>
         <Content refreshControl={this.refreshControl} contentContainerStyle={styles.contentStyle}>
           <View style={styles.userInfoContainer}>
             <TouchableOpacity onPress={this.onAvatarPress}>
@@ -161,7 +170,7 @@ class ProfileScreen extends React.PureComponent {
               <List>
                 <ListItem noIndent style={styles.itemContainer}>
                   <Item style={styles.nameInputWrapper}>
-                    <Label>Имя</Label>
+                    <Label style={styles.label}>Имя</Label>
                     <Input
                       style={styles.nameInput}
                       defaultValue={user.name}
@@ -313,10 +322,10 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={[styles.itemContainer, styles.withBorderBottom]}>
                   <Left>
-                    <Text style={styles.importantColor}>Выход</Text>
+                    <Text>Выход</Text>
                   </Left>
                   <Right>
-                    <Icon name="log-out-outline" style={styles.importantColor} />
+                    <Icon name="log-out-outline" />
                   </Right>
                 </ListItem>
               </List>
@@ -351,6 +360,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 ProfileScreen.propTypes = {};
 
 styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: menuItemColor,
+  },
   noAvatar: {
     width: 56,
     height: 56,
@@ -358,6 +370,7 @@ styles = StyleSheet.create({
   },
   contentStyle: {
     flexGrow: 1,
+    backgroundColor: menuItemColor,
   },
   optionsContainer: {
     justifyContent: 'space-between',
@@ -371,8 +384,8 @@ styles = StyleSheet.create({
     padding: 16,
   },
   itemContainer: {
-    backgroundColor: menuItemColor,
-    borderTopColor: borderColor,
+    backgroundColor: appearanceBgColor,
+    borderTopColor: menuItemColor,
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
@@ -391,7 +404,7 @@ styles = StyleSheet.create({
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,
-    borderBottomColor: borderColor,
+    borderBottomColor: menuItemColor,
   },
   changeAvatarButton: {
     marginTop: 12,
@@ -408,7 +421,7 @@ styles = StyleSheet.create({
     marginLeft: 16,
     color: activeColor,
   },
-  importantColor: {
-    color: '#e22',
+  label: {
+    color: disabledColor,
   },
 });

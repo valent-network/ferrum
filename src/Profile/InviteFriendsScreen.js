@@ -9,7 +9,7 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsActions';
 
-import { mainColor, lightColor, activeColor } from '../Colors';
+import { appearanceBgColor, lightColor, activeColor, menuItemColor } from '../Colors';
 
 class InviteFriendsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -22,7 +22,7 @@ class InviteFriendsScreen extends React.PureComponent {
 
     return {
       headerStyle: {
-        backgroundColor: mainColor,
+        backgroundColor: menuItemColor,
       },
       headerTitle: 'Пригласить друзей',
       headerTitleStyle: { color: lightColor },
@@ -39,15 +39,13 @@ class InviteFriendsScreen extends React.PureComponent {
     const renderItem = ({ item, index }) => <UsersListItem contact={item} />;
 
     return (
-      <React.Fragment>
-        <UserContactsList
-          userContacts={userContacts}
-          isLoading={isLoading}
-          loadMoreUserContacts={loadMoreUserContacts}
-          onRefresh={onRefresh}
-          renderItem={renderItem}
-        />
-      </React.Fragment>
+      <UserContactsList
+        userContacts={userContacts}
+        isLoading={isLoading}
+        loadMoreUserContacts={loadMoreUserContacts}
+        onRefresh={onRefresh}
+        renderItem={renderItem}
+      />
     );
   }
 }

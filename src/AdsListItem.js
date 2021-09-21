@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   imagePreviewContainer: {
     flex: 1,
     backgroundColor: 'transparent',
-    borderRadius: 12,
+    borderRadius: 0,
     shadowColor: darkColor,
     shadowOffset: {
       width: 0,
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
   },
   imagePreview: {
     height: '100%',
-    borderRadius: 12,
+    borderTopLeftRadius: 24,
+    borderBottomLeftRadius: 24,
   },
   detailsContainer: {
     padding: 10,
@@ -85,7 +86,8 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-end',
     bottom: 0,
-    borderRadius: 12,
+    borderTopLeftRadius: 12,
+    borderBottomLeftRadius: 24,
     position: 'absolute',
     zIndex: 100000,
   },
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     height: 500,
     marginTop: 6,
     padding: 16,
+    paddingRight: 0,
     backgroundColor: 'transparent',
   },
 });

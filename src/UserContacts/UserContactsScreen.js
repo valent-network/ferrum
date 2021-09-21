@@ -12,7 +12,7 @@ import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions
 import { filterByContact } from '../Feed/feedActions';
 import PermissionsBox from '../Feed/PermissionsBox';
 
-import { appearanceBgColor, mainColor, lightColor, darkColor, disabledColor } from '../Colors';
+import { appearanceBgColor, menuItemColor, lightColor, darkColor, disabledColor } from '../Colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -48,6 +48,7 @@ class UserContactsScreen extends React.PureComponent {
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input
               placeholder="Поиск"
+              placeholderTextColor={disabledColor}
               style={styles.inputTextColor}
               onChangeText={onUpdateQuery}
               defaultValue={query}
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     borderRadius: 8,
-    backgroundColor: mainColor,
+    backgroundColor: menuItemColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
   searchIcon: {

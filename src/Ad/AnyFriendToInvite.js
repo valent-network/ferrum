@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Text, View, Button } from 'native-base';
 
-import { mainColor, activeColor } from '../Colors';
+import { menuItemColor, activeColor } from '../Colors';
 
 export default ({ openFriendPickerModal }) => (
   <View style={styles.mutualFriendBox}>
     <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
     <Text note style={styles.smallFont}>
-      {'\n'}Обсудить с другом
+      {'\n'}Обсудить с другом{'\n'}
     </Text>
     <Button small block dark style={styles.button} onPress={openFriendPickerModal}>
       <Text>Выбрать</Text>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    borderColor: mainColor,
+    borderColor: menuItemColor,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 0,
     padding: 12,

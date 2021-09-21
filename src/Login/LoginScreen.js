@@ -31,6 +31,7 @@ import {
   appearanceBgColor,
   disabledColor,
   borderColor,
+  menuItemColor,
 } from '../Colors';
 
 import { onTosPress, random } from '../Utils';
@@ -89,7 +90,7 @@ export default class LoginScreen extends React.Component {
           <Icon name="ios-key-outline" style={styles.icon} />
           <Input
             style={styles.input}
-            placeholder="1 2 3 4"
+            placeholder="1234"
             placeholderTextColor={disabledColor}
             keyboardType="numeric"
             textContentType="oneTimeCode"
@@ -166,7 +167,7 @@ export default class LoginScreen extends React.Component {
                     <Switch
                       thumbColor={lightColor}
                       trackColor={trackColor}
-                      ios_backgroundColor={mainColor}
+                      ios_backgroundColor={menuItemColor}
                       onValueChange={this.changeTosAcceptance}
                       value={this.state.tosAccespted}
                     />
@@ -205,7 +206,7 @@ LoginScreen.propTypes = {
 const styles = StyleSheet.create({
   mainContainer: {
     justifyContent: 'center',
-    minHeight: '100%'
+    minHeight: '100%',
   },
   h1: {
     fontWeight: 'bold',
@@ -331,12 +332,12 @@ const styles = StyleSheet.create({
   h2Container: { marginBottom: 8 },
   union: {
     position: 'absolute',
-    left: random(100,200),
-    bottom: 10
+    left: random(100, 200),
+    bottom: 10,
   },
   ellipse: {
     position: 'absolute',
     top: 40,
-    right: random(100,200)
-  }
+    right: random(100, 200),
+  },
 });

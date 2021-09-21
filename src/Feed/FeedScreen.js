@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container, Fab, Icon } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Container } from 'native-base';
 
 import AdsList from '../AdsList';
 
@@ -12,8 +11,6 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import FeedFilters from './FeedFilters';
 import PermissionsBox from './PermissionsBox';
-
-import { activeColor, mainColor, lightColor } from '../Colors';
 
 class FeedScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -26,8 +23,7 @@ class FeedScreen extends React.PureComponent {
   };
 
   render() {
-    const { ads, loadMoreAds, filters, isLoading, onRefresh, switchModalVisible } = this.props;
-    const filtersPresent = Object.values(filters).filter((f) => f.length > 0).length > 0;
+    const { ads, loadMoreAds, filters, isLoading, onRefresh } = this.props;
 
     return (
       <Container>
@@ -41,14 +37,6 @@ class FeedScreen extends React.PureComponent {
           onAdOpened={this.onAdOpened}
           fromFeed={true}
         />
-        <Fab
-          direction="left"
-          active={true}
-          position="bottomRight"
-          onPress={switchModalVisible}
-          style={styles.fabContainer}>
-          <Icon name={filtersPresent ? 'funnel' : 'funnel-outline'} style={styles.fabIcon} />
-        </Fab>
       </Container>
     );
   }
@@ -58,7 +46,6 @@ function mapStateToProps(state) {
   return {
     ads: state.feed.ads,
     isLoading: state.feed.isLoading,
-    filters: state.filters,
   };
 }
 
@@ -67,17 +54,7 @@ function mapDispatchToProps(dispatch) {
     loadMoreAds: () => dispatch(loadMoreAds()),
     loadAd: (id) => dispatch(loadAd(id)),
     onRefresh: () => dispatch(getAll()),
-    switchModalVisible: () => dispatch({ type: ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY }),
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);
-
-const styles = StyleSheet.create({
-  fabIcon: {
-    color: lightColor,
-  },
-  fabContainer: {
-    backgroundColor: activeColor,
-  },
-});

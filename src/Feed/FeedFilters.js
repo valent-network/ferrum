@@ -19,8 +19,11 @@ import {
   Content,
   Left,
   Right,
+  Body,
 } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import ChatIcon from '../navigation/ChatIcon';
 
 import * as ActionTypes from '../actions/actionTypes';
 
@@ -130,6 +133,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
             placeholder="BMW X6 2015..."
+            placeholderTextColor={disabledColor}
             style={styles.inputTextColor}
             onChangeText={onChangeQueryWithDelay}
             defaultValue={filters.query}
@@ -139,6 +143,13 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
             <Icon name="close-circle" style={styles.inputTextColor} onPress={filterQueryReset} />
           )}
         </Item>
+        <Right style={styles.filterIconContainer}>
+          <Icon
+            name={filtersPresent ? 'funnel' : 'funnel-outline'}
+            style={styles.filterIcon}
+            onPress={switchModalVisible}
+          />
+        </Right>
       </Header>
 
       <Modal animationType="slide" visible={modalVisible}>
@@ -164,7 +175,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       <Switch
                         thumbColor={lightColor}
                         trackColor={trackColor}
-                        ios_backgroundColor={mainColor}
+                        ios_backgroundColor={menuItemColor}
                         onValueChange={onContactsModeChange}
                         value={filters.contacts_mode == 'directFriends'}
                       />
@@ -270,6 +281,7 @@ function mapDispatchToProps(dispatch) {
     filterReset: () => dispatch(resetFilters()),
     filterQueryReset: () => dispatch(resetFilters()),
     applyFilter: (filterKey, filterValue) => dispatch(applyFilter(filterKey, filterValue)),
+    switchModalVisible: () => dispatch({ type: ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY }),
   };
 }
 
@@ -298,14 +310,13 @@ const styles = StyleSheet.create({
     color: lightColor,
     alignSelf: 'center',
     fontSize: 14,
-    height: 18,
   },
   filtersHeader: {
     borderBottomWidth: 0,
     alignSelf: 'center',
   },
   mainHeader: {
-    backgroundColor: 'transparent',
+    backgroundColor: menuItemColor,
     borderBottomWidth: 0,
     paddingBottom: 16,
     paddingLeft: 12,
@@ -317,7 +328,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   filterBox: {
-    borderColor: borderColor,
+    borderColor: activeColor,
     borderWidth: 0.2,
     borderRadius: 2,
     marginRight: 12,
@@ -370,7 +381,7 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     borderRadius: 8,
-    backgroundColor: mainColor,
+    backgroundColor: appearanceBgColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
   searchIcon: {
@@ -381,5 +392,17 @@ const styles = StyleSheet.create({
   },
   inputTextColor: {
     color: lightColor,
+  },
+  filterIconContainer: {
+    height: '100%',
+    minWidth: 48,
+    maxWidth: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  filterIcon: {
+    color: disabledColor,
+    fontSize: 18,
+    padding: 9,
   },
 });

@@ -2,15 +2,15 @@ import React from 'react';
 
 import codePush from 'react-native-code-push';
 
-if (process.env.NODE_ENV === 'development') {
-  const whyDidYouRender = require('@welldone-software/why-did-you-render');
-  const ReactRedux = require('react-redux');
-  whyDidYouRender(React, {
-    trackAllPureComponents: true,
-    onlyLogs: true,
-    trackExtraHooks: [[ReactRedux, 'useSelector']],
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   const whyDidYouRender = require('@welldone-software/why-did-you-render');
+//   const ReactRedux = require('react-redux');
+//   whyDidYouRender(React, {
+//     trackAllPureComponents: true,
+//     onlyLogs: true,
+//     trackExtraHooks: [[ReactRedux, 'useSelector']],
+//   });
+// }
 
 import { View, StyleSheet, StatusBar } from 'react-native';
 
@@ -29,7 +29,7 @@ import Root from './src/Root';
 import getTheme from './native-base-theme/components';
 import nativeBaseThemeVariables from './native-base-theme/variables/platform';
 
-import { darkColor, lightColor } from './src/Colors';
+import { darkColor, lightColor, appearanceBgColor } from './src/Colors';
 
 // console.disableYellowBox = true;
 
@@ -37,7 +37,7 @@ const App = () => {
     const notificationRef = (ref) => (notification.ref = ref);
     const themeVariables = {
       ...nativeBaseThemeVariables,
-      containerBgColor: darkColor,
+      containerBgColor: appearanceBgColor,
       textColor: lightColor,
     }
     const theme = getTheme(themeVariables);
@@ -62,6 +62,6 @@ export default codePush(App);
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
   },
 });

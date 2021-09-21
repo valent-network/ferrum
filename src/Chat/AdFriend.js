@@ -4,7 +4,7 @@ import { Text, Icon, ListItem, Left, Body, Right, Thumbnail, Button } from 'nati
 
 import { StyleSheet } from 'react-native';
 
-import { activeColor, borderColor } from '../Colors';
+import { activeColor, menuItemColor, disabledColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
@@ -26,7 +26,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
         <Text style={friend.user_id && membersIds.includes(friend.user_id) ? { color: activeColor } : {}}>
           {friend.name}
         </Text>
-        <Text note>{friendPhoneNumber}</Text>
+        <Text style={styles.contactPhoneStyle}>{friendPhoneNumber}</Text>
       </Body>
       {!membersIds.includes(friend.user_id) && (
         <Right>
@@ -55,10 +55,14 @@ const DefaultAvatar = () => <Thumbnail source={require('../assets/default_avatar
 const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: borderColor,
+    borderBottomColor: menuItemColor,
     paddingVertical: 8,
   },
   addButton: {
     backgroundColor: activeColor,
+  },
+  contactPhoneStyle: {
+    fontSize: 12,
+    color: disabledColor,
   },
 });

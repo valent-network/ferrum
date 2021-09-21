@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import {
   activeColor,
-  darkColor,
+  menuItemColor,
   appearanceBgColor,
   priceColor,
   deletedColor,
@@ -64,8 +64,8 @@ export const styles = StyleSheet.create({
     fontSize: 18,
   },
   separator: {
-    borderWidth: 1,
-    borderColor: darkColor,
+    borderWidth: 0.5,
+    borderColor: menuItemColor,
     marginTop: 8,
     marginBottom: 8,
   },

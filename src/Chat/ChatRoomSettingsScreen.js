@@ -90,9 +90,7 @@ function ChatRoomsSettingsScreen({
         <Text onPress={onShow}>
           {chat.title}
           {'\n'}
-          <Text note style={styles.activeColor}>
-            Подробнее
-          </Text>
+          <Text style={styles.activeColor}>Подробнее</Text>
         </Text>
 
         <Text style={styles.activeColor} onPress={onLeave}>
@@ -156,11 +154,12 @@ const styles = StyleSheet.create({
   },
   separator: {
     backgroundColor: menuItemColor,
-    borderColor: borderColor,
+    borderColor: activeColor,
     height: 48,
   },
   separatorText: {
     fontSize: 16,
+    color: disabledColor,
   },
   leaveIcon: {
     fontSize: 14,

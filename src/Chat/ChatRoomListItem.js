@@ -8,7 +8,7 @@ import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from
 
 import dayjs from 'dayjs';
 
-import { activeColor, darkColor, disabledColor, borderColor } from '../Colors';
+import { activeColor, darkColor, disabledColor, menuItemColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
 
@@ -61,10 +61,10 @@ export default function ChatRoomListItem({ chat }) {
         <Text>{chat.system ? 'Рекарио' : chat.title}</Text>
         <Text>{lastMessage?.user?._id && lastMessage.user.name}</Text>
 
-        <Text note>{messagePreview}</Text>
+        <Text style={styles.smallFont}>{messagePreview}</Text>
       </Body>
       <Right style={styles.centered}>
-        <Text note>{lastMessageDateString}</Text>
+        <Text style={styles.smallFont}>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
           <Badge style={styles.unreadBadge}>
             <Text>{chat.new_messages_count}</Text>
@@ -91,9 +91,13 @@ const styles = StyleSheet.create({
   chatRow: {
     marginBottom: 8,
     borderBottomWidth: 0.5,
-    borderBottomColor: borderColor,
+    borderBottomColor: menuItemColor,
   },
   centered: {
     alignItems: 'center',
+  },
+  smallFont: {
+    color: disabledColor,
+    fontSize: 14,
   },
 });
