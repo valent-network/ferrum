@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './myAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor, primaryColor } from '../Colors';
+import { activeColor, primaryColor, secondaryColor } from '../Colors';
 
 class MyAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -83,7 +83,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyAdsScreen);
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: 'transparent',
+    backgroundColor: secondaryColor,
     borderBottomWidth: 0,
   },
   headerIcon: {

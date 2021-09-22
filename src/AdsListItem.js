@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
     padding: 16,
     paddingRight: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: primaryColor,
   },
 });

@@ -29,7 +29,7 @@ import Root from './src/Root';
 import getTheme from './native-base-theme/components';
 import nativeBaseThemeVariables from './native-base-theme/variables/platform';
 
-import { darkColor, lightColor, appearanceBgColor } from './src/Colors';
+import { darkColor, lightColor, primaryColor } from './src/Colors';
 
 // console.disableYellowBox = true;
 
@@ -37,7 +37,7 @@ const App = () => {
     const notificationRef = (ref) => (notification.ref = ref);
     const themeVariables = {
       ...nativeBaseThemeVariables,
-      containerBgColor: appearanceBgColor,
+      containerBgColor: primaryColor,
       textColor: lightColor,
     }
     const theme = getTheme(themeVariables);
@@ -62,6 +62,6 @@ export default codePush(App);
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
 });
