@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './visitedAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor } from '../Colors';
+import { activeColor, appearanceBgColor } from '../Colors';
 
 class VisitedAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -43,7 +43,7 @@ class VisitedAdsScreen extends React.PureComponent {
     // if (ads.length === 0 && isLoading) { return <Container><Content></Content></Container> }
 
     return (
-      <Container>
+      <Container style={styles.mainContainer}>
         <Header style={styles.header} iosBarStyle="light-content" noShadow={true}>
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
@@ -94,5 +94,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: activeColor,
+  },
+  mainContainer: {
+    backgroundColor: appearanceBgColor,
   },
 });

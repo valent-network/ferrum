@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './favoriteAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor } from '../Colors';
+import { activeColor, appearanceBgColor } from '../Colors';
 
 class FavoriteAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -41,7 +41,7 @@ class FavoriteAdsScreen extends React.PureComponent {
     const { ads, loadMoreAds, isLoading, onRefresh } = this.props;
 
     return (
-      <Container>
+      <Container style={styles.mainContainer}>
         <Header style={styles.header} noShadow={true} iosBarStyle="light-content">
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
@@ -92,5 +92,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: activeColor,
+  },
+  mainContainer: {
+    backgroundColor: appearanceBgColor,
   },
 });
