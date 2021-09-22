@@ -40,9 +40,7 @@ import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINoti
 import {
   activeColor,
   lightColor,
-  mainColor,
   disabledColor,
-  borderColor,
   menuItemColor,
   deletedColor,
   appearanceBgColor,

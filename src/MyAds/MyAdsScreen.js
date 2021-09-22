@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './myAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor, darkColor } from '../Colors';
+import { activeColor } from '../Colors';
 
 class MyAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {

@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './favoriteAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor, darkColor } from '../Colors';
+import { activeColor } from '../Colors';
 
 class FavoriteAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {

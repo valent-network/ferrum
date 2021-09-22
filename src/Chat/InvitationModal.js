@@ -6,7 +6,7 @@ import { Text, View, Icon, Thumbnail, Item, Input, Button } from 'native-base';
 
 import { updateUserName } from '../Profile/profileActions';
 
-import { lightColor, activeColor, menuItemColor, disabledColor, warningColor } from '../Colors';
+import { lightColor, activeColor, menuItemColor, disabledColor, warningColor, appearanceBgColor } from '../Colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const [name, setName] = useState(friend.name);
@@ -134,7 +134,20 @@ const styles = StyleSheet.create({
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
   avatar: { alignSelf: 'center' },
   friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
-  emptyUserNameContainer: { backgroundColor: warningColor, padding: 16, borderRadius: 8, marginTop: 16 },
+  emptyUserNameContainer: {
+    backgroundColor: warningColor,
+    padding: 16,
+    borderRadius: 8,
+    marginTop: 16,
+    shadowColor: appearanceBgColor,
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
+  },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },
   noAvatar: {

@@ -13,7 +13,7 @@ import * as ActionTypes from '../actions/actionTypes.js';
 
 import { goToSettings } from '../Utils';
 
-import { activeColor, mainColor } from '../Colors';
+import { activeColor, menuItemColor } from '../Colors';
 
 class PermissionsBox extends React.PureComponent {
   onPress = () => (this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions());
@@ -76,11 +76,10 @@ PermissionsBox.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: mainColor,
+    backgroundColor: menuItemColor,
     margin: 12,
     padding: 12,
     borderColor: activeColor,
-    borderWidth: 2,
     borderRadius: 4,
   },
   button: {

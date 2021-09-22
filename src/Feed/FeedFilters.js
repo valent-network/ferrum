@@ -31,12 +31,10 @@ import { applyFilter, resetFilters } from './feedActions';
 
 import {
   activeColor,
-  mainColor,
   trackColor,
   appearanceBgColor,
   lightColor,
   disabledColor,
-  borderColor,
   menuItemColor,
 } from '../Colors';
 
@@ -380,7 +378,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   searchBar: {
-    borderRadius: 8,
+    borderRadius: 16,
     backgroundColor: appearanceBgColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
@@ -402,7 +400,8 @@ const styles = StyleSheet.create({
   },
   filterIcon: {
     color: disabledColor,
-    fontSize: 18,
-    padding: 9,
+    fontSize: 22,
+    padding: 11,
+    color: activeColor,
   },
 });

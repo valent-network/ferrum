@@ -23,6 +23,8 @@ class InviteFriendsScreen extends React.PureComponent {
     return {
       headerStyle: {
         backgroundColor: menuItemColor,
+        borderWidth: 0,
+        borderBottomColor: appearanceBgColor
       },
       headerTitle: 'Пригласить друзей',
       headerTitleStyle: { color: lightColor },

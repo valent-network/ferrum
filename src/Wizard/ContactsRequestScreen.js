@@ -8,7 +8,7 @@ import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import { activeColor, lightColor, darkColor, disabledColor } from '../Colors';
+import { activeColor, lightColor, appearanceBgColor, disabledColor } from '../Colors';
 
 import PICTURE from '../assets/wizard2.png';
 
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
   },
   icon: {
     alignSelf: 'center',

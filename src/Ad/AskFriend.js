@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, Button } from 'native-base';
 import { ScrollView, StyleSheet, Image } from 'react-native';
-import { mainColor, activeColor } from '../Colors';
+import { activeColor } from '../Colors';
 
 import { initiateChatRoom } from '../Chat/chatActions';
 import InvitationModal from '../Chat/InvitationModal';

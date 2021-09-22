@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Container, Content, Text, Button, H1, View } from 'native-base';
 
-import { activeColor, darkColor, disabledColor } from '../Colors';
+import { activeColor, disabledColor, appearanceBgColor } from '../Colors';
 
 import PICTURE from '../assets/wizard1.png';
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
   },
   icon: {
     alignSelf: 'center',

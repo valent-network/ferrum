@@ -6,7 +6,7 @@ import { Container, Content, Spinner } from 'native-base';
 
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from '../actions/actionTypes';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from '../Chat/chatActions';
-import { activeColor, lightColor, appearanceBgColor, menuItemColor, borderColor } from '../Colors';
+import { activeColor, lightColor, appearanceBgColor, menuItemColor } from '../Colors';
 import { serverChannel } from '../services/ServerChannel';
 
 import { commonGiftedChatOptions } from './commonGiftedChatOptions';
@@ -119,8 +119,7 @@ ChatRoomScreen.navigationOptions = ({ navigation }) => {
     headerStyle: {
       backgroundColor: menuItemColor,
       shadowColor: 'transparent',
-      borderBottomWidth: 1,
-      borderBottomColor: borderColor,
+      borderBottomWidth: 0,
       height: 104,
     },
     headerTitle: () => <CurrentChatHeader />,

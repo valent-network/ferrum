@@ -8,7 +8,7 @@ import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from
 
 import dayjs from 'dayjs';
 
-import { activeColor, darkColor, disabledColor, menuItemColor } from '../Colors';
+import { activeColor, disabledColor, menuItemColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
 

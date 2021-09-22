@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, ListItem, Left, Right, Body, Thumbnail, Icon } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor, darkColor, disabledColor, appearanceBgColor, menuItemColor } from '../Colors';
+import { activeColor, disabledColor, appearanceBgColor, menuItemColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default class UsersListItem extends React.PureComponent {

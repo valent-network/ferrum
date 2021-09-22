@@ -22,7 +22,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { darkColor, activeColor, appearanceBgColor, disabledColor, menuItemColor } from '../Colors';
+import { activeColor, appearanceBgColor, disabledColor, menuItemColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -45,7 +45,7 @@ function iconFor(iconName) {
 
 const defaultNavigationOptions = {
   cardStyle: {
-    backgroundColor: darkColor,
+    backgroundColor: appearanceBgColor,
   },
 };
 

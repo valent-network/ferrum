@@ -23,14 +23,11 @@ import { TextInputMask } from 'react-native-masked-text';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import {
-  darkColor,
   activeColor,
-  mainColor,
   trackColor,
   lightColor,
   appearanceBgColor,
   disabledColor,
-  borderColor,
   menuItemColor,
 } from '../Colors';
 
@@ -238,7 +235,7 @@ const styles = StyleSheet.create({
   },
   phoneCountryText: {
     fontSize: 17,
-    color: borderColor,
+    color: disabledColor,
   },
   codeInput: {
     borderRadius: 8,

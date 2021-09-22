@@ -32,7 +32,7 @@ class UserContactsList extends React.PureComponent {
         keyExtractor={this.keyExtractor}
         onEndReached={this.onEndReached}
         renderItem={renderItem}
-        style={{ backgroundColor: appearanceBgColor }}
+        style={{ backgroundColor: appearanceBgColor, borderWidth: 0 }}
       />
     );
   }
