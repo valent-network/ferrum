@@ -8,7 +8,7 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsActions';
 
-import { lightColor, menuItemColor, appearanceBgColor } from '../Colors';
+import { lightColor, secondaryColor, primaryColor } from '../Colors';
 
 function FriendPickerModal({ userContacts, isLoading, onRefresh, loadMoreUserContacts, onClose, onUserPress }) {
   const renderItem = ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />;
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
   contentContainer: {
     paddingHorizontal: 0,
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
   closeIcon: {
     alignSelf: 'flex-start',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
     paddingVertical: 16,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

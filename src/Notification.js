@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text, Thumbnail } from 'native-base';
-import { activeColor, lightColor, appearanceBgColor } from './Colors';
+import { activeColor, lightColor, primaryColor } from './Colors';
 
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowColor: appearanceBgColor,
+    shadowColor: primaryColor,
     shadowOffset: {
       width: 0,
       height: 12,

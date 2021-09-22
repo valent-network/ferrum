@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Text, View, Button, Thumbnail } from 'native-base';
 
-import { menuItemColor, activeColor } from '../Colors';
+import { secondaryColor, activeColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 const INVITATIONAL_TEXT_SMS = 'Привет, смотри, нашел твою машину здесь — https://recar.io/get';
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    borderColor: menuItemColor,
+    borderColor: secondaryColor,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 0,
     padding: 12,

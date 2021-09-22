@@ -8,7 +8,7 @@ import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './Styles';
 
-import { appearanceBgColor } from '../Colors'
+import { primaryColor } from '../Colors'
 
 const ImageViewerPageAnimationTimeoutMs = 300;
 
@@ -79,7 +79,7 @@ export default class ImageGallery extends React.Component {
             onChange={this.syncCarousel}
             pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
             imageUrls={images.map(this.imageMapper)}
-            backgroundColor={appearanceBgColor}
+            backgroundColor={primaryColor}
           />
         </Modal>
       </React.Fragment>

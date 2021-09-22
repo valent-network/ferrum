@@ -7,7 +7,7 @@ import { View, Icon, Text, Thumbnail, Button, ActionSheet } from 'native-base';
 
 import { getReferrer, setReferrer } from './profileActions';
 
-import { lightColor, appearanceBgColor, activeColor } from '../Colors';
+import { lightColor, primaryColor, activeColor } from '../Colors';
 
 import { onReferralInfoPress } from '../Utils';
 
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
     paddingVertical: 16,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,

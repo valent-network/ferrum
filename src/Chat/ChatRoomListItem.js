@@ -8,7 +8,7 @@ import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from
 
 import dayjs from 'dayjs';
 
-import { activeColor, disabledColor, menuItemColor } from '../Colors';
+import { activeColor, disabledColor, secondaryColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   chatRow: {
     marginBottom: 8,
     borderBottomWidth: 0.5,
-    borderBottomColor: menuItemColor,
+    borderBottomColor: secondaryColor,
   },
   centered: {
     alignItems: 'center',

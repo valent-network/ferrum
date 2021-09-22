@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, lightColor, disabledColor, menuItemColor, borderColor } from '../Colors';
+import { activeColor, lightColor, disabledColor, secondaryColor, borderColor } from '../Colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   separator: {
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
     borderColor: activeColor,
     height: 48,
   },

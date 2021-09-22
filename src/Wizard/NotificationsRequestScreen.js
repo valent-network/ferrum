@@ -10,7 +10,7 @@ import PushNotification from 'react-native-push-notification';
 
 import { setWizardDone } from '../actions/sessionsActions';
 
-import { activeColor, lightColor, appearanceBgColor, disabledColor } from '../Colors';
+import { activeColor, lightColor, primaryColor, disabledColor } from '../Colors';
 
 import PICTURE from '../assets/wizard3.png';
 
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
   icon: {
     alignSelf: 'center',

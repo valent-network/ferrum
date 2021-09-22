@@ -22,7 +22,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { activeColor, appearanceBgColor, disabledColor, menuItemColor } from '../Colors';
+import { activeColor, primaryColor, disabledColor, secondaryColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -45,7 +45,7 @@ function iconFor(iconName) {
 
 const defaultNavigationOptions = {
   cardStyle: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
 };
 
@@ -171,9 +171,9 @@ const bottomTabsNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: appearanceBgColor,
+        backgroundColor: primaryColor,
         borderTopWidth: 1,
-        borderTopColor: menuItemColor,
+        borderTopColor: secondaryColor,
         height: 64,
         paddingTop: 4,
       },

@@ -6,7 +6,7 @@ import { Container, Content, Spinner } from 'native-base';
 
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from '../actions/actionTypes';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from '../Chat/chatActions';
-import { activeColor, lightColor, appearanceBgColor, menuItemColor } from '../Colors';
+import { activeColor, lightColor, primaryColor, secondaryColor } from '../Colors';
 import { serverChannel } from '../services/ServerChannel';
 
 import { commonGiftedChatOptions } from './commonGiftedChatOptions';
@@ -117,7 +117,7 @@ function mapDispatchToProps(dispatch) {
 ChatRoomScreen.navigationOptions = ({ navigation }) => {
   return {
     headerStyle: {
-      backgroundColor: menuItemColor,
+      backgroundColor: secondaryColor,
       shadowColor: 'transparent',
       borderBottomWidth: 0,
       height: 104,
@@ -137,10 +137,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomScreen);
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
   },
   spinnerContainer: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
 });
 

@@ -26,9 +26,9 @@ import {
   activeColor,
   trackColor,
   lightColor,
-  appearanceBgColor,
+  primaryColor,
   disabledColor,
-  menuItemColor,
+  secondaryColor,
 } from '../Colors';
 
 import { onTosPress, random } from '../Utils';
@@ -133,7 +133,7 @@ export default class LoginScreen extends React.Component {
     }
 
     return (
-      <View>
+      <View style={styles.wrapperContainer}>
         <View style={styles.header}>
           <Thumbnail source={RECARIO_LOGO} style={styles.mainLogo} />
           <Text style={styles.headerText}>Р Е К А Р И О</Text>
@@ -164,7 +164,7 @@ export default class LoginScreen extends React.Component {
                     <Switch
                       thumbColor={lightColor}
                       trackColor={trackColor}
-                      ios_backgroundColor={menuItemColor}
+                      ios_backgroundColor={secondaryColor}
                       onValueChange={this.changeTosAcceptance}
                       value={this.state.tosAccespted}
                     />
@@ -336,5 +336,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     right: random(100, 200),
+  },
+  wrapperContainer: {
+    backgroundColor: primaryColor,
   },
 });

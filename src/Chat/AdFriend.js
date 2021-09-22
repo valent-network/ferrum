@@ -4,7 +4,7 @@ import { Text, Icon, ListItem, Left, Body, Right, Thumbnail, Button } from 'nati
 
 import { StyleSheet } from 'react-native';
 
-import { activeColor, menuItemColor, disabledColor } from '../Colors';
+import { activeColor, secondaryColor, disabledColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
@@ -55,7 +55,7 @@ const DefaultAvatar = () => <Thumbnail source={require('../assets/default_avatar
 const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: menuItemColor,
+    borderBottomColor: secondaryColor,
     paddingVertical: 8,
   },
   addButton: {

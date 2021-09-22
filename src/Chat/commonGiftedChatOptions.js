@@ -6,7 +6,7 @@ import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
 import ru from 'dayjs/locale/ru';
 
-import { activeColor, appearanceBgColor, lightColor, menuItemColor } from '../Colors';
+import { activeColor, primaryColor, lightColor, secondaryColor } from '../Colors';
 
 const renderLoadEarlier = (props) => <LoadEarlier label="Загрузить еще..." {...props} />;
 
@@ -29,7 +29,7 @@ export const commonGiftedChatOptions = {
   locale: ru,
   listViewProps: {
     style: {
-      backgroundColor: appearanceBgColor,
+      backgroundColor: primaryColor,
     },
     keyboardDismissMode: 'on-drag',
   },
@@ -40,9 +40,9 @@ export const commonGiftedChatOptions = {
 
 const styles = StyleSheet.create({
   inputToolbarContainer: {
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
     borderTopWidth: 0.5,
-    borderTopColor: appearanceBgColor,
+    borderTopColor: primaryColor,
   },
   textInput: {
     color: lightColor,

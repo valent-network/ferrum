@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import {
   activeColor,
-  menuItemColor,
-  appearanceBgColor,
+  secondaryColor,
+  primaryColor,
   priceColor,
   deletedColor,
   lightColor,
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
   },
   separator: {
     borderWidth: 0.5,
-    borderColor: menuItemColor,
+    borderColor: secondaryColor,
     marginTop: 8,
     marginBottom: 8,
   },
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     color: lightColor,
   },
   mainContainer: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
   },
   image: {
     height: 350,

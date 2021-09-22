@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet } from 'react-native';
 import { Text, View, Button, Thumbnail } from 'native-base';
-import { menuItemColor, activeColor } from '../Colors';
+import { secondaryColor, activeColor } from '../Colors';
 import NavigationService from '../services/NavigationService';
 
 export default ({ chat }) => (
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    borderColor: menuItemColor,
+    borderColor: secondaryColor,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 0,
     padding: 12,

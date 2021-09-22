@@ -6,7 +6,7 @@ import { Text, View, Icon, Thumbnail, Item, Input, Button } from 'native-base';
 
 import { updateUserName } from '../Profile/profileActions';
 
-import { lightColor, activeColor, menuItemColor, disabledColor, warningColor, appearanceBgColor } from '../Colors';
+import { lightColor, activeColor, secondaryColor, disabledColor, warningColor, primaryColor } from '../Colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const [name, setName] = useState(friend.name);
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
     padding: 16,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     marginTop: 16,
-    shadowColor: appearanceBgColor,
+    shadowColor: primaryColor,
     shadowOffset: {
       width: 0,
       height: 12,

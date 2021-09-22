@@ -41,9 +41,9 @@ import {
   activeColor,
   lightColor,
   disabledColor,
-  menuItemColor,
+  secondaryColor,
   deletedColor,
-  appearanceBgColor,
+  primaryColor,
 } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
@@ -359,7 +359,7 @@ ProfileScreen.propTypes = {};
 
 styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
   },
   noAvatar: {
     width: 56,
@@ -368,7 +368,7 @@ styles = StyleSheet.create({
   },
   contentStyle: {
     flexGrow: 1,
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
   },
   optionsContainer: {
     justifyContent: 'space-between',
@@ -382,8 +382,8 @@ styles = StyleSheet.create({
     padding: 16,
   },
   itemContainer: {
-    backgroundColor: appearanceBgColor,
-    borderTopColor: menuItemColor,
+    backgroundColor: primaryColor,
+    borderTopColor: secondaryColor,
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
@@ -402,7 +402,7 @@ styles = StyleSheet.create({
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,
-    borderBottomColor: menuItemColor,
+    borderBottomColor: secondaryColor,
   },
   changeAvatarButton: {
     marginTop: 12,

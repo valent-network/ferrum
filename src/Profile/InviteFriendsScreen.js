@@ -9,7 +9,7 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from '../UserContacts/userContactsActions';
 
-import { appearanceBgColor, lightColor, activeColor, menuItemColor } from '../Colors';
+import { primaryColor, lightColor, activeColor, secondaryColor } from '../Colors';
 
 class InviteFriendsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -22,9 +22,9 @@ class InviteFriendsScreen extends React.PureComponent {
 
     return {
       headerStyle: {
-        backgroundColor: menuItemColor,
+        backgroundColor: secondaryColor,
         borderWidth: 0,
-        borderBottomColor: appearanceBgColor
+        borderBottomColor: primaryColor
       },
       headerTitle: 'Пригласить друзей',
       headerTitleStyle: { color: lightColor },

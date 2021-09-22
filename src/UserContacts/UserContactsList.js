@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, appearanceBgColor, menuItemColor } from '../Colors';
+import { activeColor, primaryColor, secondaryColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 import ListNotFound from '../ListNotFound';
@@ -32,7 +32,7 @@ class UserContactsList extends React.PureComponent {
         keyExtractor={this.keyExtractor}
         onEndReached={this.onEndReached}
         renderItem={renderItem}
-        style={{ backgroundColor: appearanceBgColor, borderWidth: 0 }}
+        style={{ backgroundColor: primaryColor, borderWidth: 0 }}
       />
     );
   }

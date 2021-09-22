@@ -32,10 +32,10 @@ import { applyFilter, resetFilters } from './feedActions';
 import {
   activeColor,
   trackColor,
-  appearanceBgColor,
+  primaryColor,
   lightColor,
   disabledColor,
-  menuItemColor,
+  secondaryColor,
 } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
@@ -173,7 +173,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       <Switch
                         thumbColor={lightColor}
                         trackColor={trackColor}
-                        ios_backgroundColor={menuItemColor}
+                        ios_backgroundColor={secondaryColor}
                         onValueChange={onContactsModeChange}
                         value={filters.contacts_mode == 'directFriends'}
                       />
@@ -289,7 +289,7 @@ FeedFilters.propTypes = {};
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
     flex: 1,
     padding: 16,
   },
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   mainHeader: {
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
     borderBottomWidth: 0,
     paddingBottom: 16,
     paddingLeft: 12,
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
-    backgroundColor: menuItemColor,
+    backgroundColor: secondaryColor,
   },
   filterBoxText: {
     color: lightColor,
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
     color: lightColor,
   },
   safeArea: {
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
     minHeight: '100%',
   },
   submitButtonWrapper: {
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     borderRadius: 16,
-    backgroundColor: appearanceBgColor,
+    backgroundColor: primaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
   },
   searchIcon: {

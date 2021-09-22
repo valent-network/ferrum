@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 export const activeColor = '#5E56D3';
 
-export const appearanceBgColor = '#2E2C4F';
+export const primaryColor = '#2E2C4F';
 
-export const menuItemColor = '#3C3C5D';
+export const secondaryColor = '#3C3C5D';
 
 //
 
@@ -22,4 +22,4 @@ export const deletedColor = '#f11';
 
 //
 
-export const trackColor = { true: activeColor, false: menuItemColor };
+export const trackColor = { true: activeColor, false: secondaryColor };
