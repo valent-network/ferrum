@@ -24,7 +24,7 @@ import { getProfile } from './Profile/profileActions';
 
 import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnread } from './Chat/chatActions';
 
-import { activeColor } from './Colors';
+import { activeColor, spinnerColor } from './Colors';
 
 import { getAccessToken, getWizardDone, getPushToken } from './AsyncStorage';
 
@@ -123,7 +123,7 @@ class Root extends React.Component {
       return (
         <Container>
           <Content>
-            <Spinner color={activeColor} />
+            <Spinner color={spinnerColor} />
           </Content>
         </Container>
       );

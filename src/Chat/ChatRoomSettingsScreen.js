@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, lightColor, disabledColor, secondaryColor, borderColor } from '../Colors';
+import { activeColor, lightColor, disabledColor, secondaryColor, spinnerColor } from '../Colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -99,7 +99,7 @@ function ChatRoomsSettingsScreen({
         </Text>
       </View>
       {isLoading ? (
-        <Spinner color={activeColor} />
+        <Spinner color={spinnerColor} />
       ) : (
         <FlatList data={toDisplay} refreshing={isLoading} keyExtractor={keyExtractor} renderItem={renderItem} />
       )}

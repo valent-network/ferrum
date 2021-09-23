@@ -6,6 +6,8 @@ export const primaryColor = '#2E2C4F';
 
 export const secondaryColor = '#3C3C5D';
 
+export const spinnerColor = '#c9c9c9';
+
 //
 
 export const lightColor = '#c9c9c9';

@@ -6,7 +6,7 @@ import { View, Text, Spinner } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 
 import { decOfNum } from '../Utils';
-import { activeColor } from '../Colors';
+import { spinnerColor } from '../Colors';
 
 import NavigationService from '../services/NavigationService';
 
@@ -20,7 +20,7 @@ const HeaderTitle = ({ chat, isLoading, navigation }) => {
   onPress = () => NavigationService.push('ChatRoomSettingsScreen', { chat: chat });
 
   if (isLoading) {
-    return <Spinner color={activeColor} />;
+    return <Spinner color={spinnerColor} />;
   }
 
   return (

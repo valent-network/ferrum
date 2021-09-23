@@ -13,7 +13,7 @@ import OptionsList from './OptionsList';
 import NavigationService from '../services/NavigationService';
 
 import { styles } from './Styles';
-import { activeColor, lightColor } from '../Colors';
+import { activeColor, lightColor, spinnerColor } from '../Colors';
 
 export default class AdScreen extends React.PureComponent {
   shareAction = () => {
@@ -43,7 +43,7 @@ export default class AdScreen extends React.PureComponent {
       return (
         <Container>
           <Content>
-            <Spinner color={activeColor} />
+            <Spinner color={spinnerColor} />
           </Content>
         </Container>
       );
@@ -85,7 +85,7 @@ export default class AdScreen extends React.PureComponent {
 
             {typeof currentAdFriends !== 'undefined' &&
               (askFriendsIsLoading ? (
-                <Spinner color={activeColor} />
+                <Spinner color={spinnerColor} />
               ) : (
                 <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
               ))}

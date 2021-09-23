@@ -22,7 +22,15 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { activeColor, trackColor, lightColor, primaryColor, disabledColor, secondaryColor } from '../Colors';
+import {
+  activeColor,
+  trackColor,
+  lightColor,
+  primaryColor,
+  disabledColor,
+  secondaryColor,
+  spinnerColor,
+} from '../Colors';
 
 import { onTosPress, random } from '../Utils';
 
@@ -119,7 +127,7 @@ export default class LoginScreen extends React.Component {
       return (
         <Container>
           <Content>
-            <Spinner color={activeColor} />
+            <Spinner color={spinnerColor} />
           </Content>
         </Container>
       );

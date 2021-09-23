@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, primaryColor, lightColor } from '../Colors';
+import { activeColor, primaryColor, lightColor, spinnerColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 import ListNotFound from '../ListNotFound';
@@ -22,7 +22,7 @@ class UserContactsList extends React.PureComponent {
     const refreshControl = isLoading ? this.refreshControlLoading : this.refreshControlStable;
 
     if (userContacts.length === 0) {
-      return isLoading ? <Spinner color={activeColor} /> : <ListNotFound refreshControl={refreshControl} />;
+      return isLoading ? <Spinner color={spinnerColor} /> : <ListNotFound refreshControl={refreshControl} />;
     }
 
     return (

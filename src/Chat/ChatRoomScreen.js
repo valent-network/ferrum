@@ -6,7 +6,7 @@ import { Container, Content, Spinner } from 'native-base';
 
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from '../actions/actionTypes';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from '../Chat/chatActions';
-import { activeColor, lightColor, primaryColor, secondaryColor } from '../Colors';
+import { lightColor, primaryColor, secondaryColor, spinnerColor } from '../Colors';
 import { serverChannel } from '../services/ServerChannel';
 
 import { commonGiftedChatOptions } from './commonGiftedChatOptions';
@@ -148,7 +148,7 @@ const SpinnerScreen = () => {
   return (
     <Container style={styles.spinnerContainer}>
       <Content>
-        <Spinner color={activeColor} />
+        <Spinner color={spinnerColor} />
       </Content>
     </Container>
   );

@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { activeColor, lightColor } from '../Colors';
+import { lightColor, spinnerColor } from '../Colors';
 
 import { getChatRooms } from './chatActions';
 
@@ -25,7 +25,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
     return isLoading ? (
       <Container>
         <Content>
-          <Spinner color={activeColor} />
+          <Spinner color={spinnerColor} />
         </Content>
       </Container>
     ) : (
