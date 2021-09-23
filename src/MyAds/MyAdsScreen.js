@@ -94,6 +94,6 @@ const styles = StyleSheet.create({
     color: activeColor,
   },
   mainContainer: {
-    backgroundColor: primaryColor
-  }
+    backgroundColor: primaryColor,
+  },
 });

@@ -22,14 +22,7 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import {
-  activeColor,
-  trackColor,
-  lightColor,
-  primaryColor,
-  disabledColor,
-  secondaryColor,
-} from '../Colors';
+import { activeColor, trackColor, lightColor, primaryColor, disabledColor, secondaryColor } from '../Colors';
 
 import { onTosPress, random } from '../Utils';
 

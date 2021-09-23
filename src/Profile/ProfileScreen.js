@@ -22,7 +22,7 @@ import {
 } from 'native-base';
 
 import Clipboard from '@react-native-community/clipboard';
-import { TouchableOpacity, Image, StyleSheet, RefreshControl } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } from 'react-native';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -37,14 +37,7 @@ import { deleteContacts } from '../UserContacts/userContactsActions';
 
 import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from '../Utils';
 
-import {
-  activeColor,
-  lightColor,
-  disabledColor,
-  secondaryColor,
-  deletedColor,
-  primaryColor,
-} from '../Colors';
+import { activeColor, lightColor, disabledColor, secondaryColor, deletedColor, primaryColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -359,7 +352,7 @@ ProfileScreen.propTypes = {};
 
 styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
   },
   noAvatar: {
     width: 56,
@@ -399,6 +392,7 @@ styles = StyleSheet.create({
   userInfoContainer: {
     alignItems: 'center',
     paddingVertical: 24,
+    backgroundColor: primaryColor,
   },
   withBorderBottom: {
     borderBottomWidth: 0.5,

@@ -204,13 +204,6 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                 </Text>
               )}
 
-              {!user.refcode && (
-                <Text style={[styles.noteText, { color: activeColor }]} onPress={onReferralInfoPress}>
-                  <Text style={styles.noteText}>Читайте подробнее о том, что это даст лично вам,</Text>
-                  &nbsp;здесь.
-                </Text>
-              )}
-
               {user.refcode && selfRefcode !== refcode && (
                 <View>
                   <Thumbnail source={{ uri: user.avatar }} style={styles.avatarThumbnail} />

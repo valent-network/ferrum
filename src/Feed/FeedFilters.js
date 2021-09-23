@@ -29,14 +29,7 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import {
-  activeColor,
-  trackColor,
-  primaryColor,
-  lightColor,
-  disabledColor,
-  secondaryColor,
-} from '../Colors';
+import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secondaryColor } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
   let typingTimer;

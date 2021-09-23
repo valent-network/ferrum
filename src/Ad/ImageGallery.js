@@ -8,7 +8,7 @@ import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './Styles';
 
-import { primaryColor } from '../Colors'
+import { primaryColor } from '../Colors';
 
 const ImageViewerPageAnimationTimeoutMs = 300;
 
@@ -67,7 +67,8 @@ export default class ImageGallery extends React.Component {
 
         <Modal
           visible={this.state.imagesFullscreenOpened}
-          transparent={false}
+          transparent={true}
+          animationType="fade"
           onRequestClose={this.changeImagesFullscreenOpened}>
           <ImageViewer
             enableSwipeDown={true}
