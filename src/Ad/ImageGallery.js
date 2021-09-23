@@ -10,7 +10,7 @@ import { styles } from './Styles';
 
 import { primaryColor } from '../Colors';
 
-const ImageViewerPageAnimationTimeoutMs = 300;
+const ImageViewerPageAnimationTimeoutMs = 150;
 
 export default class ImageGallery extends React.Component {
   constructor(props) {
@@ -75,6 +75,7 @@ export default class ImageGallery extends React.Component {
             enablePreload={true}
             saveToLocalByLongPress={false}
             maxOverflow={0}
+            flipThreshold={1}
             index={this._carousel?.currentIndex}
             onCancel={this.changeImagesFullscreenOpened}
             onChange={this.syncCarousel}
