@@ -124,7 +124,7 @@ class ProfileScreen extends React.PureComponent {
       (buttonIndex) => buttonIndex === 0 && this.props.onSignOut(),
     );
 
-  refreshControl = (<RefreshControl refreshing={false} tintColor={secondaryColor} onRefresh={this.props.onRefresh} />);
+  refreshControl = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.props.onRefresh} />);
 
   openSetReferrerModal = () => this.setState({ referrerModalVisible: true });
   closeSetReferrerModal = () => {

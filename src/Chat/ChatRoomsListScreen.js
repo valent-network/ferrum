@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { activeColor, secondaryColor } from '../Colors';
+import { activeColor, lightColor } from '../Colors';
 
 import { getChatRooms } from './chatActions';
 
@@ -30,7 +30,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
       </Container>
     ) : (
       <ListNotFound
-        refreshControl={<RefreshControl refreshing={isLoading} tintColor={secondaryColor} onRefresh={onEndReached} />}
+        refreshControl={<RefreshControl refreshing={isLoading} tintColor={lightColor} onRefresh={onEndReached} />}
       />
     );
   }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, secondaryColor } from './Colors';
+import { activeColor, lightColor } from './Colors';
 
 import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
@@ -19,8 +19,8 @@ class AdsList extends React.PureComponent {
   flatListBugFix = { right: 1 };
 
   onRefresh = this.props.onRefresh;
-  refreshControlLoading = (<RefreshControl refreshing={true} tintColor={secondaryColor} onRefresh={this.onRefresh} />);
-  refreshControlStable = (<RefreshControl refreshing={false} tintColor={secondaryColor} onRefresh={this.onRefresh} />);
+  refreshControlLoading = (<RefreshControl refreshing={true} tintColor={lightColor} onRefresh={this.onRefresh} />);
+  refreshControlStable = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.onRefresh} />);
 
   _renderItem = ({ item, index }) => (
     <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={this.props.onAdOpened} />

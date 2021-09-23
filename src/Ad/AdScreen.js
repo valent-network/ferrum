@@ -13,7 +13,7 @@ import OptionsList from './OptionsList';
 import NavigationService from '../services/NavigationService';
 
 import { styles } from './Styles';
-import { activeColor, secondaryColor } from '../Colors';
+import { activeColor, lightColor } from '../Colors';
 
 export default class AdScreen extends React.PureComponent {
   shareAction = () => {
@@ -36,7 +36,7 @@ export default class AdScreen extends React.PureComponent {
 
   render() {
     const { ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
-    const refreshControl = <RefreshControl tintColor={secondaryColor} refreshing={isLoading} onRefresh={onRefresh} />;
+    const refreshControl = <RefreshControl tintColor={lightColor} refreshing={isLoading} onRefresh={onRefresh} />;
     const colorStyle = ad.is_favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
 
     if (isLoading && typeof ad.id === 'undefined') {
