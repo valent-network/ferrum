@@ -6,7 +6,7 @@ import { secondaryColor, activeColor } from '../Colors';
 
 export default ({ openFriendPickerModal }) => (
   <View style={styles.mutualFriendBox}>
-    <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
+    <Image style={styles.noAvatar} source={require('../assets/recario.png')} />
     <Text note style={styles.smallFont}>
       {'\n'}Обсудить с другом{'\n'}
     </Text>
