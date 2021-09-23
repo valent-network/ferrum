@@ -82,7 +82,7 @@ export default class LoginScreen extends React.Component {
         <H1 style={styles.h1}>Введите код из SMS</H1>
         <View style={styles.h2Container}>
           <Text style={styles.h2}>SMS с кодом было отправлено на номер</Text>
-          <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '')}</Text>
+          <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '').replace(/^\+380/g, '')}</Text>
         </View>
         <Item style={styles.codeInput} rounded>
           <Icon name="ios-key-outline" style={styles.icon} />
