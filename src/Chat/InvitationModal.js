@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Text, View, Icon, Thumbnail, Item, Input, Button } from 'native-base';
+import { Text, View, Icon, Item, Input, Button } from 'native-base';
+
+import UserAvatar from 'react-native-user-avatar';
 
 import { updateUserName } from '../Profile/profileActions';
 
@@ -32,11 +34,9 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
           </View>
 
           <View style={styles.contentContainer}>
-            {friend.avatar ? (
-              <Thumbnail source={{ uri: friend.avatar }} style={styles.avatar} />
-            ) : (
-              <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-            )}
+            <View style={styles.userAvatarContainer}>
+              <UserAvatar size={48} name={friend.name || ''} src={friend.avatar} bgColor={activeColor} />
+            </View>
             <Text style={styles.friendInfo}>
               {friend.name}
               {'\n'}
@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
   introduceOption: { fontSize: 18, marginRight: 8 },
   activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: lightColor },
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
-  avatar: { alignSelf: 'center' },
   friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
   emptyUserNameContainer: {
     backgroundColor: warningColor,
@@ -150,14 +149,12 @@ const styles = StyleSheet.create({
   },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },
-  noAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignSelf: 'center',
-  },
   nameInput: {
     color: lightColor,
+  },
+  userAvatarContainer: {
+    width: 48,
+    alignSelf: 'center',
   },
 });
 

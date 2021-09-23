@@ -18,9 +18,9 @@ export default ({ openFriendPickerModal }) => (
 
 const styles = StyleSheet.create({
   noAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
   },
   mutualFriendBox: {
     padding: 6,

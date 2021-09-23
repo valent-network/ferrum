@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, ActionSheet } from 'native-base';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
+
+import { Text, ListItem, Left, Right, Body, Icon, ActionSheet } from 'native-base';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { activeColor, disabledColor, secondaryColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
@@ -53,12 +55,12 @@ export default class UserContactsListItem extends React.PureComponent {
         onPress={this.openMore}
         style={styles.mainContainer}>
         <Left>
-          {this.user && this.user.avatar && (
-            <Thumbnail source={{ uri: this.user.avatar }} style={styles.avatarThumbnail} />
-          )}
-          {(!this.user || !this.user.avatar) && (
-            <Image style={styles.defaultAvatar} source={require('../assets/default_avatar.png')} />
-          )}
+          <UserAvatar
+            size={48}
+            name={this.user?.name || contact.name || ''}
+            src={this.user?.avatar}
+            bgColor={this.user ? activeColor : secondaryColor}
+          />
         </Left>
         <Body>
           <Text style={phoneStyle}>{contact.name}</Text>
@@ -78,18 +80,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
     borderBottomColor: secondaryColor,
-  },
-  defaultAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-  },
-  avatarThumbnail: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    borderColor: activeColor,
-    borderWidth: 2,
   },
   contactPhoneStyle: {
     fontSize: 12,

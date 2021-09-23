@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { StyleSheet, Image } from 'react-native';
-import { Text, View, Button, Thumbnail } from 'native-base';
+import UserAvatar from 'react-native-user-avatar';
 
-import { secondaryColor, activeColor } from '../Colors';
+import { StyleSheet } from 'react-native';
+import { Text, View, Button } from 'native-base';
+
+import { secondaryColor, activeColor, primaryColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 const INVITATIONAL_TEXT_SMS = 'Привет, смотри, нашел твою машину здесь — https://recar.io/get';
 
 export default ({ friend, prepareInvitation }) => (
   <View style={styles.mutualFriendBox} key={friend.id}>
-    {friend.avatar ? (
-      <Thumbnail source={{ uri: friend.avatar }} />
-    ) : (
-      <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-    )}
+    <UserAvatar
+      size={48}
+      name={friend.name || ''}
+      src={friend.avatar}
+      bgColor={friend.user_id ? activeColor : primaryColor}
+    />
     <Text note style={styles.smallFont}>
       {friend.name}
     </Text>
@@ -37,11 +40,6 @@ export default ({ friend, prepareInvitation }) => (
 );
 
 const styles = StyleSheet.create({
-  noAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-  },
   mutualFriendBox: {
     padding: 6,
     borderWidth: 1,

@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Text, Icon, ListItem, Left, Body, Right, Thumbnail, Button } from 'native-base';
+import { Text, Icon, ListItem, Left, Body, Right, Button } from 'native-base';
 
 import { StyleSheet } from 'react-native';
+
+import UserAvatar from 'react-native-user-avatar';
 
 import { activeColor, secondaryColor, disabledColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
@@ -19,9 +21,12 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
 
   return (
     <ListItem style={styles.mainContainer} noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent">
-      {friend.user_id && (
-        <Left>{friend.avatar ? <Thumbnail source={{ uri: friend.avatar }} /> : <DefaultAvatar />}</Left>
-      )}
+      <UserAvatar
+        size={48}
+        name={friend.name || ''}
+        src={friend.avatar}
+        bgColor={friend.user_id ? activeColor : secondaryColor}
+      />
       <Body>
         <Text style={friend.user_id && membersIds.includes(friend.user_id) ? { color: activeColor } : {}}>
           {friend.name}
@@ -49,8 +54,6 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
     </ListItem>
   );
 }
-
-const DefaultAvatar = () => <Thumbnail source={require('../assets/default_avatar.png')} />;
 
 const styles = StyleSheet.create({
   mainContainer: {

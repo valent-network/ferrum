@@ -3590,6 +3590,11 @@ inherits@2, inherits@2.0.4, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+initials@^3.0.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/initials/-/initials-3.1.1.tgz#a63395b2c46bc56207b4b964a6eb185dbd8458e6"
+  integrity sha512-imRkwIpCUer+w9NB41dTENhJrTQTGOJthRa3URF0O9+L7MOMBPmN8njwkiX4u8YnzxbjEp4Is0ohiW6NSA8ZCw==
+
 inquirer@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-0.12.0.tgz#1ef2bfd63504df0bc75785fff8c2c41df12f077e"
@@ -6157,6 +6162,14 @@ react-native-typing-animation@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/react-native-typing-animation/-/react-native-typing-animation-0.1.7.tgz#8f2cf08d9400ae543a110292eb7d71523dda5528"
   integrity sha512-4H3rF9M+I2yAZpYJcY0Mb29TXkn98QK12rrKSY6LZj1BQD9NNmRZuNXzwX4XHapsIz+N/J8M3p27FOQPbfzqeg==
+
+react-native-user-avatar@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-user-avatar/-/react-native-user-avatar-1.0.7.tgz#be7a3912e3babad8780c8b83cff9a7e14d15cff7"
+  integrity sha512-ROWoH0yqHbs6yc5hruEI5n0yjpnw5fNAiEwTiVHbqOSPsgKU4Zwy+Ftr/8EaFzIrVRqxY7QXXZY/EWUll1YY+Q==
+  dependencies:
+    initials "^3.0.1"
+    prop-types "^15.7.2"
 
 react-native-vector-icons@^7.0.0:
   version "7.1.0"

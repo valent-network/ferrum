@@ -5,6 +5,8 @@ import { Modal, StyleSheet, TouchableOpacity, Keyboard, TextInput } from 'react-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { View, Icon, Text, Thumbnail, Button, ActionSheet } from 'native-base';
 
+import UserAvatar from 'react-native-user-avatar';
+
 import { getReferrer, setReferrer } from './profileActions';
 
 import { lightColor, primaryColor, activeColor } from '../Colors';
@@ -206,7 +208,9 @@ function SetReferrerModal({ onClose, selfRefcode }) {
 
               {user.refcode && selfRefcode !== refcode && (
                 <View>
-                  <Thumbnail source={{ uri: user.avatar }} style={styles.avatarThumbnail} />
+                  <View style={styles.userAvatarContainer}>
+                    <UserAvatar size={48} name={user.name || ''} src={user.avatar} bgColor={activeColor} />
+                  </View>
                   <Text>{user.name} приглашает вас в Рекарио.</Text>
                   <Button style={styles.confirmButton} onPress={confirmInvitation} block>
                     <Text>Принимаю приглашение</Text>
@@ -237,13 +241,11 @@ function SetReferrerModal({ onClose, selfRefcode }) {
 
 const styles = StyleSheet.create({
   modalControlsContainer: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: 16,
   },
   contentContainer: {
     padding: 16,
-    flexDirection: 'column',
     flex: 1,
   },
   closeIcon: {
@@ -270,15 +272,6 @@ const styles = StyleSheet.create({
   noteText: {
     fontSize: 16,
     marginBottom: 8,
-  },
-  avatarThumbnail: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderColor: activeColor,
-    borderWidth: 2,
-    alignSelf: 'center',
-    marginVertical: 32,
   },
   confirmButton: {
     backgroundColor: activeColor,
@@ -309,6 +302,10 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
+    alignSelf: 'center',
+  },
+  userAvatarContainer: {
+    width: 48,
     alignSelf: 'center',
   },
 });

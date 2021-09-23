@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, ListItem, Left, Right, Body, Thumbnail, Icon, Button } from 'native-base';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
+
+import { Text, ListItem, Left, Right, Body, Icon, Button } from 'native-base';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { activeColor, disabledColor, primaryColor, secondaryColor } from '../Colors';
-
-import DEFAULT_AVATAR from '../assets/default_avatar.png';
 
 import { invitationalSMS } from '../Utils';
 
@@ -19,7 +19,7 @@ export default class UsersListItem extends React.PureComponent {
     return (
       <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent" style={styles.mainContainer}>
         <Left>
-          <Image style={styles.defaultAvatar} source={DEFAULT_AVATAR} />
+          <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={secondaryColor} />
         </Left>
         <Body>
           <Text>{contact.name}</Text>
@@ -45,18 +45,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: secondaryColor,
     backgroundColor: primaryColor,
-  },
-  defaultAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-  },
-  avatarThumbnail: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    borderColor: activeColor,
-    borderWidth: 2,
   },
   contactPhoneStyle: {
     fontSize: 12,

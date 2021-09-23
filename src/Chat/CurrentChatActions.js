@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
+import UserAvatar from 'react-native-user-avatar';
+
 import { Thumbnail, Spinner } from 'native-base';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import NavigationService from '../services/NavigationService';
 import { activeColor } from '../Colors';
@@ -17,7 +19,9 @@ const HeaderActions = ({ chat, isLoading }) => {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Thumbnail style={styles.carPhoto} source={{ uri: chat.photo }} />
+      <View style={styles.carPhoto}>
+        <UserAvatar size={36} name={chat.title || ''} src={chat.photo} bgColor={activeColor} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -37,8 +41,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(HeaderActions);
 
 const styles = StyleSheet.create({
   carPhoto: {
-    width: 32,
-    height: 32,
-    marginRight: 16,
+    marginRight: 18,
   },
 });

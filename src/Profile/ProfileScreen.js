@@ -10,7 +10,6 @@ import {
   ListItem,
   Input,
   Form,
-  Thumbnail,
   Left,
   Right,
   Body,
@@ -20,6 +19,8 @@ import {
   Item,
   Label,
 } from 'native-base';
+
+import UserAvatar from 'react-native-user-avatar';
 
 import Clipboard from '@react-native-community/clipboard';
 import { TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } from 'react-native';
@@ -146,11 +147,7 @@ class ProfileScreen extends React.PureComponent {
         <Content refreshControl={this.refreshControl} contentContainerStyle={styles.contentStyle}>
           <View style={styles.userInfoContainer}>
             <TouchableOpacity onPress={this.onAvatarPress}>
-              {user.avatar ? (
-                <Thumbnail source={{ uri: user.avatar }} />
-              ) : (
-                <Image style={styles.noAvatar} source={require('../assets/default_avatar.png')} />
-              )}
+              <UserAvatar size={48} name={user.name || ''} src={user.avatar} bgColor={activeColor} />
             </TouchableOpacity>
             <Text note style={styles.changeAvatarButton} onPress={this.onAvatarPress}>
               Изменить
@@ -353,11 +350,6 @@ ProfileScreen.propTypes = {};
 styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: primaryColor,
-  },
-  noAvatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 32,
   },
   contentStyle: {
     flexGrow: 1,

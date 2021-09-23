@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, Button } from 'native-base';
-import { ScrollView, StyleSheet, Image } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { activeColor } from '../Colors';
 
 import { initiateChatRoom } from '../Chat/chatActions';

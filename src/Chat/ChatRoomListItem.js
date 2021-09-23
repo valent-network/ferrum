@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 
 import NavigationService from '../services/NavigationService';
 
+import UserAvatar from 'react-native-user-avatar';
+
 import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from 'native-base';
 
 import dayjs from 'dayjs';
@@ -55,7 +57,11 @@ export default function ChatRoomListItem({ chat }) {
       onLongPress={onLongPress}
       style={styles.chatRow}>
       <Left>
-        <Thumbnail source={chat.system ? RECARIO_LOGO : { uri: chat.photo }} style={styles.carPhoto} />
+        {chat.system ? (
+          <Thumbnail source={RECARIO_LOGO} style={styles.carPhoto} />
+        ) : (
+          <UserAvatar size={48} name={chat.title || ''} src={chat.photo} bgColor={activeColor} />
+        )}
       </Left>
       <Body style={styles.previewBody}>
         <Text>{chat.system ? 'Рекарио' : chat.title}</Text>
@@ -77,8 +83,8 @@ export default function ChatRoomListItem({ chat }) {
 
 const styles = StyleSheet.create({
   carPhoto: {
-    borderColor: activeColor,
-    borderWidth: 1,
+    width: 48,
+    height: 48,
   },
   previewBody: {
     backgroundColor: 'transparent',
