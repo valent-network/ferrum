@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Header, Item, Icon, Input, Text, Fab } from 'native-base';
-import { StyleSheet, Platform } from 'react-native';
+import { Container, Header, Item, Icon, Input, Text, Left, Right } from 'native-base';
+import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
+
+import NavigationService from '../services/NavigationService';
 
 import UserContactsList from './UserContactsList';
 import UserContactsListItem from './UserContactsListItem';
@@ -17,7 +19,7 @@ import { primaryColor, secondaryColor, lightColor, disabledColor } from '../Colo
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
   static navigationOptions = ({ navigation }) => {
-    return { header: () => null };
+    return { header: () => null, headerShown: false };
   };
 
   renderItem = ({ item, index }) => (
@@ -44,6 +46,11 @@ class UserContactsScreen extends React.PureComponent {
     return (
       <Container>
         <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar>
+          <TouchableOpacity activeOpacity={1} onPress={() => NavigationService.navigate('ProfileScreen')}>
+            <Left style={styles.topIconContainer}>
+              <Icon name="chevron-back-outline" />
+            </Left>
+          </TouchableOpacity>
           <Item style={styles.searchBar}>
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input
@@ -56,6 +63,7 @@ class UserContactsScreen extends React.PureComponent {
             />
             {query.length > 0 && <Icon name="close-circle" style={styles.inputTextColor} onPress={this.resetQuery} />}
           </Item>
+          <Right style={styles.topIconContainer}></Right>
         </Header>
         <PermissionsBox />
         <UserContactsList
@@ -108,5 +116,10 @@ const styles = StyleSheet.create({
   },
   inputTextColor: {
     color: lightColor,
+  },
+  topIconContainer: {
+    maxWidth: 57,
+    minWidth: 57,
+    justifyContent: 'center',
   },
 });

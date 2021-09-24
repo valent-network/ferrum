@@ -250,6 +250,19 @@ class ProfileScreen extends React.PureComponent {
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
                   noIndent
+                  onPress={() => this.props.navigation.push('UserContacts')}
+                  activeOpacity={1}
+                  underlayColor="transparent">
+                  <Left>
+                    <Text>Друзья</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="chevron-forward-outline" />
+                  </Right>
+                </ListItem>
+                <ListItem
+                  style={[styles.itemContainer, styles.withBorderBottom]}
+                  noIndent
                   onPress={() => this.props.navigation.push('InviteFriendsScreen')}
                   activeOpacity={1}
                   underlayColor="transparent">

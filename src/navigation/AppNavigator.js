@@ -108,23 +108,29 @@ FeedNavigator.navigationOptions = ({ navigation }) => {
   };
 };
 
-const ProfileNavigator = createStackNavigator(
-  {
-    ProfileScreen: { screen: ProfileScreen },
-    InviteFriendsScreen: { screen: InviteFriendsScreen },
-  },
-  {
-    initialRouteName: 'ProfileScreen',
-    defaultNavigationOptions: defaultNavigationOptions,
-  },
-);
-
 const UserContactsNavigator = createStackNavigator(
   {
     UserContactsScreen: { screen: UserContactsScreen },
   },
   {
     initialRouteName: 'UserContactsScreen',
+    defaultNavigationOptions: defaultNavigationOptions,
+  },
+);
+
+const ProfileNavigator = createStackNavigator(
+  {
+    ProfileScreen: { screen: ProfileScreen },
+    InviteFriendsScreen: { screen: InviteFriendsScreen },
+    UserContacts: {
+      screen: UserContactsNavigator,
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
+  },
+  {
+    initialRouteName: 'ProfileScreen',
     defaultNavigationOptions: defaultNavigationOptions,
   },
 );
@@ -166,14 +172,6 @@ const bottomTabsNavigator = createBottomTabNavigator(
       navigationOptions: {
         title: '',
         tabBarIcon: iconFor('garage'),
-      },
-    },
-    UserContacts: {
-      screen: UserContactsNavigator,
-      path: 'user_contacts',
-      navigationOptions: {
-        title: '',
-        tabBarIcon: iconFor('people-circle-outline'),
       },
     },
     Profile: {

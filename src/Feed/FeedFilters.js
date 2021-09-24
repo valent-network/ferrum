@@ -124,10 +124,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
       <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar rounded>
         <TouchableOpacity activeOpacity={1} onPress={switchModalVisible}>
           <Left style={styles.topIconContainer}>
-            <Icon
-              name={filtersPresent ? 'funnel' : 'funnel-outline'}
-              style={styles.filterIcon}
-            />
+            <Icon name={filtersPresent ? 'funnel' : 'funnel-outline'} style={styles.filterIcon} />
           </Left>
         </TouchableOpacity>
         <Item style={styles.searchBar}>
