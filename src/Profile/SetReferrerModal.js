@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
   modalControlsContainer: {
     justifyContent: 'space-between',
     marginLeft: 16,
+    marginTop: 36,
   },
   contentContainer: {
     padding: 16,

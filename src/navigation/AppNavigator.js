@@ -179,7 +179,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: 'profile',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('settings-outline'),
+        tabBarIcon: iconFor('menu-outline'),
       },
     },
   },
