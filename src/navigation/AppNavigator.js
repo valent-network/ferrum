@@ -3,6 +3,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faWarehouse } from '@fortawesome/free-solid-svg-icons';
+
 import { StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
@@ -38,6 +41,18 @@ const styles = StyleSheet.create({
 });
 
 function iconFor(iconName) {
+  if (iconName === 'garage') {
+    return ({ tintColor }) => {
+      return (
+        <FontAwesomeIcon
+          icon={faWarehouse}
+          style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon}
+          size={24}
+        />
+      );
+    };
+  }
+
   return ({ tintColor }) => {
     return <Icon name={iconName} style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon} />;
   };
@@ -140,7 +155,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: '',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('star-outline'),
+        tabBarIcon: iconFor('garage'),
       },
     },
     Chat: {
