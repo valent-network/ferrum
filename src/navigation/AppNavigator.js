@@ -25,7 +25,7 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { activeColor, primaryColor, disabledColor, secondaryColor } from '../Colors';
+import { activeColor, primaryColor, disabledColor, secondaryColor, lightColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
@@ -64,17 +64,6 @@ const defaultNavigationOptions = {
   },
 };
 
-const FeedNavigator = createStackNavigator(
-  {
-    FeedScreen: { screen: FeedScreen },
-    Ad: { screen: FeedAdScreen },
-  },
-  {
-    initialRouteName: 'FeedScreen',
-    defaultNavigationOptions: defaultNavigationOptions,
-  },
-);
-
 const ChatStack = createStackNavigator(
   {
     ChatRoomsListScreen: { screen: ChatRoomsListScreen, path: '' },
@@ -87,9 +76,30 @@ const ChatStack = createStackNavigator(
   },
 );
 
-ChatStack.navigationOptions = ({ navigation }) => {
+const FeedNavigator = createStackNavigator(
+  {
+    FeedScreen: { screen: FeedScreen },
+    Ad: { screen: FeedAdScreen },
+    Chat: {
+      screen: ChatStack,
+      path: '',
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
+  },
+  {
+    initialRouteName: 'FeedScreen',
+    defaultNavigationOptions: defaultNavigationOptions,
+  },
+);
+
+FeedNavigator.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 0) {
+
+  const route = navigation.state.routes[navigation.state.routes.length - 1];
+
+  if (route.routeName === 'Chat') {
     tabBarVisible = false;
   }
 
@@ -156,14 +166,6 @@ const bottomTabsNavigator = createBottomTabNavigator(
       navigationOptions: {
         title: '',
         tabBarIcon: iconFor('garage'),
-      },
-    },
-    Chat: {
-      screen: ChatStack,
-      path: '',
-      navigationOptions: {
-        title: '',
-        tabBarIcon: (props) => <ChatIcon {...props} />,
       },
     },
     UserContacts: {

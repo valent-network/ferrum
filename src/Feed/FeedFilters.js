@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StyleSheet, ScrollView, Modal, SafeAreaView, Switch, Platform } from 'react-native';
+import { StyleSheet, ScrollView, Modal, SafeAreaView, Switch, Platform, TouchableOpacity } from 'react-native';
 import {
   View,
   Text,
@@ -22,6 +22,8 @@ import {
   Body,
 } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import NavigationService from '../services/NavigationService';
 
 import ChatIcon from '../navigation/ChatIcon';
 
@@ -120,6 +122,14 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
   return (
     <View>
       <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar rounded>
+        <TouchableOpacity activeOpacity={1} onPress={switchModalVisible}>
+          <Left style={styles.topIconContainer}>
+            <Icon
+              name={filtersPresent ? 'funnel' : 'funnel-outline'}
+              style={styles.filterIcon}
+            />
+          </Left>
+        </TouchableOpacity>
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
@@ -134,13 +144,11 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
             <Icon name="close-circle" style={styles.inputTextColor} onPress={filterQueryReset} />
           )}
         </Item>
-        <Right style={styles.filterIconContainer}>
-          <Icon
-            name={filtersPresent ? 'funnel' : 'funnel-outline'}
-            style={styles.filterIcon}
-            onPress={switchModalVisible}
-          />
-        </Right>
+        <TouchableOpacity activeOpacity={1} onPress={() => NavigationService.navigate('ChatRoomsListScreen')}>
+          <Right style={styles.topIconContainer}>
+            <ChatIcon />
+          </Right>
+        </TouchableOpacity>
       </Header>
 
       <Modal animationType="slide" visible={modalVisible}>
@@ -384,17 +392,16 @@ const styles = StyleSheet.create({
   inputTextColor: {
     color: lightColor,
   },
-  filterIconContainer: {
+  topIconContainer: {
     height: '100%',
-    minWidth: 48,
-    maxWidth: 48,
+    minWidth: 57,
+    maxWidth: 57,
     justifyContent: 'center',
     alignItems: 'center',
   },
   filterIcon: {
     color: disabledColor,
-    fontSize: 22,
-    padding: 11,
+    fontSize: 24,
     color: activeColor,
   },
 });

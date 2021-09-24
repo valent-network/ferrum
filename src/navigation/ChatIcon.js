@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
 import { activeColor, disabledColor } from '../Colors';
-import NavigationService from '../services/NavigationService';
 
-const ChatIcon = ({ tintColor, unreadMessagesCount }) => {
-  const icon = (
-    <Icon name="chatbubbles-outline" style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon} />
-  );
+const ChatIcon = ({ unreadMessagesCount }) => {
+  const icon = <Icon name="chatbubbles-outline" style={styles.activeIcon} />;
 
   if (unreadMessagesCount === 0) {
     return icon;
@@ -18,7 +15,7 @@ const ChatIcon = ({ tintColor, unreadMessagesCount }) => {
 
   return (
     <FooterTab style={styles.footerTab}>
-      <Button badge vertical activeOpacity={1} onPress={doNavigate}>
+      <Button badge vertical activeOpacity={1}>
         <Badge style={styles.badge}>
           <Text>{unreadMessagesCount}</Text>
         </Badge>
@@ -44,16 +41,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: activeColor,
   },
-  inactiveIcon: {
-    fontSize: 24,
-    color: disabledColor,
-  },
   badge: {
     backgroundColor: activeColor,
   },
   footerTab: {
-    backgroundColor: 'transparent', // for Android
+    backgroundColor: 'transparent', // for Android,
+    padding: 0,
+    margin: 0,
   },
 });
-
-const doNavigate = () => NavigationService.navigate('ChatRoomsListScreen');
