@@ -211,17 +211,21 @@ class ProfileScreen extends React.PureComponent {
                       </Right>
                     </ListItem>
                     {user.referrer && (
-                      <React.Fragment>
+                      <View style={styles.referrerContainer}>
+                        <View style={styles.referrerAvatarContainer}>
+                          <UserAvatar
+                            size={48}
+                            name={user.referrer.contact_name || user.referrer.name || ''}
+                            src={user.referrer.avatar}
+                            bgColor={activeColor}
+                          />
+                        </View>
                         <Text style={styles.noteText}>
                           {user.referrer.contact_name || user.referrer.name || 'Имя не указано'}
                           &nbsp;
                           {user.referrer.phone}
                         </Text>
-                        <Text style={[styles.noteText, { color: activeColor }]} onPress={onReferralInfoPress}>
-                          <Text style={styles.noteText}>Читайте подробнее о том, что это даст лично вам,</Text>
-                          &nbsp;здесь.
-                        </Text>
-                      </React.Fragment>
+                      </View>
                     )}
                   </React.Fragment>
                 )}
@@ -407,5 +411,14 @@ styles = StyleSheet.create({
   },
   label: {
     color: disabledColor,
+  },
+  referrerContainer: {
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingLeft: 16,
+  },
+  referrerAvatarContainer: {
+    width: 48,
+    flexWrap: 'wrap',
   },
 });
