@@ -36,7 +36,7 @@ export default class UsersListItem extends React.PureComponent {
         onPress={() => onUserPress(friend)}
         style={styles.mainContainer}>
         <Left>
-          <UserAvatar size={48} name={contact.name || ''} src={contact.user.avatar} bgColor={activeColor} />
+          <UserAvatar size={48} name={friend.name || friend.user_name || ''} src={contact.user.avatar} bgColor={activeColor} />
         </Left>
         <Body>
           <Text style={phoneStyle}>{contact.name}</Text>

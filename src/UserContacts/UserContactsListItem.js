@@ -57,7 +57,7 @@ export default class UserContactsListItem extends React.PureComponent {
         <Left>
           <UserAvatar
             size={48}
-            name={this.user?.name || contact.name || ''}
+            name={contact.name || this.user?.name ||''}
             src={this.user?.avatar}
             bgColor={this.user ? activeColor : secondaryColor}
           />
