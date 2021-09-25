@@ -313,9 +313,9 @@ const styles = StyleSheet.create({
   },
   mainHeader: {
     backgroundColor: secondaryColor,
+    flexWrap: 'nowrap',
     borderBottomWidth: 0,
-    paddingBottom: 16,
-    paddingLeft: 12,
+    paddingBottom: 8,
   },
   filterTitle: {
     marginTop: 16,
@@ -379,6 +379,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: primaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
+    alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
   },
   searchIcon: {
     color: disabledColor,
@@ -395,6 +396,8 @@ const styles = StyleSheet.create({
     maxWidth: 57,
     justifyContent: 'center',
     alignItems: 'center',
+    minHeight: 57,
+    maxHeight: 57
   },
   filterIcon: {
     color: disabledColor,
