@@ -129,8 +129,7 @@ export function newMessage(chat, myMessage = false) {
     const messageBody = chat.messages[0].text;
     const messageUserId = chat.messages[0].user._id;
 
-    // # TODO: system notifications are not shown at all at the moment
-    const shouldShowUINoitifcation = !myMessage && messageUserId !== currentUserId && !messageUserId === null;
+    const shouldShowUINoitifcation = !myMessage && (messageUserId !== currentUserId);
 
     if (currentChatId === chat.id) {
       if (messageUserId !== currentUserId) {

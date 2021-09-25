@@ -6,6 +6,8 @@ import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
 import { activeColor, disabledColor } from '../Colors';
 
+import NavigationService from '../services/NavigationService';
+
 const ChatIcon = ({ unreadMessagesCount }) => {
   const icon = <Icon name="chatbubbles-outline" style={styles.activeIcon} />;
 
@@ -15,7 +17,7 @@ const ChatIcon = ({ unreadMessagesCount }) => {
 
   return (
     <FooterTab style={styles.footerTab}>
-      <Button badge vertical activeOpacity={1}>
+      <Button badge vertical activeOpacity={1} onPress={() => NavigationService.navigate('ChatRoomsListScreen')}>
         <Badge style={styles.badge}>
           <Text>{unreadMessagesCount}</Text>
         </Badge>
