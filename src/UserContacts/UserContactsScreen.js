@@ -102,14 +102,15 @@ UserContactsScreen.propTypes = {};
 const styles = StyleSheet.create({
   mainHeader: {
     backgroundColor: secondaryColor,
+    flexWrap: 'nowrap',
     borderBottomWidth: 0,
-    paddingBottom: 16,
-    paddingLeft: 12,
+    paddingBottom: 8,
   },
   searchBar: {
     borderRadius: 16,
     backgroundColor: primaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
+    alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
   },
   searchIcon: {
     color: disabledColor,
@@ -118,8 +119,12 @@ const styles = StyleSheet.create({
     color: lightColor,
   },
   topIconContainer: {
-    maxWidth: 57,
+    height: '100%',
     minWidth: 57,
+    maxWidth: 57,
     justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 57,
+    maxHeight: 57
   },
 });
