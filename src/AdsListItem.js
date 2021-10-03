@@ -16,7 +16,8 @@ export default class AdsListItem extends React.PureComponent {
 
     const imageURI = { uri: image };
 
-    let knowsText;
+    let knowsText, handsCountString;
+
 
     if (friend_name_and_total) {
       if (friend_name_and_total.friend_hands === 1) {
@@ -30,6 +31,8 @@ export default class AdsListItem extends React.PureComponent {
             ? `Знает ${friend_name_and_total.name} и еще ${friend_name_and_total.count}...`
             : `Знает ${friend_name_and_total.name}`;
       }
+      handsCountString = "🤝".repeat(friend_name_and_total.friend_hands);
+      knowsText = `${handsCountString} ${knowsText}`;
     }
 
     return (
