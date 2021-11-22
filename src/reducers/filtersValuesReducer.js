@@ -5,6 +5,7 @@ const initialState = {
   wheels: [],
   carcasses: [],
   fuels: [],
+  hops_count: [],
 };
 
 export default function filtersValuesReducer(state = initialState, action = {}) {

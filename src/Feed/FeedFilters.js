@@ -105,18 +105,13 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
   const filterBoxGears = (filterValue) => filterBox(filterValue, 'gears');
   const filterBoxCarcasses = (filterValue) => filterBox(filterValue, 'carcasses');
   const filterBoxFuels = (filterValue) => filterBox(filterValue, 'fuels');
+  const filterBoxHopsCount = (filterValue, index) => filterBox(filterValue, 'hops_count');
 
   const filtersPresent = Object.values(filters).filter((f) => f.length > 0).length > 0;
 
   const onChangeQueryWithDelay = (text) => {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(() => applyFilter('query', text), 200);
-  };
-
-  const onContactsModeChange = () => {
-    const valueToSet = filters.contacts_mode == 'directFriends' ? '' : 'directFriends';
-
-    applyFilter('contacts_mode', valueToSet);
   };
 
   return (
@@ -163,20 +158,10 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                   <Icon name="close-outline" onPress={switchModalVisibleWithLocal} style={styles.closeIcon} />
                 </View>
                 <Form style={styles.filtersForm}>
-                  <View style={styles.switchFilter}>
-                    <Left>
-                      <H2 style={styles.filterTitle}>Только друзья</H2>
-                    </Left>
-                    <Right>
-                      <Switch
-                        thumbColor={lightColor}
-                        trackColor={trackColor}
-                        ios_backgroundColor={secondaryColor}
-                        onValueChange={onContactsModeChange}
-                        value={filters.contacts_mode == 'directFriends'}
-                      />
-                    </Right>
-                  </View>
+                  <H2 style={styles.filterTitle}>Знаю через</H2>
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {filtersValues.hops_count.map(filterBoxHopsCount)}
+                  </ScrollView>
                   <H2 style={styles.filterTitle}>Цена, $</H2>
                   <View style={styles.rangeItemWrapper}>
                     <Item style={styles.rangeItem}>

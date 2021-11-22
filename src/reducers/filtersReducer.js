@@ -6,11 +6,11 @@ const initialState = {
   min_year: '',
   max_year: '',
   query: '',
-  contacts_mode: '',
   gears: [],
   wheels: [],
   carcasses: [],
   fuels: [],
+  hops_count: [],
 };
 
 export default function filtersReducer(state = initialState, action = {}) {
@@ -22,9 +22,15 @@ export default function filtersReducer(state = initialState, action = {}) {
       };
     case ActionTypes.FILTER_CHANGED_ARRAY:
       const isThere = state[action.filterKey].filter((f) => f === action.filterValue).length === 1;
-      const newFilter = isThere
-        ? state[action.filterKey].filter((f) => f !== action.filterValue)
-        : state[action.filterKey].concat(action.filterValue);
+      let newFilter;
+
+      if (action.filterKey === 'hops_count') { // if single-valued filter
+        newFilter = isThere ? [] : [action.filterValue]
+      } else {
+        newFilter = isThere
+          ? state[action.filterKey].filter((f) => f !== action.filterValue)
+          : state[action.filterKey].concat(action.filterValue);
+      }
 
       return {
         ...state,

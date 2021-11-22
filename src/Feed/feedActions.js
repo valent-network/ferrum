@@ -45,7 +45,7 @@ export function loadMoreAds() {
 }
 
 export function applyFilter(filterKey, filterValue) {
-  const filterType = ['gears', 'wheels', 'fuels', 'carcasses'].filter((f) => f === filterKey).length
+  const filterType = ['gears', 'wheels', 'fuels', 'carcasses', 'hops_count'].filter((f) => f === filterKey).length
     ? ActionTypes.FILTER_CHANGED_ARRAY
     : ActionTypes.FILTER_CHANGED;
 
