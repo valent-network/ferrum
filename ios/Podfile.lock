@@ -1,22 +1,22 @@
 PODS:
-  - appcenter-analytics (4.1.0):
+  - appcenter-analytics (4.3.0):
     - AppCenter/Analytics (~> 4.0)
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
-  - appcenter-core (4.1.0):
+  - appcenter-core (4.3.0):
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
-  - appcenter-crashes (4.1.0):
+  - appcenter-crashes (4.3.0):
     - AppCenter/Crashes (~> 4.0)
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
-  - AppCenter/Analytics (4.0.0):
+  - AppCenter/Analytics (4.3.0):
     - AppCenter/Core
-  - AppCenter/Core (4.0.0)
-  - AppCenter/Crashes (4.0.0):
+  - AppCenter/Core (4.3.0)
+  - AppCenter/Crashes (4.3.0):
     - AppCenter/Core
-  - AppCenterReactNativeShared (4.0.0):
-    - AppCenter/Core (= 4.0.0)
+  - AppCenterReactNativeShared (4.3.0):
+    - AppCenter/Core (= 4.3.0)
   - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
   - CodePush (6.4.1):
@@ -34,9 +34,9 @@ PODS:
     - React-jsi (= 0.64.2)
     - ReactCommon/turbomodule/core (= 0.64.2)
   - glog (0.3.5)
-  - JWT (3.0.0-beta.12):
+  - JWT (3.0.0-beta.14):
     - Base64 (~> 1.1.2)
-  - Permission-Contacts (3.0.4):
+  - Permission-Contacts (3.1.0):
     - RNPermissions
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
@@ -233,7 +233,7 @@ PODS:
   - React-jsinspector (0.64.2)
   - react-native-contacts (6.0.5):
     - React-Core
-  - react-native-safe-area-context (3.2.0):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
   - React-perflogger (0.64.2)
   - React-RCTActionSheet (0.64.2):
@@ -305,7 +305,7 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
-  - RNCPushNotificationIOS (1.8.0):
+  - RNCPushNotificationIOS (1.10.1):
     - React-Core
   - RNDeviceInfo (6.2.1):
     - React-Core
@@ -320,7 +320,7 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController
-  - RNPermissions (3.0.4):
+  - RNPermissions (3.1.0):
     - React-Core
   - RNReanimated (1.13.3):
     - React-Core
@@ -331,7 +331,7 @@ PODS:
   - RNVectorIcons (8.1.0):
     - React-Core
   - SSZipArchive (2.2.3)
-  - TOCropViewController (2.5.5)
+  - TOCropViewController (2.6.0)
   - toolbar-android (0.1.0-rc.2):
     - React
   - Yoga (1.14.0)
@@ -497,20 +497,20 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppCenter: 51351e0121e40ba75e28ecb7de5c2e69d480df5e
-  appcenter-analytics: aa074250b2cb182d6f7d67d9c236dd4606673ab5
-  appcenter-core: c97920e79eba2321a262d3733cb2a6f1097db539
-  appcenter-crashes: 804ae51c5d1742ce20fdb6a68b3d06208a404ad5
-  AppCenterReactNativeShared: 69aedc15c136e5f76a0cc9eb2ad84d3cefc6e64f
+  AppCenter: 883369ab78427b0561c688158d689dfe1f993ea9
+  appcenter-analytics: 2a8a55d2feba193c3c8a51b9902ef4757386414e
+  appcenter-core: 0293b8aeee457a25b44323a311de49c29d9defa7
+  appcenter-crashes: ad135405e148a9ed1c8bd169a9d2ea7bbaecd34c
+  AppCenterReactNativeShared: a821c7287a296486889ef6339317b701febb0695
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  CodePush: 352a7efabd0a7079a1138a5c6f677baedb0dedf9
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  CodePush: 23f72a4f0be1be2b08cb3d882b10178e204e419f
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
   FBReactNativeSpec: 04ef71a4cece95b6f8e78773d565fb659984a356
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
-  Permission-Contacts: bfcef5b0e4f59be6add84b393fd6f22ed0aa6752
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  JWT: ef71dfb03e1f842081e64dc42eef0e164f35d251
+  Permission-Contacts: 3d93d90633551cada277e2887bcb31ef13b0af8d
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: 6d3e854f0e7260a648badd0d44fc364bc9da9728
   RCTTypeSafety: c1f31d19349c6b53085766359caac425926fafaa
@@ -523,7 +523,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
   react-native-contacts: 931baebf460125c5a7bbce1c4521a96c69795123
-  react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
+  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
   React-RCTAnimation: 6a2e76ab50c6f25b428d81b76a5a45351c4d77aa
@@ -536,21 +536,21 @@ SPEC CHECKSUMS:
   React-RCTVibration: 24600e3b1aaa77126989bc58b6747509a1ba14f3
   React-runtimeexecutor: a9904c6d0218fb9f8b19d6dd88607225927668f9
   ReactCommon: 149906e01aa51142707a10665185db879898e966
-  RNCAsyncStorage: dfcd17ecff5403061bc649ee33ee751718870c8a
-  RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
-  RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
-  RNCPushNotificationIOS: 61a7c72bd1ebad3568025957d001e0f0e7b32191
-  RNDeviceInfo: 9b6aba9ffaed69ecb72bd13c7bcb0debf277bc9f
+  RNCAsyncStorage: e87a98245b4fb2925d27166c34d4534f871f93fc
+  RNCClipboard: 5e299c6df8e0c98f3d7416b86ae563d3a9f768a3
+  RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
+  RNCPushNotificationIOS: 089da3b657e1e3d464f38195fd2e3069608ef5af
+  RNDeviceInfo: 80905692dd27fbee9034d7895c92bda29e5a3fc4
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 08ba3a2e2f4f8833d606f01906c371e382c4dea9
-  RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
+  RNPermissions: b3588a19e12bff03fe21bc46911fd32343666dc0
   RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
-  TOCropViewController: da59f531f8ac8a94ef6d6c0fc34009350f9e8bfe
-  toolbar-android: 85f3ef4d691469f2d304e7dee4bca013aa1ba1ff
+  TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
+  toolbar-android: 404f4450b203597e7b417f714ff417bed562a1be
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
 
 PODFILE CHECKSUM: fbf04816bcc7b0d31a0c2e29d3bc03732af214bb

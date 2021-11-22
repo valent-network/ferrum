@@ -11,15 +11,14 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		35CF74AA541A8E55BCAA2F53 /* libPods-recario.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECBF9F445591981FBD1DEC6 /* libPods-recario.a */; };
 		A8D0D8F524D978A6007FFD8C /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8D0D8F424D978A6007FFD8C /* AppCenter-Config.plist */; };
-		E0894A6E96F4277717C02D1D /* libPods-recario.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C7D1E69E544922FFFAE8C0 /* libPods-recario.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* recarioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = recarioTests.m; sourceTree = "<group>"; };
-		04C7D1E69E544922FFFAE8C0 /* libPods-recario.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-recario.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* recario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = recario/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = recario/AppDelegate.m; sourceTree = "<group>"; };
@@ -27,12 +26,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = recario/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = recario/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = recario/main.m; sourceTree = "<group>"; };
-		45E57833AA24C9B3C4FD5D92 /* Pods-recario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recario.debug.xcconfig"; path = "Target Support Files/Pods-recario/Pods-recario.debug.xcconfig"; sourceTree = "<group>"; };
-		99D25192C569984504A54AF7 /* Pods-recario.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recario.release.xcconfig"; path = "Target Support Files/Pods-recario/Pods-recario.release.xcconfig"; sourceTree = "<group>"; };
+		6ECBF9F445591981FBD1DEC6 /* libPods-recario.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-recario.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F970AF7D8DA21FDBA2FC6FA /* Pods-recario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recario.debug.xcconfig"; path = "Target Support Files/Pods-recario/Pods-recario.debug.xcconfig"; sourceTree = "<group>"; };
 		A8D0D8F424D978A6007FFD8C /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "recario/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		CE4AF6FC23CB456F005B046E /* recario.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = recario.entitlements; path = recario/recario.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F8D7604BB147F97104F5C47B /* Pods-recario.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-recario.release.xcconfig"; path = "Target Support Files/Pods-recario/Pods-recario.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0894A6E96F4277717C02D1D /* libPods-recario.a in Frameworks */,
+				35CF74AA541A8E55BCAA2F53 /* libPods-recario.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +85,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				04C7D1E69E544922FFFAE8C0 /* libPods-recario.a */,
+				6ECBF9F445591981FBD1DEC6 /* libPods-recario.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,8 +123,8 @@
 		CCA1386CE46C9031585F60D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				45E57833AA24C9B3C4FD5D92 /* Pods-recario.debug.xcconfig */,
-				99D25192C569984504A54AF7 /* Pods-recario.release.xcconfig */,
+				7F970AF7D8DA21FDBA2FC6FA /* Pods-recario.debug.xcconfig */,
+				F8D7604BB147F97104F5C47B /* Pods-recario.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -136,13 +136,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "recario" */;
 			buildPhases = (
-				C1193C7CA3CF0BEEF8C73785 /* [CP] Check Pods Manifest.lock */,
+				0B711ECCC88B3CB8B168307A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				9B9755BC517C37B63E8A1F47 /* [CP] Copy Pods Resources */,
+				DE44626C4FE9A13CFF3F3AD3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,7 +213,29 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		9B9755BC517C37B63E8A1F47 /* [CP] Copy Pods Resources */ = {
+		0B711ECCC88B3CB8B168307A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-recario-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE44626C4FE9A13CFF3F3AD3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,28 +289,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-recario/Pods-recario-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C1193C7CA3CF0BEEF8C73785 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-recario-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,7 +337,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45E57833AA24C9B3C4FD5D92 /* Pods-recario.debug.xcconfig */;
+			baseConfigurationReference = 7F970AF7D8DA21FDBA2FC6FA /* Pods-recario.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = recario/recario.entitlements;
@@ -362,7 +362,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99D25192C569984504A54AF7 /* Pods-recario.release.xcconfig */;
+			baseConfigurationReference = F8D7604BB147F97104F5C47B /* Pods-recario.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = recario/recario.entitlements;
