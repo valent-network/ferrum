@@ -69,3 +69,20 @@ export function updateQuery(query) {
     dispatch(getAll());
   };
 }
+
+export function toggleBlock(userContactId) {
+  return function (dispatch) {
+    return API.toggleBlock(userContactId)
+      .then((payload) => {
+        dispatch({
+          type: ActionTypes.USER_CONTACTS_TOGGLE_BLOCK_SUCCESS,
+          userContactId: userContactId,
+          blocked: payload.data.blocked,
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.USER_CONTACTS_TOGGLE_BLOCK_FAILED });
+        displayError(error);
+      });
+  };
+}

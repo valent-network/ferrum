@@ -9,7 +9,7 @@ import NavigationService from '../services/NavigationService';
 import UserContactsList from './UserContactsList';
 import UserContactsListItem from './UserContactsListItem';
 
-import { loadMoreUserContacts, getAll, updateQuery } from './userContactsActions';
+import { loadMoreUserContacts, getAll, updateQuery, toggleBlock } from './userContactsActions';
 
 import { filterByContact } from '../Feed/feedActions';
 import PermissionsBox from '../Feed/PermissionsBox';
@@ -23,7 +23,11 @@ class UserContactsScreen extends React.PureComponent {
   };
 
   renderItem = ({ item, index }) => (
-    <UserContactsListItem contact={item} filterByContact={this.props.filterByContact} />
+    <UserContactsListItem
+      contact={item}
+      filterByContact={this.props.filterByContact}
+      toggleBlock={this.props.toggleBlock}
+    />
   );
 
   resetQuery = () => this.props.updateQuery('');
@@ -92,6 +96,7 @@ function mapDispatchToProps(dispatch) {
     onRefresh: () => dispatch(getAll()),
     filterByContact: (name) => dispatch(filterByContact(name)),
     updateQuery: (query) => dispatch(updateQuery(query)),
+    toggleBlock: (userContactId) => dispatch(toggleBlock(userContactId)),
   };
 }
 
@@ -125,6 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 57,
-    maxHeight: 57
+    maxHeight: 57,
   },
 });

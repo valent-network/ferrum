@@ -18,7 +18,6 @@ export default class AdsListItem extends React.PureComponent {
 
     let knowsText, handsCountString;
 
-
     if (friend_name_and_total) {
       if (friend_name_and_total.friend_hands === 1) {
         knowsText =
@@ -31,7 +30,7 @@ export default class AdsListItem extends React.PureComponent {
             ? `Знает ${friend_name_and_total.name} и еще ${friend_name_and_total.count}...`
             : `Знает ${friend_name_and_total.name}`;
       }
-      handsCountString = "🤝".repeat(friend_name_and_total.friend_hands);
+      handsCountString = '🤝'.repeat(friend_name_and_total.friend_hands);
       knowsText = `${handsCountString} ${knowsText}`;
     }
 

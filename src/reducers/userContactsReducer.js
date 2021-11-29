@@ -85,6 +85,11 @@ export default function userContactsReducer(state = initialState, action = {}) {
         ...state,
         isUploading: false,
       };
+    case ActionTypes.USER_CONTACTS_TOGGLE_BLOCK_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map((c) => (c.id == action.userContactId ? { ...c, is_blocked: action.blocked } : c)),
+      };
     default:
       return state;
   }

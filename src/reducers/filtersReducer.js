@@ -24,8 +24,9 @@ export default function filtersReducer(state = initialState, action = {}) {
       const isThere = state[action.filterKey].filter((f) => f === action.filterValue).length === 1;
       let newFilter;
 
-      if (action.filterKey === 'hops_count') { // if single-valued filter
-        newFilter = isThere ? [] : [action.filterValue]
+      if (action.filterKey === 'hops_count') {
+        // if single-valued filter
+        newFilter = isThere ? [] : [action.filterValue];
       } else {
         newFilter = isThere
           ? state[action.filterKey].filter((f) => f !== action.filterValue)

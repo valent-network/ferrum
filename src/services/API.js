@@ -171,4 +171,8 @@ export default class API {
   static setReferrer(refcode) {
     return apiService.post(`/v1/user/set_referrer`, { refcode: refcode });
   }
+
+  static toggleBlock(userContactId) {
+    return apiService.put(`/v1/blocked_user_contacts/${userContactId}`);
+  }
 }
