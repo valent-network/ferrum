@@ -7,6 +7,9 @@ import { Container, Content, Spinner } from 'native-base';
 
 import NavigationService from './services/NavigationService';
 
+import PushNotification from 'react-native-push-notification';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+
 import AppNavigator from './navigation/AppNavigator';
 import LoginNavigator from './navigation/LoginNavigator';
 import WizardNavigator from './navigation/WizardNavigator';
@@ -31,10 +34,47 @@ import { getAccessToken, getWizardDone, getPushToken } from './AsyncStorage';
 import API from './services/API';
 import { serverChannel } from './services/ServerChannel';
 
+import NotifService from './pushNotificationsSetup';
+
 class Root extends React.Component {
   constructor(props) {
     super(props);
     this.state = { wizardLoading: true };
+
+    new NotifService(this.onNotification.bind(this))
+  }
+
+  appNavigatorRef = (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef);
+
+  openChatRoom(chatRoomId) {
+    if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
+      setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
+    }
+  }
+
+  iOsNotificationHandler(notification) {
+    this.openChatRoom(notification.data.chat_room_id);
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
+  }
+
+  androidNotificationHandler(notification) {
+    if (notification.data) {
+      if (notification.userInteraction == true) {
+        this.openChatRoom(notification.data.chat_room_id);
+      } else {
+        if (this.props.currentChatId?.toString() != notification.data.chat_room_id.toString()) {
+          PushNotification.localNotification({
+            channelId: 'messages',
+            userInfo: notification.data,
+            ...notification.data,
+          });
+        }
+      }
+    }
+  }
+
+  onNotification(notification) {
+    Platform.OS === 'ios' ? this.iOsNotificationHandler(notification) : this.androidNotificationHandler(notification);
   }
 
   onContactsProcessed = () => {
@@ -117,8 +157,6 @@ class Root extends React.Component {
       getChatRooms,
     } = this.props;
 
-    const appNavigatorRef = (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef);
-
     if (isLoading || this.state.wizardLoading) {
       return (
         <Container>
@@ -142,7 +180,8 @@ class Root extends React.Component {
       getVisitedAds();
       getFavoriteAds();
       getProfile();
-      return <AppNavigator uriPrefix="recarioapp://" ref={appNavigatorRef} />;
+
+      return <AppNavigator uriPrefix="recarioapp://" ref={this.appNavigatorRef} />;
     } else {
       return wizardDone ? <LoginNavigator /> : <WizardNavigator />;
     }
@@ -154,6 +193,7 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     wizardDone: state.auth.wizardDone,
     isLoading: state.auth.isLoading,
+    currentChatId: state.currentChat.id,
   };
 }
 
