@@ -153,6 +153,7 @@ export function newMessage(chat, myMessage = false) {
             message: messageBody,
             largeIconUrl: chat.photo,
             bigPictureUrl: chat.photo,
+            channelId: 'messages',
             userInfo: {
               chat_room_id: chat.id,
             },

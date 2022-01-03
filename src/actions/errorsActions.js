@@ -11,6 +11,7 @@ function showNotification(message) {
       message: message,
       largeIcon: '',
       smallIcon: '',
+      channelId: 'messages',
     });
   }
 }

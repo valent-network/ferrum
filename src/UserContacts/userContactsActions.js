@@ -53,7 +53,7 @@ export function deleteContacts() {
         if (Platform.OS === 'ios') {
           UINotification.ref.show({ message: messageText });
         } else {
-          PushNotification.localNotification({ message: messageText, largeIcon: '', smallIcon: '' });
+          PushNotification.localNotification({ message: messageText, largeIcon: '', smallIcon: '', channelId: 'messages' });
         }
       })
       .catch((error) => {
