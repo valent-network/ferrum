@@ -9,9 +9,9 @@ global.removeEventListener = EventRegister.removeEventListener;
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'wss://recar.io/cable';
+  baseURL = 'wss://api.recar.io/cable';
 } else {
-  baseURL = 'ws://192.168.0.100:3000/cable';
+  baseURL = 'ws://192.168.1.207:3000/cable';
 }
 
 let cachedToken;
