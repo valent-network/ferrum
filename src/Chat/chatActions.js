@@ -64,9 +64,9 @@ export function initiateSystemChatRoom() {
     // dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS, adFriends: [] });
     API.initiateSystemChatRoom().then(({ data }) => {
       dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: data.chat_room_id });
+      NavigationService.navigate('ChatRoomScreen', { chat: {}, chatRoomId: data.chat_room_id });
       serverChannel.connectToChatRoomChannel(data.chat_room_id);
       dispatch(getMessages(data.chat_room_id));
-      NavigationService.navigate('ChatRoomScreen', { chat: {}, chatRoomId: data.chat_room_id });
     });
   };
 }

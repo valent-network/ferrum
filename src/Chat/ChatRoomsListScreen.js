@@ -12,14 +12,16 @@ import { getChatRooms } from './chatActions';
 
 import ListNotFound from '../ListNotFound';
 
-function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
+function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset, currentUser }) {
   const keyExtractor = useCallback((item) => item?.id?.toString(), []);
 
   const onEndReached = useCallback(() => {
     getChatRoomsWithOffset(chats.length);
   }, []);
 
-  const renderItem = ({ item, index }) => <ChatRoomListItem chat={item} />;
+  const renderItem = ({ item, index }) => <ChatRoomListItem chat={item} currentUser={currentUser} />;
+
+  const refreshControl = <RefreshControl refreshing={isLoading} tintColor={lightColor} onRefresh={onEndReached} />;
 
   if (chats.length === 0) {
     return isLoading ? (
@@ -30,7 +32,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset }) {
       </Container>
     ) : (
       <ListNotFound
-        refreshControl={<RefreshControl refreshing={isLoading} tintColor={lightColor} onRefresh={onEndReached} />}
+        refreshControl={refreshControl}
       />
     );
   }
@@ -54,6 +56,7 @@ function mapStateToProps(state) {
   return {
     chats: state.chats.list,
     isLoading: state.chats.isLoading,
+    currentUser: state.user,
   };
 }
 

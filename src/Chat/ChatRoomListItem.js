@@ -16,7 +16,7 @@ import { leaveChat } from './chatActions';
 
 import RECARIO_LOGO from '../assets/recario.png';
 
-export default function ChatRoomListItem({ chat }) {
+export default function ChatRoomListItem({ chat, currentUser }) {
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
   const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
@@ -65,7 +65,7 @@ export default function ChatRoomListItem({ chat }) {
       </Left>
       <Body style={styles.previewBody}>
         <Text>{chat.system ? 'Рекарио' : chat.title}</Text>
-        <Text>{lastMessage?.user?._id && lastMessage.user.name}</Text>
+        <Text>{lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? 'Вы' : lastMessage.user.name)}</Text>
 
         <Text style={styles.smallFont}>{messagePreview}</Text>
       </Body>

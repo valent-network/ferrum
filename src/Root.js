@@ -47,27 +47,36 @@ class Root extends React.Component {
   appNavigatorRef = (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef);
 
   openChatRoom(chatRoomId) {
-    if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
-      setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
-    }
+    // if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
+    //   setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
+    // }
+
+    setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
   }
 
   iOsNotificationHandler(notification) {
-    this.openChatRoom(notification.data.chat_room_id);
+    if (notification.data.chat_room_id) {
+      this.openChatRoom(notification.data.chat_room_id);
+    }
+
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   }
 
   androidNotificationHandler(notification) {
     if (notification.data) {
       if (notification.userInteraction == true) {
-        this.openChatRoom(notification.data.chat_room_id);
+        if(notification.data.chat_room_id) {
+          this.openChatRoom(notification.data.chat_room_id);
+        }
       } else {
-        if (this.props.currentChatId?.toString() != notification.data.chat_room_id.toString()) {
-          PushNotification.localNotification({
-            channelId: 'messages',
-            userInfo: notification.data,
-            ...notification.data,
-          });
+        if (!notification.foreground) {
+          if (this.props.currentChatId?.toString() != notification.data.chat_room_id.toString()) {
+            PushNotification.localNotification({
+              channelId: 'messages',
+              userInfo: notification.data,
+              ...notification.data,
+            });
+          }
         }
       }
     }

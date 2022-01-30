@@ -33,13 +33,13 @@ export default function currentChatReducer(state = initialState, action = {}) {
         isLoadingSettings: false,
       };
     case ActionTypes.SET_CURRENT_CHAT:
-      if (action.chatRoomId === state.id) {
+      if (parseInt(action.chatRoomId) === state.id) {
         return state;
       }
 
       return {
         ...state,
-        id: action.chatRoomId,
+        id: parseInt(action.chatRoomId),
       };
     case ActionTypes.ADD_MESSAGES:
       return {
