@@ -46,18 +46,28 @@ class Root extends React.Component {
 
   appNavigatorRef = (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef);
 
+  pushNotificationRouter = (notification) => {
+    switch(notification.data.notification_action) {
+      case 'open_chat_room':
+        this.openChatRoom(notification.data.chat_room_id);
+        break;
+      default:
+        console.warn(notification)
+    }
+  }
+
   openChatRoom(chatRoomId) {
     // if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
     //   setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
     // }
 
-    setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
+    if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
+      setTimeout(() => NavigationService.navigate('ChatRoomScreen', {chatRoomId}), 500);
+    }
   }
 
   iOsNotificationHandler(notification) {
-    if (notification.data.chat_room_id) {
-      this.openChatRoom(notification.data.chat_room_id);
-    }
+    this.pushNotificationRouter(notification);
 
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   }
@@ -65,18 +75,14 @@ class Root extends React.Component {
   androidNotificationHandler(notification) {
     if (notification.data) {
       if (notification.userInteraction == true) {
-        if(notification.data.chat_room_id) {
-          this.openChatRoom(notification.data.chat_room_id);
-        }
+        this.pushNotificationRouter(notification);
       } else {
         if (!notification.foreground) {
-          if (this.props.currentChatId?.toString() != notification.data.chat_room_id.toString()) {
-            PushNotification.localNotification({
-              channelId: 'messages',
-              userInfo: notification.data,
-              ...notification.data,
-            });
-          }
+          PushNotification.localNotification({
+            channelId: 'messages',
+            userInfo: notification.data,
+            ...notification.data,
+          });
         }
       }
     }

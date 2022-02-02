@@ -156,6 +156,7 @@ export function newMessage(chat, myMessage = false) {
             channelId: 'messages',
             userInfo: {
               chat_room_id: chat.id,
+              notification_action: 'open_chat_room',
             },
           });
         }
