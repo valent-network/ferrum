@@ -67,7 +67,9 @@ class Root extends React.Component {
   }
 
   iOsNotificationHandler(notification) {
-    this.pushNotificationRouter(notification);
+    if (notification.userInteraction == true) {
+      this.pushNotificationRouter(notification);
+    }
 
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   }
