@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
 
 #import <CodePush/CodePush.h>
@@ -40,7 +41,23 @@
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   
+  // Define UNUserNotificationCenter
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  center.delegate = self;
+
   return YES;
+}
+
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+
+    //Still call the javascript onNotification handler so it can display the new message right away
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    [RNCPushNotificationIOS didReceiveRemoteNotification:userInfo];
+
+    //hide push notification
+    completionHandler(UNNotificationPresentationOptionNone);
 }
 
 // Required to register for notifications
@@ -64,10 +81,12 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
   [RNCPushNotificationIOS didFailToRegisterForRemoteNotificationsWithError:error];
 }
-// Required for the localNotification event.
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+// Required for localNotification event
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)(void))completionHandler
 {
-  [RNCPushNotificationIOS didReceiveLocalNotification:notification];
+  [RNCPushNotificationIOS didReceiveNotificationResponse:response];
 }
 
 - (BOOL)application:(UIApplication *)application
