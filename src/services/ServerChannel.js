@@ -1,6 +1,7 @@
 import { createConsumer } from '@rails/actioncable';
 import { EventRegister } from 'react-native-event-listeners';
 import NavigationService from './NavigationService';
+import { BASE_URL } from '../config';
 
 // https://github.com/rails/rails/issues/35674
 global.addEventListener = EventRegister.addEventListener;
@@ -11,7 +12,7 @@ let baseURL = '';
 if (process.env.NODE_ENV === 'production') {
   baseURL = 'wss://api.recar.io/cable';
 } else {
-  baseURL = 'ws://192.168.1.207:3000/cable';
+  baseURL = `ws://${BASE_URL}/cable`;
 }
 
 let cachedToken;

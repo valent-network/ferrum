@@ -4,13 +4,14 @@ import { getUniqueId, getVersion } from 'react-native-device-info';
 import { store } from '../store';
 import * as ActionTypes from '../actions/actionTypes';
 import { clearAccessToken } from '../AsyncStorage';
+import { BASE_URL } from '../config';
 
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'production') {
   baseURL = 'https://api.recar.io/api';
 } else {
-  baseURL = 'http://192.168.1.207:3000/api';
+  baseURL = `http://${BASE_URL}/api`;
 }
 
 const apiService = axios.create({
