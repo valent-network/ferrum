@@ -30,6 +30,9 @@ import {
   disabledColor,
   secondaryColor,
   spinnerColor,
+  UABlue,
+  UAYellow,
+  disabledYellowColor,
 } from '../Colors';
 
 import { onTosPress, random } from '../Utils';
@@ -89,7 +92,7 @@ export default class LoginScreen extends React.Component {
           <Input
             style={styles.input}
             placeholder="1234"
-            placeholderTextColor={disabledColor}
+            placeholderTextColor={disabledYellowColor}
             keyboardType="numeric"
             textContentType="oneTimeCode"
             onChangeText={this.onInputCode}
@@ -111,8 +114,8 @@ export default class LoginScreen extends React.Component {
           <TextInputMask
             type={'custom'}
             options={this.phoneMaskOptions}
-            placeholder="50 123-45-67"
-            placeholderTextColor={disabledColor}
+            placeholder="50 XXX-XX-XX"
+            placeholderTextColor={disabledYellowColor}
             value={phone}
             includeRawValueInChangeText={true}
             keyboardType="numeric"
@@ -157,7 +160,7 @@ export default class LoginScreen extends React.Component {
                     <View style={styles.tosTextContainer}>
                       <Text onPress={onTosPress} style={styles.smallFont}>
                         Ознакомлен(а) с&nbsp;
-                        <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
+                        <Text style={[styles.activeColor, styles.smallFont, styles.underLine ]}>условиями использования</Text>
                       </Text>
                     </View>
                   </Left>
@@ -165,7 +168,7 @@ export default class LoginScreen extends React.Component {
                     <Switch
                       thumbColor={lightColor}
                       trackColor={trackColor}
-                      ios_backgroundColor={secondaryColor}
+                      ios_backgroundColor={disabledYellowColor}
                       onValueChange={this.changeTosAcceptance}
                       value={this.state.tosAccespted}
                     />
@@ -181,7 +184,7 @@ export default class LoginScreen extends React.Component {
               )}
               {step === 2 && (
                 <Text onPress={this.onRequest} style={styles.resendCodeText}>
-                  <Text>Не приходит код?</Text>
+                  <Text style={styles.disabledYellowColor}>Не приходит код?</Text>
                   &nbsp; Отправить код ещё раз
                 </Text>
               )}
@@ -209,28 +212,28 @@ const styles = StyleSheet.create({
   h1: {
     fontWeight: 'bold',
     marginBottom: 8,
-    color: lightColor,
+    color: primaryColor,
   },
   h2: {
     fontSize: 16,
     marginBottom: 8,
-    color: disabledColor,
+    color: secondaryColor,
   },
   button: {
     marginTop: 12,
-    backgroundColor: activeColor,
     height: 52,
     borderRadius: 8,
+    backgroundColor: activeColor
   },
   disabledButton: {
     marginTop: 12,
-    backgroundColor: disabledColor,
+    backgroundColor: disabledYellowColor,
     height: 52,
     borderRadius: 8,
   },
   input: {
     fontSize: 17,
-    color: lightColor,
+    color: primaryColor,
     padding: 0,
     margin: 0,
   },
@@ -242,7 +245,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'transparent',
     borderWidth: 0,
-    borderColor: lightColor,
+    borderColor: UABlue,
     height: 52,
   },
   helperActions: {
@@ -253,20 +256,20 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
+    color: secondaryColor,
   },
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 8,
     backgroundColor: 'transparent',
-    borderColor: lightColor,
+    borderColor: UABlue,
     height: 52,
   },
   phoneInputMasked: {
     fontSize: 18,
     height: '100%',
     width: '100%',
-    color: lightColor,
-    fontWeight: 'bold',
+    color: primaryColor,
     borderWidth: 0,
   },
   switchContainer: { flex: 0 },
@@ -292,7 +295,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   icon: {
-    color: disabledColor,
+    color: UABlue,
   },
   linksContainer: {
     alignItems: 'flex-end',
@@ -311,22 +314,22 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     marginTop: 0,
-    backgroundColor: '#3C3C5D',
+    backgroundColor: UABlue,
     height: '20%',
     width: '100%',
     borderBottomRightRadius: 50,
     borderBottomLeftRadius: 0,
   },
   headerText: {
-    color: lightColor,
+    color: UAYellow,
   },
   goButton: {
     fontWeight: 'bold',
   },
   flag: { marginLeft: 16 },
-  h2Note: { color: lightColor, fontWeight: 'bold' },
+  h2Note: { color: primaryColor, fontWeight: 'bold' },
   countryCodeNoteContainer: { marginRight: 16 },
-  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
+  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: UABlue },
   h2Container: { marginBottom: 8 },
   union: {
     position: 'absolute',
@@ -339,6 +342,12 @@ const styles = StyleSheet.create({
     right: random(100, 200),
   },
   wrapperContainer: {
-    backgroundColor: primaryColor,
+    backgroundColor: UAYellow,
+  },
+  underLine: {
+    textDecorationLine: 'underline',
+  },
+  disabledYellowColor: {
+    color: disabledYellowColor,
   },
 });

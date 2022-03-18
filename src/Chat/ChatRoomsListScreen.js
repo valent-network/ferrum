@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { lightColor, spinnerColor, secondaryColor } from '../Colors';
+import { lightColor, spinnerColor, secondaryColor, UABlue } from '../Colors';
 
 import { getChatRooms } from './chatActions';
 
@@ -73,7 +73,7 @@ ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
     headerTintColor: lightColor,
     headerBackTitleVisible: false,
     headerStyle: {
-      backgroundColor: secondaryColor,
+      backgroundColor: UABlue,
       shadowColor: 'transparent',
       borderBottomWidth: 0,
       height: 104,

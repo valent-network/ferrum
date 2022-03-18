@@ -14,7 +14,7 @@ import { loadMoreUserContacts, getAll, updateQuery, toggleBlock } from './userCo
 import { filterByContact } from '../Feed/feedActions';
 import PermissionsBox from '../Feed/PermissionsBox';
 
-import { primaryColor, secondaryColor, lightColor, disabledColor } from '../Colors';
+import { primaryColor, secondaryColor, lightColor, disabledColor, UABlue } from '../Colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -106,7 +106,7 @@ UserContactsScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: secondaryColor,
+    backgroundColor: UABlue,
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
     paddingBottom: 8,
