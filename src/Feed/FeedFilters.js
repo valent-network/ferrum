@@ -31,7 +31,7 @@ import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
 
-import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secondaryColor } from '../Colors';
+import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secondaryColor, UABlue, UAYellow } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
   let typingTimer;
@@ -101,10 +101,6 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
     );
   };
 
-  const filterBoxWheels = (filterValue) => filterBox(filterValue, 'wheels');
-  const filterBoxGears = (filterValue) => filterBox(filterValue, 'gears');
-  const filterBoxCarcasses = (filterValue) => filterBox(filterValue, 'carcasses');
-  const filterBoxFuels = (filterValue) => filterBox(filterValue, 'fuels');
   const filterBoxHopsCount = (filterValue, index) => filterBox(filterValue, 'hops_count');
 
   const filtersPresent = Object.values(filters).filter((f) => f.length > 0).length > 0;
@@ -125,7 +121,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
-            placeholder="BMW X6 2015..."
+            placeholder="Байрактар..."
             placeholderTextColor={disabledColor}
             style={styles.inputTextColor}
             onChangeText={onChangeQueryWithDelay}
@@ -187,51 +183,6 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       />
                     </Item>
                   </View>
-                  <H2 style={styles.filterTitle}>Год</H2>
-                  <View style={styles.rangeItemWrapper}>
-                    <Item style={styles.rangeItem}>
-                      <Label>от</Label>
-                      <Input
-                        style={styles.inputTextColor}
-                        keyboardType="numeric"
-                        defaultValue={filters.min_year.toString()}
-                        onEndEditing={(event) => applyFilter('min_year', event.nativeEvent.text)}
-                        onChangeText={(value) => applyFilterLocally('min_year', value)}
-                        returnKeyType={'done'}
-                      />
-                    </Item>
-                    <Item style={styles.rangeItem}>
-                      <Label>до</Label>
-                      <Input
-                        style={styles.inputTextColor}
-                        keyboardType="numeric"
-                        defaultValue={filters.max_year.toString()}
-                        onEndEditing={(event) => applyFilter('max_year', event.nativeEvent.text)}
-                        onChangeText={(value) => applyFilterLocally('max_year', value)}
-                        returnKeyType={'done'}
-                      />
-                    </Item>
-                  </View>
-
-                  <H2 style={styles.filterTitle}>Двигатель</H2>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filtersValues.fuels.map(filterBoxFuels)}
-                  </ScrollView>
-
-                  <H2 style={styles.filterTitle}>Коробка передач</H2>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filtersValues.gears.map(filterBoxGears)}
-                  </ScrollView>
-
-                  <H2 style={styles.filterTitle}>Привод</H2>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filtersValues.wheels.map(filterBoxWheels)}
-                  </ScrollView>
-
-                  <H2 style={styles.filterTitle}>Кузов</H2>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filtersValues.carcasses.map(filterBoxCarcasses)}
-                  </ScrollView>
 
                   <View style={styles.submitButtonWrapper}>
                     <Button block onPress={switchModalVisibleWithLocal} style={styles.submitButton}>
@@ -297,7 +248,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   mainHeader: {
-    backgroundColor: secondaryColor,
+    backgroundColor: UABlue,
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
     paddingBottom: 8,
@@ -385,8 +336,7 @@ const styles = StyleSheet.create({
     maxHeight: 57,
   },
   filterIcon: {
-    color: disabledColor,
     fontSize: 24,
-    color: activeColor,
+    color: UAYellow,
   },
 });
