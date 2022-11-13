@@ -22,7 +22,7 @@ import {
 
 import UserAvatar from 'react-native-user-avatar';
 
-import Clipboard from '@react-native-community/clipboard';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } from 'react-native';
 
 import ImagePicker from 'react-native-image-crop-picker';

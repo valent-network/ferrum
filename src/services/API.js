@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Qs from 'qs';
-import { getUniqueId, getVersion } from 'react-native-device-info';
+import { Platform } from 'react-native';
+import { getUniqueId, getReadableVersion } from 'react-native-device-info';
 import { store } from '../store';
 import * as ActionTypes from '../actions/actionTypes';
 import { clearAccessToken } from '../AsyncStorage';
@@ -64,11 +65,16 @@ export default class API {
     return apiService.get(`/v2/friendly_ads/${id}`);
   }
 
-  static signIn(phone, code) {
+  static async signIn(phone, code) {
+
+    let idResolver = Platform.os === "android" ? getAndroidId().then(androidId => androidId) :
+                                                 getUniqueId().then(uniqueId => uniqueId)
+    let uniqueId = await idResolver;
+
     return apiService.put('/v1/sessions', {
       phone_number: phone,
       verification_code: code,
-      device_id: getUniqueId(),
+      device_id: uniqueId,
     });
   }
 
@@ -130,7 +136,7 @@ export default class API {
   }
 
   static updateProfile(userParams = {}, deviceParams = {}) {
-    return apiService.put('/v1/user', { user: userParams, device: { ...deviceParams, build_version: getVersion() } });
+    return apiService.put('/v1/user', { user: userParams, device: { ...deviceParams, build_version: getReadableVersion() } });
   }
 
   static likeAd(adId) {

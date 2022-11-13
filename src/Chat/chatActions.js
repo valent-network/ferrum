@@ -1,5 +1,5 @@
 import PushNotification from 'react-native-push-notification';
-import Clipboard from '@react-native-community/clipboard';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { Platform } from 'react-native';
 import { ActionSheet } from 'native-base';
 import * as ActionTypes from '../actions/actionTypes.js';
