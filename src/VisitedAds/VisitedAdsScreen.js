@@ -9,7 +9,7 @@ import AdsList from '../AdsList';
 import { loadMoreAds, getAll } from './visitedAdsActions';
 import { loadAd } from '../actions/adsActions';
 
-import { activeColor, primaryColor, secondaryColor, lightColor, UABlue } from '../Colors';
+import { activeColor, primaryColor, secondaryColor } from '../Colors';
 
 class VisitedAdsScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -85,15 +85,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(VisitedAdsScreen);
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: UABlue,
+    backgroundColor: secondaryColor,
     borderBottomWidth: 0,
   },
   headerIcon: {
     fontSize: 18,
-    color: lightColor,
+    color: activeColor,
   },
   headerTitle: {
-    color: lightColor,
+    color: activeColor,
   },
   mainContainer: {
     backgroundColor: primaryColor,

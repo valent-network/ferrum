@@ -25,18 +25,18 @@ import ChatRoomsListScreen from '../Chat/ChatRoomsListScreen';
 
 import StarredAdScreen from '../Starred/AdScreenContainer';
 
-import { activeColor, primaryColor, disabledColor, secondaryColor, lightColor, UAYellow, UABlue, disabledYellowColor } from '../Colors';
+import { activeColor, primaryColor, disabledColor, secondaryColor, lightColor } from '../Colors';
 
 import ChatIcon from './ChatIcon';
 
 const styles = StyleSheet.create({
   activeIcon: {
     fontSize: 24,
-    color: UABlue,
+    color: activeColor,
   },
   inactiveIcon: {
     fontSize: 24,
-    color: disabledYellowColor,
+    color: disabledColor,
   },
 });
 
@@ -171,7 +171,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: '',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('star-outline'),
+        tabBarIcon: iconFor('garage'),
       },
     },
     Profile: {
@@ -186,7 +186,9 @@ const bottomTabsNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: UAYellow,
+        backgroundColor: primaryColor,
+        borderTopWidth: 1,
+        borderTopColor: secondaryColor,
         height: 64,
         paddingTop: 4,
       },
