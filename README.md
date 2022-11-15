@@ -20,7 +20,7 @@ Following variables should be set (i.e. in `~/.gradle/gradle.properties`):
 
 ```
 MYAPP_UPLOAD_STORE_FILE=/path/to/my-upload-key.keystore
-MYAPP_UPLOAD_KEY_ALIAS=key0
+MYAPP_UPLOAD_KEY_ALIAS=recario
 MYAPP_UPLOAD_STORE_PASSWORD=Your-Password
 MYAPP_UPLOAD_KEY_PASSWORD=Your-Password
 ```
