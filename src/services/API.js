@@ -18,20 +18,17 @@ if (process.env.NODE_ENV === 'production') {
 const apiService = axios.create({
   baseURL: baseURL,
   headers: {},
+  paramsSerializer: {
+    serialize: (params) => {
+      return Qs.stringify(params, {
+        arrayFormat: 'brackets',
+        encode: false,
+      });
+    }
+  },
 });
 
 apiService.defaults.headers.common['X-User-Access-Token'] = null;
-
-apiService.interceptors.request.use((config) => {
-  config.paramsSerializer = (params) => {
-    return Qs.stringify(params, {
-      arrayFormat: 'brackets',
-      encode: false,
-    });
-  };
-
-  return config;
-});
 
 apiService.interceptors.response.use(
   function (response) {
