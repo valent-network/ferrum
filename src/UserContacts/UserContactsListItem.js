@@ -5,18 +5,20 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { Text, ListItem, Left, Right, Body, Icon, ActionSheet } from 'native-base';
 import { TouchableOpacity, StyleSheet } from 'react-native';
+import { withTranslation } from 'react-i18next';
 
 import { activeColor, disabledColor, secondaryColor, warningColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
-export default class UserContactsListItem extends React.PureComponent {
+class UserContactsListItem extends React.PureComponent {
   user = this.props.contact.user;
 
   openMore = () => {
-    const blockOrUnblockActionName = this.props.contact.is_blocked ? 'Разблокировать' : 'Заблокировать';
+    const { t } = this.props;
+    const blockOrUnblockActionName = this.props.contact.is_blocked ? t('profile.actions.unblock') : t('profile.actions.block');
     const actions = this.user
-      ? ['Искать объявления', blockOrUnblockActionName, 'Отменить']
-      : ['Искать объявления', blockOrUnblockActionName, 'Пригласить', 'Отменить'];
+      ? [t('profile.actions.searchAds'), blockOrUnblockActionName, t('actions.cancel')]
+      : [t('profile.actions.searchAds'), blockOrUnblockActionName, t('actions.invite'), t('actions.cancel')];
     const cancelIndex = this.user ? 2 : 3;
     ActionSheet.show(
       {
@@ -38,13 +40,13 @@ export default class UserContactsListItem extends React.PureComponent {
   };
 
   sendInvitation = () => {
-    const { contact } = this.props;
+    const { t, contact } = this.props;
 
     if (this.user) {
       return;
     }
 
-    invitationalSMS(contact.phone, 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io/get');
+    invitationalSMS(contact.phone, t('profile.inviteFriendSMSText'));
   };
 
   render() {
@@ -81,6 +83,8 @@ export default class UserContactsListItem extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(UserContactsListItem);
 
 UserContactsListItem.propTypes = {};
 

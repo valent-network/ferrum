@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, Button } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
+import { withTranslation } from 'react-i18next';
+
 import { activeColor } from '../Colors';
 
 import { initiateChatRoom } from '../Chat/chatActions';
@@ -30,7 +32,7 @@ class AskFriend extends React.PureComponent {
     this.setState({ modalVisible: true, friendPickerModalVisible: false, friendToInvite: friend });
 
   render() {
-    const { currentAdFriends } = this.props;
+    const { t, currentAdFriends } = this.props;
     const { modalVisible, friendPickerModalVisible, friendToInvite } = this.state;
     const closeModal = () => this.setState({ modalVisible: false });
     const closeFriendPickerModal = () => this.setState({ friendPickerModalVisible: false });
@@ -42,7 +44,7 @@ class AskFriend extends React.PureComponent {
 
     return (
       <View>
-        {direct_friend && <Text>Разместил(а) {direct_friend.name}</Text>}
+        {direct_friend && <Text>{t('ad.postedBy')} {direct_friend.name}</Text>}
 
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.mutualFriendsContainer}>
           <AnyFriendToInvite openFriendPickerModal={this.openFriendPickerModal} />
@@ -73,7 +75,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AskFriend);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(AskFriend));
 
 AskFriend.propTypes = {
   ad: PropTypes.object.isRequired,

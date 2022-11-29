@@ -1,13 +1,14 @@
 import PushNotification from 'react-native-push-notification';
 import { Platform } from 'react-native';
 import { notification } from '../Utils';
+import i18n from '../../i18n';
 
 function showNotification(message) {
   if (Platform.OS === 'ios') {
     notification.ref.show({ message: message });
   } else {
     PushNotification.localNotification({
-      title: 'К сожалению, произошла ошибка :(',
+      title: i18n.t('errors.title'),
       message: message,
       largeIcon: '',
       smallIcon: '',
@@ -22,7 +23,7 @@ export function displayError(error) {
     const message = response.data.message ? response.data.message : response.data;
     showNotification(message);
   } else if (error.request) {
-    showNotification('Проблемы с подключением к сети');
+    showNotification(i18n.t('errors.connectionErrorMessage'));
   } else {
   }
 }

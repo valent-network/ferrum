@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { withTranslation } from 'react-i18next';
 
 import { Text } from 'native-base';
 
 import { priceColor, disabledColor, lightColor, primaryColor, secondaryColor, activeColor } from './Colors';
 
-export default class AdsListItem extends React.PureComponent {
+class AdsListItem extends React.PureComponent {
   onPress = () => this.props.onPress(this.props.ad);
 
   render() {
     const { title, image, price, short_description, friend_name_and_total } = this.props.ad;
 
-    const { ad } = this.props;
+    const { t, ad } = this.props;
 
     const imageURI = { uri: image };
 
@@ -22,13 +23,13 @@ export default class AdsListItem extends React.PureComponent {
       if (friend_name_and_total.friend_hands === 1) {
         knowsText =
           friend_name_and_total.count > 0
-            ? `Разместил ${friend_name_and_total.name}, знают еще ${friend_name_and_total.count}...`
-            : `Разместил ${friend_name_and_total.name}`;
+            ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t('ads.knowsMorePostfix')}...`
+            : `${t('ad.postedBy')} ${friend_name_and_total.name}`;
       } else {
         knowsText =
           friend_name_and_total.count > 0
-            ? `Знает ${friend_name_and_total.name} и еще ${friend_name_and_total.count}...`
-            : `Знает ${friend_name_and_total.name}`;
+            ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t('ads.knowsMorePostfix')}...`
+            : `${t('ads.knows')} ${friend_name_and_total.name}`;
       }
       handsCountString = '🤝'.repeat(friend_name_and_total.friend_hands);
       knowsText = `${handsCountString} ${knowsText}`;
@@ -54,6 +55,8 @@ export default class AdsListItem extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(AdsListItem);
 
 AdsListItem.propTypes = {};
 

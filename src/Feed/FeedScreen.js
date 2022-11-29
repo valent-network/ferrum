@@ -14,7 +14,7 @@ import PermissionsBox from './PermissionsBox';
 
 class FeedScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
-    return { header: () => null, title: 'Лента' };
+    return { header: () => null, title: '' };
   };
 
   onAdOpened = (ad) => {

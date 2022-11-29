@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, View, Icon } from 'native-base';
+import { withTranslation } from 'react-i18next';
 
 import { secondaryColor } from '../Colors';
 
-export default class OptionsList extends React.PureComponent {
+class OptionsList extends React.PureComponent {
   goToAdSource = () => Linking.openURL(this.props.ad.url);
   render() {
-    const { options } = this.props.ad;
+    const { t } = this.props;
+    const { url, options } = this.props.ad;
     return (
       <View style={styles.mainContainer}>
 
@@ -18,14 +20,17 @@ export default class OptionsList extends React.PureComponent {
             {options[opt][0]}: {options[opt][1]}
           </Text>
         ))}
-        {options && options.url && <Text style={styles.optionContainer} onPress={this.goToAdSource}>
-          Источник&nbsp;
+
+        {url && <Text style={styles.optionContainer} onPress={this.goToAdSource}>
+          {t('ad.options.source')}&nbsp;
           <Icon name="ios-open-outline" style={styles.sourceIcon} />
         </Text>}
       </View>
     );
   }
 }
+
+export default withTranslation()(OptionsList);
 
 OptionsList.propTypes = {
   ad: PropTypes.object.isRequired,

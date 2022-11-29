@@ -60,7 +60,7 @@ export default class ImageGallery extends React.Component {
           <Badge style={styles.imageGalleryBadge}>
             <Icon name="images-outline" style={styles.imageGalleryBadgeIcon} />
             <Text style={styles.ImageGalleryBadgeText}>
-              &nbsp;{this.state.currentImageIndex + 1} из {images.length}
+              &nbsp;{this.state.currentImageIndex + 1} / {images.length}
             </Text>
           </Badge>
         </View>

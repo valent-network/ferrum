@@ -22,6 +22,8 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import { withTranslation } from 'react-i18next';
+
 import {
   activeColor,
   trackColor,
@@ -40,7 +42,7 @@ import FLAG from '../assets/Flag.png';
 import UNION from '../assets/Union.png';
 import ELLIPSE from '../assets/Ellipse.png';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
   onInputCode = (text) => this.props.onInputCode(text);
   onRequest = () => this.props.onRequest(`${this.props.phone}`);
@@ -55,7 +57,7 @@ export default class LoginScreen extends React.Component {
   }
 
   render() {
-    const { phone, code, step, onRequest, onSignIn, onReset, isLoading } = this.props;
+    const { t, phone, code, step, onRequest, onSignIn, onReset, isLoading } = this.props;
     const step1IsDisabled = !this.state.tosAccespted || phone.length !== 12;
     const step2IsDisabled = code.length !== 4;
 
@@ -65,7 +67,7 @@ export default class LoginScreen extends React.Component {
         style={step1IsDisabled ? styles.disabledButton : styles.button}
         block
         disabled={step1IsDisabled}>
-        <Text style={styles.goButton}>Получить код</Text>
+        <Text style={styles.goButton}>{t('login.buttons.getCode')}</Text>
       </Button>
     );
     const signInButton = (
@@ -74,14 +76,14 @@ export default class LoginScreen extends React.Component {
         style={step2IsDisabled ? styles.disabledButton : styles.button}
         disabled={step2IsDisabled}
         block>
-        <Text style={styles.goButton}>Войти</Text>
+        <Text style={styles.goButton}>{t('login.buttons.signIn')}</Text>
       </Button>
     );
     const codeInput = (
       <React.Fragment>
-        <H1 style={styles.h1}>Введите код из SMS</H1>
+        <H1 style={styles.h1}>{t('login.headers.enterSms')}</H1>
         <View style={styles.h2Container}>
-          <Text style={styles.h2}>SMS с кодом было отправлено на номер</Text>
+          <Text style={styles.h2}>{t('login.headers.smsWasSent')}</Text>
           <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '').replace(/^\+380/g, '')}</Text>
         </View>
         <Item style={styles.codeInput} rounded>
@@ -101,8 +103,8 @@ export default class LoginScreen extends React.Component {
     );
     const phoneInput = (
       <React.Fragment>
-        <H1 style={styles.h1}>Войдите с помощью мобильного телефона</H1>
-        <H2 style={styles.h2}>Мы отправим SMS с кодом, чтобы вы не придумывали очередной пароль</H2>
+        <H1 style={styles.h1}>{t('login.headers.main')}</H1>
+        <H2 style={styles.h2}>{t('login.headers.secondary')}</H2>
         <Item rounded style={styles.phoneInput}>
           <Image source={FLAG} style={styles.flag} />
           <View style={styles.countryCodeNoteContainer}>
@@ -137,7 +139,7 @@ export default class LoginScreen extends React.Component {
       <View style={styles.wrapperContainer}>
         <View style={styles.header}>
           <Thumbnail source={RECARIO_LOGO} style={styles.mainLogo} />
-          <Text style={styles.headerText}>Р Е К А Р И О</Text>
+          <Text style={styles.headerText}>{t('login.companyName')}</Text>
           <Image source={UNION} style={styles.union} />
           <Image source={ELLIPSE} style={styles.ellipse} />
         </View>
@@ -156,8 +158,8 @@ export default class LoginScreen extends React.Component {
                   <Left>
                     <View style={styles.tosTextContainer}>
                       <Text onPress={onTosPress} style={styles.smallFont}>
-                        Ознакомлен(а) с&nbsp;
-                        <Text style={[styles.activeColor, styles.smallFont]}>условиями использования</Text>
+                        {t('login.agreeTos')}&nbsp;
+                        <Text style={[styles.activeColor, styles.smallFont]}>{t('login.tos')}</Text>
                       </Text>
                     </View>
                   </Left>
@@ -176,13 +178,13 @@ export default class LoginScreen extends React.Component {
             <View style={styles.linksContainer}>
               {step === 2 && (
                 <Text onPress={onReset} style={styles.changePhoneText}>
-                  &nbsp; Изменить телефон
+                  &nbsp; {t('login.changeNumber')}
                 </Text>
               )}
               {step === 2 && (
                 <Text onPress={this.onRequest} style={styles.resendCodeText}>
-                  <Text>Не приходит код?</Text>
-                  &nbsp; Отправить код ещё раз
+                  <Text>{t('login.didntReceive')}</Text>
+                  &nbsp; {t('login.tryAgain')}
                 </Text>
               )}
             </View>
@@ -192,6 +194,8 @@ export default class LoginScreen extends React.Component {
     );
   }
 }
+
+export default withTranslation()(LoginScreen);
 
 LoginScreen.propTypes = {
   onSignIn: PropTypes.func.isRequired,

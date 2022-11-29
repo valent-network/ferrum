@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Text, View, Icon, Item, Input, Button } from 'native-base';
+import { useTranslation } from 'react-i18next';
 
 import UserAvatar from 'react-native-user-avatar';
 
@@ -11,6 +12,7 @@ import { updateUserName } from '../Profile/profileActions';
 import { lightColor, activeColor, secondaryColor, disabledColor, warningColor, primaryColor } from '../Colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
+  const { t } = useTranslation();
   const [name, setName] = useState(friend.name);
   const [userName, setUserName] = useState();
   const possibleIntroNames = [friend.user_name, friend.name].filter((n) => n && n.length);
@@ -44,13 +46,13 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
             </Text>
             {!userNamePresent && (
               <View style={styles.emptyUserNameContainer}>
-                <Text>Чтобы начать чать, пожалуйста, укажите, как другие участники могут к вам обращаться:</Text>
+                <Text>{t('chat.nameYourselfText')}</Text>
                 <Item>
                   <Input
                     style={styles.nameInput}
                     value={userName}
                     onChangeText={setUserName}
-                    placeholder="Ваше имя"
+                    placeholder={t('chat.placeholders.yourName')}
                     placeholderTextColor={lightColor}
                     returnKeyType={'done'}
                   />
@@ -60,11 +62,11 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                   block
                   onPress={() => updateUserName(userName)}
                   style={!userName || !userName.length ? styles.disabledSubmitButton : styles.activeSubmitButton}>
-                  <Text>Готово</Text>
+                  <Text>{t('chat.buttons.setMyName')}</Text>
                 </Button>
               </View>
             )}
-            <Text style={styles.introHeader}>Имя для других участников чата:</Text>
+            <Text style={styles.introHeader}>{t('chat.introHeader')}</Text>
 
             {possibleIntroNames.map((n) => (
               <TouchableOpacity key={n} onPress={() => setName(n)}>
@@ -81,7 +83,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                 defaultValue={name}
                 name={name}
                 onChangeText={setName}
-                placeholder="Представьте друга..."
+                placeholder={t('chat.placeholders.introduceFriend')}
                 returnKeyType={'done'}
               />
             </Item>
@@ -92,7 +94,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               dark
               style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}>
-              <Text>Добавить</Text>
+              <Text>{t('chat.buttons.addFriend')}</Text>
             </Button>
           </View>
         </View>

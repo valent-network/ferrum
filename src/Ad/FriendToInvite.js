@@ -5,39 +5,44 @@ import UserAvatar from 'react-native-user-avatar';
 import { StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
 
+import { useTranslation } from 'react-i18next';
+
 import { secondaryColor, activeColor, primaryColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
-const INVITATIONAL_TEXT_SMS = 'Привет, смотри, нашел твою машину здесь — https://recar.io/get';
+export default ({ friend, prepareInvitation }) => {
+  const { t } = useTranslation();
 
-export default ({ friend, prepareInvitation }) => (
-  <View style={styles.mutualFriendBox} key={friend.id}>
-    <UserAvatar
-      size={48}
-      name={friend.name || ''}
-      src={friend.avatar}
-      bgColor={friend.user_id ? activeColor : primaryColor}
-    />
-    <Text note style={styles.smallFont}>
-      {friend.name}
-    </Text>
-    <Text note style={styles.smallFont}>
-      {friend.phone_number}
-    </Text>
-    <Button
-      small
-      block
-      dark
-      style={styles.button}
-      onPress={
-        friend.user_id
-          ? () => prepareInvitation(friend)
-          : () => invitationalSMS(friend.phone_number, INVITATIONAL_TEXT_SMS)
-      }>
-      <Text>{friend.user_id ? 'Спросить' : 'Пригласить'}</Text>
-    </Button>
-  </View>
-);
+  return (
+    <View style={styles.mutualFriendBox} key={friend.id}>
+      <UserAvatar
+        size={48}
+        name={friend.name || ''}
+        src={friend.avatar}
+        bgColor={friend.user_id ? activeColor : primaryColor}
+      />
+      <Text note style={styles.smallFont}>
+        {friend.name}
+      </Text>
+      <Text note style={styles.smallFont}>
+        {friend.phone_number}
+      </Text>
+      <Button
+        small
+        block
+        dark
+        style={styles.button}
+        onPress={
+          friend.user_id
+            ? () => prepareInvitation(friend)
+            : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
+        }>
+        <Text>{friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend')}</Text>
+      </Button>
+    </View>
+  )
+}
+
 
 const styles = StyleSheet.create({
   mutualFriendBox: {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Container, Content, Header, Body, Title, Icon, ActionSheet } from 'native-base';
+import { withTranslation } from 'react-i18next';
 
 import AdsList from '../AdsList';
 
@@ -21,10 +22,12 @@ class VisitedAdsScreen extends React.PureComponent {
     navigation.navigate('VisitedAdScreen', { id: ad.id });
   };
 
-  showChangeStarredScreen = () =>
-    ActionSheet.show(
+  showChangeStarredScreen = () => {
+    const { t } = this.props;
+
+    return ActionSheet.show(
       {
-        options: ['Избранные', 'Мои объявления', 'Отменить'],
+        options: [t('ads.favorite'), t('ads.myAds'), t('actions.cancel')],
         cancelButtonIndex: 2,
       },
       (buttonIndex) => {
@@ -35,10 +38,11 @@ class VisitedAdsScreen extends React.PureComponent {
             return this.props.navigation.navigate('MyAdsScreen');
         }
       },
-    );
+    )
+  }
 
   render() {
-    const { ads, loadMoreAds, isLoading, onRefresh } = this.props;
+    const { t, ads, loadMoreAds, isLoading, onRefresh } = this.props;
 
     // if (ads.length === 0 && isLoading) { return <Container><Content></Content></Container> }
 
@@ -47,7 +51,7 @@ class VisitedAdsScreen extends React.PureComponent {
         <Header style={styles.header} iosBarStyle="light-content" noShadow={true}>
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
-              Просмотренные&nbsp;
+              {t('ads.visited')}&nbsp;
               <Icon name="chevron-down-outline" style={styles.headerIcon} />
             </Title>
           </Body>
@@ -81,7 +85,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VisitedAdsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(VisitedAdsScreen));
 
 const styles = StyleSheet.create({
   header: {

@@ -5,6 +5,8 @@ import { StyleSheet } from 'react-native';
 
 import { View, Text, Button } from 'native-base';
 
+import { withTranslation } from 'react-i18next';
+
 import ContactsUploading from './ContactsUploading';
 
 import { checkContactsPermissions, requestContactsPermissions } from '../actions/userContactsActions';
@@ -16,12 +18,15 @@ import { goToSettings } from '../Utils';
 import { activeColor, secondaryColor } from '../Colors';
 
 class PermissionsBox extends React.PureComponent {
+
   onPress = () => (this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions());
 
   componentDidMount() {
     this.props.checkContactsPermissions();
   }
   render() {
+    const { t } = this.props;
+
     const {
       permissionsGiven,
       permissionsRequested,
@@ -40,13 +45,10 @@ class PermissionsBox extends React.PureComponent {
 
     return (
       <View style={styles.mainContainer}>
-        <Text>
-          Приложению нужен доступ к вашему списку контактов для того, чтобы вы могли найти друзей и знакомых, продающих
-          машину
-        </Text>
+        <Text>{t('feed.permissionBoxText')}</Text>
         {
           <Button block style={styles.button} onPress={this.onPress}>
-            <Text>Предоставить</Text>
+            <Text>{t('feed.permissionBoxSubmit')}</Text>
           </Button>
         }
       </View>
@@ -70,7 +72,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PermissionsBox);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(PermissionsBox));
 
 PermissionsBox.propTypes = {};
 

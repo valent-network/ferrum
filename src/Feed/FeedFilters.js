@@ -22,6 +22,7 @@ import {
   Body,
 } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useTranslation } from "react-i18next";
 
 import NavigationService from '../services/NavigationService';
 
@@ -34,6 +35,8 @@ import { applyFilter, resetFilters } from './feedActions';
 import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secondaryColor } from '../Colors';
 
 const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVisible, switchModalVisible }) => {
+  const { t } = useTranslation();
+
   let typingTimer;
 
   const filterQueryReset = useCallback(() => applyFilter('query', ''), []);
@@ -125,7 +128,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
-            placeholder="BMW X6 2015..."
+            placeholder={t('feed.search.placeholder')}
             placeholderTextColor={disabledColor}
             style={styles.inputTextColor}
             onChangeText={onChangeQueryWithDelay}
@@ -149,23 +152,23 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
             <View style={styles.modalContainer}>
               <Content>
                 <View style={styles.modalControlsContainer}>
-                  <H1 style={styles.filtersHeader}>Фильтры</H1>
+                  <H1 style={styles.filtersHeader}>{t('feed.filters.headers.main')}</H1>
                   {filtersPresent && (
                     <H3 onPress={filterResetWithLocal} style={styles.resetControl}>
-                      Сбросить
+                      {t('feed.filters.headers.reset')}
                     </H3>
                   )}
                   <Icon name="close-outline" onPress={switchModalVisibleWithLocal} style={styles.closeIcon} />
                 </View>
                 <Form style={styles.filtersForm}>
-                  <H2 style={styles.filterTitle}>Знаю через</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.knowThrough')}</H2>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filtersValues.hops_count.map(filterBoxHopsCount)}
                   </ScrollView>
-                  <H2 style={styles.filterTitle}>Цена, $</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.price')}</H2>
                   <View style={styles.rangeItemWrapper}>
                     <Item style={styles.rangeItem}>
-                      <Label>от</Label>
+                      <Label>{t('feed.filters.from')}</Label>
                       <Input
                         style={styles.inputTextColor}
                         keyboardType="numeric"
@@ -176,7 +179,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
-                      <Label>до</Label>
+                      <Label>{t('feed.filters.to')}</Label>
                       <Input
                         style={styles.inputTextColor}
                         keyboardType="numeric"
@@ -187,10 +190,10 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       />
                     </Item>
                   </View>
-                  <H2 style={styles.filterTitle}>Год</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.year')}</H2>
                   <View style={styles.rangeItemWrapper}>
                     <Item style={styles.rangeItem}>
-                      <Label>от</Label>
+                      <Label>{t('feed.filters.from')}</Label>
                       <Input
                         style={styles.inputTextColor}
                         keyboardType="numeric"
@@ -201,7 +204,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                       />
                     </Item>
                     <Item style={styles.rangeItem}>
-                      <Label>до</Label>
+                      <Label>{t('feed.filters.to')}</Label>
                       <Input
                         style={styles.inputTextColor}
                         keyboardType="numeric"
@@ -213,29 +216,29 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                     </Item>
                   </View>
 
-                  <H2 style={styles.filterTitle}>Двигатель</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.engine')}</H2>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filtersValues.fuels.map(filterBoxFuels)}
                   </ScrollView>
 
-                  <H2 style={styles.filterTitle}>Коробка передач</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.gears')}</H2>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filtersValues.gears.map(filterBoxGears)}
                   </ScrollView>
 
-                  <H2 style={styles.filterTitle}>Привод</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.wheels')}</H2>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filtersValues.wheels.map(filterBoxWheels)}
                   </ScrollView>
 
-                  <H2 style={styles.filterTitle}>Кузов</H2>
+                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.carcass')}</H2>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {filtersValues.carcasses.map(filterBoxCarcasses)}
                   </ScrollView>
 
                   <View style={styles.submitButtonWrapper}>
                     <Button block onPress={switchModalVisibleWithLocal} style={styles.submitButton}>
-                      <Text>Поиск</Text>
+                      <Text>{t('feed.filters.submit')}</Text>
                     </Button>
                   </View>
                 </Form>

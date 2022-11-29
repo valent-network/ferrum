@@ -4,10 +4,13 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
+import { useTranslation } from 'react-i18next';
+
 import { secondaryColor, activeColor } from '../Colors';
 import NavigationService from '../services/NavigationService';
 
 export default ({ chat }) => {
+  const { t } = useTranslation();
   const firstUser = chat.chat_room_users[1] || chat.chat_room_users[0];
 
   return (
@@ -29,7 +32,7 @@ export default ({ chat }) => {
         dark
         style={styles.button}
         onPress={() => NavigationService.navigate('ChatRoomScreen', { chatRoomId: chat.id })}>
-        <Text>Продолжить</Text>
+        <Text>{t('ad.buttons.continueChat')}</Text>
       </Button>
     </View>
   );

@@ -10,6 +10,8 @@ import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from
 
 import dayjs from 'dayjs';
 
+import { useTranslation } from 'react-i18next';
+
 import { activeColor, disabledColor, secondaryColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
@@ -17,6 +19,7 @@ import { leaveChat } from './chatActions';
 import RECARIO_LOGO from '../assets/recario.png';
 
 export default function ChatRoomListItem({ chat, currentUser }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
   const onPress = () => NavigationService.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
@@ -30,13 +33,13 @@ export default function ChatRoomListItem({ chat, currentUser }) {
   const onLongPress = () => {
     const msg = lastMessage.user?._id ? `${lastMessage.user.name}: ${messagePreview}` : messagePreview;
     const title = chat.system
-      ? 'Системный чат\nВ него можно вернуться в любой момент'
+      ? t('chat.actions.systemChatHeader')
       : `${chat.title}\n${lastMessageDateString} – ${msg}`;
 
     ActionSheet.show(
       {
         title: title,
-        options: ['Покинуть чат', 'Отменить'],
+        options: [t('chat.actions.leave'), t('chat.actions.cancel')],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
       },
@@ -64,8 +67,8 @@ export default function ChatRoomListItem({ chat, currentUser }) {
         )}
       </Left>
       <Body style={styles.previewBody}>
-        <Text>{chat.system ? 'Рекарио' : chat.title}</Text>
-        <Text>{lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? 'Вы' : lastMessage.user.name)}</Text>
+        <Text>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
+        <Text>{lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? t('chat.you') : lastMessage.user.name)}</Text>
 
         <Text style={styles.smallFont}>{messagePreview}</Text>
       </Body>

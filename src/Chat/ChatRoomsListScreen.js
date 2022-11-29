@@ -12,6 +12,8 @@ import { getChatRooms } from './chatActions';
 
 import ListNotFound from '../ListNotFound';
 
+import i18n from '../../i18n';
+
 function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset, currentUser }) {
   const keyExtractor = useCallback((item) => item?.id?.toString(), []);
 
@@ -78,7 +80,7 @@ ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
       borderBottomWidth: 0,
       height: 104,
     },
-    title: 'Чаты',
+    title: i18n.t('nav.titles.chats'),
   };
 };
 

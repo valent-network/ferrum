@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import { Container, Content, Header, Body, Title, Icon, ActionSheet } from 'native-base';
+import { withTranslation } from 'react-i18next';
 
 import AdsList from '../AdsList';
 
@@ -12,19 +13,16 @@ import { loadAd } from '../actions/adsActions';
 import { activeColor, primaryColor, secondaryColor } from '../Colors';
 
 class MyAdsScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    return { title: 'Мои объявления', headerShown: false };
-  };
-
   onAdOpened = (ad) => {
     const { navigation, loadAd } = this.props;
     navigation.push('MyAdScreen', { id: ad.id });
   };
 
-  showChangeStarredScreen = () =>
+  showChangeStarredScreen = () => {
+    const { t } = this.props;
     ActionSheet.show(
       {
-        options: ['Просмотренные', 'Избранные', 'Отменить'],
+        options: [t('ads.visited'), t('ads.favorite'), t('actions.cancel')],
         cancelButtonIndex: 2,
       },
       (buttonIndex) => {
@@ -35,17 +33,18 @@ class MyAdsScreen extends React.PureComponent {
             return this.props.navigation.navigate('FavoriteAdsScreen');
         }
       },
-    );
+    )
+  }
 
   render() {
-    const { ads, loadMoreAds, isLoading, onRefresh } = this.props;
+    const { t, ads, loadMoreAds, isLoading, onRefresh } = this.props;
 
     return (
       <Container style={styles.mainContainer}>
         <Header style={styles.header} iosBarStyle="light-content" noShadow={true}>
           <Body>
             <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
-              Мои объявления&nbsp;
+              {t('ads.myAds')}&nbsp;
               <Icon name="chevron-down-outline" style={styles.headerIcon} />
             </Title>
           </Body>
@@ -79,7 +78,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyAdsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(MyAdsScreen));
 
 const styles = StyleSheet.create({
   header: {

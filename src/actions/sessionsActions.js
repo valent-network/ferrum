@@ -2,6 +2,7 @@ import * as ActionTypes from './actionTypes.js';
 import API from '../services/API';
 import { displayError } from '../actions/errorsActions';
 import { setAccessToken, clearAccessToken, setWizardDoneValue, setAuthPhone, clearAuthPhone } from '../AsyncStorage';
+import i18n from '../../i18n';
 
 export function signIn(phone, code) {
   return function (dispatch) {
@@ -73,7 +74,7 @@ export function changePhone(phone) {
 export function phoneIsInvalidFormat() {
   return {
     type: ActionTypes.AUTH_PHONE_IS_INVALID_FORMAT,
-    message: 'В номере телефона должно быть 9 цифр',
+    message: i18n.t('session.errors.authPhoneInvalidFormat'),
   };
 }
 
@@ -84,7 +85,7 @@ export function changeCode(code) {
 export function codeIsInvalidFormat() {
   return {
     type: ActionTypes.AUTH_CODE_IS_INVALID_FORMAT,
-    message: 'Код должен содержать 4 цифры',
+    message: i18n.t('session.errors.authCodeInvalidFormat'),
   };
 }
 

@@ -6,10 +6,13 @@ import { StyleSheet } from 'react-native';
 
 import UserAvatar from 'react-native-user-avatar';
 
+import { useTranslation } from 'react-i18next';
+
 import { activeColor, secondaryColor, disabledColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
+  const { t } = useTranslation();
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
   const addUserToChatRoom = (userId) => {
     if (!userId || membersIds.includes(userId)) {
@@ -44,10 +47,10 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
                 : () =>
                     invitationalSMS(
                       friend.phone_number,
-                      'Привет, нашел твою машину в продаже и есть вопрос, скачай, пожалуйста – https://recar.io/get',
+                      t('ad.invitationText'),
                     )
             }>
-            <Text>{friend.user_id ? 'Добавить' : 'Пригласить'}</Text>
+            <Text>{friend.user_id ? t('chat.buttons.addFriend') : t('ad.buttons.inviteFriend')}</Text>
           </Button>
         </Right>
       )}

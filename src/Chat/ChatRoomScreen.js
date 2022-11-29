@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { StyleSheet, TouchableOpacity, AppState } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { Container, Content, Spinner } from 'native-base';
+import { useTranslation } from 'react-i18next';
+
+import uk from 'dayjs/locale/uk';
+import en from 'dayjs/locale/en-gb';
 
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from '../actions/actionTypes';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from '../Chat/chatActions';
@@ -50,6 +54,8 @@ function ChatRoomScreen({
     };
   }, []);
 
+  const { i18n } = useTranslation();
+
   const onConnect = useCallback(() => {
     setCurrentChat(chatRoomId);
     serverChannel.connectToChatRoomChannel(chatRoomId);
@@ -81,6 +87,7 @@ function ChatRoomScreen({
   const giftedChatOptions = {
     user: { _id: userId, name: userName },
     messages: messages,
+    locale: i18n.language === 'en' ? en : uk,
     onLoadEarlier: () => getMessages(chatRoomId, messages.length),
     loadEarlier: shouldLoadEarlier,
     onSend: (message) => onSend(message[0], chatRoomId),

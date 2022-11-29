@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Header, Item, Icon, Input, Text, Left, Right } from 'native-base';
 import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { withTranslation } from 'react-i18next';
 
 import NavigationService from '../services/NavigationService';
 
@@ -18,9 +19,6 @@ import { primaryColor, secondaryColor, lightColor, disabledColor } from '../Colo
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
-  static navigationOptions = ({ navigation }) => {
-    return { header: () => null, headerShown: false };
-  };
 
   renderItem = ({ item, index }) => (
     <UserContactsListItem
@@ -34,6 +32,7 @@ class UserContactsScreen extends React.PureComponent {
 
   render() {
     const {
+      t,
       userContacts,
       isLoading,
       query,
@@ -58,7 +57,7 @@ class UserContactsScreen extends React.PureComponent {
           <Item style={styles.searchBar}>
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input
-              placeholder="Поиск"
+              placeholder={t('profile.placeholders.userContactsSearch')}
               placeholderTextColor={disabledColor}
               style={styles.inputTextColor}
               onChangeText={onUpdateQuery}
@@ -100,7 +99,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserContactsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(UserContactsScreen));
 
 UserContactsScreen.propTypes = {};
 

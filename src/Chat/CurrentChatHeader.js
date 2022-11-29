@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import { View, Text, Spinner } from 'native-base';
 import { TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { decOfNum } from '../Utils';
 import { spinnerColor } from '../Colors';
@@ -15,8 +16,9 @@ const HeaderTitle = ({ chat, isLoading, navigation }) => {
     return null;
   }
 
+  const { t } = useTranslation();
   const chatRoomUsersCount = chat.chat_room_users?.length || 0;
-  const membersWord = decOfNum(chatRoomUsersCount, ['участник', 'участника', 'участников']);
+  const membersWord = decOfNum(chatRoomUsersCount, [t('chat.oneMember'), t('chat.twoMembers'), t('chat.threeMembers')]);
   onPress = () => NavigationService.push('ChatRoomSettingsScreen', { chat: chat });
 
   if (isLoading) {
@@ -26,7 +28,7 @@ const HeaderTitle = ({ chat, isLoading, navigation }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.centered}>
-        <Text numberOfLines={1}>{chat.system ? 'Рекарио' : chat.title}</Text>
+        <Text numberOfLines={1}>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
         {chatRoomUsersCount > 0 && !chat.system && (
           <Text>
             {chatRoomUsersCount} {membersWord}

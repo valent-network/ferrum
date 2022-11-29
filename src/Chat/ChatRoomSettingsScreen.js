@@ -7,6 +7,8 @@ import { activeColor, lightColor, disabledColor, secondaryColor, spinnerColor } 
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
+import { useTranslation } from 'react-i18next';
+
 import { getAdFriendsToChat, addUserToChat, leaveChat } from './chatActions';
 
 import { mergeArraysKeepNew } from '../Utils';
@@ -27,6 +29,7 @@ function ChatRoomsSettingsScreen({
     return null;
   }
 
+  const { t } = useTranslation();
   const initializeChat = () => {
     getAdFriendsToChat(chat.ad_id, chat.id);
   };
@@ -43,10 +46,10 @@ function ChatRoomsSettingsScreen({
   const onLeave = () => {
     ActionSheet.show(
       {
-        options: ['Покинуть чат', 'Отменить'],
+        options: [t('chat.actions.leave'), t('chat.actions.cancel')],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
-        title: `Покинув чат вы потеряете доступ ко всем его сообщениям, пока вас не пригласят обратно оставшиеся участники`,
+        title: t('chat.settings.leaveChatTitle'),
       },
       (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
     );
@@ -62,8 +65,8 @@ function ChatRoomsSettingsScreen({
   const toDisplayMembers = friendsAndMembers.filter((f) => f.user_id && membersIds.includes(f.user_id));
   const toDisplayFriends = friendsAndMembers.filter((f) => !membersIds.includes(f.user_id));
   let toDisplay = toDisplayFriends.length
-    ? [{ separator: 'Участники' }, ...toDisplayMembers, { separator: 'Могут знать продавца' }, ...toDisplayFriends]
-    : [{ separator: 'Участники' }, ...toDisplayMembers];
+    ? [{ separator: t('chat.settings.members') }, ...toDisplayMembers, { separator: t('chat.settings.mayKnow') }, ...toDisplayFriends]
+    : [{ separator: t('chat.settings.members') }, ...toDisplayMembers];
 
   const keyExtractor = (item) => (item.separator || item.user_id || item.id).toString();
   const renderItem = ({ item }) => {
@@ -90,11 +93,11 @@ function ChatRoomsSettingsScreen({
         <Text onPress={onShow}>
           {chat.title}
           {'\n'}
-          <Text style={styles.activeColor}>Подробнее</Text>
+          <Text style={styles.activeColor}>{t('chat.settings.more')}</Text>
         </Text>
 
         <Text style={styles.activeColor} onPress={onLeave}>
-          Покинуть чать&nbsp;
+          {t('chat.settings.leaveChat')}&nbsp;
           <Icon name="log-out-outline" style={styles.leaveIcon} />
         </Text>
       </View>

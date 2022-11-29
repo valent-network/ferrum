@@ -3,39 +3,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Container, Content, Text, Button, H1, View } from 'native-base';
+import { withTranslation } from 'react-i18next';
 
 import { activeColor, disabledColor, primaryColor } from '../Colors';
 
 import PICTURE from '../assets/wizard1.png';
 
-export default class HelloScreen extends React.PureComponent {
+class HelloScreen extends React.PureComponent {
   nextStep = () => {
     this.props.navigation.navigate('ContactsRequestScreen');
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
           <Content>
             <Image style={styles.picture} source={PICTURE} />
-            <H1 style={styles.h1}>Держите руку на пульсе с Рекарио</H1>
+            <H1 style={styles.h1}>{t('wizzard.helloH1')}</H1>
             <View style={styles.mainContainer}>
-              <Text style={styles.textBlock}>Узнайте, кто из друзей сейчас продаёт автомобиль</Text>
-              <Text style={styles.textBlock}>
-                Попросите рекомендацию друга о конкретном объявлении — он может знать продавца
-              </Text>
-              <Text style={styles.textBlock}>Помогайте друзьям находить машины мечты</Text>
+              <Text style={styles.textBlock}>{t('wizzard.helloPros1')}</Text>
+              <Text style={styles.textBlock}>{t('wizzard.helloPros2')}</Text>
+              <Text style={styles.textBlock}>{t('wizzard.helloPros3')}</Text>
             </View>
           </Content>
           <Button block dark onPress={this.nextStep} style={styles.goButton}>
-            <Text style={styles.goButtonText}>Продолжить</Text>
+            <Text style={styles.goButtonText}>{t('wizzard.helloSubmit')}</Text>
           </Button>
         </Container>
       </SafeAreaView>
     );
   }
 }
+
+export default withTranslation()(HelloScreen);
 
 HelloScreen.propTypes = {};
 

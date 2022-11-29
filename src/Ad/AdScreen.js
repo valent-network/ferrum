@@ -4,6 +4,8 @@ import { RefreshControl, ScrollView, Share } from 'react-native';
 
 import { Text, Container, Content, Spinner, View, Icon, H3, Header, Title, Body, Left, Right } from 'native-base';
 
+import { withTranslation } from 'react-i18next';
+
 import { loadAd } from '../actions/adsActions';
 
 import ImageGallery from './ImageGallery';
@@ -15,12 +17,14 @@ import NavigationService from '../services/NavigationService';
 import { styles } from './Styles';
 import { activeColor, lightColor, spinnerColor } from '../Colors';
 
-export default class AdScreen extends React.PureComponent {
+import i18n from '../../i18n'
+
+class AdScreen extends React.PureComponent {
   shareAction = () => {
     const { ad } = this.props;
 
     Share.share({
-      message: `Посмотри, ты можешь знать продавца: https://recar.io/ads/${ad.id}`,
+      message: `${i18n.t('ad.shareText')} https://recar.io/ads/${ad.id}`,
       title: ad.title,
     });
   };
@@ -35,7 +39,7 @@ export default class AdScreen extends React.PureComponent {
   favIconDefaultStyles = [styles.icon, styles.mainColor];
 
   render() {
-    const { ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
+    const { t, ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
     const refreshControl = <RefreshControl tintColor={lightColor} refreshing={isLoading} onRefresh={onRefresh} />;
     const colorStyle = ad.is_favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
 
@@ -79,7 +83,7 @@ export default class AdScreen extends React.PureComponent {
             {ad.deleted && (
               <View>
                 <View style={styles.separator}></View>
-                <Text style={styles.deleted}>Удалено</Text>
+                <Text style={styles.deleted}>{t('ad.deleted')}</Text>
               </View>
             )}
 
@@ -101,6 +105,8 @@ export default class AdScreen extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(AdScreen);
 
 AdScreen.propTypes = {
   ad: PropTypes.object.isRequired,

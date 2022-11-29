@@ -110,7 +110,7 @@ FeedNavigator.navigationOptions = ({ navigation }) => {
 
 const UserContactsNavigator = createStackNavigator(
   {
-    UserContactsScreen: { screen: UserContactsScreen },
+    UserContactsScreen: { screen: UserContactsScreen, navigationOptions: { headerShown: false } },
   },
   {
     initialRouteName: 'UserContactsScreen',
@@ -120,7 +120,7 @@ const UserContactsNavigator = createStackNavigator(
 
 const ProfileNavigator = createStackNavigator(
   {
-    ProfileScreen: { screen: ProfileScreen },
+    ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false } },
     InviteFriendsScreen: { screen: InviteFriendsScreen },
     UserContacts: {
       screen: UserContactsNavigator,
@@ -138,15 +138,15 @@ const ProfileNavigator = createStackNavigator(
 const StarredNavigator = createSwitchNavigator(
   {
     visited: createStackNavigator({
-      VisitedAdsScreen: { screen: VisitedAdsScreen, path: '' },
+      VisitedAdsScreen: { screen: VisitedAdsScreen, path: '', navigationOptions: {headerShown: false} },
       VisitedAdScreen: { screen: StarredAdScreen, path: 'ads/:id' },
     }),
     Favorites: createStackNavigator({
-      FavoriteAdsScreen,
+      FavoriteAdsScreen: { screen: FavoriteAdsScreen, navigationOptions: {headerShown: false} },
       FavorteAdScreen: { screen: StarredAdScreen },
     }),
     My: createStackNavigator({
-      MyAdsScreen,
+      MyAdsScreen: { screen: MyAdsScreen, navigationOptions: {headerShown: false} },
       MyAdScreen: { screen: StarredAdScreen },
     }),
   },

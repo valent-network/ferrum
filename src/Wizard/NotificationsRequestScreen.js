@@ -8,6 +8,8 @@ import { Container, Content, Text, Button, H1, View } from 'native-base';
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import PushNotification from 'react-native-push-notification';
 
+import { withTranslation } from 'react-i18next';
+
 import { setWizardDone } from '../actions/sessionsActions';
 
 import { activeColor, lightColor, primaryColor, disabledColor } from '../Colors';
@@ -26,20 +28,20 @@ class NotificationsRequestScreen extends React.PureComponent {
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
           <Content contentContainerStyle={styles.contentContainer}>
             <Image style={styles.picture} source={PICTURE} />
-            <H1 style={styles.h1}>Будьте в курсе самых свежих событий вместе с Рекарио</H1>
+            <H1 style={styles.h1}>{t('wizzard.notificationsH1')}</H1>
             <View style={styles.mainContainer}>
-              <Text style={styles.textBlock}>
-                Отправляем только самые важные оповещения, чтобы не беспокоить по пустякам
-              </Text>
+              <Text style={styles.textBlock}>{t('wizzard.notificationsPros1')}</Text>
             </View>
           </Content>
           <Button block dark onPress={this.requestPushNotifications} style={styles.goButton}>
-            <Text style={styles.goButtonText}>Продолжить</Text>
+            <Text style={styles.goButtonText}>{t('wizzard.contactsSubmit')}</Text>
           </Button>
         </Container>
       </SafeAreaView>
@@ -57,7 +59,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationsRequestScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(NotificationsRequestScreen));
 
 NotificationsRequestScreen.propTypes = {};
 

@@ -5,6 +5,7 @@ import API from '../services/API';
 import { displayError } from '../actions/errorsActions';
 import equal from 'react-fast-compare';
 import { notification as UINotification } from '../Utils';
+import i18n from '../../i18n';
 
 export function loadMoreUserContacts() {
   return function (dispatch, getState) {
@@ -48,7 +49,7 @@ export function deleteContacts() {
 
     return API.deleteContacts()
       .then((deleteContactsPayload) => {
-        const messageText = 'Контакты успешно удалены!';
+        const messageText = i18n.t('profile.contactsSuccessfullyDeleted');
         dispatch({ type: ActionTypes.DELETE_CONTACTS_SUCCESS });
         if (Platform.OS === 'ios') {
           UINotification.ref.show({ message: messageText });

@@ -27,6 +27,8 @@ import { TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } fro
 
 import ImagePicker from 'react-native-image-crop-picker';
 
+import { withTranslation } from 'react-i18next';
+
 import { updateUserName, updateUserAvatar, getProfile } from './profileActions';
 import { initiateSystemChatRoom } from '../Chat/chatActions';
 
@@ -41,9 +43,6 @@ import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINoti
 import { activeColor, lightColor, disabledColor, secondaryColor, deletedColor, primaryColor } from '../Colors';
 
 class ProfileScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    return { header: () => null };
-  };
 
   constructor(props) {
     super(props);
@@ -74,14 +73,15 @@ class ProfileScreen extends React.PureComponent {
   };
 
   onAvatarPress = () => {
+    const { t } = this.props;
     const avatarPresent = this.props.user.avatar && this.props.user.avatar.length > 0;
 
     ActionSheet.show(
       {
-        title: 'Изменить фото профиля',
+        title: t('profile.actions.changeAvatarTitle'),
         options: avatarPresent
-          ? ['Выбрать из галереи...', 'Удалить', 'Отменить']
-          : ['Выбрать из галереи...', 'Отменить'],
+          ? [t('profile.actions.pickFromGallery'), t('actions.delete'), t('actions.cancel')]
+          : [t('profile.actions.pickFromGallery'), t('actions.cancel')],
         cancelButtonIndex: avatarPresent ? 2 : 1,
         destructiveButtonIndex: avatarPresent ? 1 : null,
       },
@@ -102,28 +102,35 @@ class ProfileScreen extends React.PureComponent {
     onUserAvatarChanged('');
   };
 
-  confirmDeleteContacts = () =>
-    ActionSheet.show(
+  confirmDeleteContacts = () => {
+    const { t } = this.props;
+
+    return ActionSheet.show(
       {
         title:
-          'Уверены, что хотите удалить контакты с серверов Рекарио? Чтобы их восстановить, просто перезапустите приложение',
-        options: ['Удалить', 'Отменить'],
+          t('profile.actions.deleteContactsTitle'),
+        options: [t('actions.delete'), t('actions.cancel')],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
       },
       (buttonIndex) => buttonIndex === 0 && this.props.deleteContacts(),
-    );
+    )
+  }
 
-  confirmSignOut = () =>
-    ActionSheet.show(
+
+  confirmSignOut = () => {
+    const { t } = this.props;
+
+    return ActionSheet.show(
       {
-        title: 'Выход из приложения',
-        options: ['Выйти', 'Отменить'],
+        title: t('profile.actions.signOutTitle'),
+        options: [t('profile.actions.signOut'), t('actions.cancel')],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
       },
       (buttonIndex) => buttonIndex === 0 && this.props.onSignOut(),
-    );
+    )
+  }
 
   refreshControl = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.props.onRefresh} />);
 
@@ -134,11 +141,14 @@ class ProfileScreen extends React.PureComponent {
   };
 
   copyRefcode = () => {
+    const { t } = this.props;
+
     Clipboard.setString(this.props.user.refcode);
-    UINotification.ref.show({ message: 'Пригласительный код скопирован' });
+    UINotification.ref.show({ message: t('notifications.profile.copyRefcode') });
   };
 
   render() {
+    const { t } = this.props;
     const { onRefresh, onInitiateSystemChatRoom, user } = this.props;
     const { referrerModalVisible } = this.state;
 
@@ -150,7 +160,7 @@ class ProfileScreen extends React.PureComponent {
               <UserAvatar size={48} name={user.name || ''} src={user.avatar} bgColor={activeColor} />
             </TouchableOpacity>
             <Text note style={styles.changeAvatarButton} onPress={this.onAvatarPress}>
-              Изменить
+              {t('actions.edit')}
             </Text>
           </View>
           <View style={styles.optionsContainer}>
@@ -158,7 +168,7 @@ class ProfileScreen extends React.PureComponent {
               <List>
                 <ListItem noIndent style={styles.itemContainer}>
                   <Item style={styles.nameInputWrapper}>
-                    <Label style={styles.label}>Имя</Label>
+                    <Label style={styles.label}>{t('profile.labels.name')}</Label>
                     <Input
                       style={styles.nameInput}
                       defaultValue={user.name}
@@ -174,7 +184,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   onPress={this.copyRefcode}>
                   <Left>
-                    <Text>Пригласительный код</Text>
+                    <Text>{t('profile.labels.refCode')}</Text>
                   </Left>
                   <Text style={styles.disabledText}>{user.refcode}</Text>
                   <Icon style={styles.copyButton} name="copy" />
@@ -185,14 +195,14 @@ class ProfileScreen extends React.PureComponent {
                   activeOpacity={1}
                   underlayColor="transparent">
                   <Left>
-                    <Text>Телефон</Text>
+                    <Text>{t('profile.labels.phoneNumber')}</Text>
                   </Left>
                   <Text style={styles.disabledText}>{user.phoneNumber}</Text>
                 </ListItem>
 
                 {!user.referrer.refcode && (
                   <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
-                    <Text>Ввести пригласительный код</Text>
+                    <Text>{t('profile.actions.enterRefCode')}</Text>
                   </Button>
                 )}
 
@@ -204,7 +214,7 @@ class ProfileScreen extends React.PureComponent {
                       activeOpacity={1}
                       underlayColor="transparent">
                       <Left>
-                        <Text>Меня пригласил</Text>
+                        <Text>{t('profile.labels.referrer')}</Text>
                       </Left>
                       <Right>
                         <Text style={styles.disabledText}>{user.referrer.refcode}</Text>
@@ -221,7 +231,7 @@ class ProfileScreen extends React.PureComponent {
                           />
                         </View>
                         <Text style={styles.noteText}>
-                          {user.referrer.contact_name || user.referrer.name || 'Имя не указано'}
+                          {user.referrer.contact_name || user.referrer.name || t('profile.nameNotPresent')}
                           &nbsp;
                           {user.referrer.phone}
                         </Text>
@@ -237,15 +247,14 @@ class ProfileScreen extends React.PureComponent {
                   activeOpacity={1}
                   underlayColor="transparent">
                   <Left>
-                    <Text>Книга контактов</Text>
+                    <Text>{t('profile.labels.contactsBook')}</Text>
                   </Left>
                   <Right>
-                    <Text style={styles.activeColor}>Удалить</Text>
+                    <Text style={styles.activeColor}>{t('actions.delete')}</Text>
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>
-                  Не забудьте отключить доступ к контактам в настройках телефона, чтобы они не были синхронизированы
-                  снова после удаления.
+                  {t('profile.deleteContactsNote')}
                 </Text>
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
@@ -254,7 +263,7 @@ class ProfileScreen extends React.PureComponent {
                   activeOpacity={1}
                   underlayColor="transparent">
                   <Left>
-                    <Text>Друзья</Text>
+                    <Text>{t('profile.labels.friends')}</Text>
                   </Left>
                   <Right>
                     <Icon name="chevron-forward-outline" />
@@ -267,15 +276,14 @@ class ProfileScreen extends React.PureComponent {
                   activeOpacity={1}
                   underlayColor="transparent">
                   <Left>
-                    <Text>Пригласить друзей</Text>
+                    <Text>{t('profile.labels.inviteFriends')}</Text>
                   </Left>
                   <Right>
                     <Icon name="chevron-forward-outline" />
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>
-                  Чем больше друзей в Рекарио — тем больше пользы вы получаете. Даже если друзья лично не заинтересованы
-                  в покупке или продаже авто, у них могут быть друзья, у которых вы можете захотеть купить машину.
+                  {t('profile.inviteFriendsNote')}
                 </Text>
               </List>
             </View>
@@ -288,7 +296,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={styles.itemContainer}>
                   <Left>
-                    <Text style={styles.bottomLinks}>Написать в техподдержку</Text>
+                    <Text style={styles.bottomLinks}>{t('profile.labels.support')}</Text>
                   </Left>
                   <Right>
                     <Icon name="chatbubbles-outline" />
@@ -301,7 +309,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={styles.itemContainer}>
                   <Left>
-                    <Text style={styles.bottomLinks}>Условия использования</Text>
+                    <Text style={styles.bottomLinks}>{t('profile.labels.tos')}</Text>
                   </Left>
                   <Right>
                     <Icon style={styles.activeColor} name="open-outline" />
@@ -314,7 +322,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={styles.itemContainer}>
                   <Left>
-                    <Text style={styles.bottomLinks}>Политика конфиденциальности</Text>
+                    <Text style={styles.bottomLinks}>{t('profile.labels.privacy')}</Text>
                   </Left>
                   <Right>
                     <Icon style={styles.activeColor} name="open-outline" />
@@ -327,7 +335,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                   style={[styles.itemContainer, styles.withBorderBottom]}>
                   <Left>
-                    <Text>Выход</Text>
+                    <Text>{t('profile.labels.signOut')}</Text>
                   </Left>
                   <Right>
                     <Icon name="log-out-outline" />
@@ -360,7 +368,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ProfileScreen));
 
 ProfileScreen.propTypes = {};
 

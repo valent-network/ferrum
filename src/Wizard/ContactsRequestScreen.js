@@ -6,6 +6,8 @@ import { Container, Content, Text, Button, H1, View } from 'native-base';
 
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
+import { withTranslation } from 'react-i18next';
+
 import { setWizardDone } from '../actions/sessionsActions';
 
 import { activeColor, lightColor, primaryColor, disabledColor } from '../Colors';
@@ -34,27 +36,23 @@ class ContactsRequestScreen extends React.PureComponent {
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <Container>
           <Content contentContainerStyle={styles.contentContainer}>
             <Image style={styles.picture} source={PICTURE} />
-            <H1 style={styles.h1}>Соберите своих друзей в Рекарио</H1>
+            <H1 style={styles.h1}>{t('wizzard.contactsH1')}</H1>
 
             <View style={styles.mainContainer}>
-              <Text style={styles.textBlock}>
-                Мы будем периодически загружать вашу контактную книгу на свои сервера
-              </Text>
-              <Text style={styles.textBlock}>
-                Это нужно для того, чтобы показывать объявления ваших друзей и знакомых
-              </Text>
-              <Text style={styles.textBlock}>
-                Вы в любой момент можете полностью удалить свои данные с наших серверов
-              </Text>
+              <Text style={styles.textBlock}>{t('wizzard.contactsPros1')}</Text>
+              <Text style={styles.textBlock}>{t('wizzard.contactsPros2')}</Text>
+              <Text style={styles.textBlock}>{t('wizzard.contactsPros3')}</Text>
             </View>
           </Content>
           <Button block dark onPress={this.requestContacts} style={styles.goButton}>
-            <Text style={styles.goButtonText}>Продолжить</Text>
+            <Text style={styles.goButtonText}>{t('wizzard.contactsSubmit')}</Text>
           </Button>
         </Container>
       </SafeAreaView>
@@ -72,7 +70,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsRequestScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ContactsRequestScreen));
 
 ContactsRequestScreen.propTypes = {};
 

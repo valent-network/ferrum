@@ -10,7 +10,7 @@ export default class ContactsUploading extends React.PureComponent {
     return (
       <Button iconLeft block style={styles.contactsUploadingButton}>
         <Icon name="people-sharp" />
-        <Text>Обработка контактной книги...</Text>
+        <Text>{t('feed.contactsProcessingText')}</Text>
         <Spinner size="small" color={lightColor} />
         <Text>&nbsp;</Text>
       </Button>

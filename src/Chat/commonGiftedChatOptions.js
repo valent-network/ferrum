@@ -4,11 +4,11 @@ import { Icon } from 'native-base';
 
 import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
-import ru from 'dayjs/locale/ru';
+import i18n from '../../i18n';
 
 import { activeColor, primaryColor, lightColor, secondaryColor } from '../Colors';
 
-const renderLoadEarlier = (props) => <LoadEarlier label="Загрузить еще..." {...props} />;
+const renderLoadEarlier = (props) => <LoadEarlier label={i18n.t('chat.placeholders.loadMore')} {...props} />;
 
 const renderInputToolbar = (props) => (
   <InputToolbar {...props} textInputStyle={styles.textInput} containerStyle={styles.inputToolbarContainer} />
@@ -24,9 +24,8 @@ export const commonGiftedChatOptions = {
   ...(Platform.OS === 'ios' && { bottomOffset: 0 }),
   infiniteScroll: true,
   maxInputLength: 200,
-  placeholder: 'Сообщение...',
+  placeholder: i18n.t('chat.placeholders.message'),
   renderUsernameOnMessage: true,
-  locale: ru,
   listViewProps: {
     style: {
       backgroundColor: primaryColor,

@@ -4,23 +4,25 @@ import { StyleSheet } from 'react-native';
 
 import { Icon, Text, Content, Button } from 'native-base';
 
+import { withTranslation } from 'react-i18next';
+
 import NavigationService from './services/NavigationService';
 
 import { activeColor } from './Colors';
 
-export default class ListNotFound extends React.PureComponent {
+class ListNotFound extends React.PureComponent {
   inviteFriends = () => NavigationService.navigate('InviteFriendsScreen');
 
   render() {
-    const { refreshControl, fromFeed } = this.props;
+    const { t, refreshControl, fromFeed } = this.props;
     return (
       <Content contentContainerStyle={styles.notFoundContainer} refreshControl={refreshControl}>
         <Icon name="ios-sad" style={styles.notFoundIcon} />
-        <Text style={styles.notFoundText}>Пусто</Text>
+        <Text style={styles.notFoundText}>{t('listNotFound')}</Text>
         {fromFeed && (
           <Button onPress={this.inviteFriends} style={styles.inviteFriendsButton}>
             <Icon name="happy-outline" />
-            <Text>Пригласить друзей</Text>
+            <Text>{t('buttons.listNotfoundInviteFriends')}</Text>
             <Icon name="happy-outline" />
           </Button>
         )}
@@ -28,6 +30,8 @@ export default class ListNotFound extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(ListNotFound);
 
 ListNotFound.propTypes = {
   refreshControl: PropTypes.element.isRequired,

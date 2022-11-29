@@ -6,15 +6,15 @@ import UserAvatar from 'react-native-user-avatar';
 import { Text, ListItem, Left, Right, Body, Icon, Button } from 'native-base';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
+import { withTranslation } from 'react-i18next';
+
 import { activeColor, disabledColor, primaryColor, secondaryColor } from '../Colors';
 
 import { invitationalSMS } from '../Utils';
 
-const INVITATIONAL_TEXT = 'Привет, посмотри – очень удобно купить и продать авто: https://recar.io/get';
-
-export default class UsersListItem extends React.PureComponent {
+class UsersListItem extends React.PureComponent {
   render() {
-    const { contact, onUserPress } = this.props;
+    const { t, contact, onUserPress } = this.props;
 
     return (
       <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent" style={styles.mainContainer}>
@@ -26,14 +26,16 @@ export default class UsersListItem extends React.PureComponent {
           <Text style={styles.contactPhoneStyle}>{contact.phone}</Text>
         </Body>
         <Right>
-          <Button style={styles.actionButton} onPress={() => invitationalSMS(contact.phone, INVITATIONAL_TEXT)}>
-            <Text>Пригласить</Text>
+          <Button style={styles.actionButton} onPress={() => invitationalSMS(contact.phone, t('profile.inviteFriendSMSText'))}>
+            <Text>{t('buttons.invite')}</Text>
           </Button>
         </Right>
       </ListItem>
     );
   }
 }
+
+export default withTranslation()(UsersListItem);
 
 UsersListItem.propTypes = {};
 

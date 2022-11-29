@@ -8,6 +8,7 @@ import { notification as UINotification } from '../Utils';
 import NavigationService from '../services/NavigationService';
 import { serverChannel } from '../services/ServerChannel';
 import { displayError } from '../actions/errorsActions';
+import i18n from '../../i18n';
 
 export function getChatRooms(offset = 0) {
   return function (dispatch) {
@@ -194,15 +195,15 @@ export function updateUnread(count) {
 }
 
 export function onMessageLongPress(userId, message, onDelete) {
-  const actions = [{ title: 'Скопировать текст', callback: () => Clipboard.setString(message.text) }];
+  const actions = [{ title: i18n.t('chat.actions.copyMessage'), callback: () => Clipboard.setString(message.text) }];
   let destructiveButtonIndex = null;
   if (userId === message.user._id) {
-    actions.push({ title: 'Удалить сообщение', callback: onDelete });
+    actions.push({ title: i18n.t('chat.actions.deleteMessage'), callback: onDelete });
     destructiveButtonIndex = 1;
   }
 
   const actionSheetOptions = {
-    options: [...actions.map((a) => a.title), 'Отменить'],
+    options: [...actions.map((a) => a.title), i18n.t('chat.actions.cancel')],
     cancelButtonIndex: actions.length + 1,
     destructiveButtonIndex: destructiveButtonIndex,
   };

@@ -4,6 +4,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import { Modal, StyleSheet, TouchableOpacity, Keyboard, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { View, Icon, Text, Thumbnail, Button, ActionSheet } from 'native-base';
+import { useTranslation } from 'react-i18next';
 
 import UserAvatar from 'react-native-user-avatar';
 
@@ -26,6 +27,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
   const [char5, setChar5] = useState(null);
   const chars = [char1, char2, char3, char4, char5];
   const setChars = [setChar1, setChar2, setChar3, setChar4, setChar5];
+  const { t } = useTranslation()
 
   useEffect(() => setRefcode(chars.join('')), chars);
 
@@ -64,8 +66,8 @@ function SetReferrerModal({ onClose, selfRefcode }) {
   confirmInvitation = () =>
     ActionSheet.show(
       {
-        title: `Внимание, вы подтверждаете, что вас пригласил именно ${user.name}. Изменить свой выбор в будущем будет невозможно.`,
-        options: ['Подтверждаю', 'Отменить'],
+        title: `${t('profile.referrer.actions.titleConfirmP1')} ${user.name}. ${t('profile.referrer.actions.titleNoChangeP2')}`,
+        options: [t('actions.accept'), t('actions.cancel')],
         cancelButtonIndex: 1,
         destructiveButtonIndex: 0,
       },
@@ -200,10 +202,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
               </View>
 
               {!user.refcode && (
-                <Text style={styles.noteText}>
-                  Укажите пригласительный код человека, который рассказал вам о Рекарио. Это даст долгосрочные бонусы
-                  вам обоим!
-                </Text>
+                <Text style={styles.noteText}>{t('profile.referrer.callToAction')}</Text>
               )}
 
               {user.refcode && selfRefcode !== refcode && (
@@ -211,9 +210,9 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                   <View style={styles.userAvatarContainer}>
                     <UserAvatar size={48} name={user.name || ''} src={user.avatar} bgColor={activeColor} />
                   </View>
-                  <Text>{user.name} приглашает вас в Рекарио.</Text>
+                  <Text>{user.name} {t('profile.referrer.friendInvitesYou')}</Text>
                   <Button style={styles.confirmButton} onPress={confirmInvitation} block>
-                    <Text>Принимаю приглашение</Text>
+                    <Text>{t('profile.referrer.buttons.accepting')}</Text>
                   </Button>
                 </View>
               )}
@@ -221,14 +220,14 @@ function SetReferrerModal({ onClose, selfRefcode }) {
               {user.notFound && selfRefcode !== refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
-                  <Text>Пользователь не найден</Text>
+                  <Text>{t('profile.referrer.errors.userNotFound')}</Text>
                 </View>
               )}
 
               {selfRefcode === refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
-                  <Text>Вы не можете пригласить сами себя</Text>
+                  <Text>{t('profile.referrer.errors.selfInvitationf')}</Text>
                 </View>
               )}
             </KeyboardAwareScrollView>
