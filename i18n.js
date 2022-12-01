@@ -12,14 +12,13 @@ const resources = {
   uk: { translation: uk },
 };
 
-
 i18n.use(initReactI18next).init({
   resources,
-  //language to use if translations in user language are not available
+  compatibilityJSON: 'v3',
   fallbackLng: "en",
   lng: lng,
   interpolation: {
-    escapeValue: false, // not needed for react!!
+    escapeValue: false,
   },
 });
 

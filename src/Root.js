@@ -29,12 +29,14 @@ import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnre
 
 import { activeColor, spinnerColor } from './Colors';
 
-import { getAccessToken, getWizardDone, getPushToken } from './AsyncStorage';
+import { getCachedLocale, getAccessToken, getWizardDone, getPushToken } from './AsyncStorage';
 
 import API from './services/API';
 import { serverChannel } from './services/ServerChannel';
 
 import NotifService from './pushNotificationsSetup';
+
+import i18n from '../i18n';
 
 class Root extends React.Component {
   constructor(props) {
@@ -140,6 +142,10 @@ class Root extends React.Component {
     await getAccessToken().then((token) => {
       t = token || accessToken;
       setCachedToken(t);
+    });
+
+    await getCachedLocale().then(locale => {
+      i18n.changeLanguage(locale);
     });
 
     AppState.addEventListener('change', this.refreshApp);

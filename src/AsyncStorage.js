@@ -83,3 +83,20 @@ export const setPushToken = async (pushToken) => {
     return false;
   }
 };
+
+
+export const getCachedLocale = async () => {
+  try {
+    return await AsyncStorage.getItem('@AsyncStorage:locale');
+  } catch (error) {
+    return false;
+  }
+};
+
+export const setCachedLocale = async (locale) => {
+  try {
+    return await AsyncStorage.setItem('@AsyncStorage:locale', locale);
+  } catch (error) {
+    return false;
+  }
+};
