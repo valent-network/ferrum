@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ru</string>
+	<string>uk</string>
 	<key>CFBundleDisplayName</key>
-	<string>Рекарио</string>
+	<string>recar.io</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
@@ -18,6 +18,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>uk</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
@@ -60,19 +65,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Доступ к камере необходим для того, чтобы сделать фото для профиля и объявления</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Доступ к контактам необходим для того, чтобы находить друзей, использующих Рекарио, а так же для помощи друзьям при выборе ими машины.
-Ваши контакты будут периодически синхронизироваться и храниться на наших серверах.
-Мы используем их для того, чтобы найти ваших друзей зарегистрированных в Рекарио.
-Чем больше ваших друзей в Рекарио, тем полезнее приложение будет для вас.
-Вы в любой момент можете удалить ваши контакты с наших серверов.
-</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>2018 Viktor Vsk</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Доступ к фото галеерее необходим для изменения фото профиля и добавления фотографий объявления</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>
@@ -97,7 +91,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>ap</key>
-	<string></string>
 </dict>
 </plist>

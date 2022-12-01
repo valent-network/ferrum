@@ -5,7 +5,8 @@ export default {
       feed: "Feed",
       chats: "Chats",
       myAds: "My Ads",
-      inviteFriends: "Invite Friends"
+      inviteFriends: "Invite Friends",
+      language: "Language",
     }
   },
   actions: {
@@ -20,7 +21,7 @@ export default {
     listNotfoundInviteFriends: "Invite Friends"
   },
   feed: {
-    permissionBoxText: "Recario requiers access to contacts book in order to show you your friends who are selling their cars right now",
+    permissionBoxText: "Recario requiers access to contacts book in order to show your friends who are selling their cars right now",
     permissionBoxSubmit: "Grant",
     contactsProcessingText: "Processing contacts book...",
     search: {
@@ -49,6 +50,7 @@ export default {
     discussWithFriend: "Discuss with a friend",
     postedBy: "Posted by",
     options: { source: "Source" },
+    deleted: "Deleted",
     buttons: {
       selectFriend: "Select",
       invitveFriend: "Invite",
@@ -102,7 +104,7 @@ export default {
     shareMessage: "Get Recario: https://recar.io/get",
     inviteFriendSMSText: "Hi, see what I've got — its so easy to buy or sell a car through your friends and mates! https://recar.io/get",
     deleteContactsNote: "Keep in mind to turn off permission to your contacts in settings to not get them synchronized again after application reload",
-    inviteFriendsNote: "The more friends in Recario — the more benefits you get. Even if your friends are personally not interested in buying or selling cars, they may have friends and mates who do.",
+    inviteFriendsNote: "The more friends in Recario — the more benefits you get. Even if your friends are personally not interested in buying or selling cars, they may have friends and mates who do",
     nameNotPresent: "No name",
     contactsSuccessfullyDeleted: "Contacts successfully deleted",
     actions: {
@@ -132,7 +134,7 @@ export default {
       signOut: "Sign out"
     },
     referrer: {
-      callToAction: "Invite your friend and get bonus!",
+      callToAction: "Invite your friend and make Recario even more useful for yourself!",
       friendInvitesYou: "invites you to explore Recario together",
       buttons: {
         accepting: "I accept the invitation"
@@ -167,16 +169,16 @@ export default {
   },
   wizzard: {
     helloPros1: "Find friends and mates selling cars right now",
-    helloPros2: "Ask friend to tell you more about the seller",
+    helloPros2: "Ask a friend to tell you more about the seller",
     helloPros3: "Help friends to find their dream cars",
     helloH1: "Stay up to date using Recario",
     helloSubmit: "Got it",
-    contactsPros1: "We will upload your contact book to our servers from time to time",
+    contactsPros1: "We will upload your contacts book to our servers from time to time",
     contactsPros2: "It is necessary in order to show you ads of your friends and mates",
-    contactsPros3: "You can remove your contacts from our server at any time",
-    contactsH1: "Gether all of your friends at Recario",
+    contactsPros3: "You can remove your contacts book from our servers at any time",
+    contactsH1: "Get all your friends to Recario",
     contactsSubmit: "Next",
-    notificationsPros1: "Only the most important notifications are sent, to not disturb you without the reason",
+    notificationsPros1: "Only the most important notifications are sent to not disturb you without a reason",
     notificationsH1: "Keep in touch with Recario",
     notificationsSubmit: "Continue",
   },

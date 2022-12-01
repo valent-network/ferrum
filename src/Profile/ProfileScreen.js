@@ -23,7 +23,7 @@ import {
 import UserAvatar from 'react-native-user-avatar';
 
 import Clipboard from '@react-native-clipboard/clipboard';
-import { TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } from 'react-native';
+import { Platform, TouchableOpacity, Image, StyleSheet, RefreshControl, SafeAreaView } from 'react-native';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -38,7 +38,7 @@ import { signOut } from '../actions/sessionsActions';
 
 import { deleteContacts } from '../UserContacts/userContactsActions';
 
-import { onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from '../Utils';
+import { goToSettings, onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from '../Utils';
 
 import { activeColor, lightColor, disabledColor, secondaryColor, deletedColor, primaryColor } from '../Colors';
 
@@ -256,6 +256,19 @@ class ProfileScreen extends React.PureComponent {
                 <Text style={styles.noteText}>
                   {t('profile.deleteContactsNote')}
                 </Text>
+                {Platform.OS === 'android' && <ListItem
+                  style={[styles.itemContainer, styles.withBorderBottom]}
+                  noIndent
+                  onPress={() => this.props.navigation.push('LanguageScreen')}
+                  activeOpacity={1}
+                  underlayColor="transparent">
+                  <Left>
+                    <Text>Українська / English</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="chevron-forward-outline" />
+                  </Right>
+                </ListItem>}
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
                   noIndent

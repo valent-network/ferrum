@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  recario
+
+  Created by Viktor Vsk on 11/30/22.
+  Copyright © 2022 recar.io. All rights reserved.
+*/
+"NSContactsUsageDescription" = "Access to contacts is required in order to find your friends and mates who are using Recario already and to help your friends and mates to find a car. Your contacts will be synchronized with our servers from time to time. More friends you have in Recario — more useful Recario becomes to you. You can delete all your contacts from our servers any time";
+"NSCameraUsageDescription" = "Access to camera is required in order to take profile photos and phot os for your ads";
+"NSPhotoLibraryUsageDescription" = "Access to gallery is required in order to pick existing photos as profile photo and add photos to your ads";

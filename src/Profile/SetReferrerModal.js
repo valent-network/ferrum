@@ -227,7 +227,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
               {selfRefcode === refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
-                  <Text>{t('profile.referrer.errors.selfInvitationf')}</Text>
+                  <Text>{t('profile.referrer.errors.selfInvitation')}</Text>
                 </View>
               )}
             </KeyboardAwareScrollView>

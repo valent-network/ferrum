@@ -12,6 +12,7 @@ import { Icon } from 'native-base';
 import AdScreen from '../Ad/AdScreen';
 import UserContactsScreen from '../UserContacts/UserContactsScreen';
 import ProfileScreen from '../Profile/ProfileScreen';
+import LanguageScreen from '../Profile/LanguageScreen';
 import InviteFriendsScreen from '../Profile/InviteFriendsScreen';
 import FeedScreen from '../Feed/FeedScreen';
 import FeedAdScreen from '../Feed/AdScreenContainer';
@@ -122,6 +123,9 @@ const ProfileNavigator = createStackNavigator(
   {
     ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false } },
     InviteFriendsScreen: { screen: InviteFriendsScreen },
+    LanguageScreen: {
+      screen: LanguageScreen,
+    },
     UserContacts: {
       screen: UserContactsNavigator,
       navigationOptions: {
