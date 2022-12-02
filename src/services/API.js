@@ -6,6 +6,7 @@ import { store } from '../store';
 import * as ActionTypes from '../actions/actionTypes';
 import { clearAccessToken } from '../AsyncStorage';
 import { BASE_URL } from '../config';
+import { displayError } from '../actions/errorsActions';
 
 let baseURL = '';
 
@@ -35,12 +36,17 @@ apiService.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (401 === error.response.status) {
-      clearAccessToken();
-      API.clearAccessToken();
-      store.dispatch({ type: ActionTypes.SIGN_OUT_SUCCESS });
+      // console.warn(error.status)
+    if (typeof error.response !== "undefined") {
+      if (401 === error.response.status) {
+        clearAccessToken();
+        API.clearAccessToken();
+        store.dispatch({ type: ActionTypes.SIGN_OUT_SUCCESS });
+      } else {
+        return Promise.reject(error);
+      }
     } else {
-      return Promise.reject(error);
+      displayError(error)
     }
   },
 );
