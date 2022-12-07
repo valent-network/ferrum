@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, TouchableOpacity, AppState } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { Container, Content, Spinner } from 'native-base';
+import { GiftedChat, SystemMessage } from 'react-native-gifted-chat';
+import { Container, Content, Spinner, Text } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import uk from 'dayjs/locale/uk';
@@ -11,6 +11,7 @@ import en from 'dayjs/locale/en-gb';
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from '../actions/actionTypes';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from '../Chat/chatActions';
 import { lightColor, primaryColor, secondaryColor, spinnerColor } from '../Colors';
+import { localizedSystemMessage } from '../Utils';
 import { serverChannel } from '../services/ServerChannel';
 
 import { commonGiftedChatOptions } from './commonGiftedChatOptions';
@@ -54,7 +55,7 @@ function ChatRoomScreen({
     };
   }, []);
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const onConnect = useCallback(() => {
     setCurrentChat(chatRoomId);
@@ -92,6 +93,11 @@ function ChatRoomScreen({
     loadEarlier: shouldLoadEarlier,
     onSend: (message) => onSend(message[0], chatRoomId),
     onLongPress: (context, message) => onMessageLongPress(userId, message, onDelete),
+    renderSystemMessage: (props) => {
+      props.currentMessage.text = localizedSystemMessage(props.currentMessage);
+
+      return <SystemMessage {...props} />
+    }
   };
 
   return (

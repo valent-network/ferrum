@@ -146,6 +146,7 @@ class Root extends React.Component {
 
     await getCachedLocale().then(locale => {
       i18n.changeLanguage(locale);
+      API.changeLanguage(locale);
     });
 
     AppState.addEventListener('change', this.refreshApp);

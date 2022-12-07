@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { ActionSheet } from 'native-base';
 import * as ActionTypes from '../actions/actionTypes.js';
 import API from '../services/API';
-import { notification as UINotification } from '../Utils';
+import { localizedSystemMessage, notification as UINotification } from '../Utils';
 import NavigationService from '../services/NavigationService';
 import { serverChannel } from '../services/ServerChannel';
 import { displayError } from '../actions/errorsActions';
@@ -127,8 +127,15 @@ export function newMessage(chat, myMessage = false) {
   return (dispatch, getState) => {
     const currentChatId = getState().currentChat.id;
     const currentUserId = getState().user._id;
-    const messageBody = chat.messages[0].text;
-    const messageUserId = chat.messages[0].user._id;
+    const message = chat.messages[0]
+    const messageBody = message.system ? localizedSystemMessage(message) : message.text;
+    const messageUserId = message.user._id;
+
+    // This is how we are currently going to determine if the message should 
+    // have sender name in notification. We can't omit sender name in all system
+    // messages because some messages may come from support or news etc
+    // In future if necessary this condition may be more complex
+    const isServiceMessage = message.system && message.extra.type;
 
     const shouldShowUINoitifcation = !myMessage && messageUserId !== currentUserId;
 
@@ -143,7 +150,7 @@ export function newMessage(chat, myMessage = false) {
             message: {
               message: messageBody,
               photo: chat.photo,
-              name: chat.messages[0].user?.name,
+              name: isServiceMessage ? "" : message.user?.name,
               title: chat.title,
             },
             onPress: () => goToChat(chat, dispatch),

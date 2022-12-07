@@ -1,5 +1,7 @@
 import { Platform, Linking } from 'react-native';
 
+import i18n from '../i18n';
+
 export const notification = { ref: {} };
 
 export const goToSettings = () => Linking.openURL('app-settings:');
@@ -31,4 +33,23 @@ export function random(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+export function localizedSystemMessage(message) {
+  const { text, extra: { type, name } } = message;
+  let localizedText;
+
+  switch(type) {
+    case "init":
+      localizedText = `${name} ${i18n.t('chat.system.init')}`
+      break;
+    case "left":
+      localizedText = `${name} ${i18n.t('chat.system.left')}`
+      break;
+    case "add":
+      localizedText = `${name} ${i18n.t('chat.system.add')}`
+      break;
+  }
+
+  return localizedText || message.text;
 }

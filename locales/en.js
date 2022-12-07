@@ -97,6 +97,9 @@ export default {
       yourName: "Your name...",
       message: "Message...",
       loadMore: "Load more..."
+    },
+    system: {
+      initiated: "asked about this ad"
     }
   },
   profile: {
