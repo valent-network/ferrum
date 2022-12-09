@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: primaryColor,
     fontSize: 16,
     paddingLeft: 8,
-    lineHeight: 18,
+    lineHeight: 20,
   },
   sendContainer: {
     justifyContent: 'center',
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   sendButton: {
     color: superActiveColor,
     fontWeight: 'bold',
-    fontSize: 36
+    fontSize: 32,
+    paddingRight: 4,
   },
 });
