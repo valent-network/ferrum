@@ -144,10 +144,12 @@ class Root extends React.Component {
       setCachedToken(t);
     });
 
-    await getCachedLocale().then(locale => {
-      i18n.changeLanguage(locale);
-      API.changeLanguage(locale);
-    });
+    if (Platform.OS === 'android') {
+      await getCachedLocale().then(locale => {
+        i18n.changeLanguage(locale);
+        API.changeLanguage(locale);
+      });
+    }
 
     AppState.addEventListener('change', this.refreshApp);
 
