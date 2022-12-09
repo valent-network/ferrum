@@ -21,7 +21,7 @@ const renderSend = (props) => (
 );
 
 export const commonGiftedChatOptions = {
-  ...(Platform.OS === 'ios' && { bottomOffset: 0 }),
+  ...(Platform.OS === 'ios' && { bottomOffset: 1 }),
   infiniteScroll: true,
   maxInputLength: 200,
   wrapInSafeArea: true,
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderTopColor: primaryColor,
     backgroundColor: secondaryColor,
-    paddingTop: 12,
+    paddingTop: 4
+
   },
   textInput: {
     color: lightColor,
