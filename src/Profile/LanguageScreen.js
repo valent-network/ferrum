@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import { primaryColor, lightColor, secondaryColor } from '../Colors';
 import { getCachedLocale, setCachedLocale } from '../AsyncStorage';
 import i18n from '../../i18n';
+import API from '../services/API';
 
 function LanguageScreen({ navigation }) {
    const [locale, setLocale] = useState();
@@ -17,6 +18,7 @@ function LanguageScreen({ navigation }) {
    i18n.changeLanguage(locale);
    setLocale(locale);
    setCachedLocale(locale);
+   API.changeLanguage(locale);
    navigation.goBack();
   }
 
