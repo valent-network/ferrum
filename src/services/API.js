@@ -53,7 +53,7 @@ apiService.interceptors.response.use(
 
 export default class API {
   static changeLanguage(locale) {
-    apiService.defaults.headers.common['HTTP_ACCEPT_LANGUAGE'] = locale;
+    apiService.defaults.headers.common['X-User-Locale'] = locale;
   }
 
   static setAccessToken(accessToken) {

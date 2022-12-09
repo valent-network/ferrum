@@ -53,7 +53,7 @@ export default {
     deleted: "Видалено",
     buttons: {
       selectFriend: "Обрати",
-      invitveFriend: "Запросити",
+      inviteFriend: "Запросити",
       askFriend: "Запитати",
       continueChat: "Продовжити"
     }

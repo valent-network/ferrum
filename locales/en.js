@@ -53,7 +53,7 @@ export default {
     deleted: "Deleted",
     buttons: {
       selectFriend: "Select",
-      invitveFriend: "Invite",
+      inviteFriend: "Invite",
       askFriend: "Ask",
       continueChat: "Continue"
     }
