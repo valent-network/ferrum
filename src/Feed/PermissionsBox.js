@@ -25,19 +25,18 @@ class PermissionsBox extends React.PureComponent {
     this.props.checkContactsPermissions();
   }
   render() {
-    const { t } = this.props;
-
     const {
       permissionsGiven,
       permissionsRequested,
       checkContactsPermissions,
       userContactsCount,
       userContactsProcessed,
+      t,
     } = this.props;
 
     if (permissionsGiven && permissionsRequested) {
       if (userContactsCount === 0 && !userContactsProcessed) {
-        return <ContactsUploading />;
+        return <ContactsUploading t={t}/>;
       } else {
         return null;
       }
