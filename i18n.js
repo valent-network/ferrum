@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 import { default as en } from './locales/en';
 import { default as uk } from './locales/uk';
 import API from './src/services/API';
+import { getCachedLocale, setCachedLocale } from './src/AsyncStorage';
 
 import { Platform, NativeModules } from 'react-native';
 
@@ -24,6 +25,12 @@ i18n.use(initReactI18next).init({
 });
 
 API.changeLanguage(lng);
+
+if (Platform.OS === 'android') {
+  getCachedLocale().then((l) => {
+    if(l != 'uk' && l != 'en') { setCachedLocale(lng) }
+  });
+}
 
 export default i18n;
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Content, List, ListItem, Radio, Left, Right, Container } from 'native-base';
+import { Text, Content, List, ListItem, Radio, Left, Right, Container, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 import { primaryColor, lightColor, secondaryColor } from '../Colors';
@@ -35,6 +35,14 @@ function LanguageScreen({ navigation }) {
             <Right><Radio selected={locale === 'en'} onPress={() => changeLocale('en')}/></Right>
           </ListItem>
         </List>
+
+        <View style={styles.notes}>
+          <Text>Для того, щоб весь контент було коректно перекладено відповідно до ваших налаштувань, може знадобитись перезавантаження додатку. Вибачте за незручності</Text>
+        </View>
+
+        <View style={styles.notes}>
+          <Text>In order to correctly translate everything, application reload may be required. We are sorry for this inconvenience</Text>
+        </View>
       </Content>
     </Container>
   )
@@ -64,4 +72,5 @@ LanguageScreen.navigationOptions = ({ navigation }) => {
 export default LanguageScreen;
 
 const styles = StyleSheet.create({
+  notes: { padding: 16 }
 });
