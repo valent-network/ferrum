@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-export const activeColor = '#5E56D3';
+export const activeColor = '#0057B8';
 
-export const primaryColor = '#2E2C4F';
+export const superActiveColor = '#FFDD00';
 
-export const secondaryColor = '#3C3C5D';
+export const primaryColor = '#1E1C4F';
+
+export const secondaryColor = '#2C2C5D';
 
 export const spinnerColor = '#c9c9c9';
 
@@ -12,7 +14,7 @@ export const spinnerColor = '#c9c9c9';
 
 export const lightColor = '#c9c9c9';
 
-export const disabledColor = 'rgba(255,255,255,0.4)';
+export const disabledColor = 'rgba(255,255,255,0.5)';
 
 //
 

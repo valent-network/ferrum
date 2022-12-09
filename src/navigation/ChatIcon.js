@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
-import { activeColor, disabledColor } from '../Colors';
+import { activeColor, disabledColor, superActiveColor } from '../Colors';
 
 import NavigationService from '../services/NavigationService';
 
@@ -41,7 +41,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChatIcon);
 const styles = StyleSheet.create({
   activeIcon: {
     fontSize: 24,
-    color: activeColor,
+    color: superActiveColor,
   },
   badge: {
     backgroundColor: activeColor,

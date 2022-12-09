@@ -6,7 +6,7 @@ import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
 import i18n from '../../i18n';
 
-import { activeColor, primaryColor, lightColor, secondaryColor } from '../Colors';
+import { activeColor, primaryColor, lightColor, secondaryColor, superActiveColor } from '../Colors';
 
 const renderLoadEarlier = (props) => <LoadEarlier label={i18n.t('chat.placeholders.loadMore')} {...props} />;
 
@@ -16,7 +16,7 @@ const renderInputToolbar = (props) => (
 
 const renderSend = (props) => (
   <Send {...props} containerStyle={styles.sendContainer}>
-    <Icon name="paper-plane" style={styles.sendButton} />
+    <Icon name="arrow-up-circle-outline" style={styles.sendButton} />
   </Send>
 );
 
@@ -24,6 +24,8 @@ export const commonGiftedChatOptions = {
   ...(Platform.OS === 'ios' && { bottomOffset: 0 }),
   infiniteScroll: true,
   maxInputLength: 200,
+  wrapInSafeArea: true,
+  alwaysShowSend: true,
   placeholder: i18n.t('chat.placeholders.message'),
   renderUsernameOnMessage: true,
   listViewProps: {
@@ -42,18 +44,27 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     borderTopWidth: 0.5,
     borderTopColor: primaryColor,
+    backgroundColor: secondaryColor,
+    paddingTop: 12,
   },
   textInput: {
     color: lightColor,
+    borderRadius: 10,
+    backgroundColor: primaryColor,
+    fontSize: 16,
+    paddingLeft: 8,
+    lineHeight: 18,
   },
   sendContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    paddingRight: 12,
+    alignSelf: 'flex-end',
+    marginLeft: 4,
+
   },
   sendButton: {
-    color: activeColor,
+    color: superActiveColor,
     fontWeight: 'bold',
+    fontSize: 36
   },
 });

@@ -32,6 +32,7 @@ import {
   disabledColor,
   secondaryColor,
   spinnerColor,
+  superActiveColor,
 } from '../Colors';
 
 import { onTosPress, random } from '../Utils';
@@ -315,14 +316,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     marginTop: 0,
-    backgroundColor: '#3C3C5D',
+    backgroundColor: activeColor,
     height: '20%',
     width: '100%',
     borderBottomRightRadius: 50,
     borderBottomLeftRadius: 0,
   },
   headerText: {
-    color: lightColor,
+    color: superActiveColor,
+    fontWeight: '800'
   },
   goButton: {
     fontWeight: 'bold',
