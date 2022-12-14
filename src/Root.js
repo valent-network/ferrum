@@ -135,7 +135,19 @@ class Root extends React.Component {
   };
 
   async componentDidMount() {
-    const { accessToken, setCachedToken, setWizardDone, newMessage } = this.props;
+    const {
+      accessToken,
+      setCachedToken,
+      setWizardDone,
+      newMessage,
+      getFeed,
+      getContacts,
+      getMyAds,
+      getVisitedAds,
+      getFavoriteAds,
+      getProfile,
+      getChatRooms,
+    } = this.props;
 
     let t;
 
@@ -160,8 +172,22 @@ class Root extends React.Component {
       this.setState({ wizardLoading: false });
     });
 
-    serverChannel.authenticate(t);
-    serverChannel.connectToUsersChannel(this.userChannelCallbacks);
+    if (t) {
+      this.refreshApp();
+      getPushToken().then((pushToken) => {
+        API.updateProfile({}, JSON.parse(pushToken));
+      });
+      getChatRooms();
+      getFeed();
+      getContacts();
+      getMyAds();
+      getVisitedAds();
+      getFavoriteAds();
+      getProfile();
+
+      serverChannel.authenticate(t);
+      serverChannel.connectToUsersChannel(this.userChannelCallbacks);
+    }
   }
 
   componentWillUnmount() {
@@ -174,13 +200,6 @@ class Root extends React.Component {
       isLoading,
       accessToken,
       wizardDone,
-      getFeed,
-      getContacts,
-      getMyAds,
-      getVisitedAds,
-      getFavoriteAds,
-      getProfile,
-      getChatRooms,
     } = this.props;
 
     if (isLoading || this.state.wizardLoading) {
@@ -194,19 +213,6 @@ class Root extends React.Component {
     }
 
     if (accessToken) {
-      this.refreshApp();
-
-      getPushToken().then((pushToken) => {
-        API.updateProfile({}, JSON.parse(pushToken));
-      });
-      getChatRooms();
-      getFeed();
-      getContacts();
-      getMyAds();
-      getVisitedAds();
-      getFavoriteAds();
-      getProfile();
-
       return <AppNavigator uriPrefix="recarioapp://" ref={this.appNavigatorRef} />;
     } else {
       return wizardDone ? <LoginNavigator /> : <WizardNavigator />;
