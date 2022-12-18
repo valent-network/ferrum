@@ -114,7 +114,7 @@ class Root extends React.Component {
   };
 
   refreshApp = () => {
-    const { accessToken, tryUpdateContacts, updateFilterValues, getChatRooms, getProfile, newMessage } = this.props;
+    const { accessToken, tryUpdateContacts, updateFilterValues, getChatRooms, getProfile } = this.props;
 
     if (AppState.currentState === 'active') {
       if (!accessToken) {
@@ -129,25 +129,36 @@ class Root extends React.Component {
     serverChannel.connectToUsersChannel(this.userChannelCallbacks);
 
     updateFilterValues();
-    getChatRooms();
     tryUpdateContacts();
+    getChatRooms();
     getProfile();
   };
 
-  async componentDidMount() {
+  refreshAndPopualteApp = () => {
     const {
-      accessToken,
-      setCachedToken,
-      setWizardDone,
-      newMessage,
       getFeed,
       getContacts,
       getMyAds,
       getVisitedAds,
       getFavoriteAds,
-      getProfile,
-      getChatRooms,
     } = this.props;
+
+    this.refreshApp();
+
+    getPushToken().then((pushToken) => {
+      API.updateProfile({}, JSON.parse(pushToken));
+    });
+
+    getFeed();
+    getContacts();
+    getMyAds();
+    getVisitedAds();
+    getFavoriteAds();
+  }
+
+
+  async componentDidMount() {
+    const { accessToken, setCachedToken, setWizardDone, } = this.props;
 
     let t;
 
@@ -172,27 +183,20 @@ class Root extends React.Component {
       this.setState({ wizardLoading: false });
     });
 
-    if (t) {
-      this.refreshApp();
-      getPushToken().then((pushToken) => {
-        API.updateProfile({}, JSON.parse(pushToken));
-      });
-      getChatRooms();
-      getFeed();
-      getContacts();
-      getMyAds();
-      getVisitedAds();
-      getFavoriteAds();
-      getProfile();
-
-      serverChannel.authenticate(t);
-      serverChannel.connectToUsersChannel(this.userChannelCallbacks);
-    }
+    if (t) { this.refreshAndPopualteApp(); }
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.refreshApp);
     serverChannel.disconnect();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { accessToken } = this.props;
+
+    if (prevProps.accessToken !== accessToken && typeof accessToken !== 'undefined') {
+      this.refreshAndPopualteApp();
+    }
   }
 
   render() {
