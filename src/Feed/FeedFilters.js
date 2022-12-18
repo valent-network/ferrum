@@ -147,7 +147,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
           </Right>
         </TouchableOpacity>
       </Header>
-      <KnowThroughFilter />
+      {filters.hops_count.length > 0 && <KnowThroughFilter />}
 
       <Modal animationType="fade" visible={modalVisible}>
         <SafeAreaView style={styles.safeArea}>
