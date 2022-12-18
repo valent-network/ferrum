@@ -43,6 +43,11 @@ export default function visitedAdsRedducer(state = initialSetting, action = {}) 
         ...state,
         list: equal(state.list, t) ? state.list : t,
       };
+    case ActionTypes.GET_STARRED_AD_SUCCESS:
+      return {
+        ...state,
+        list: [action.ad, ...state.list.filter(ad => ad.id !== action.ad.id)]
+      }
     case ActionTypes.GET_VISITED_ADS_WITH_OFFSET_SUCCESS:
       const newList = mergeArraysKeepNew([...state.list, ...action.list], (it) => it.id);
 
