@@ -28,6 +28,8 @@ import NavigationService from '../services/NavigationService';
 
 import ChatIcon from '../navigation/ChatIcon';
 
+import KnowThroughFilter from './KnowThroughFilter';
+
 import * as ActionTypes from '../actions/actionTypes';
 
 import { applyFilter, resetFilters } from './feedActions';
@@ -130,7 +132,7 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
           <Input
             placeholder={t('feed.search.placeholder')}
             placeholderTextColor={disabledColor}
-            style={styles.inputTextColor}
+            style={[styles.inputTextColor, styles.searchBarInput]}
             onChangeText={onChangeQueryWithDelay}
             defaultValue={filters.query}
             returnKeyType={'done'}
@@ -145,8 +147,9 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
           </Right>
         </TouchableOpacity>
       </Header>
+      <KnowThroughFilter />
 
-      <Modal animationType="slide" visible={modalVisible}>
+      <Modal animationType="fade" visible={modalVisible}>
         <SafeAreaView style={styles.safeArea}>
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always" bounces={false} extraHeight={296}>
             <View style={styles.modalContainer}>
@@ -161,10 +164,6 @@ const FeedFilters = ({ filters, filtersValues, applyFilter, filterReset, modalVi
                   <Icon name="close-outline" onPress={switchModalVisibleWithLocal} style={styles.closeIcon} />
                 </View>
                 <Form style={styles.filtersForm}>
-                  <H2 style={styles.filterTitle}>{t('feed.filters.headers.knowThrough')}</H2>
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {filtersValues.hops_count.map(filterBoxHopsCount)}
-                  </ScrollView>
                   <H2 style={styles.filterTitle}>{t('feed.filters.headers.price')}</H2>
                   <View style={styles.rangeItemWrapper}>
                     <Item style={styles.rangeItem}>
@@ -303,7 +302,7 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
-    paddingBottom: 8,
+    alignItems: 'center'
   },
   filterTitle: {
     marginTop: 16,
@@ -371,6 +370,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     color: disabledColor,
+    fontSize: 14,
   },
   filtersForm: {
     paddingBottom: 96,
@@ -378,14 +378,18 @@ const styles = StyleSheet.create({
   inputTextColor: {
     color: lightColor,
   },
+  searchBarInput: {
+    fontSize: 14,
+    paddingLeft: 0,
+  },
   topIconContainer: {
     height: '100%',
-    minWidth: 57,
-    maxWidth: 57,
+    minWidth: 52,
+    maxWidth: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 57,
-    maxHeight: 57,
+    minHeight: 52,
+    maxHeight: 52,
   },
   filterIcon: {
     color: disabledColor,
