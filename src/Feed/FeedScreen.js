@@ -12,6 +12,8 @@ import * as ActionTypes from '../actions/actionTypes';
 import FeedFilters from './FeedFilters';
 import PermissionsBox from './PermissionsBox';
 
+import { FlingGestureHandler, Directions, State } from 'react-native-gesture-handler';
+
 class FeedScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     return { header: () => null, title: '' };
@@ -22,22 +24,38 @@ class FeedScreen extends React.PureComponent {
     navigation.push('Ad', { id: ad.id });
   };
 
+  onSwipeRight = ({nativeEvent}) => {
+    if (nativeEvent.state === State.ACTIVE) {
+      this.props.switchModalVisible()
+    }
+  }
+
+  onSwipeLeft = ({nativeEvent}) => {
+    if (nativeEvent.state === State.ACTIVE) {
+      this.props.navigation.navigate('ChatRoomsListScreen')
+    }
+  }
+
   render() {
     const { ads, loadMoreAds, filters, isLoading, onRefresh } = this.props;
 
     return (
-      <Container>
-        <FeedFilters />
-        <PermissionsBox />
-        <AdsList
-          ads={ads}
-          isLoading={isLoading}
-          onRefresh={onRefresh}
-          loadMoreAds={loadMoreAds}
-          onAdOpened={this.onAdOpened}
-          fromFeed={true}
-        />
-      </Container>
+      <FlingGestureHandler direction={Directions.RIGHT} onHandlerStateChange={this.onSwipeRight.bind(this)}>
+        <FlingGestureHandler direction={Directions.LEFT} onHandlerStateChange={this.onSwipeLeft.bind(this)}>
+          <Container>
+            <FeedFilters />
+            <PermissionsBox />
+            <AdsList
+              ads={ads}
+              isLoading={isLoading}
+              onRefresh={onRefresh}
+              loadMoreAds={loadMoreAds}
+              onAdOpened={this.onAdOpened}
+              fromFeed={true}
+            />
+          </Container>
+        </FlingGestureHandler>
+      </FlingGestureHandler>
     );
   }
 }
@@ -54,6 +72,7 @@ function mapDispatchToProps(dispatch) {
     loadMoreAds: () => dispatch(loadMoreAds()),
     loadAd: (id) => dispatch(loadAd(id)),
     onRefresh: () => dispatch(getAll()),
+    switchModalVisible: () => dispatch({ type: ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY }),
   };
 }
 
