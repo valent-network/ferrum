@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor } from '../Colors';
+import { activeColor, disabledColor, secondaryColor, superActiveColor } from '../Colors';
 
 import { leaveChat } from './chatActions';
 
@@ -67,13 +67,13 @@ export default function ChatRoomListItem({ chat, currentUser }) {
         )}
       </Left>
       <Body style={styles.previewBody}>
-        <Text>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
+        <Text style={styles.title}>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
         <Text>{lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? t('chat.you') : lastMessage.user.name)}</Text>
 
         <Text style={styles.smallFont}>{messagePreview}</Text>
       </Body>
-      <Right style={styles.centered}>
-        <Text style={styles.smallFont}>{lastMessageDateString}</Text>
+      <Right style={styles.notes}>
+        <Text style={[styles.smallFont, styles.centered]}>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
           <Badge style={styles.unreadBadge}>
             <Text>{chat.new_messages_count}</Text>
@@ -88,25 +88,41 @@ const styles = StyleSheet.create({
   carPhoto: {
     width: 48,
     height: 48,
+    borderTopColor: activeColor,
+    borderLeftColor: activeColor,
+    borderRightColor: superActiveColor,
+    borderBottomColor: superActiveColor,
+    borderWidth: 1
   },
   previewBody: {
-    backgroundColor: 'transparent',
+    paddingTop: 4,
+    paddingBottom: 4,
   },
   unreadBadge: {
     backgroundColor: activeColor,
-    transform: [{ scale: 0.8 }],
+    transform: [{ scale: 0.6 }],
     alignItems: 'center',
   },
   chatRow: {
     marginBottom: 8,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.6,
     borderBottomColor: secondaryColor,
   },
   centered: {
-    alignItems: 'center',
+    alignSelf: 'center',
   },
   smallFont: {
     color: disabledColor,
-    fontSize: 14,
+    fontSize: 13,
   },
+  title: {
+    fontWeight: 'bold'
+  },
+  notes: {
+    paddingTop: 2,
+    paddingLeft: 2,
+    paddingRight: 2,
+    paddingBottom: 2,
+    justifyContent: 'space-between'
+  }
 });

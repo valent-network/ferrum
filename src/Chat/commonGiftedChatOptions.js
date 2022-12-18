@@ -6,7 +6,7 @@ import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
 import i18n from '../../i18n';
 
-import { activeColor, primaryColor, lightColor, secondaryColor, superActiveColor } from '../Colors';
+import { activeColor, primaryColor, lightColor, secondaryColor } from '../Colors';
 
 const renderLoadEarlier = (props) => <LoadEarlier label={i18n.t('chat.placeholders.loadMore')} {...props} />;
 
@@ -16,7 +16,7 @@ const renderInputToolbar = (props) => (
 
 const renderSend = (props) => (
   <Send {...props} containerStyle={styles.sendContainer}>
-    <Icon name="arrow-up-circle-outline" style={styles.sendButton} />
+    <Icon name="arrow-up-circle-sharp" style={styles.sendButton} />
   </Send>
 );
 
@@ -42,19 +42,11 @@ export const commonGiftedChatOptions = {
 const styles = StyleSheet.create({
   inputToolbarContainer: {
     backgroundColor: secondaryColor,
-    borderTopWidth: 0.5,
-    borderTopColor: primaryColor,
+    borderTopColor: secondaryColor,
     backgroundColor: secondaryColor,
-    paddingTop: 4
-
   },
   textInput: {
     color: lightColor,
-    borderRadius: 10,
-    backgroundColor: primaryColor,
-    fontSize: 16,
-    paddingLeft: 8,
-    lineHeight: 20,
   },
   sendContainer: {
     justifyContent: 'center',
@@ -64,7 +56,7 @@ const styles = StyleSheet.create({
 
   },
   sendButton: {
-    color: superActiveColor,
+    color: activeColor,
     fontWeight: 'bold',
     fontSize: 32,
     paddingRight: 4,
