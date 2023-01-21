@@ -89,7 +89,7 @@ export default class Notification extends React.PureComponent {
                   {'\n'}
                 </Text>
               )}
-              {text.replace(/\n/g, ' ')}
+              {!!text && text.toString().replace(/\n/g, ' ')}
             </Text>
           </TouchableOpacity>
         </Animated.View>
