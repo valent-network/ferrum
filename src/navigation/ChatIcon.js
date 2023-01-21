@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
-import { activeColor, disabledColor, superActiveColor } from '../Colors';
+import { activeColor } from '../Colors';
 
 import NavigationService from '../services/NavigationService';
 
-const ChatIcon = ({ unreadMessagesCount }) => {
-  const icon = <Icon name="chatbubbles-outline" style={styles.activeIcon} />;
+const ChatIcon = ({ tintColor, unreadMessagesCount }) => {
+  const icon = <Icon name="chatbubble" style={[styles.activeIcon, { color: tintColor }]} />;
 
   if (unreadMessagesCount === 0) {
     return icon;
@@ -41,7 +41,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChatIcon);
 const styles = StyleSheet.create({
   activeIcon: {
     fontSize: 24,
-    color: superActiveColor,
   },
   badge: {
     backgroundColor: activeColor,

@@ -2,14 +2,15 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faWarehouse } from '@fortawesome/free-solid-svg-icons';
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import { Transition } from 'react-native-reanimated';
 
 import { StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
 import AdScreen from '../Ad/AdScreen';
+import NewAdScreen from '../Ad/NewAdScreen';
+import EditAdScreen from '../Ad/EditAdScreen';
 import UserContactsScreen from '../UserContacts/UserContactsScreen';
 import ProfileScreen from '../Profile/ProfileScreen';
 import LanguageScreen from '../Profile/LanguageScreen';
@@ -42,20 +43,10 @@ const styles = StyleSheet.create({
 });
 
 function iconFor(iconName) {
-  if (iconName === 'garage') {
-    return ({ tintColor }) => {
-      return (
-        <FontAwesomeIcon
-          icon={faWarehouse}
-          style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon}
-          size={24}
-        />
-      );
-    };
-  }
-
   return ({ tintColor }) => {
-    return <Icon name={iconName} style={tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon} />;
+    let style = tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon
+    if (iconName=='add-circle-sharp') { style = [style, {marginTop: -24, fontSize: 54}] };
+    return <Icon name={iconName} style={style} />;
   };
 }
 
@@ -81,33 +72,12 @@ const FeedNavigator = createStackNavigator(
   {
     FeedScreen: { screen: FeedScreen },
     Ad: { screen: FeedAdScreen },
-    Chat: {
-      screen: ChatStack,
-      path: '',
-      navigationOptions: {
-        headerShown: false,
-      },
-    },
   },
   {
     initialRouteName: 'FeedScreen',
     defaultNavigationOptions: defaultNavigationOptions,
   },
 );
-
-FeedNavigator.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true;
-
-  const route = navigation.state.routes[navigation.state.routes.length - 1];
-
-  if (route.routeName === 'Chat') {
-    tabBarVisible = false;
-  }
-
-  return {
-    tabBarVisible,
-  };
-};
 
 const UserContactsNavigator = createStackNavigator(
   {
@@ -139,7 +109,7 @@ const ProfileNavigator = createStackNavigator(
   },
 );
 
-const StarredNavigator = createSwitchNavigator(
+const StarredNavigator = createAnimatedSwitchNavigator(
   {
     visited: createStackNavigator({
       VisitedAdsScreen: { screen: VisitedAdsScreen, path: '', navigationOptions: {headerShown: false} },
@@ -147,16 +117,27 @@ const StarredNavigator = createSwitchNavigator(
     }),
     Favorites: createStackNavigator({
       FavoriteAdsScreen: { screen: FavoriteAdsScreen, navigationOptions: {headerShown: false} },
-      FavorteAdScreen: { screen: StarredAdScreen },
+      FavoriteAdScreen: { screen: StarredAdScreen },
     }),
     My: createStackNavigator({
       MyAdsScreen: { screen: MyAdsScreen, navigationOptions: {headerShown: false} },
       MyAdScreen: { screen: StarredAdScreen },
+      EditAdScreen: { screen: EditAdScreen },
     }),
   },
   {
     initialRouteName: 'Favorites',
     defaultNavigationOptions: defaultNavigationOptions,
+    transition: (
+      <Transition.Together>
+        <Transition.Out
+          type="slide-right"
+          durationMs={400}
+          interpolation="easeIn"
+        />
+        <Transition.In type="fade" durationMs={200} />
+      </Transition.Together>
+    )
   },
 );
 
@@ -167,7 +148,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: 'feed',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('search-outline'),
+        tabBarIcon: iconFor('search'),
       },
     },
     VisitedAds: {
@@ -175,7 +156,24 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: '',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('garage'),
+        tabBarIcon: iconFor('bookmarks'),
+      },
+    },
+    CreateAd: {
+      screen: NewAdScreen,
+      path: 'createAd',
+      navigationOptions: {
+        title: '',
+        tabBarIcon: iconFor('add-circle-sharp'),
+        tabBarVisible: false,
+      },
+    },
+    Chat: {
+      screen: ChatStack,
+      path: '',
+      navigationOptions: {
+        title: '',
+        tabBarIcon: ({tintColor}) => <ChatIcon tintColor={tintColor} />,
       },
     },
     Profile: {
@@ -183,7 +181,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: 'profile',
       navigationOptions: {
         title: '',
-        tabBarIcon: iconFor('menu-outline'),
+        tabBarIcon: iconFor('menu'),
       },
     },
   },
