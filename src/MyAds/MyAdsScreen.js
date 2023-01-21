@@ -2,62 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
-import { Container, Content, Header, Body, Title, Icon, ActionSheet } from 'native-base';
-import { withTranslation } from 'react-i18next';
+import { Container } from 'native-base';
 
 import AdsList from '../AdsList';
+import AdsListHeader from '../Starred/AdsListHeader';
 
 import { loadMoreAds, getAll } from './myAdsActions';
-import { loadAd } from '../actions/adsActions';
+import { likeAd, unlikeAd } from '../FavoriteAds/favoriteAdsActions';
+// import { loadAd } from '../actions/adsActions';
 
-import { activeColor, primaryColor, secondaryColor } from '../Colors';
+import { primaryColor, lightColor, secondaryColor } from '../Colors';
 
 class MyAdsScreen extends React.PureComponent {
-  onAdOpened = (ad) => {
-    const { navigation, loadAd } = this.props;
-    navigation.push('MyAdScreen', { id: ad.id });
-  };
-
-  showChangeStarredScreen = () => {
-    const { t } = this.props;
-    ActionSheet.show(
-      {
-        options: [t('ads.visited'), t('ads.favorite'), t('actions.cancel')],
-        cancelButtonIndex: 2,
-      },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            return this.props.navigation.navigate('VisitedAdsScreen');
-          case 1:
-            return this.props.navigation.navigate('FavoriteAdsScreen');
-        }
-      },
-    )
-  }
+  onAdOpened = (ad) => this.props.navigation.push('MyAdScreen', { id: ad.id })
 
   render() {
-    const { t, ads, loadMoreAds, isLoading, onRefresh } = this.props;
+    const { ads, loadMoreAds, isLoading, onRefresh, navigation, likeAd, unlikeAd } = this.props;
 
     return (
       <Container style={styles.mainContainer}>
-        <Header style={styles.header} iosBarStyle="light-content" noShadow={true}>
-          <Body>
-            <Title onPress={this.showChangeStarredScreen} style={styles.headerTitle}>
-              {t('ads.myAds')}&nbsp;
-              <Icon name="chevron-down-outline" style={styles.headerIcon} />
-            </Title>
-          </Body>
-        </Header>
-        {
-          <AdsList
-            ads={ads}
-            isLoading={isLoading}
-            onRefresh={onRefresh}
-            loadMoreAds={loadMoreAds}
-            onAdOpened={this.onAdOpened}
-          />
-        }
+        <AdsListHeader navigate={navigation.navigate} tab='MyAdsScreen' />
+        <AdsList
+          ads={ads}
+          isLoading={isLoading}
+          onRefresh={onRefresh}
+          loadMoreAds={loadMoreAds}
+          likeAd={likeAd}
+          unlikeAd={unlikeAd}
+          onAdOpened={this.onAdOpened}
+        />
       </Container>
     );
   }
@@ -73,25 +46,15 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadMoreAds: () => dispatch(loadMoreAds()),
-    loadAd: (id) => dispatch(loadAd(id)),
     onRefresh: () => dispatch(getAll()),
+    likeAd: (adId) => dispatch(likeAd(adId)),
+    unlikeAd: (adId) => dispatch(unlikeAd(adId)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(MyAdsScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(MyAdsScreen);
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: secondaryColor,
-    borderBottomWidth: 0,
-  },
-  headerIcon: {
-    fontSize: 18,
-    color: activeColor,
-  },
-  headerTitle: {
-    color: activeColor,
-  },
   mainContainer: {
     backgroundColor: primaryColor,
   },

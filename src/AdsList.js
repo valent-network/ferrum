@@ -23,7 +23,7 @@ class AdsList extends React.PureComponent {
   refreshControlStable = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.onRefresh} />);
 
   _renderItem = ({ item, index }) => (
-    <AdsListItem ad={item} index={index} totalAds={this.props.ads.length} onPress={this.props.onAdOpened} />
+    <AdsListItem ad={item} onPress={this.props.onAdOpened} likeAd={this.props.likeAd} unlikeAd={this.props.unlikeAd} />
   );
 
   render() {
