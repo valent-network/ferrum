@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const apiService = axios.create({
   baseURL: baseURL,
-  headers: {},
+  headers: { contentType: 'application/json' },
   paramsSerializer: {
     serialize: (params) => {
       return Qs.stringify(params, {
@@ -36,7 +36,6 @@ apiService.interceptors.response.use(
     return response;
   },
   function (error) {
-      // console.warn(error.status)
     if (typeof error.response !== "undefined") {
       if (401 === error.response.status) {
         clearAccessToken();
@@ -65,7 +64,7 @@ export default class API {
   }
 
   static getAd(id) {
-    return apiService.get(`/v1/ads/${id}`);
+    return apiService.get(`/v2/ads/${id}`);
   }
 
   static getAdFriends(id) {
@@ -106,7 +105,7 @@ export default class API {
   }
 
   static getFeed(offset = 0, filters = {}) {
-    return apiService.get('/v1/feed_ads', {
+    return apiService.get('/v2/feed_ads', {
       params: {
         offset: offset,
         filters: filters,
@@ -115,15 +114,15 @@ export default class API {
   }
 
   static getVisitedAds(offset = 0) {
-    return apiService.get(`/v1/visited_ads?offset=${offset}`);
+    return apiService.get(`/v2/visited_ads?offset=${offset}`);
   }
 
   static getFavoriteAds(offset = 0) {
-    return apiService.get(`/v1/favorite_ads?offset=${offset}`);
+    return apiService.get(`/v2/favorite_ads?offset=${offset}`);
   }
 
   static getMyAds(offset = 0) {
-    return apiService.get(`/v1/my_ads?offset=${offset}`);
+    return apiService.get(`/v2/my_ads?offset=${offset}`);
   }
 
   static getUserContacts(offset = 0, query = '') {
@@ -140,6 +139,10 @@ export default class API {
 
   static getFilters() {
     return apiService.get('/filters');
+  }
+
+  static getSettings() {
+    return apiService.get('/v1/settings');
   }
 
   static updateProfile(userParams = {}, deviceParams = {}) {
@@ -188,5 +191,50 @@ export default class API {
 
   static toggleBlock(userContactId) {
     return apiService.put(`/v1/blocked_user_contacts/${userContactId}`);
+  }
+
+  static createAd(adParams) {
+    const { title, short_description, description, price, city_id, category_id, options, ad_images } = adParams;
+
+    const params = { "ad":
+        {
+          "price": price,
+          "city_id": city_id,
+          "category_id": category_id,
+          "ad_query_attributes": { title },
+          "ad_description_attributes": { "body": description, "short": short_description },
+          "ad_extra_attributes": { details: options },
+          "ad_images_attributes": ad_images,
+        }
+      }
+
+    return apiService.post('/v2/ads', params);
+  }
+
+
+  static updateAd(ad) {
+    const { title, short_description, description, price, city_id, options, deleted, ad_images } = ad;
+
+    const params = { "ad":
+        {
+          "price": price,
+          "city_id": city_id,
+          "deleted": deleted,
+          "ad_query_attributes": { title },
+          "ad_description_attributes": { "body": description, "short": short_description },
+          "ad_extra_attributes": { details: options },
+          "ad_images_attributes": ad_images,
+        }
+      }
+
+    return apiService.put(`/v2/ads/${ad.id}`, params);
+  }
+
+  static deleteAd(adId) {
+    return apiService.delete(`/v2/ads/${adId}`);
+  }
+
+  static archiveAd(adId) {
+    return apiService.delete(`/v2/ads/${adId}/archive`);
   }
 }
