@@ -19,11 +19,12 @@ import * as ActionTypes from './actions/actionTypes';
 import { setWizardDone } from './actions/sessionsActions';
 import { tryUpdateContacts } from './actions/userContactsActions';
 import { getAll as getUserContacts } from './UserContacts/userContactsActions';
-import { getAll as getFeed, updateFilterValues } from './Feed/feedActions';
+import { getAll as getFeed } from './Feed/feedActions';
 import { getAll as getMyAds } from './MyAds/myAdsActions';
 import { getAll as getVisitedAds } from './VisitedAds/visitedAdsActions';
 import { getAll as getFavoriteAds } from './FavoriteAds/favoriteAdsActions';
 import { getProfile } from './Profile/profileActions';
+import { getSettings } from './actions';
 
 import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnread } from './Chat/chatActions';
 
@@ -114,7 +115,13 @@ class Root extends React.Component {
   };
 
   refreshApp = () => {
-    const { accessToken, tryUpdateContacts, updateFilterValues, getChatRooms, getProfile } = this.props;
+    const {
+      accessToken,
+      tryUpdateContacts,
+      getChatRooms,
+      getProfile,
+      getSettings,
+    } = this.props;
 
     if (AppState.currentState === 'active') {
       if (!accessToken) {
@@ -128,10 +135,10 @@ class Root extends React.Component {
     serverChannel.authenticate(accessToken);
     serverChannel.connectToUsersChannel(this.userChannelCallbacks);
 
-    updateFilterValues();
     tryUpdateContacts();
     getChatRooms();
     getProfile();
+    getSettings();
   };
 
   refreshAndPopualteApp = () => {
@@ -248,7 +255,7 @@ function mapDispatchToProps(dispatch) {
     getProfile: () => dispatch(getProfile()),
     setWizardDone: () => dispatch(setWizardDone()),
     tryUpdateContacts: () => dispatch(tryUpdateContacts()),
-    updateFilterValues: () => dispatch(updateFilterValues()),
+    getSettings: () => dispatch(getSettings()),
     updateContactsFinished: () => dispatch({ type: ActionTypes.UPDATE_CONTACTS_FINISHED }),
     newMessage: (chat, myMessage) => dispatch(newMessage(chat, myMessage)),
     readUpdate: (chat) => dispatch(readUpdate(chat)),

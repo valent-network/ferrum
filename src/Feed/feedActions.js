@@ -45,15 +45,29 @@ export function loadMoreAds() {
 }
 
 export function applyFilter(filterKey, filterValue) {
-  const filterType = ['gears', 'wheels', 'fuels', 'carcasses', 'hops_count'].filter((f) => f === filterKey).length
-    ? ActionTypes.FILTER_CHANGED_ARRAY
-    : ActionTypes.FILTER_CHANGED;
 
   return function (dispatch, getState) {
-    if (getState().filters[filterKey] !== filterValue) {
-      dispatch({ type: filterType, filterKey: filterKey, filterValue: filterValue });
-      dispatch(getAll());
+    const state = getState();
+    const currentCategory = state.settings.categories.filter(c => c.id == state.filters.category_id)[0]
+    const filterableOpts = currentCategory?.ad_option_types.map(opt => opt.name) || []
+    const filterType = [...filterableOpts, 'hops_count', 'category_id'].filter((f) => f === filterKey).length
+      ? ActionTypes.FILTER_CHANGED_ARRAY
+      : ActionTypes.FILTER_CHANGED;
+    const existingFilterValue = state.filters[filterKey];
+
+
+    switch(filterType) {
+      case ActionTypes.FILTER_CHANGED:
+        dispatch({ type: filterType, filterKey: filterKey, filterValue: filterValue });
+      break;
+      case ActionTypes.FILTER_CHANGED_ARRAY:
+        if (!existingFilterValue?.filter(fv => fv.id == filterValue.id).length) {
+          dispatch({ type: filterType, filterKey: filterKey, filterValue: filterValue.id });
+        }
+      break;
     }
+
+    dispatch(getAll());
   };
 }
 
@@ -61,18 +75,6 @@ export function resetFilters() {
   return function (dispatch) {
     dispatch({ type: ActionTypes.FILTER_RESET });
     dispatch(getAll());
-  };
-}
-
-export function updateFilterValues() {
-  return function (dispatch) {
-    return API.getFilters()
-      .then((payload) => {
-        dispatch({ type: ActionTypes.FILTER_VALUES_UPDATE, filterValues: payload.data });
-      })
-      .catch((error) => {
-        displayError(error);
-      });
   };
 }
 

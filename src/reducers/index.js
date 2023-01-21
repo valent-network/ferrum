@@ -9,10 +9,10 @@ import favoriteAdsReducer from './favoriteAdsReducer';
 import userReducer from './userReducer';
 import userContactsReducer from './userContactsReducer';
 import filtersReducer from './filtersReducer';
-import filtersValuesReducer from './filtersValuesReducer';
 import starredAdReducer from './starredAdReducer';
 import chatsReducer from './chatsReducer';
 import currentChatReducer from './currentChatReducer';
+import settingsReducer from './settingsReducer.js';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -25,10 +25,10 @@ const rootReducer = combineReducers({
   user: userReducer,
   userContacts: userContactsReducer,
   filters: filtersReducer,
-  filtersValues: filtersValuesReducer,
   starredAd: starredAdReducer,
   chats: chatsReducer,
   currentChat: currentChatReducer,
+  settings: settingsReducer,
 });
 
 export default rootReducer;
