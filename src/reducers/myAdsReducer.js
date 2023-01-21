@@ -6,6 +6,7 @@ import { mergeArraysKeepNew } from '../Utils';
 const initialSetting = {
   list: [],
   isLoading: true,
+  isCreating: false,
 };
 
 export default function myAdsRedducer(state = initialSetting, action = {}) {
@@ -46,6 +47,67 @@ export default function myAdsRedducer(state = initialSetting, action = {}) {
         ...state,
         isLoading: false,
       };
+    case ActionTypes.DELETE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.filter(ad => ad.id != action.adId)
+      }
+    case ActionTypes.ARCHIVE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.adId ? {...ad, deleted: true} : ad)
+      }
+    case ActionTypes.UNARCHIVE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.adId ? {...ad, deleted: false} : ad)
+      }
+    case ActionTypes.CREATE_AD_SUCCESS:
+      return {
+        ...state,
+        isCreating: false,
+        list: [action.ad, ...state.list]
+      }
+    case ActionTypes.CREATE_AD_FAILED:
+      return {
+        ...state,
+        isCreating: false,
+      }
+    case ActionTypes.CREATE_AD_STARTED:
+      return {
+        ...state,
+        isCreating: true,
+      }
+    case ActionTypes.UPDATE_AD_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+      }
+    case ActionTypes.UPDATE_AD_FAILED:
+      return {
+        ...state,
+        isUpdating: false,
+      }
+    case ActionTypes.UPDATE_AD_STARTED:
+      return {
+        ...state,
+        isUpdating: true,
+      }
+    case ActionTypes.LIKE_AD:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? {...ad, favorite: true} : ad)
+      }
+    case ActionTypes.UNLIKE_AD:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? {...ad, favorite: false} : ad)
+      }
+    case ActionTypes.UPDATE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? action.ad : ad)
+      }
     default:
       return state;
   }

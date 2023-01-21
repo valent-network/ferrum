@@ -60,6 +60,36 @@ export default function visitedAdsRedducer(state = initialSetting, action = {}) 
         ...state,
         isLoading: false,
       };
+    case ActionTypes.DELETE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.filter(ad => ad.id != action.adId)
+      }
+    case ActionTypes.ARCHIVE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.adId ? {...ad, deleted: true} : ad)
+      }
+    case ActionTypes.UNARCHIVE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.adId ? {...ad, deleted: false} : ad)
+      }
+    case ActionTypes.LIKE_AD:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? {...ad, favorite: true} : ad)
+      }
+    case ActionTypes.UNLIKE_AD:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? {...ad, favorite: false} : ad)
+      }
+    case ActionTypes.UPDATE_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map(ad => ad.id == action.ad.id ? action.ad : ad)
+      }
     default:
       return state;
   }
