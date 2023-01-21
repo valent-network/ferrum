@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 
 import AdScreen from '../Ad/AdScreen';
 
-import { loadAd } from '../actions/adsActions';
+import { loadAd, deleteAd, archiveAd, unarchiveAd } from '../actions/adsActions';
 import { likeAd, unlikeAd } from '../FavoriteAds/favoriteAdsActions';
+
+import * as ActionTypes from '../actions/actionTypes.js';
 
 class AdScreenContainer extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -19,7 +21,9 @@ class AdScreenContainer extends React.PureComponent {
   };
 
   componentDidMount() {
-    const { ad, loadAd, isLoading, navigation } = this.props;
+    const { ad, loadAd, isLoading, navigation, shouldNotReset } = this.props;
+
+    shouldNotReset();
 
     if (isLoading) return;
 
@@ -29,26 +33,37 @@ class AdScreenContainer extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const { ad, loadAd, isLoading, navigation } = this.props;
+    const { navigation, shouldPopToTopOnFocus, shouldNotReset } = this.props;
 
-    if (isLoading) return;
+    this.focusListener = navigation.addListener('didFocus', () => {
+      if (shouldPopToTopOnFocus) {
+        navigation.popToTop();
+        // shouldNotReset();
+      }
+    });
+  }
 
-    if (parseInt(ad.id) == parseInt(navigation.state.params.id)) return;
-
-    loadAd(navigation.state.params.id);
+  componentWillUnmount() {
+    if (this.focusListener) { this.focusListener.remove(); }
   }
 
   render() {
-    const { ad, currentAdFriends, askFriendsIsLoading, isLoading, likeAd, unlikeAd } = this.props;
+    const { ad, currentAdFriends, navigation, askFriendsIsLoading, isLoading, likeAd, unlikeAd, deleteAd, archiveAd, unarchiveAd, actionsLoading } = this.props;
+
+    const shouldReset = parseInt(ad.id) != parseInt(navigation.state.params.id);
 
     return (
       <AdScreen
         ad={ad}
         likeAd={likeAd}
         unlikeAd={unlikeAd}
+        deleteAd={deleteAd}
+        archiveAd={archiveAd}
+        unarchiveAd={unarchiveAd}
         currentAdFriends={currentAdFriends}
-        askFriendsIsLoading={askFriendsIsLoading}
-        isLoading={isLoading}
+        askFriendsIsLoading={shouldReset || askFriendsIsLoading}
+        isLoading={shouldReset || isLoading}
+        actionsLoading={actionsLoading}
         onRefresh={this.onRefresh}
       />
     );
@@ -61,6 +76,8 @@ function mapStateToProps(state) {
     isLoading: state.feedAd.isLoading,
     askFriendsIsLoading: state.feedAd.askFriendsIsLoading,
     currentAdFriends: state.feedAd.currentAdFriends,
+    actionsLoading: state.feedAd.currentAd.actionsLoading,
+    shouldPopToTopOnFocus: state.feedAd.shouldReset,
   };
 }
 
@@ -69,6 +86,10 @@ function mapDispatchToProps(dispatch) {
     loadAd: (id) => dispatch(loadAd(id)),
     likeAd: (adId) => dispatch(likeAd(adId)),
     unlikeAd: (adId) => dispatch(unlikeAd(adId)),
+    deleteAd: (adId) => dispatch(deleteAd(adId)),
+    archiveAd: (adId) => dispatch(archiveAd(adId)),
+    unarchiveAd: (adId) => dispatch(unarchiveAd(adId)),
+    shouldNotReset: (adId) => dispatch({ type: ActionTypes.REMOVE_RESET_FEED_AD }),
   };
 }
 

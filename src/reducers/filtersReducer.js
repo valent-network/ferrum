@@ -1,16 +1,13 @@
 import * as ActionTypes from '../actions/actionTypes';
 
+const singleValueFilters = ['hops_count', 'category_id'];
+
 const initialState = {
   min_price: '',
   max_price: '',
-  min_year: '',
-  max_year: '',
   query: '',
-  gears: [],
-  wheels: [],
-  carcasses: [],
-  fuels: [],
   hops_count: [],
+  category_id: [],
 };
 
 export default function filtersReducer(state = initialState, action = {}) {
@@ -21,16 +18,27 @@ export default function filtersReducer(state = initialState, action = {}) {
         [action.filterKey]: action.filterValue,
       };
     case ActionTypes.FILTER_CHANGED_ARRAY:
-      const isThere = state[action.filterKey].filter((f) => f === action.filterValue).length === 1;
+      const filterValues = state[action.filterKey] || [];
+      const isSingleValueFilter = !!singleValueFilters.filter(f => f === action.filterKey).length
+      const isThere = filterValues.filter((f) => f === action.filterValue).length === 1;
       let newFilter;
 
-      if (action.filterKey === 'hops_count') {
-        // if single-valued filter
+      if (isSingleValueFilter) {
         newFilter = isThere ? [] : [action.filterValue];
       } else {
         newFilter = isThere
-          ? state[action.filterKey].filter((f) => f !== action.filterValue)
-          : state[action.filterKey].concat(action.filterValue);
+          ? filterValues.filter((f) => f !== action.filterValue)
+          : filterValues.concat(action.filterValue);
+      }
+
+      if (action.filterKey === 'category_id' && !newFilter.length) {
+        return {
+          ...initialState,
+          min_price: state.min_price,
+          max_price: state.max_price,
+          query: state.query,
+          hops_count: state.hops_count,
+        }
       }
 
       return {

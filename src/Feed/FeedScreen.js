@@ -1,79 +1,85 @@
-import React from 'react';
+import React, { useCallback} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container } from 'native-base';
+import { Container, Icon, Header } from 'native-base';
+import { StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 
 import AdsList from '../AdsList';
 
 import { loadMoreAds, getAll } from './feedActions';
-import { loadAd } from '../actions/adsActions';
-import * as ActionTypes from '../actions/actionTypes';
+import { likeAd, unlikeAd } from '../FavoriteAds/favoriteAdsActions';
 
-import FeedFilters from './FeedFilters';
+import FiltersModal from './Filters/FiltersModal';
+import SearchBar from './Filters/SearchBar';
+import MultiPicker from './Filters/MultiPicker';
+import Funnel from './Filters/Funnel';
+
 import PermissionsBox from './PermissionsBox';
 
-import { FlingGestureHandler, Directions, State } from 'react-native-gesture-handler';
+import { secondaryColor, activeColor } from '../Colors';
 
-class FeedScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    return { header: () => null, title: '' };
-  };
-
-  onAdOpened = (ad) => {
-    const { navigation, loadAd } = this.props;
+const FeedScreen = ({ ads, loadMoreAds, hopsOpt, isLoading, onRefresh, likeAd, unlikeAd, navigation }) => {
+  const onAdOpened = (ad) => {
     navigation.push('Ad', { id: ad.id });
   };
-
-  onSwipeRight = ({nativeEvent}) => {
-    if (nativeEvent.state === State.ACTIVE) {
-      this.props.switchModalVisible()
-    }
-  }
-
-  onSwipeLeft = ({nativeEvent}) => {
-    if (nativeEvent.state === State.ACTIVE) {
-      this.props.navigation.navigate('ChatRoomsListScreen')
-    }
-  }
-
-  render() {
-    const { ads, loadMoreAds, filters, isLoading, onRefresh } = this.props;
-
-    return (
-      <FlingGestureHandler direction={Directions.RIGHT} onHandlerStateChange={this.onSwipeRight.bind(this)}>
-        <FlingGestureHandler direction={Directions.LEFT} onHandlerStateChange={this.onSwipeLeft.bind(this)}>
-          <Container>
-            <FeedFilters />
-            <PermissionsBox />
-            <AdsList
-              ads={ads}
-              isLoading={isLoading}
-              onRefresh={onRefresh}
-              loadMoreAds={loadMoreAds}
-              onAdOpened={this.onAdOpened}
-              fromFeed={true}
-            />
-          </Container>
-        </FlingGestureHandler>
-      </FlingGestureHandler>
-    );
-  }
+  return (
+    <Container>
+      <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar rounded>
+        <SearchBar />
+      </Header>
+      <View style={styles.filtersRow}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+          <Funnel />
+          <MultiPicker opt={hopsOpt}/>
+        </ScrollView>
+      </View>
+      <PermissionsBox />
+      <AdsList
+        ads={ads}
+        isLoading={isLoading}
+        onRefresh={onRefresh}
+        loadMoreAds={loadMoreAds}
+        likeAd={likeAd}
+        unlikeAd={unlikeAd}
+        onAdOpened={onAdOpened}
+        fromFeed={true}
+      />
+      <FiltersModal />
+    </Container>
+  );
 }
 
 function mapStateToProps(state) {
   return {
     ads: state.feed.ads,
     isLoading: state.feed.isLoading,
+    hopsOpt: {name: 'hops_count', values: state.settings.filtersValues.hops_count},
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     loadMoreAds: () => dispatch(loadMoreAds()),
-    loadAd: (id) => dispatch(loadAd(id)),
+    likeAd: (adId) => dispatch(likeAd(adId)),
+    unlikeAd: (adId) => dispatch(unlikeAd(adId)),
     onRefresh: () => dispatch(getAll()),
-    switchModalVisible: () => dispatch({ type: ActionTypes.FILTER_MODAL_SWITCH_VISIBILITY }),
   };
 }
+
+FeedScreen.navigationOptions = ({ navigation }) => {
+  return { header: () => null, title: '' };
+};
+
+const styles = StyleSheet.create({
+  mainHeader: {
+    backgroundColor: secondaryColor,
+    flexWrap: 'nowrap',
+    borderBottomWidth: 0,
+    alignItems: 'center'
+  },
+  filtersRow: {
+    paddingVertical: 12,
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);

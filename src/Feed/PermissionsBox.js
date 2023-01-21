@@ -78,7 +78,8 @@ PermissionsBox.propTypes = {};
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: secondaryColor,
-    margin: 12,
+    marginHorizontal: 0,
+    marginBottom: 16,
     padding: 12,
     borderColor: activeColor,
     borderRadius: 4,
