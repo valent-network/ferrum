@@ -3,12 +3,12 @@ import { Platform } from 'react-native';
 import { notification } from '../Utils';
 import i18n from '../../i18n';
 
-function showNotification(message) {
+function showNotification(title, message) {
   if (Platform.OS === 'ios') {
-    notification.ref.show({ message: message });
+    notification.ref.show({ message: { title, message } });
   } else {
     PushNotification.localNotification({
-      title: i18n.t('errors.title'),
+      title: title,
       message: message,
       largeIcon: '',
       smallIcon: '',
@@ -20,8 +20,14 @@ function showNotification(message) {
 export function displayError(error) {
   if (error.response) {
     const response = error.response;
-    const message = response.data.message ? response.data.message : response.data;
-    showNotification(message);
+    // console.warn(response.data)
+    // const message = response.data.message ? response.data.message : response.data;
+    if (response.data.message) {
+      showNotification(response.data.message, response.data.errors);
+    } else {
+      showNotification(response.data);
+    }
+    // showNotification(message);
   } else if (error.request) {
     showNotification(i18n.t('errors.connectionErrorMessage'));
   } else {
