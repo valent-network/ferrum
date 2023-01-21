@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   notes: {
-    paddingTop: 2,
+    paddingTop: 6,
     paddingLeft: 2,
-    paddingRight: 2,
+    paddingRight: 6,
     paddingBottom: 2,
     justifyContent: 'space-between'
   }

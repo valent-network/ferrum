@@ -8,7 +8,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, secondaryColor, disabledColor } from '../Colors';
+import { activeColor, secondaryColor, disabledColor, notesColor } from '../Colors';
 import { invitationalSMS } from '../Utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
@@ -60,9 +60,10 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     borderBottomColor: secondaryColor,
-    paddingVertical: 8,
+    padding: 0,
+    margin: 0
   },
   addButton: {
     backgroundColor: activeColor,

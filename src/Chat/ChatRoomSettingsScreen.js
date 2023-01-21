@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, lightColor, disabledColor, secondaryColor, spinnerColor } from '../Colors';
+import { activeColor, lightColor, disabledColor, secondaryColor, spinnerColor, notesColor } from '../Colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -31,7 +31,7 @@ function ChatRoomsSettingsScreen({
 
   const { t } = useTranslation();
   const initializeChat = () => {
-    getAdFriendsToChat(chat.ad_id, chat.id);
+    if (chat.ad_id) { getAdFriendsToChat(chat.ad_id, chat.id); };
   };
 
   useEffect(initializeChat, [chat.id]);
@@ -64,6 +64,7 @@ function ChatRoomsSettingsScreen({
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
   const toDisplayMembers = friendsAndMembers.filter((f) => f.user_id && membersIds.includes(f.user_id));
   const toDisplayFriends = friendsAndMembers.filter((f) => !membersIds.includes(f.user_id));
+  const imageSource = { uri: chat.photo };
   let toDisplay = toDisplayFriends.length
     ? [{ separator: t('chat.settings.members') }, ...toDisplayMembers, { separator: t('chat.settings.mayKnow') }, ...toDisplayFriends]
     : [{ separator: t('chat.settings.members') }, ...toDisplayMembers];
@@ -88,13 +89,15 @@ function ChatRoomsSettingsScreen({
 
   return (
     <Container>
-      <Image source={{ uri: chat.photo }} style={styles.adPhoto} />
+      <Image source={imageSource} style={styles.adPhoto} />
       <View style={styles.infoContainer}>
-        <Text onPress={onShow}>
+        {chat.ad_id && <Text onPress={onShow}>
           {chat.title}
           {'\n'}
-          <Text style={styles.activeColor}>{t('chat.settings.more')}</Text>
-        </Text>
+          {<Text style={styles.activeColor}>{t('chat.settings.more')}</Text>}
+        </Text>}
+
+        {!chat.ad_id && <Text>{chat.title}</Text>}
 
         <Text style={styles.activeColor} onPress={onLeave}>
           {t('chat.settings.leaveChat')}&nbsp;
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     backgroundColor: secondaryColor,
-    borderColor: activeColor,
+    borderColor: notesColor,
     height: 48,
   },
   separatorText: {
