@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, Share } from 'react-native';
 
-import { Text, Container, Content, Spinner, View, Icon, H3, Header, Title, Body, Left, Right } from 'native-base';
+import { Text, Container, Content, Spinner, View, Icon, H3, Header, Title, Body, Left, Right, ActionSheet } from 'native-base';
 
 import { withTranslation } from 'react-i18next';
 
@@ -17,7 +17,7 @@ import NavigationService from '../services/NavigationService';
 import { styles } from './Styles';
 import { activeColor, lightColor, spinnerColor } from '../Colors';
 
-import i18n from '../../i18n'
+import i18n from '../../i18n';
 
 class AdScreen extends React.PureComponent {
   shareAction = () => {
@@ -29,19 +29,67 @@ class AdScreen extends React.PureComponent {
     });
   };
 
+  t = this.props.t
+
   favAction = () => {
     const { ad, likeAd, unlikeAd } = this.props;
 
-    ad.is_favorite ? unlikeAd(ad) : likeAd(ad);
+    ad.favorite ? unlikeAd(ad) : likeAd(ad);
   };
+
+  deleteAd = () => {
+    const { t } = this.props;
+
+    ActionSheet.show(
+      {
+        title: t('ad.alerts.confirm_delete'),
+        options: [t('actions.delete'), t('actions.cancel')],
+        cancelButtonIndex: 1,
+        destructiveButtonIndex: 0,
+      },
+      (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            return this.props.deleteAd(this.props.ad.id);
+        }
+      },
+    );
+  }
+
+  archiveAd = () => {
+    const { t } = this.props;
+
+    ActionSheet.show(
+      {
+        title: t('ad.alerts.confirm_archive'),
+        options: [t('actions.archive'), t('actions.cancel')],
+        cancelButtonIndex: 1,
+        destructiveButtonIndex: 0,
+      },
+      (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            return this.props.archiveAd(this.props.ad.id);
+        }
+      },
+    );
+  }
+
+  unarchiveAd = () => {
+    this.props.unarchiveAd(this.props.ad.id);
+  }
+
+  editAd = () => {
+    NavigationService.navigate('EditAdScreen', { ad: this.props.ad })
+  }
 
   favIconActiveStyles = [styles.icon, styles.activeColor];
   favIconDefaultStyles = [styles.icon, styles.mainColor];
 
   render() {
-    const { t, ad, currentAdFriends, askFriendsIsLoading, isLoading, onRefresh } = this.props;
+    const { t, ad, currentAdFriends, askFriendsIsLoading, isLoading, actionsLoading, onRefresh } = this.props;
     const refreshControl = <RefreshControl tintColor={lightColor} refreshing={isLoading} onRefresh={onRefresh} />;
-    const colorStyle = ad.is_favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
+    const colorStyle = ad.favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
 
     if (isLoading && typeof ad.id === 'undefined') {
       return (
@@ -62,15 +110,44 @@ class AdScreen extends React.PureComponent {
             </Left>
             <Right style={styles.actionButtonsContainer}>
               <Icon onPress={this.shareAction} name="share-outline" />
-              <Icon onPress={this.favAction} style={colorStyle} name={ad.is_favorite ? 'heart' : 'heart-outline'} />
+              <Icon onPress={this.favAction} style={colorStyle} name={ad.favorite ? 'heart-circle-outline' : 'heart-circle-sharp'} />
             </Right>
           </Header>
         </View>
         <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
           <ImageGallery ad={ad} />
+          {ad.images.length === 0 && <View style={styles.imagePlaceholder}></View>}
           <View style={styles.contentContainer}>
+
+            {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}
+
+            {ad.my_ad && !actionsLoading &&
+              <View style={styles.actions}>
+                {!ad.deleted && <Text style={styles.actionText} onPress={this.archiveAd}>
+                    <Icon style={styles.actionIcon} name='eye-off-outline' />
+                    {' '}
+                    {t('actions.archive')}
+                  </Text>}
+                {ad.deleted && <Text style={styles.actionText} onPress={this.unarchiveAd}>
+                    <Icon style={styles.actionIcon} name='eye-outline' />
+                    {' '}
+                    {t('actions.unarchive')}
+                </Text>}
+                <Text style={styles.actionText} onPress={this.deleteAd}>
+                  <Icon style={styles.actionIcon} name='trash-outline' />
+                  {' '}
+                  {t('actions.delete')}
+                </Text>
+                <Text style={styles.actionText} onPress={this.editAd}>
+                  <Icon style={styles.actionIcon} name='create-outline' />
+                  {' '}
+                  {t('actions.edit')}
+                </Text>
+              </View>
+            }
+
             <Text style={styles.title}>{ad.title}</Text>
-            <Text style={styles.price}>{ad.price} $</Text>
+            <Text style={styles.price}>{ad.price} {ad.category_currency}</Text>
 
             <View style={styles.oldPricesContainer}>
               {ad.prices.map((v, index) => (
@@ -80,19 +157,18 @@ class AdScreen extends React.PureComponent {
               ))}
             </View>
 
-            {ad.deleted && (
-              <View>
-                <View style={styles.separator}></View>
-                <Text style={styles.deleted}>{t('ad.deleted')}</Text>
-              </View>
-            )}
 
-            {typeof currentAdFriends !== 'undefined' &&
-              (askFriendsIsLoading ? (
+            {askFriendsIsLoading ? (
                 <Spinner color={spinnerColor} />
               ) : (
                 <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
-              ))}
+              )}
+
+            {ad.deleted && (
+              <View style={styles.deletedContainer}>
+                <Text style={styles.deleted}>{t('ad.deleted')}</Text>
+              </View>
+            )}
 
             <OptionsList ad={ad} />
 

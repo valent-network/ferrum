@@ -7,6 +7,7 @@ import {
   deletedColor,
   lightColor,
   disabledColor,
+  notesColor,
 } from '../Colors';
 
 export const styles = StyleSheet.create({
@@ -38,8 +39,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   descriptionContainer: {
-    margin: 4,
     marginBottom: 16,
+    backgroundColor: secondaryColor,
+    padding: 16,
+    borderRadius: 4,
   },
   contentContainer: {
     padding: 12,
@@ -71,16 +74,34 @@ export const styles = StyleSheet.create({
   },
   deleted: {
     textAlign: 'center',
-    fontWeight: 'bold',
-    marginTop: 16,
-    marginBottom: 16,
+    paddingVertical: 16,
     color: deletedColor,
   },
+  deletedContainer: {
+    backgroundColor: secondaryColor,
+    borderRadius: 4,
+    marginTop: 8,
+  },
   descriptionText: {
-    fontSize: 12,
+    fontSize: 13,
   },
   actionButtonsContainer: {
     flexDirection: 'row',
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 16,
+    marginVertical: 8,
+    backgroundColor: secondaryColor,
+    borderRadius: 4,
+  },
+  actionText: {
+    color: activeColor,
+  },
+  actionIcon: {
+    fontSize: 15,
+    color: activeColor,
   },
   icon: {
     marginRight: 8,
@@ -107,6 +128,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: 12,
   },
+  imageGalleryModalContainer: {
+    flex: 1,
+    paddingTop: 16,
+    backgroundColor: primaryColor,
+  },
   imageGalleryBadge: {
     backgroundColor: lightColor,
     flexDirection: 'row',
@@ -123,4 +149,9 @@ export const styles = StyleSheet.create({
   imageGalleryBadgeText: {
     color: lightColor,
   },
+  imagePlaceholder: {
+    height: 350,
+    width: '100%',
+    backgroundColor: notesColor,
+  }
 });

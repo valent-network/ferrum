@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, Badge, Icon, View } from 'native-base';
-import { TouchableOpacity, Image, Modal, Dimensions } from 'react-native';
+import { TouchableOpacity, Image, Modal, Dimensions, SafeAreaView } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './Styles';
 
-import { primaryColor } from '../Colors';
+import { primaryColor, lightColor } from '../Colors';
 
 const ImageViewerPageAnimationTimeoutMs = 150;
 
@@ -24,16 +24,18 @@ export default class ImageGallery extends React.Component {
     });
   };
 
-  imageMapper = (image) => ({ url: image });
+  imageMapper = (image) => ({ url: image.url });
   windowWidth = Dimensions.get('window').width;
   syncCarousel = (index) =>
     setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs);
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
 
   _renderItem = ({ item, index }) => {
+    const url = item.url;
+
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.changeImagesFullscreenOpened}>
-        <Image style={styles.image} source={{ uri: item }} onPress={this.changeImagesFullscreenOpened} />
+        <Image style={styles.image} source={{ uri: url }} onPress={this.changeImagesFullscreenOpened} />
       </TouchableOpacity>
     );
   };
@@ -70,19 +72,22 @@ export default class ImageGallery extends React.Component {
           transparent={true}
           animationType="fade"
           onRequestClose={this.changeImagesFullscreenOpened}>
-          <ImageViewer
-            enableSwipeDown={true}
-            enablePreload={true}
-            saveToLocalByLongPress={false}
-            maxOverflow={0}
-            flipThreshold={1}
-            index={this._carousel?.currentIndex}
-            onCancel={this.changeImagesFullscreenOpened}
-            onChange={this.syncCarousel}
-            pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
-            imageUrls={images.map(this.imageMapper)}
-            backgroundColor={primaryColor}
-          />
+
+          <View style={styles.imageGalleryModalContainer}>
+              <ImageViewer
+                enableSwipeDown={true}
+                enablePreload={true}
+                saveToLocalByLongPress={false}
+                maxOverflow={0}
+                flipThreshold={1}
+                index={this._carousel?.currentIndex}
+                onCancel={this.changeImagesFullscreenOpened}
+                onChange={this.syncCarousel}
+                pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
+                imageUrls={images.map(this.imageMapper)}
+                backgroundColor={primaryColor}
+              />
+          </View>
         </Modal>
       </React.Fragment>
     );

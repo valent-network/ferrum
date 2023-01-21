@@ -49,10 +49,10 @@ class AskFriend extends React.PureComponent {
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.mutualFriendsContainer}>
           <AnyFriendToInvite openFriendPickerModal={this.openFriendPickerModal} />
           {chats.map((c) => (
-            <ChatToContinue chat={c} key={c.id} />
+            <ChatToContinue chat={c} key={`chat-${c.id}`} />
           ))}
           {friends.map((f) => (
-            <FriendToInvite friend={f} key={f.id} prepareInvitation={this.prepareInvitation} />
+            <FriendToInvite friend={f} key={`friend-${f.id}`} prepareInvitation={this.prepareInvitation} />
           ))}
         </ScrollView>
 

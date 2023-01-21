@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Text, View, Icon } from 'native-base';
 import { withTranslation } from 'react-i18next';
 
-import { secondaryColor } from '../Colors';
+import { notesColor } from '../Colors';
 
 class OptionsList extends React.PureComponent {
   goToAdSource = () => Linking.openURL(this.props.ad.url);
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     borderWidth: 1,
-    borderColor: secondaryColor,
+    borderColor: notesColor,
     marginRight: 4,
     marginBottom: 4,
     borderRadius: 4,
