@@ -15,7 +15,7 @@ import Picker from './Picker';
 import AdImagePicker from './AdImagePicker';
 import { spinnerColor, activeColor, lightColor } from '../../Colors';
 
-export default AdForm = ({ defaultValues, navigationGoBack, onSubmit, citiesByRegion, categories, isLoading, newRecord }) => {
+export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, isLoading, newRecord }) => {
   if (!categories.length) { 
     return (
       <Container>
@@ -88,9 +88,6 @@ export default AdForm = ({ defaultValues, navigationGoBack, onSubmit, citiesByRe
 
   return (
     <Container>
-      {newRecord && <Header iosBarStyle="light-content" style={styles.header}>
-        <Left><Icon name='chevron-back-outline' onPress={navigationGoBack} /></Left>
-      </Header>}
       <Content padder enableResetScrollToCoords={false}>
         <Form>
           <View style={[styles.pickerContainer, {padding: 8, paddingVertical: 16}]}>

@@ -6,7 +6,8 @@ export default {
       chats: "Чати",
       myAds: "Мої оголошення",
       inviteFriends: "Запросити друзів",
-      language: "Налаштування мови"
+      language: "Налаштування мови",
+      createAd: "Нове оголошення",
     }
   },
   actions: {
@@ -52,7 +53,7 @@ export default {
     discussWithFriend: "Обговорити з другом",
     postedBy: "Розмістив(ла)",
     options: { source: "Джерело" },
-    deleted: "Заховано",
+    deleted: "Сховано",
     restore: "Відновити",
     addImages: "Додати фото",
     alerts: {

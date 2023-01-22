@@ -92,6 +92,17 @@ const FeedNavigator = createStackNavigator(
     defaultNavigationOptions: defaultNavigationOptions,
   },
 );
+const NewAdStack = createStackNavigator(
+  {
+    NewAdScreen: {
+      screen: NewAdScreen,
+    },
+  },
+  {
+    initialRouteName: 'NewAdScreen',
+    defaultNavigationOptions: defaultNavigationOptions,
+  },
+);
 
 const UserContactsNavigator = createStackNavigator(
   {
@@ -174,7 +185,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       },
     },
     CreateAd: {
-      screen: NewAdScreen,
+      screen: NewAdStack,
       path: 'createAd',
       navigationOptions: {
         title: '',

@@ -2,10 +2,6 @@ import { StyleSheet } from 'react-native';
 import { priceColor, lightColor, primaryColor, secondaryColor, activeColor, notesColor, errorColor, deletedColor } from '../../Colors';
 
 export default StyleSheet.create({
-  header: {
-    backgroundColor: primaryColor,
-    borderBottomWidth: 0,
-  },
   textAreaContainer: {
     padding: 0,
     margin: 0,

@@ -1,22 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { Icon } from 'native-base';
+
 import AdForm from './Form/AdForm';
 
 import { createAd } from '../actions/adsActions';
 
 import { defaultValues  } from './Form/Helpers';
 
-const NewAdScreen = ({ navigation, onSubmit, citiesByRegion, categories, isLoading }) => {
-  const goBack = () => navigation.goBack();
+import {secondaryColor, lightColor} from '../Colors';
+
+import i18n from '../../i18n';
+
+const NewAdScreen = ({ onSubmit, citiesByRegion, categories, isLoading }) => {
 
   return <AdForm citiesByRegion={citiesByRegion}
                  categories={categories}
-                 navigationGoBack={goBack}
                  onSubmit={onSubmit}
                  isLoading={isLoading}
                  newRecord={true}
                  defaultValues={defaultValues} />
+}
+
+NewAdScreen.navigationOptions = ({navigation}) => {
+  return {
+    headerStyle: {
+      backgroundColor: secondaryColor,
+      shadowColor: 'transparent',
+      borderBottomWidth: 0,
+    },
+    headerTintColor: lightColor,
+    headerLeft: () => <Icon name='chevron-back-outline' onPress={() => navigation.navigate('FeedScreen')} />,
+    title: i18n.t('nav.titles.createAd'),
+  }
 }
 
 function mapStateToProps(state) {
