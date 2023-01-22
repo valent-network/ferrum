@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, Linking, Image } from 'react-native';
+import { StyleSheet, Switch, Linking, Image, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -13,7 +13,6 @@ import {
   View,
   Left,
   Right,
-  Thumbnail,
   H1,
   H2,
 } from 'native-base';
@@ -37,7 +36,7 @@ import {
 
 import { onTosPress, random } from '../Utils';
 
-import RECARIO_LOGO from '../assets/recario.png';
+import RECARIO_LOGO from '../assets/logo.png';
 
 import FLAG from '../assets/Flag.png';
 import UNION from '../assets/Union.png';
@@ -138,12 +137,11 @@ class LoginScreen extends React.Component {
 
     return (
       <View style={styles.wrapperContainer}>
-        <View style={styles.header}>
-          <Thumbnail source={RECARIO_LOGO} style={styles.mainLogo} />
-          <Text style={styles.headerText}>{t('login.companyName')}</Text>
+        <SafeAreaView style={styles.header}>
+          <Image source={RECARIO_LOGO} style={styles.mainLogo} />
           <Image source={UNION} style={styles.union} />
           <Image source={ELLIPSE} style={styles.ellipse} />
-        </View>
+        </SafeAreaView>
         <KeyboardAwareScrollView
           contentContainerStyle={styles.mainContainer}
           extraHeight={128}
@@ -308,7 +306,8 @@ const styles = StyleSheet.create({
   disabledColor: { color: disabledColor },
   label: { marginBottom: 8 },
   mainLogo: {
-    marginBottom: 16,
+    width: 96,
+    height: 96,
   },
   header: {
     position: 'absolute',

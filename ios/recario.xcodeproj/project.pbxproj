@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		35CF74AA541A8E55BCAA2F53 /* libPods-recario.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECBF9F445591981FBD1DEC6 /* libPods-recario.a */; };
 		A8D0D8F524D978A6007FFD8C /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8D0D8F424D978A6007FFD8C /* AppCenter-Config.plist */; };
 		FA0AC4B629380890002F91C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC4B829380890002F91C8 /* InfoPlist.strings */; };
 		FA3CB53A2938955C006BB223 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3CB5392938955C006BB223 /* LaunchScreen.xib */; };
+		FA71B3F6297CB5A100DBB6ED /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FA71B3F5297CB5A100DBB6ED /* logo.png */; };
+		FA71B3F8297CBA1E00DBB6ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +24,6 @@
 		13B07F961A680F5B00A75B9A /* recario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = recario/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = recario/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = recario/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = recario/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = recario/main.m; sourceTree = "<group>"; };
 		6ECBF9F445591981FBD1DEC6 /* libPods-recario.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-recario.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +36,8 @@
 		FA0AC4B729380890002F91C8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA0AC4B929380896002F91C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA3CB5392938955C006BB223 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = recario/LaunchScreen.xib; sourceTree = "<group>"; };
+		FA71B3F5297CB5A100DBB6ED /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "../../../Downloads/Logo Valent/PNG/logo.png"; sourceTree = "<group>"; };
+		FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../Downloads/AppIcons/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +72,14 @@
 		13B07FAE1A68108700A75B9A /* recario */ = {
 			isa = PBXGroup;
 			children = (
+				FA71B3F5297CB5A100DBB6ED /* logo.png */,
 				FA3CB5392938955C006BB223 /* LaunchScreen.xib */,
 				A8D0D8F424D978A6007FFD8C /* AppCenter-Config.plist */,
 				CE4AF6FC23CB456F005B046E /* recario.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				FA0AC4B829380890002F91C8 /* InfoPlist.strings */,
@@ -195,8 +198,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3CB53A2938955C006BB223 /* LaunchScreen.xib in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FA71B3F6297CB5A100DBB6ED /* logo.png in Resources */,
 				FA0AC4B629380890002F91C8 /* InfoPlist.strings in Resources */,
+				FA71B3F8297CBA1E00DBB6ED /* Images.xcassets in Resources */,
 				A8D0D8F524D978A6007FFD8C /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +349,7 @@
 			baseConfigurationReference = 7F970AF7D8DA21FDBA2FC6FA /* Pods-recario.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = recario/recario.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -370,6 +375,7 @@
 			baseConfigurationReference = F8D7604BB147F97104F5C47B /* Pods-recario.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = recario/recario.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4MQ8U74VYC;

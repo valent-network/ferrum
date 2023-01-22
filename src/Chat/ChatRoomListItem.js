@@ -16,7 +16,7 @@ import { activeColor, disabledColor, secondaryColor, superActiveColor } from '..
 
 import { leaveChat } from './chatActions';
 
-import RECARIO_LOGO from '../assets/recario.png';
+import RECARIO_LOGO from '../assets/logo.png';
 
 export default function ChatRoomListItem({ chat, currentUser }) {
   const { t } = useTranslation();

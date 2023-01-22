@@ -14,7 +14,7 @@ import { lightColor, primaryColor, activeColor } from '../Colors';
 
 import { onReferralInfoPress } from '../Utils';
 
-import RECARIO_LOGO from '../assets/recario.png';
+import RECARIO_LOGO from '../assets/logo.png';
 
 function SetReferrerModal({ onClose, selfRefcode }) {
   const [refcode, setRefcode] = useState('');

@@ -10,7 +10,7 @@ export default ({ openFriendPickerModal }) => {
 
   return (
     <View style={styles.mutualFriendBox}>
-      <Image style={styles.noAvatar} source={require('../assets/recario.png')} />
+      <Image style={styles.noAvatar} source={require('../assets/logo.png')} />
       <Text note style={styles.smallFont}>
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
