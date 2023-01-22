@@ -158,11 +158,9 @@ class AdScreen extends React.PureComponent {
             </View>
 
 
-            {askFriendsIsLoading ? (
-                <Spinner color={spinnerColor} />
-              ) : (
-                <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
-              )}
+            {
+              !ad.my_ad && (askFriendsIsLoading ? <Spinner color={spinnerColor} /> : <AskFriend ad={ad} currentAdFriends={currentAdFriends} />)
+            }
 
             {ad.deleted && (
               <View style={styles.deletedContainer}>
@@ -170,7 +168,7 @@ class AdScreen extends React.PureComponent {
               </View>
             )}
 
-            <OptionsList ad={ad} />
+            {Object.keys(ad.options).length > 0 && <OptionsList ad={ad} />}
 
             <View style={styles.descriptionContainer}>
               <Text style={styles.descriptionText}>{ad.description}</Text>

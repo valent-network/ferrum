@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
   },
   descriptionContainer: {
     marginBottom: 16,
+    marginTop: 4,
     backgroundColor: secondaryColor,
     padding: 16,
     borderRadius: 4,

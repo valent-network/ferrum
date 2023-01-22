@@ -78,7 +78,7 @@ export default AdForm = ({ defaultValues, navigationGoBack, onSubmit, citiesByRe
     if (input_type == 'picker') {
       return <Picker field={field} paramName={`options[${name}]`} collection={collectionOpts} onReset={onReset} errors={errors} iosHeader={localized_name} placeholder={localized_name} errors={errors} />
     } else {
-      return <TextOrNumberInput paramName={name} paramType={input_type} field={field} errors={errors} />
+      return <TextOrNumberInput paramName={name} paramType={input_type} field={field} errors={errors} localized_name={localized_name} />
     }
   }
 
