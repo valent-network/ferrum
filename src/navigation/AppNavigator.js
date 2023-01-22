@@ -68,6 +68,20 @@ const ChatStack = createStackNavigator(
   },
 );
 
+ChatStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+
+  const route = navigation.state.routes[navigation.state.routes.length - 1];
+
+  if (route.routeName === 'ChatRoomScreen') {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 const FeedNavigator = createStackNavigator(
   {
     FeedScreen: { screen: FeedScreen },
