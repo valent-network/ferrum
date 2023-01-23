@@ -59,8 +59,8 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     onSubmit(data, reset);
   }
 
-  const textOrNumberInputControl = ({paramName, paramType}) => ({ field }) => {
-    return <TextOrNumberInput paramName={paramName} paramType={paramType} field={field} errors={errors} />
+  const textOrNumberInputControl = ({paramName, paramType, placeholder}) => ({ field }) => {
+    return <TextOrNumberInput paramName={paramName} paramType={paramType} field={field} errors={errors} placeholder={placeholder} />
   }
 
   const textareaControl = ({rowSpan, paramName}) => ({ field }) => {
@@ -68,7 +68,16 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
   };
 
   const pickerControl = ({paramName, collection, onReset, disabled}) => ({ field }) => {
-    return <Picker disabled={disabled} field={field} paramName={paramName} collection={collection} onReset={onReset} errors={errors} />
+    const pickerProps = {
+      disabled: disabled,
+      field: field,
+      paramName: paramName,
+      collection: collection,
+      onReset: onReset,
+      errors: errors,
+      localizedName: t(`ad.params.${paramName}`)
+    }
+    return <Picker {...pickerProps}/>
   };
 
   const categoryOptionsPickerControl = ({name, values, localized_name, input_type}) => ({ field }) => {
@@ -76,9 +85,29 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     const collectionOpts = values.map(c => {return{label: c.name, value: c.name}});
 
     if (input_type == 'picker') {
-      return <Picker field={field} paramName={`options[${name}]`} collection={collectionOpts} onReset={onReset} errors={errors} iosHeader={localized_name} placeholder={localized_name} errors={errors} />
+      const pickerProps = {
+        field: field,
+        paramName: `options[${name}]`,
+        collection: collectionOpts,
+        onReset: onReset,
+        errors: errors,
+        iosHeader: localized_name,
+        localizedName: localized_name,
+        placeholder: t('actions.choose'),
+        errors: errors,
+      }
+
+      return <Picker {...pickerProps}/>
     } else {
-      return <TextOrNumberInput paramName={name} paramType={input_type} field={field} errors={errors} localized_name={localized_name} />
+      const inputProps = {
+        paramName: name,
+        paramType: input_type,
+        field: field,
+        errors: errors,
+        localized_name: localized_name,
+      }
+
+      return <TextOrNumberInput {...inputProps}/>
     }
   }
 
@@ -102,13 +131,13 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
           </View>
 
           <View style={styles.pickerContainer}>
-          <Controller control={control} rules={rules.region} name='region' render={pickerControl({paramName: 'region', collection: regionsOptsCollection, onReset: onRegionReset})}/>
+            <Controller control={control} rules={rules.region} name='region' render={pickerControl({paramName: 'region', collection: regionsOptsCollection, onReset: onRegionReset})}/>
             {!!region && <Controller control={control} rules={cityRules} name='city_id' render={pickerControl({paramName: 'city_id', collection: citiesOfRegionOpts, onReset: onCityReset})}/>}
           </View>
 
-          <Controller control={control} rules={rules.title} name='title' render={textOrNumberInputControl({ paramName: 'title', paramType: 'default'})} />
+          <Controller control={control} rules={rules.title} name='title' render={textOrNumberInputControl({ paramName: 'title', paramType: 'default', placeholder: t(`ad.params.placeholders.title`)})} />
           <View>
-            <Controller control={control} rules={rules.price} name='price' render={textOrNumberInputControl({ paramName: 'price', paramType: 'number'})} />
+            <Controller control={control} rules={rules.price} name='price' render={textOrNumberInputControl({ paramName: 'price', paramType: 'number', placeholder: t(`ad.params.placeholders.price`)})} />
             <Text style={styles.currency}>{activeCategory?.currency}</Text>
           </View>
           <Controller control={control} rules={rules.short_description} name='short_description' render={textareaControl({rowSpan: 3, paramName: 'short_description'})} />

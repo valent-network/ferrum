@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Textarea, View, Input } from 'native-base';
+import { Text, Textarea, View, Input, Label } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Styles';
@@ -13,6 +13,7 @@ export default function AdTextarea({field, rowSpan, paramName, errors}) {
 
     return <View style={styles.textAreaContainer}>
       <Input style={styles.inputRefTextareaWorkaround} ref={setRef} />
+      <Label style={styles.textAreaLabel}><Text style={error ? styles.labelTextError : styles.labelText}>{t(`ad.params.${paramName}`)}</Text></Label>
       <Textarea style={styles.textArea}
                 rowSpan={rowSpan}
                 bordered

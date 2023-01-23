@@ -3,9 +3,12 @@ import { priceColor, lightColor, primaryColor, secondaryColor, activeColor, note
 
 export default StyleSheet.create({
   textAreaContainer: {
-    padding: 0,
-    margin: 0,
     marginBottom: 6,
+    padding: 4,
+    paddingLeft: 0,
+    borderRadius: 4,
+    marginLeft: 0,
+    backgroundColor: secondaryColor
   },
   textArea: {
     backgroundColor: secondaryColor,
@@ -19,14 +22,11 @@ export default StyleSheet.create({
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
   },
-  textAreaNotes: {
-    padding: 16,
-    paddingTop: 4,
-    paddingLeft: 8,
-    fontSize: 13
-  },
   textAreaFooter: {
 
+  },
+  textAreaLabel: {
+    paddingLeft: 8,
   },
   textAreaFooterError: {
     borderBottomWidth: 1,
@@ -43,8 +43,8 @@ export default StyleSheet.create({
   inputContainer: {
     color: lightColor,
     backgroundColor: secondaryColor,
-    marginBottom: 6,
     borderBottomWidth: 0,
+    marginBottom: 6,
     padding: 4,
     paddingLeft: 8,
     borderRadius: 4,
@@ -54,9 +54,14 @@ export default StyleSheet.create({
     color: lightColor,
   },
   labelText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: notesColor
   },
   labelTextError: {
     color: errorColor,
+    fontWeight: 'bold',
+    fontSize: 14,
   },
   pickerText: {
     color: lightColor,

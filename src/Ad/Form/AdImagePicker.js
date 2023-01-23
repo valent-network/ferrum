@@ -66,7 +66,7 @@ export default function AdImagePicker({adImages, register, setValue}) {
 
   return(<>
     <View style={styles.adImageContainer}>
-      <Text>{t('ad.params.ad_images')}</Text>
+      <Text style={styles.labelText}>{t('ad.params.ad_images')}</Text>
       <Text style={styles.addImageText} onPress={openImagePicker}>{t('ad.addImages')}</Text>
     </View>
     <View>
