@@ -61,7 +61,7 @@ export default StyleSheet.create({
   labelTextError: {
     color: errorColor,
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
   },
   pickerText: {
     color: lightColor,
