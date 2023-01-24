@@ -1,6 +1,6 @@
 {
-  "name": "recario",
-  "version": "1.40.0",
+  "name": "valent.network",
+  "version": "2.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
