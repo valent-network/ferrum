@@ -7,6 +7,7 @@ export default {
       myAds: "My Ads",
       inviteFriends: "Invite Friends",
       language: "Language",
+      createAd: "Create Ad",
     }
   },
   actions: {
@@ -14,7 +15,13 @@ export default {
     accept: "Accept",
     delete: "Delete",
     edit: "Edit",
-    invite: "Invite"
+    invite: "Invite",
+    back: "Back",
+    choose: "Choose",
+    create: "Create",
+    archive: "Archive",
+    unarchive: "Unarchive",
+    update: "Update",
   },
   buttons: {
     invite: "Invite",
@@ -32,12 +39,8 @@ export default {
         knowThrough: "Know Through",
         main: "Filters",
         reset: "Reset",
-        price: "Price, $",
-        engine: "Fuel",
-        gears: "Gearbox",
-        wheels: "Drivetrain",
-        carcass: "Body Style",
-        year: "Years",
+        price: "Price",
+        category: "Category",
       },
       from: "from",
       to: "to",
@@ -51,12 +54,51 @@ export default {
     postedBy: "Posted by",
     options: { source: "Source" },
     deleted: "Deleted",
-    buttons: {
-      selectFriend: "Select",
-      inviteFriend: "Invite",
-      askFriend: "Ask",
-      continueChat: "Continue"
-    }
+    restore: "Restore",
+    addImages: "Add Images",
+    alerts: {
+      confirm_delete: "Are you sure you want to delete this ad? This action is irreversible",
+      confirm_archive: "Are you sure you want to hide this ad? It won't be searchable but will remain untouched in chats, favorite ads and visited ads"
+    },
+    formErrors: {
+      required: "Required field",
+      minLength: "Too short, minimum length is:",
+      maxLength: "Too long, maximum length is:",
+      max: "Too big number, maximum is:",
+      pattern: "Wrong format",
+    },
+    params: {
+      title: "Title",
+      description: "Description",
+      short_description: "Short Description",
+      price: "Price",
+      category_id: "Category",
+      region: "Region",
+      city_id: "City",
+      ad_images: "Ad Photos",
+      notes: {
+        title: "Main title of the ad",
+        description: "Full ad text",
+        short_description: "Short description to be shown in the feed",
+        ad_images: "First photo will become the main photo of the ad",
+        ad_images_non_native: "Please, re-upload the photos we've found on external resources",
+      },
+      placeholders: {
+        title: "iPhone 15, in stock",
+        description: "Detailed description including for example delivery and return conditions",
+        short_description: "Short description to be show in the feed",
+        category_id: "Choose Category",
+        region: "Choose Region",
+        city_id: "Choose City",
+        price: '24022022',
+      },
+      buttons: {
+        selectFriend: "Select",
+        inviteFriend: "Invite",
+        askFriend: "Ask",
+        continueChat: "Continue",
+      },
+    },
   },
   ads: {
     visited: "Visited",
@@ -99,7 +141,9 @@ export default {
       loadMore: "Load more..."
     },
     system: {
-      initiated: "asked about this ad"
+      init: "asked about this ad",
+      left: "left the chat",
+      add: "joined the chat",
     }
   },
   profile: {
