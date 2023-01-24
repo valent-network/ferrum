@@ -76,7 +76,7 @@ export function createAd(adParams, resetForm) {
     return API.createAd(adParams)
               .then((payload) => {
                 dispatch({ type: ActionTypes.CREATE_AD_SUCCESS, ad: payload.data });
-                NavigationService.push('MyAdScreen', { id: payload.data.id });
+                NavigationService.navigate('MyAdScreen', { id: payload.data.id });
                 resetForm();
               })
               .catch((error) => {
@@ -92,7 +92,7 @@ export function updateAd(adParams, resetForm) {
     return API.updateAd(adParams)
               .then((payload) => {
                 dispatch({ type: ActionTypes.UPDATE_AD_SUCCESS, ad: payload.data });
-                NavigationService.push('MyAdScreen', { id: payload.data.id });
+                NavigationService.navigate('MyAdScreen', { id: payload.data.id });
                 resetForm();
               })
               .catch((error) => {
