@@ -31,6 +31,6 @@ export function displayError(error) {
   } else if (error.request) {
     showNotification(i18n.t('errors.connectionErrorMessage'));
   } else {
-    console.warn(error.name);
+    console.warn(error);
   }
 }
