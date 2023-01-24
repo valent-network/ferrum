@@ -3,7 +3,7 @@ import { priceColor, lightColor, primaryColor, secondaryColor, activeColor, note
 
 export default StyleSheet.create({
   textAreaContainer: {
-    marginBottom: 6,
+    marginTop: 16,
     padding: 4,
     paddingLeft: 0,
     borderRadius: 4,
@@ -44,7 +44,7 @@ export default StyleSheet.create({
     color: lightColor,
     backgroundColor: secondaryColor,
     borderBottomWidth: 0,
-    marginBottom: 6,
+    marginTop: 16,
     padding: 4,
     paddingLeft: 8,
     borderRadius: 4,
@@ -56,7 +56,7 @@ export default StyleSheet.create({
   labelText: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: notesColor
+    color: lightColor,
   },
   labelTextError: {
     color: errorColor,
@@ -74,8 +74,8 @@ export default StyleSheet.create({
   },
   pickerContainer: {
     backgroundColor: secondaryColor,
-    borderRadius: 8,
-    marginBottom: 6,
+    borderRadius: 4,
+    marginTop: 16,
   },
   pickerHeader: {
     backgroundColor: primaryColor,
@@ -93,7 +93,7 @@ export default StyleSheet.create({
   submitButton: {},
   charLimitContainer: {backgroundColor: secondaryColor, padding: 8, borderBottomLeftRadius: 4, borderBottomRightRadius: 4},
   charLimitText: { color: notesColor, fontSize: 12, alignSelf: 'flex-end'},
-  currency: { color: priceColor, fontSize: 14, alignSelf: 'flex-end', position: 'absolute', paddingRight: 8, paddingTop: 8},
+  currency: { color: priceColor, fontSize: 18, alignSelf: 'flex-end', position: 'absolute', paddingRight: 8, paddingTop: 8, fontWeight: 'bold'},
   resetPickerIcon: {fontSize: 18, marginRight: 16},
   adImage: {
     width: 200,
@@ -121,6 +121,10 @@ export default StyleSheet.create({
     paddingVertical: 8,
   },
   addImageText: {
+    fontWeight: 'bold',
+  },
+  addImageTextError: {
+    color: deletedColor,
     fontWeight: 'bold',
   },
   restoreText: {

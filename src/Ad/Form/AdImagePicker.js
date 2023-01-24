@@ -21,12 +21,14 @@ const OPTIONS = {
 
 const reposition = (i, index) => {return {...i, position: index}}
 
-export default function AdImagePicker({adImages, register, setValue}) {
+export default function AdImagePicker({adImages, register, setValue, error, clearErrors}) {
 
   const { t } = useTranslation();
 
   const openImagePicker = () => {
     ImagePicker.openPicker(OPTIONS).then((images) => {
+      clearErrors('ad_images');
+
       images.forEach((image, index) => {
         const appendIndex = index + adImages.length;
         const source = `data:${image.mime};base64,${image.data}`;
@@ -66,8 +68,8 @@ export default function AdImagePicker({adImages, register, setValue}) {
 
   return(<>
     <View style={styles.adImageContainer}>
-      <Text style={styles.labelText}>{t('ad.params.ad_images')}</Text>
-      <Text style={styles.addImageText} onPress={openImagePicker}>{t('ad.addImages')}</Text>
+      <Text style={error ? styles.labelTextError : styles.labelText}>{t('ad.params.ad_images')}</Text>
+      <Text style={error ? styles.addImageTextError : styles.addImageText} onPress={openImagePicker}>{t('ad.addImages')}</Text>
     </View>
     <View>
       {adImages.length > 0 && <ScrollView style={styles.adImagesContainer} horizontal={true} showsHorizontalScrollIndicator={false}>

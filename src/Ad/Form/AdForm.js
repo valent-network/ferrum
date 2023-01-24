@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { Container, Content, View, Form, Icon, Button, Text, Left, Header, Spinner } from 'native-base';
 
-
-
 import styles from './Styles';
 import { defaultPickerPropsFor, handleFocusOnError, ResetPicker, rules } from './Helpers';
 
@@ -28,7 +26,7 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
 
   const { t } = useTranslation();
 
-  const { control, handleSubmit, register, resetField, setValue, setFocus, reset, formState: { errors } } = useForm({
+  const { control, handleSubmit, register, resetField, setValue, setError, clearErrors, setFocus, reset, formState: { errors } } = useForm({
     defaultValues: defaultValues,
     submitFocusError: false,
   });
@@ -56,8 +54,21 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     resetField('region', {defaultValue: null});
   };
   const onSubmitWithReset = (data) => {
-    onSubmit(data, reset);
+
+    if (adImages.length > 0) {
+      onSubmit(data, reset);
+    } else {
+      setError('ad_images', { type: 'required' });
+    }
   }
+  const onError = (errors, e) => {
+    if (adImages.length > 0) {
+      console.warn(errors)
+    } else {
+      setError('ad_images', { type: 'required' });
+    }
+  }
+
 
   const textOrNumberInputControl = ({paramName, paramType, placeholder}) => ({ field }) => {
     return <TextOrNumberInput paramName={paramName} paramType={paramType} field={field} errors={errors} placeholder={placeholder} />
@@ -115,33 +126,56 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     handleFocusOnError(errors, setFocus);
   }, [setFocus])
 
+  const ErrorMessage = ({errorName}) => {
+    const error = errors[errorName];
+
+    if (!error) { return(null) }
+
+    const errorText = ['min', 'max', 'minLength', 'maxLength'].includes(error.type) ? `${t(`ad.formErrors.${error.type}`)} ${rules[errorName][error.type]}` : t(`ad.formErrors.${error.type}`)
+
+    return <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <Text style={{color: 'red'}}>{errorText}</Text>
+    </View>
+  }
+
   return (
     <Container>
       <Content padder enableResetScrollToCoords={false}>
         <Form>
           <View style={[styles.pickerContainer, {padding: 8, paddingVertical: 16}]}>
-            <AdImagePicker adImages={adImages} register={register} setValue={setValue} />
+            <AdImagePicker adImages={adImages} register={register} setValue={setValue} error={errors.ad_images} clearErrors={clearErrors}/>
             {!defaultValues.native && <Text>
               <Icon name='information-circle' style={styles.infoIcon} />
               {t('ad.params.notes.ad_images_non_native')}
             </Text>}
           </View>
+          <ErrorMessage errorName='ad_images' />
+
           <View style={styles.pickerContainer}>
             <Controller control={control} rules={rules.category_id} name='category_id' render={pickerControl({paramName: 'category_id', collection: categoriesOptsCollection, onReset: onCategoryReset, disabled: !newRecord})}/>
           </View>
+          <ErrorMessage errorName='category_id' />
 
           <View style={styles.pickerContainer}>
             <Controller control={control} rules={rules.region} name='region' render={pickerControl({paramName: 'region', collection: regionsOptsCollection, onReset: onRegionReset})}/>
             {!!region && <Controller control={control} rules={cityRules} name='city_id' render={pickerControl({paramName: 'city_id', collection: citiesOfRegionOpts, onReset: onCityReset})}/>}
           </View>
+          <ErrorMessage errorName='city_id' />
 
           <Controller control={control} rules={rules.title} name='title' render={textOrNumberInputControl({ paramName: 'title', paramType: 'default', placeholder: t(`ad.params.placeholders.title`)})} />
+          <ErrorMessage errorName='title' />
+
           <View>
             <Controller control={control} rules={rules.price} name='price' render={textOrNumberInputControl({ paramName: 'price', paramType: 'number', placeholder: t(`ad.params.placeholders.price`)})} />
             <Text style={styles.currency}>{activeCategory?.currency}</Text>
           </View>
+          <ErrorMessage errorName='price' />
+
           <Controller control={control} rules={rules.short_description} name='short_description' render={textareaControl({rowSpan: 3, paramName: 'short_description'})} />
+          <ErrorMessage errorName='short_description' />
+
           <Controller control={control} rules={rules.description} name='description' render={textareaControl({rowSpan: 5, paramName: 'description'})} />
+          <ErrorMessage errorName='description' />
 
           {!!categoryId && activeCategory?.ad_option_types.filter(opt => opt.filterable).map(opt => <Controller key={`opt-${opt.id}`} control={control} name={`options[${opt.name}]`} render={categoryOptionsPickerControl(opt)}/>)}
           {!!categoryId && activeCategory?.ad_option_types.filter(opt => !opt.filterable).map(opt => <Controller key={`opt-${opt.id}`} control={control} name={`options[${opt.name}]`} render={categoryOptionsPickerControl(opt)}/>)}
@@ -149,7 +183,7 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
       </Content>
 
       <View style={styles.submitButtonWrapper}>
-        <Button style={styles.submitButton} block onPress={handleSubmit(onSubmitWithReset)}>
+        <Button style={styles.submitButton} block onPress={handleSubmit(onSubmitWithReset, onError)}>
           {isLoading ? 
             <Spinner color={spinnerColor} />
             :

@@ -62,10 +62,10 @@ export function ResetPicker({value, onReset}) {
 }
 
 export const rules = {
-  title: { required: true, minLength: 5, maxLength: 100 },
-  short_description: { required: true, minLength: 5, maxLength: 150 },
-  description: { required: true, minLength: 5, maxLength: 2000 },
-  price: { required: true, pattern: /\d+/i },
+  title: { required: true, minLength: 5, maxLength: 80 },
+  short_description: { required: true, minLength: 5, maxLength: 160 },
+  description: { required: true, minLength: 5, maxLength: 1760 },
+  price: { required: true, min: 0, max: 1000000, pattern: /^(0|([^0](\d+)?))$/i },
   category_id: { required: true },
   region: { },
   city_id: { },
