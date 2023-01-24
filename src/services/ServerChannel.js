@@ -1,7 +1,7 @@
 import { createConsumer } from '@rails/actioncable';
 import { EventRegister } from 'react-native-event-listeners';
-import NavigationService from './NavigationService';
-import { BASE_URL } from '../config';
+import Navigation from './Navigation';
+import { BASE_URL } from 'config';
 
 // https://github.com/rails/rails/issues/35674
 global.addEventListener = EventRegister.addEventListener;
@@ -89,7 +89,7 @@ class ServerChannel {
         break;
       case 'initiate_chat':
         onNewMessage(payload.chat, true);
-        NavigationService.navigate('ChatRoomScreen', { chatRoomId: payload.chat.id, title: payload.chat.title });
+        Navigation.navigate('ChatRoomScreen', { chatRoomId: payload.chat.id, title: payload.chat.title });
         break;
       case 'read_update':
         onReadUpdate(payload.chat);

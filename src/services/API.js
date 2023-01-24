@@ -2,11 +2,11 @@ import axios from 'axios';
 import Qs from 'qs';
 import { Platform } from 'react-native';
 import { getUniqueId, getReadableVersion } from 'react-native-device-info';
-import { store } from '../store';
-import * as ActionTypes from '../actions/actionTypes';
-import { clearAccessToken } from '../AsyncStorage';
-import { BASE_URL } from '../config';
-import { displayError } from '../actions/errorsActions';
+import { store } from 'store';
+import * as ActionTypes from 'actions/types';
+import { clearAccessToken } from 'services/AsyncStorage';
+import { BASE_URL } from 'config';
+import { displayError } from 'actions/errors';
 
 let baseURL = '';
 
@@ -25,7 +25,7 @@ const apiService = axios.create({
         arrayFormat: 'brackets',
         encode: false,
       });
-    }
+    },
   },
 });
 
@@ -36,7 +36,7 @@ apiService.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (typeof error.response !== "undefined") {
+    if (typeof error.response !== 'undefined') {
       if (401 === error.response.status) {
         clearAccessToken();
         API.clearAccessToken();
@@ -45,7 +45,7 @@ apiService.interceptors.response.use(
         return Promise.reject(error);
       }
     } else {
-      displayError(error)
+      displayError(error);
     }
   },
 );
@@ -72,9 +72,10 @@ export default class API {
   }
 
   static async signIn(phone, code) {
-
-    let idResolver = Platform.os === "android" ? getAndroidId().then(androidId => androidId) :
-                                                 getUniqueId().then(uniqueId => uniqueId)
+    let idResolver =
+      Platform.os === 'android'
+        ? getAndroidId().then((androidId) => androidId)
+        : getUniqueId().then((uniqueId) => uniqueId);
     let uniqueId = await idResolver;
 
     return apiService.put('/v1/sessions', {
@@ -146,7 +147,10 @@ export default class API {
   }
 
   static updateProfile(userParams = {}, deviceParams = {}) {
-    return apiService.put('/v1/user', { user: userParams, device: { ...deviceParams, build_version: getReadableVersion() } });
+    return apiService.put('/v1/user', {
+      user: userParams,
+      device: { ...deviceParams, build_version: getReadableVersion() },
+    });
   }
 
   static likeAd(adId) {
@@ -196,36 +200,35 @@ export default class API {
   static createAd(adParams) {
     const { title, short_description, description, price, city_id, category_id, options, ad_images } = adParams;
 
-    const params = { "ad":
-        {
-          "price": price,
-          "city_id": city_id,
-          "category_id": category_id,
-          "ad_query_attributes": { title },
-          "ad_description_attributes": { "body": description, "short": short_description },
-          "ad_extra_attributes": { details: options },
-          "ad_images_attributes": ad_images,
-        }
-      }
+    const params = {
+      ad: {
+        price: price,
+        city_id: city_id,
+        category_id: category_id,
+        ad_query_attributes: { title },
+        ad_description_attributes: { body: description, short: short_description },
+        ad_extra_attributes: { details: options },
+        ad_images_attributes: ad_images,
+      },
+    };
 
     return apiService.post('/v2/ads', params);
   }
 
-
   static updateAd(ad) {
     const { title, short_description, description, price, city_id, options, deleted, ad_images } = ad;
 
-    const params = { "ad":
-        {
-          "price": price,
-          "city_id": city_id,
-          "deleted": deleted,
-          "ad_query_attributes": { title },
-          "ad_description_attributes": { "body": description, "short": short_description },
-          "ad_extra_attributes": { details: options },
-          "ad_images_attributes": ad_images,
-        }
-      }
+    const params = {
+      ad: {
+        price: price,
+        city_id: city_id,
+        deleted: deleted,
+        ad_query_attributes: { title },
+        ad_description_attributes: { body: description, short: short_description },
+        ad_extra_attributes: { details: options },
+        ad_images_attributes: ad_images,
+      },
+    };
 
     return apiService.put(`/v2/ads/${ad.id}`, params);
   }

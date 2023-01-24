@@ -18,18 +18,18 @@ import { Root as NativeBaseRoot, StyleProvider } from 'native-base';
 
 import { Provider } from 'react-redux';
 
-import { store } from './src/store';
+import { store } from 'store';
 
-import { notification } from './src/Utils';
+import { notification } from 'utils';
 
-import Notification from './src/Notification';
+import Notification from 'components/Notification';
 
-import Root from './src/Root';
+import Root from 'components/Root';
 
-import getTheme from './native-base-theme/components';
-import nativeBaseThemeVariables from './native-base-theme/variables/platform';
+import getTheme from 'native-base-theme/components';
+import nativeBaseThemeVariables from 'native-base-theme/variables/platform';
 
-import { darkColor, lightColor, primaryColor } from './src/Colors';
+import { darkColor, lightColor, primaryColor } from 'colors';
 
 // console.disableYellowBox = true;
 

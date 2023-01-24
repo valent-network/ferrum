@@ -1,34 +1,34 @@
 import { combineReducers } from 'redux';
-import feedReducer from './feedReducer';
-import feedAdReducer from './feedAdReducer';
-import errorReducer from './errorReducer';
-import authReducer from './authReducer';
-import myAdsReducer from './myAdsReducer';
-import visitedAdsReducer from './visitedAdsReducer';
-import favoriteAdsReducer from './favoriteAdsReducer';
-import userReducer from './userReducer';
-import userContactsReducer from './userContactsReducer';
-import filtersReducer from './filtersReducer';
-import starredAdReducer from './starredAdReducer';
-import chatsReducer from './chatsReducer';
-import currentChatReducer from './currentChatReducer';
-import settingsReducer from './settingsReducer.js';
+import feed from './feed';
+import feedAd from './feedAd';
+import error from './error';
+import auth from './auth';
+import myAds from './myAds';
+import visitedAds from './visitedAds';
+import favoriteAds from './favoriteAds';
+import user from './user';
+import userContacts from './userContacts';
+import filters from './filters';
+import starredAd from './starredAd';
+import chats from './chats';
+import currentChat from './currentChat';
+import settings from './settings';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  feedAd: feedAdReducer,
-  feed: feedReducer,
-  error: errorReducer,
-  myAds: myAdsReducer,
-  visitedAds: visitedAdsReducer,
-  favoriteAds: favoriteAdsReducer,
-  user: userReducer,
-  userContacts: userContactsReducer,
-  filters: filtersReducer,
-  starredAd: starredAdReducer,
-  chats: chatsReducer,
-  currentChat: currentChatReducer,
-  settings: settingsReducer,
+  auth,
+  feedAd,
+  feed,
+  error,
+  myAds,
+  visitedAds,
+  favoriteAds,
+  user,
+  userContacts,
+  filters,
+  starredAd,
+  chats,
+  currentChat,
+  settings,
 });
 
 export default rootReducer;
