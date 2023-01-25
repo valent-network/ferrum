@@ -114,7 +114,16 @@ export default StyleSheet.create({
     paddingTop: 8,
     fontWeight: 'bold',
   },
-  resetPickerIcon: { fontSize: 18, marginRight: 16 },
+  resetPickerIcon: {
+    fontSize: 24,
+    paddingRight: 8,
+  },
+  pickerLabelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: (Platform.OS == 'android' ? 0 : 16),
+  },
   adImage: {
     width: 200,
     height: 120,

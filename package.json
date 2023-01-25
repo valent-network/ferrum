@@ -20,6 +20,7 @@
     "@react-native-clipboard/clipboard": "1.11.1",
     "@react-native-community/push-notification-ios": "^1.10.1",
     "@react-native-community/toolbar-android": "^0.2.1",
+    "@react-native-picker/picker": "^2.4.8",
     "appcenter": "4.4.5",
     "appcenter-analytics": "4.4.5",
     "appcenter-crashes": "4.4.5",

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Right, Icon } from 'native-base';
+import { View, Icon } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 
 import I18n from 'services/i18n';
 import API from 'services/API';
-import { errorColor } from 'colors';
+import { errorColor, activeColor } from 'colors';
 import styles from './Styles';
 
 export const defaultValues = {
@@ -26,7 +27,7 @@ export function onlyNumeric(callback) {
 export function defaultPickerPropsFor(param, errors) {
   return {
     mode: 'dropdown',
-    style: { width: undefined },
+    style: { width: undefined,color: activeColor },
     textStyle: styles.pickerText,
     placeholderStyle: errors ? [styles.pickerPlaceholder, { color: errorColor }] : styles.pickerPlaceholder,
     headerStyle: styles.pickerHeader,
@@ -36,6 +37,8 @@ export function defaultPickerPropsFor(param, errors) {
     headerBackButtonText: I18n.t('actions.back'),
     placeholder: I18n.t(`ad.params.placeholders.${param}`),
     iosHeader: I18n.t(`ad.params.${param}`),
+    dropdownIconColor: activeColor,
+    iosIcon: <Icon name="arrow-down" style={{color: activeColor}} />,
   };
 }
 
@@ -63,9 +66,9 @@ export function ResetPicker({ value, onReset }) {
   }
 
   return (
-    <Right>
-      <Icon name="close-circle-outline" style={styles.resetPickerIcon} onPress={onReset} />
-    </Right>
+    <TouchableOpacity onPress={onReset} activeOpacity={1} style={styles.resetPickerContainer}>
+      <Icon name="close-circle-outline" style={styles.resetPickerIcon} />
+    </TouchableOpacity>
   );
 }
 

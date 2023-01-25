@@ -1,11 +1,14 @@
 import React from 'react';
-import { Item, Picker, Input, Label, Text } from 'native-base';
+import { Platform } from 'react-native';
+import { Item, Picker, Input, Label, Text, View, Right } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Styles';
 import { defaultPickerPropsFor, ResetPicker } from './helpers';
 
 export default function AdPicker(props) {
+  const { t } = useTranslation();
+
   if (!props.collection) {
     return null;
   }
@@ -26,18 +29,21 @@ export default function AdPicker(props) {
     ...props,
   };
 
+  const picker = <Picker {...otherProps}>
+    {Platform.OS === 'android' ? <Picker.Item label={t('actions.choose')} value={undefined}/> : <></>}
+    {collection.map((element) => (
+      <Picker.Item color={otherProps.itemStyle.color} key={`${paramName}-${element?.id || element}`} label={element.label} value={element.value} />
+    ))}
+  </Picker>
+
   return (
     <Item style={styles.inputContainer} picker>
-      <Label>
-        <Text style={styles.labelText}>{localizedName}</Text>
-      </Label>
-      <Picker {...otherProps}>
-        {collection.map((element) => (
-          <Picker.Item key={`${paramName}-${element?.id || element}`} label={element.label} value={element.value} />
-        ))}
-      </Picker>
-      <Input style={styles.inputRefPickerWorkaround} ref={setRef} />
-      {!props.disabled && <ResetPicker value={field.value} onReset={onReset} />}
+      <View style={styles.pickerLabelContainer}>
+        {!props.disabled && <ResetPicker value={field.value} onReset={onReset} />}
+        <Label><Text style={[styles.labelText]}>{localizedName}</Text></Label>
+      </View>
+      {Platform.OS === 'android' ? picker : <Right>{picker}</Right>}
+      <Input style={styles.inputRefPickerWorkaround} disabled ref={setRef} />
     </Item>
   );
 }
