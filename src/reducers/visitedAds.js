@@ -43,7 +43,7 @@ export default function visitedAds(state = initialSetting, action = {}) {
         ...state,
         list: equal(state.list, t) ? state.list : t,
       };
-    case ActionTypes.GET_STARRED_AD_SUCCESS:
+    case ActionTypes.GET_ADS_LISTS_AD_SUCCESS:
       return {
         ...state,
         list: [action.ad, ...state.list.filter((ad) => ad.id !== action.ad.id)],

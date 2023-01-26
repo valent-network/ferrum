@@ -29,18 +29,27 @@ export default function AdPicker(props) {
     ...props,
   };
 
-  const picker = <Picker {...otherProps}>
-    {Platform.OS === 'android' ? <Picker.Item label={t('actions.choose')} value={undefined}/> : <></>}
-    {collection.map((element) => (
-      <Picker.Item color={otherProps.itemStyle.color} key={`${paramName}-${element?.id || element}`} label={element.label} value={element.value} />
-    ))}
-  </Picker>
+  const picker = (
+    <Picker {...otherProps}>
+      {Platform.OS === 'android' ? <Picker.Item label={t('actions.choose')} value={undefined} /> : <></>}
+      {collection.map((element) => (
+        <Picker.Item
+          color={otherProps.itemStyle.color}
+          key={`${paramName}-${element?.id || element}`}
+          label={element.label}
+          value={element.value}
+        />
+      ))}
+    </Picker>
+  );
 
   return (
     <Item style={styles.inputContainer} picker>
       <View style={styles.pickerLabelContainer}>
         {!props.disabled && <ResetPicker value={field.value} onReset={onReset} />}
-        <Label><Text style={[styles.labelText]}>{localizedName}</Text></Label>
+        <Label>
+          <Text style={[styles.labelText]}>{localizedName}</Text>
+        </Label>
       </View>
       {Platform.OS === 'android' ? picker : <Right>{picker}</Right>}
       <Input style={styles.inputRefPickerWorkaround} disabled ref={setRef} />

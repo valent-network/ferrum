@@ -122,7 +122,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: (Platform.OS == 'android' ? 0 : 16),
+    marginRight: Platform.OS == 'android' ? 0 : 16,
   },
   adImage: {
     width: 200,

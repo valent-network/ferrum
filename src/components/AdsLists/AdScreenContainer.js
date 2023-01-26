@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AdScreen from 'components/Ad/AdScreen';
 
-import { loadAdToStarred, deleteAd, archiveAd, unarchiveAd } from 'actions/ads';
+import { loadAdToAdsLists, deleteAd, archiveAd, unarchiveAd } from 'actions/ads';
 import { likeAd, unlikeAd } from 'actions/favoriteAds';
 
 import * as ActionTypes from 'actions/types';
@@ -86,24 +86,24 @@ class AdScreenContainer extends React.PureComponent {
 
 function mapStateToProps(state) {
   return {
-    ad: state.starredAd.currentAd,
-    isLoading: state.starredAd.isLoading,
-    askFriendsIsLoading: state.starredAd.askFriendsIsLoading,
-    currentAdFriends: state.starredAd.currentAdFriends,
-    actionsLoading: state.starredAd.currentAd.actionsLoading,
-    shouldPopToTopOnFocus: state.starredAd.shouldReset,
+    ad: state.adsListsAd.currentAd,
+    isLoading: state.adsListsAd.isLoading,
+    askFriendsIsLoading: state.adsListsAd.askFriendsIsLoading,
+    currentAdFriends: state.adsListsAd.currentAdFriends,
+    actionsLoading: state.adsListsAd.currentAd.actionsLoading,
+    shouldPopToTopOnFocus: state.adsListsAd.shouldReset,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadAd: (id) => dispatch(loadAdToStarred(id)),
+    loadAd: (id) => dispatch(loadAdToAdsLists(id)),
     likeAd: (adId) => dispatch(likeAd(adId)),
     unlikeAd: (adId) => dispatch(unlikeAd(adId)),
     deleteAd: (adId) => dispatch(deleteAd(adId)),
     archiveAd: (adId) => dispatch(archiveAd(adId)),
     unarchiveAd: (adId) => dispatch(unarchiveAd(adId)),
-    shouldNotReset: (adId) => dispatch({ type: ActionTypes.REMOVE_RESET_STARRED_AD }),
+    shouldNotReset: (adId) => dispatch({ type: ActionTypes.REMOVE_RESET_ADS_LISTS_AD }),
   };
 }
 

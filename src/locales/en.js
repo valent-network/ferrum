@@ -8,6 +8,7 @@ export default {
       inviteFriends: 'Invite Friends',
       language: 'Language',
       createAd: 'Create Ad',
+      ads: 'Ads',
     },
   },
   actions: {

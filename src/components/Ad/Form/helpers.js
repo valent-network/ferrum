@@ -27,7 +27,7 @@ export function onlyNumeric(callback) {
 export function defaultPickerPropsFor(param, errors) {
   return {
     mode: 'dropdown',
-    style: { width: undefined,color: activeColor },
+    style: { width: undefined, color: activeColor },
     textStyle: styles.pickerText,
     placeholderStyle: errors ? [styles.pickerPlaceholder, { color: errorColor }] : styles.pickerPlaceholder,
     headerStyle: styles.pickerHeader,
@@ -38,7 +38,7 @@ export function defaultPickerPropsFor(param, errors) {
     placeholder: I18n.t(`ad.params.placeholders.${param}`),
     iosHeader: I18n.t(`ad.params.${param}`),
     dropdownIconColor: activeColor,
-    iosIcon: <Icon name="arrow-down" style={{color: activeColor}} />,
+    iosIcon: <Icon name="arrow-down" style={{ color: activeColor }} />,
   };
 }
 

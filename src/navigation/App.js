@@ -14,13 +14,11 @@ import LanguageScreen from 'components/Profile/LanguageScreen';
 import InviteFriendsScreen from 'components/Profile/InviteFriendsScreen';
 import FeedScreen from 'components/Feed/FeedScreen';
 import FeedAdScreen from 'components/Feed/AdScreenContainer';
-import MyAdsScreen from 'components/MyAds/MyAdsScreen';
-import VisitedAdsScreen from 'components/VisitedAds/VisitedAdsScreen';
-import FavoriteAdsScreen from 'components/FavoriteAds/FavoriteAdsScreen';
 import ChatRoomScreen from 'components/Chat/ChatRoomScreen';
 import ChatRoomSettingsScreen from 'components/Chat/ChatRoomSettingsScreen';
 import ChatRoomsListScreen from 'components/Chat/ChatRoomsListScreen';
-import StarredAdScreen from 'components/Starred/AdScreenContainer';
+import AdsListsAdScreen from 'components/AdsLists/AdScreenContainer';
+import AdsListsScreen from 'components/AdsLists/AdsListsScreen';
 import BottomTabChatIcon from 'components/BottomTabChatIcon';
 import BottomTabIcon from 'components/BottomTabIcon';
 
@@ -110,31 +108,15 @@ const ProfileNavigator = createStackNavigator(
   },
 );
 
-const StarredNavigator = createAnimatedSwitchNavigator(
+const AdsListsNavigator = createStackNavigator(
   {
-    visited: createStackNavigator({
-      VisitedAdsScreen: { screen: VisitedAdsScreen, path: '', navigationOptions: { headerShown: false } },
-      VisitedAdScreen: { screen: StarredAdScreen, path: 'ads/:id' },
-    }),
-    Favorites: createStackNavigator({
-      FavoriteAdsScreen: { screen: FavoriteAdsScreen, navigationOptions: { headerShown: false } },
-      FavoriteAdScreen: { screen: StarredAdScreen },
-    }),
-    My: createStackNavigator({
-      MyAdsScreen: { screen: MyAdsScreen, navigationOptions: { headerShown: false } },
-      MyAdScreen: { screen: StarredAdScreen },
-      EditAdScreen: { screen: EditAdScreen },
-    }),
+    AdsLists: { screen: AdsListsScreen, navigationOptions: { headerShown: false } },
+    Ad: { screen: AdsListsAdScreen, path: 'ads/:id' },
+    EditAdScreen: { screen: EditAdScreen },
   },
   {
-    initialRouteName: 'Favorites',
+    initialRouteName: 'AdsLists',
     defaultNavigationOptions: defaultNavigationOptions,
-    transition: (
-      <Transition.Together>
-        <Transition.Out type="slide-right" durationMs={400} interpolation="easeIn" />
-        <Transition.In type="fade" durationMs={200} />
-      </Transition.Together>
-    ),
   },
 );
 
@@ -149,7 +131,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       },
     },
     VisitedAds: {
-      screen: StarredNavigator,
+      screen: AdsListsNavigator,
       path: '',
       navigationOptions: {
         title: '',

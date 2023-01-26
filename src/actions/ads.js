@@ -22,18 +22,18 @@ export function loadAd(id) {
   };
 }
 
-export function loadAdToStarred(id) {
+export function loadAdToAdsLists(id) {
   return function (dispatch, getState) {
-    const shouldReset = getState().starredAd.currentAd.id !== id;
+    const shouldReset = getState().adsListsAd.currentAd.id !== id;
 
-    dispatch({ type: ActionTypes.GET_STARRED_AD_STARTED, reset: shouldReset });
-    dispatch(getAdFriendsToStarred(id));
+    dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_STARTED, reset: shouldReset });
+    dispatch(getAdFriendsToAdsLists(id));
     return API.getAd(id)
       .then((adPayload) => {
-        dispatch({ type: ActionTypes.GET_STARRED_AD_SUCCESS, ad: adPayload.data });
+        dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_SUCCESS, ad: adPayload.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.GET_STARRED_AD_FAILED });
+        dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_FAILED });
         displayError(error);
         Navigation.popToTop();
       });
@@ -55,16 +55,16 @@ export function getAdFriends(adId) {
   };
 }
 
-export function getAdFriendsToStarred(adId) {
+export function getAdFriendsToAdsLists(adId) {
   return (dispatch) => {
-    dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_STARTED });
+    dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_FRIENDS_STARTED });
 
     return API.getAdFriends(adId)
       .then((adFriendsPayload) => {
-        dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS, adFriends: adFriendsPayload.data });
+        dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_FRIENDS_SUCCESS, adFriends: adFriendsPayload.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.GET_STARRED_AD_FRIENDS_FAILED });
+        dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_FRIENDS_FAILED });
         displayError(error);
       });
   };
@@ -76,7 +76,7 @@ export function createAd(adParams, resetForm) {
     return API.createAd(adParams)
       .then((payload) => {
         dispatch({ type: ActionTypes.CREATE_AD_SUCCESS, ad: payload.data });
-        Navigation.navigate('MyAdScreen', { id: payload.data.id });
+        Navigation.navigate('AdsLists', { id: payload.data.id });
         resetForm();
       })
       .catch((error) => {
@@ -92,7 +92,7 @@ export function updateAd(adParams, resetForm) {
     return API.updateAd(adParams)
       .then((payload) => {
         dispatch({ type: ActionTypes.UPDATE_AD_SUCCESS, ad: payload.data });
-        Navigation.navigate('MyAdScreen', { id: payload.data.id });
+        Navigation.navigate('AdsLists', { id: payload.data.id });
         resetForm();
       })
       .catch((error) => {
@@ -110,8 +110,8 @@ export function deleteAd(adId) {
         const state = getState();
         dispatch({ type: ActionTypes.DELETE_AD_SUCCESS, adId: adId });
         Navigation.popToTop();
-        if (adId === state.starredAd.currentAd.id) {
-          dispatch({ type: ActionTypes.RESET_STARRED_AD });
+        if (adId === state.adsListsAd.currentAd.id) {
+          dispatch({ type: ActionTypes.RESET_ADS_LISTS_AD });
         }
         if (adId === state.feedAd.currentAd.id) {
           dispatch({ type: ActionTypes.RESET_FEED_AD });

@@ -9,7 +9,7 @@ import favoriteAds from './favoriteAds';
 import user from './user';
 import userContacts from './userContacts';
 import filters from './filters';
-import starredAd from './starredAd';
+import adsListsAd from './adsListsAd';
 import chats from './chats';
 import currentChat from './currentChat';
 import settings from './settings';
@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
   user,
   userContacts,
   filters,
-  starredAd,
+  adsListsAd,
   chats,
   currentChat,
   settings,

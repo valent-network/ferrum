@@ -8,6 +8,7 @@ export default {
       inviteFriends: 'Запросити друзів',
       language: 'Налаштування мови',
       createAd: 'Нове оголошення',
+      ads: 'Оголошення',
     },
   },
   actions: {

@@ -13,33 +13,33 @@ const initialState = {
   shouldReset: false,
 };
 
-export default function starredAd(state = initialState, action = {}) {
+export default function adsListsAd(state = initialState, action = {}) {
   switch (action.type) {
-    case ActionTypes.GET_STARRED_AD_SUCCESS:
+    case ActionTypes.GET_ADS_LISTS_AD_SUCCESS:
       return {
         ...state,
         currentAd: action.ad,
         isLoading: false,
       };
-    case ActionTypes.GET_STARRED_AD_STARTED:
+    case ActionTypes.GET_ADS_LISTS_AD_STARTED:
       return {
         ...state,
         isLoading: true,
         askFriendsIsLoading: true,
       };
-    case ActionTypes.GET_STARRED_AD_FAILED:
+    case ActionTypes.GET_ADS_LISTS_AD_FAILED:
       return initialState;
-    case ActionTypes.GET_STARRED_AD_FRIENDS_STARTED:
+    case ActionTypes.GET_ADS_LISTS_AD_FRIENDS_STARTED:
       return {
         ...state,
         askFriendsIsLoading: true,
       };
-    case ActionTypes.GET_STARRED_AD_FRIENDS_FAILED:
+    case ActionTypes.GET_ADS_LISTS_AD_FRIENDS_FAILED:
       return {
         ...state,
         askFriendsIsLoading: false,
       };
-    case ActionTypes.GET_STARRED_AD_FRIENDS_SUCCESS:
+    case ActionTypes.GET_ADS_LISTS_AD_FRIENDS_SUCCESS:
       return {
         ...state,
         currentAdFriends: action.adFriends,
@@ -113,13 +113,13 @@ export default function starredAd(state = initialState, action = {}) {
         ...state,
         currentAd: { ...state.currentAd, actionsLoading: false, deleted: false },
       };
-    case ActionTypes.RESET_STARRED_AD:
+    case ActionTypes.RESET_ADS_LISTS_AD:
       return {
         ...state,
         currentAd: initialAd,
         shouldReset: true,
       };
-    case ActionTypes.REMOVE_RESET_STARRED_AD:
+    case ActionTypes.REMOVE_RESET_ADS_LISTS_AD:
       return {
         ...state,
         shouldReset: false,
