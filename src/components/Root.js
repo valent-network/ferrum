@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AppState } from 'react-native';
+import { AppState, Linking } from 'react-native';
 
 import { Container, Content, Spinner } from 'native-base';
 
@@ -48,6 +48,11 @@ class Root extends React.Component {
   }
 
   appRef = (navigatorRef) => Navigation.setTopLevelNavigator(navigatorRef);
+
+  handleDeepLink(e) {
+    const route = e.url.replace(/.*?:\/\//g, '');
+    // console.warn(route);
+  }
 
   pushNotificationRouter = (notification) => {
     switch (notification.data.notification_action) {
@@ -180,11 +185,14 @@ class Root extends React.Component {
     if (t) {
       this.refreshAndPopualteApp();
     }
+
+    Linking.addEventListener('url', this.handleDeepLink);
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.refreshApp);
     serverChannel.disconnect();
+    Linking.removeEventListener('url', this.handleDeepLink);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

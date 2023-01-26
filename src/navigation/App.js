@@ -58,8 +58,8 @@ ChatNavigator.navigationOptions = ({ navigation }) => {
 
 const FeedNavigator = createStackNavigator(
   {
-    FeedScreen: { screen: FeedScreen },
-    Ad: { screen: FeedAdScreen },
+    FeedScreen: { screen: FeedScreen, path: '' },
+    FeedAd: { screen: FeedAdScreen, path: '' },
   },
   {
     initialRouteName: 'FeedScreen',
@@ -70,6 +70,7 @@ const NewAdNavigator = createStackNavigator(
   {
     NewAdScreen: {
       screen: NewAdScreen,
+      path: '',
     },
   },
   {
@@ -80,7 +81,7 @@ const NewAdNavigator = createStackNavigator(
 
 const UserContactsNavigator = createStackNavigator(
   {
-    UserContactsScreen: { screen: UserContactsScreen, navigationOptions: { headerShown: false } },
+    UserContactsScreen: { screen: UserContactsScreen, navigationOptions: { headerShown: false }, path: '' },
   },
   {
     initialRouteName: 'UserContactsScreen',
@@ -90,13 +91,15 @@ const UserContactsNavigator = createStackNavigator(
 
 const ProfileNavigator = createStackNavigator(
   {
-    ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false } },
-    InviteFriendsScreen: { screen: InviteFriendsScreen },
+    ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false }, path: '' },
+    InviteFriendsScreen: { screen: InviteFriendsScreen, path: '' },
     LanguageScreen: {
       screen: LanguageScreen,
+      path: '',
     },
     UserContacts: {
       screen: UserContactsNavigator,
+      path: '',
       navigationOptions: {
         headerShown: false,
       },
@@ -110,9 +113,9 @@ const ProfileNavigator = createStackNavigator(
 
 const AdsListsNavigator = createStackNavigator(
   {
-    AdsLists: { screen: AdsListsScreen, navigationOptions: { headerShown: false } },
+    AdsLists: { screen: AdsListsScreen, navigationOptions: { headerShown: false }, path: '' },
     Ad: { screen: AdsListsAdScreen, path: 'ads/:id' },
-    EditAdScreen: { screen: EditAdScreen },
+    EditAdScreen: { screen: EditAdScreen, path: '' },
   },
   {
     initialRouteName: 'AdsLists',
@@ -130,9 +133,9 @@ const bottomTabsNavigator = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <BottomTabIcon name="search" tintColor={tintColor} />,
       },
     },
-    VisitedAds: {
+    AdsLists: {
       screen: AdsListsNavigator,
-      path: '',
+      path: 'visited',
       navigationOptions: {
         title: '',
         tabBarIcon: ({ tintColor }) => <BottomTabIcon name="bookmarks" tintColor={tintColor} />,
