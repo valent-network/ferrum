@@ -7,34 +7,46 @@ import { getCachedLocale, setCachedLocale } from 'services/AsyncStorage';
 
 import { Platform, NativeModules } from 'react-native';
 
-const lng = getSystemLocale().substr(0, 2) == 'en' ? 'en' : 'uk';
-
-const resources = {
-  en: { translation: en },
-  uk: { translation: uk },
-};
-
-i18n.use(initReactI18next).init({
-  resources,
-  compatibilityJSON: 'v3',
-  fallbackLng: 'en',
-  lng: lng,
-  interpolation: {
-    escapeValue: false,
-  },
-});
-
-API.changeLanguage(lng);
+// if system locale is english, we use english
+// otherwise we always use uk locale
+// at the moment because we don't have others
+const systemLocale = getSystemLocale().substr(0, 2) == 'en' ? 'en' : 'uk';
 
 if (Platform.OS === 'android') {
-  getCachedLocale().then((l) => {
-    if (l != 'uk' && l != 'en') {
-      setCachedLocale(lng);
+  getCachedLocale().then((cachedLocale) => {
+
+    if (cachedLocale != 'uk' && cachedLocale != 'en') {  // Not setup yet
+      setCachedLocale(systemLocale);
+      setAppLocale(systemLocale);
+    } else { // There is a cached locale already
+      setAppLocale(cachedLocale);
     }
   });
+} else {
+  // We don't cache locale on iOS, its taken care by OS
+  setAppLocale(systemLocale);
 }
 
 export default i18n;
+
+function setAppLocale(locale) {
+  const resources = {
+    en: { translation: en },
+    uk: { translation: uk },
+  };
+
+  i18n.use(initReactI18next).init({
+    resources,
+    compatibilityJSON: 'v3',
+    fallbackLng: 'en',
+    lng: locale,
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
+  API.changeLanguage(locale);
+}
 
 function getSystemLocale() {
   let locale: string;
