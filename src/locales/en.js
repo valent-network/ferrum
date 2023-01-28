@@ -95,12 +95,12 @@ export default {
         city_id: 'Choose City',
         price: '24022022',
       },
-      buttons: {
-        selectFriend: 'Select',
-        inviteFriend: 'Invite',
-        askFriend: 'Ask',
-        continueChat: 'Continue',
-      },
+    },
+    buttons: {
+      selectFriend: 'Select',
+      inviteFriend: 'Invite',
+      askFriend: 'Ask',
+      continueChat: 'Continue',
     },
   },
   ads: {
