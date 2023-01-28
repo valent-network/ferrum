@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
@@ -7,35 +7,15 @@ import { useTranslation } from 'react-i18next';
 
 import AdsList from 'components/AdsList';
 
-import { loadMoreAds as loadMoreAdsFavorite, getAll as getAllFavorite } from 'actions/favoriteAds';
-import { loadMoreAds as loadMoreAdsMyAds, getAll as getAllMyAds } from 'actions/myAds';
-import { loadMoreAds as loadMoreAdsVisited, getAll as getAllVisited } from 'actions/visitedAds';
-
-import { likeAd, unlikeAd } from 'actions/favoriteAds';
-
 import { primaryColor, secondaryColor, activeColor, lightColor } from 'colors';
 
-const AdsListsScreen = ({ ads, loadMoreAds, isLoading, onRefresh, navigation, likeAd, unlikeAd }) => {
-  const { t } = useTranslation();
+import * as ActionTypes from 'actions/types';
 
-  const [currentTab, setCurrentTab] = useState('favorite');
+const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab }) => {
+  const { t } = useTranslation();
 
   const onAdOpened = (ad) => {
     navigation.navigate('Ad', { id: ad.id });
-  };
-
-  const defaultAdsListProps = {
-    likeAd: likeAd,
-    unlikeAd: unlikeAd,
-    onAdOpened: onAdOpened,
-  };
-
-  const adsListProps = {
-    ...defaultAdsListProps,
-    ads: ads[currentTab],
-    isLoading: isLoading[currentTab],
-    onRefresh: onRefresh[currentTab],
-    loadMoreAds: loadMoreAds[currentTab],
   };
 
   return (
@@ -51,18 +31,18 @@ const AdsListsScreen = ({ ads, loadMoreAds, isLoading, onRefresh, navigation, li
       <Segment style={{ backgroundColor: secondaryColor, paddingHorizontal: 8 }}>
         <Button
           style={{ borderColor: activeColor, width: '33.33333%', justifyContent: 'center' }}
-          onPress={() => setCurrentTab('visited')}
-          active={currentTab == 'visited'}
+          onPress={() => setCurrentTab('visitedAds')}
+          active={currentTab == 'visitedAds'}
           first
         >
-          <Text style={{ color: currentTab == 'visited' ? lightColor : activeColor }}>{t('ads.visited')}</Text>
+          <Text style={{ color: currentTab == 'visitedAds' ? lightColor : activeColor }}>{t('ads.visited')}</Text>
         </Button>
         <Button
-          onPress={() => setCurrentTab('favorite')}
+          onPress={() => setCurrentTab('favoriteAds')}
           style={{ borderColor: activeColor, width: '33.33333%', justifyContent: 'center' }}
-          active={currentTab == 'favorite'}
+          active={currentTab == 'favoriteAds'}
         >
-          <Text style={{ color: currentTab == 'favorite' ? lightColor : activeColor }}>{t('ads.favorite')}</Text>
+          <Text style={{ color: currentTab == 'favoriteAds' ? lightColor : activeColor }}>{t('ads.favorite')}</Text>
         </Button>
         <Button
           onPress={() => setCurrentTab('myAds')}
@@ -73,40 +53,22 @@ const AdsListsScreen = ({ ads, loadMoreAds, isLoading, onRefresh, navigation, li
           <Text style={{ color: currentTab == 'myAds' ? lightColor : activeColor }}>{t('ads.myAds')}</Text>
         </Button>
       </Segment>
-      {<AdsList {...adsListProps} />}
+      {<AdsList onAdOpened={onAdOpened} ads={ads} isLoading={isLoading} />}
     </Container>
   );
 };
 
 function mapStateToProps(state) {
   return {
-    ads: {
-      visited: state.visitedAds.list,
-      myAds: state.myAds.list,
-      favorite: state.favoriteAds.list,
-    },
-    isLoading: {
-      visited: state.visitedAds.isLoading,
-      myAds: state.myAds.isLoading,
-      favorite: state.favoriteAds.isLoading,
-    },
+    currentTab: state.settings.currentTabAdsLists,
+    ads: state[state.settings.currentTabAdsLists].list,
+    isLoading: state[state.settings.currentTabAdsLists].isLoading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadMoreAds: {
-      visited: () => dispatch(loadMoreAdsVisited()),
-      myAds: () => dispatch(loadMoreAdsMyAds()),
-      favorite: () => dispatch(loadMoreAdsFavorite()),
-    },
-    onRefresh: {
-      visited: () => dispatch(getAllVisited()),
-      myAds: () => dispatch(getAllMyAds()),
-      favorite: () => dispatch(getAllFavorite()),
-    },
-    likeAd: (adId) => dispatch(likeAd(adId)),
-    unlikeAd: (adId) => dispatch(unlikeAd(adId)),
+    setCurrentTab: (tabName) => dispatch({ type: ActionTypes.SET_CURRENT_TAB_ADS_LISTS, tabName: tabName }),
   };
 }
 
