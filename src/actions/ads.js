@@ -1,3 +1,5 @@
+import ReactNativeBlobUtil from 'react-native-blob-util';
+
 import * as ActionTypes from 'actions/types';
 import API from 'services/API';
 import { displayError } from 'actions/errors';
@@ -150,4 +152,85 @@ export function unarchiveAd(adId) {
         displayError(error);
       });
   };
+}
+
+export function presignAndUploadToS3({ images, onComplete }) {
+  return (dispatch) => {
+    const imagesToPresign = images.map((i) => {
+      return {
+        ext: i.ext,
+        content_type: i.content_type,
+        position: i.position,
+      };
+    });
+    return API.presign(imagesToPresign).then(({ data }) => {
+      const imagesUploadData = images.map((i) => {
+        const matched = data.filter((d) => d.position === i.position)[0];
+
+        return {
+          ...i,
+          key: matched.key,
+          presigned_url: matched.presigned_url,
+        };
+      });
+      return uploadPresignedImagesToS3({ images: imagesUploadData, onComplete });
+    });
+  };
+}
+
+export const onAdImagePickerImageSelected =
+  ({ currentCollection, attachtImageToForm, onProgress }) =>
+  (image, index) => {
+    const appendIndex = index + currentCollection.length;
+    const ext = image.path.split('.').length > 1 ? image.path.split('.').pop() : null;
+
+    const adImage = {
+      position: appendIndex,
+      attachment: image.path,
+      content_type: image.mime,
+      ext: ext,
+      path: image.path,
+      opacity: 0,
+      onProgress: onProgress(appendIndex),
+    };
+
+    attachtImageToForm(adImage);
+
+    return adImage;
+  };
+
+// PRIVATE
+
+async function uploadPresignedImagesToS3({ images, onComplete }) {
+  var promises = [];
+  var uploadedImages = [];
+
+  images.map((image) => {
+    const headers = {
+      'Content-Type': image.content_type,
+      'x-amz-acl': 'public-read',
+    };
+
+    // https://github.com/axios/axios/issues/1321
+    // https://github.com/axios/axios/issues/1321#issuecomment-420941683
+    // https://github.com/axios/axios/blob/503418718f669fcc674719fd862b355605d7b41f/lib/adapters/xhr.js#L15-L17
+    // https://github.com/joltup/rn-fetch-blob#multipartform-data-example-post-form-data-with-file-and-data
+    // https://github.com/RonRadtke/react-native-blob-util
+    promises.push(
+      ReactNativeBlobUtil.fetch('PUT', image.presigned_url, headers, ReactNativeBlobUtil.wrap(image.path))
+        .uploadProgress(image.onProgress)
+        .then((res) => {
+          uploadedImages.push(image);
+        })
+        .catch((error) => {
+          displayError(error);
+        }),
+    );
+  });
+
+  await Promise.all(promises);
+
+  onComplete(uploadedImages);
+
+  return uploadedImages;
 }

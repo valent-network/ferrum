@@ -14,11 +14,12 @@ const systemLocale = getSystemLocale().substr(0, 2) == 'en' ? 'en' : 'uk';
 
 if (Platform.OS === 'android') {
   getCachedLocale().then((cachedLocale) => {
-
-    if (cachedLocale != 'uk' && cachedLocale != 'en') {  // Not setup yet
+    if (cachedLocale != 'uk' && cachedLocale != 'en') {
+      // Not setup yet
       setCachedLocale(systemLocale);
       setAppLocale(systemLocale);
-    } else { // There is a cached locale already
+    } else {
+      // There is a cached locale already
       setAppLocale(cachedLocale);
     }
   });

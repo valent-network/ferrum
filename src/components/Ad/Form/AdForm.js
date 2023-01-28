@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { Platform, Image, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { Container, Content, View, Form, Icon, Button, Text, Left, Header, Spinner } from 'native-base';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import styles from './Styles';
 import { defaultPickerPropsFor, handleFocusOnError, ResetPicker, rules } from './helpers';
@@ -11,9 +13,21 @@ import TextOrNumberInput from './TextOrNumberInput';
 import Textarea from './Textarea';
 import Picker from './Picker';
 import AdImagePicker from './AdImagePicker';
+import AdImagePickerItem from './AdImagePickerItem';
 import { spinnerColor, activeColor, lightColor } from 'colors';
+import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
 
-export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, isLoading, newRecord }) => {
+import { reposition, AD_IMAGES_PICKER_OPTIONS } from 'utils';
+
+const AdForm = ({
+  defaultValues,
+  onSubmit,
+  citiesByRegion,
+  categories,
+  isLoading,
+  newRecord,
+  presignAndUploadToS3,
+}) => {
   if (!categories.length) {
     return (
       <Container>
@@ -32,6 +46,7 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     register,
     resetField,
     setValue,
+    getValues,
     setError,
     clearErrors,
     setFocus,
@@ -41,6 +56,12 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     defaultValues: defaultValues,
     submitFocusError: false,
   });
+
+  useEffect(() => {
+    handleFocusOnError(errors, setFocus);
+  }, [setFocus]);
+
+  const [imagesUploading, setImagesUploading] = useState(false);
 
   register(`ad_images`);
 
@@ -61,6 +82,18 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
 
   const cityRules = { ...rules.city, required: !!region };
 
+  const onComplete = (newImages) => {
+    const imagesWithS3Keys = getValues('ad_images').map((i) => {
+      return i.id
+        ? i
+        : {
+            ...i,
+            key: i.key || newImages.filter((n) => n.position === i.position)[0].key,
+          };
+    });
+    setValue('ad_images', imagesWithS3Keys);
+  };
+
   const onCityReset = () => resetField('city_id', { defaultValue: null });
   const onCategoryReset = () => {
     resetField('category_id', { defaultValue: null });
@@ -72,6 +105,13 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
   };
   const onSubmitWithReset = (data) => {
     if (adImages.length > 0) {
+      data.tmp_images = data.ad_images
+        .filter((i) => !i.id)
+        .map((i) => {
+          return { position: i.position, key: i.key };
+        });
+      data.ad_images = data.ad_images.filter((i) => i.id);
+
       onSubmit(data, reset);
     } else {
       setError('ad_images', { type: 'required' });
@@ -155,10 +195,6 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
       }
     };
 
-  useEffect(() => {
-    handleFocusOnError(errors, setFocus);
-  }, [setFocus]);
-
   const ErrorMessage = ({ errorName }) => {
     const error = errors[errorName];
 
@@ -177,6 +213,36 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     );
   };
 
+  const updateCollection = (newCollection) => setValue('ad_images', newCollection.map(reposition));
+  const renderImage = (image) => (
+    <AdImagePickerItem image={image} collection={adImages} updateCollection={updateCollection} />
+  );
+  const onImageSelected = onAdImagePickerImageSelected({
+    onProgress: (index) => (written, total) => {
+      setValue(`ad_images[${index}]`, {
+        ...getValues(`ad_images[${index}]`),
+        opacity: written / total,
+      });
+    },
+    attachtImageToForm: (image) => {
+      register(`ad_images[${image.position}]`);
+      setValue(`ad_images[${image.position}]`, image);
+    },
+    currentCollection: adImages,
+  });
+
+  const openImagePicker = () => {
+    setImagesUploading(true);
+
+    ImagePicker.openPicker(AD_IMAGES_PICKER_OPTIONS).then((images) => {
+      clearErrors('ad_images');
+
+      presignAndUploadToS3({ images: images.map(onImageSelected), onComplete });
+
+      setImagesUploading(false);
+    });
+  };
+
   return (
     <Container>
       <Content padder enableResetScrollToCoords={false}>
@@ -184,10 +250,9 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
           <View style={[styles.pickerContainer, { padding: 8, paddingVertical: 16 }]}>
             <AdImagePicker
               adImages={adImages}
-              register={register}
-              setValue={setValue}
+              renderImage={renderImage}
+              onPress={openImagePicker}
               error={errors.ad_images}
-              clearErrors={clearErrors}
             />
             {!defaultValues.native && (
               <Text>
@@ -300,8 +365,13 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
       </Content>
 
       <View style={styles.submitButtonWrapper}>
-        <Button style={styles.submitButton} block onPress={handleSubmit(onSubmitWithReset, onError)}>
-          {isLoading ? (
+        <Button
+          disabled={imagesUploading}
+          style={styles.submitButton}
+          block
+          onPress={handleSubmit(onSubmitWithReset, onError)}
+        >
+          {isLoading || imagesUploading ? (
             <Spinner color={spinnerColor} />
           ) : (
             <Text>{newRecord ? t('actions.create') : t('actions.update')}</Text>
@@ -311,3 +381,14 @@ export default AdForm = ({ defaultValues, onSubmit, citiesByRegion, categories, 
     </Container>
   );
 };
+
+function mapStateToProps(state) {
+  return {};
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    presignAndUploadToS3: ({ images, onComplete }) => dispatch(presignAndUploadToS3({ images, onComplete })),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdForm);

@@ -198,7 +198,8 @@ export default class API {
   }
 
   static createAd(adParams) {
-    const { title, short_description, description, price, city_id, category_id, options, ad_images } = adParams;
+    const { title, short_description, description, price, city_id, category_id, options, ad_images, tmp_images } =
+      adParams;
 
     const params = {
       ad: {
@@ -208,7 +209,7 @@ export default class API {
         ad_query_attributes: { title },
         ad_description_attributes: { body: description, short: short_description },
         ad_extra_attributes: { details: options },
-        ad_images_attributes: ad_images,
+        tmp_images: tmp_images,
       },
     };
 
@@ -216,7 +217,7 @@ export default class API {
   }
 
   static updateAd(ad) {
-    const { title, short_description, description, price, city_id, options, deleted, ad_images } = ad;
+    const { title, short_description, description, price, city_id, options, deleted, ad_images, tmp_images } = ad;
 
     const params = {
       ad: {
@@ -227,6 +228,7 @@ export default class API {
         ad_description_attributes: { body: description, short: short_description },
         ad_extra_attributes: { details: options },
         ad_images_attributes: ad_images,
+        tmp_images: tmp_images,
       },
     };
 
@@ -239,5 +241,9 @@ export default class API {
 
   static archiveAd(adId) {
     return apiService.delete(`/v2/ads/${adId}/archive`);
+  }
+
+  static presign(images) {
+    return apiService.post(`/v1/presigner`, { images });
   }
 }

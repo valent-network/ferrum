@@ -33,12 +33,7 @@ export default function AdPicker(props) {
     <Picker {...otherProps}>
       {Platform.OS === 'android' ? <Picker.Item label={t('actions.choose')} value={undefined} /> : <></>}
       {collection.map((element) => (
-        <Picker.Item
-          color={otherProps.itemStyle.color}
-          key={`${paramName}-${element?.id || element}`}
-          label={element.label}
-          value={element.value}
-        />
+        <Picker.Item key={`${paramName}-${element?.id || element}`} label={element.label} value={element.value} />
       ))}
     </Picker>
   );

@@ -56,3 +56,16 @@ export function localizedSystemMessage(message) {
 
   return localizedText || message.text;
 }
+
+export const reposition = (i, index) => {
+  return { ...i, position: index };
+};
+
+export const AD_IMAGES_PICKER_OPTIONS = {
+  includeBase64: false,
+  compressImageQuality: 0.8,
+  writeTempFile: true,
+  mediaType: 'photo',
+  forceJpg: true,
+  multiple: true,
+};
