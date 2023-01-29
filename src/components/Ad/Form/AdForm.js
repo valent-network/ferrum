@@ -214,9 +214,20 @@ const AdForm = ({
   };
 
   const updateCollection = (newCollection) => setValue('ad_images', newCollection.map(reposition));
-  const renderImage = (image) => (
-    <AdImagePickerItem image={image} collection={adImages} updateCollection={updateCollection} />
-  );
+  const makeMain = (image) =>
+    setValue('ad_images', [image, ...adImages.filter((i) => i.position !== image.position)].map(reposition));
+  const renderImage = (image) => {
+    const makeMainImage = () => makeMain(image);
+
+    return (
+      <AdImagePickerItem
+        image={image}
+        collection={adImages}
+        updateCollection={updateCollection}
+        makeMain={makeMainImage}
+      />
+    );
+  };
   const onImageSelected = onAdImagePickerImageSelected({
     onProgress: (index) => (written, total) => {
       setValue(`ad_images[${index}]`, {
@@ -234,13 +245,18 @@ const AdForm = ({
   const openImagePicker = () => {
     setImagesUploading(true);
 
-    ImagePicker.openPicker(AD_IMAGES_PICKER_OPTIONS).then((images) => {
-      clearErrors('ad_images');
+    ImagePicker.openPicker(AD_IMAGES_PICKER_OPTIONS)
+      .then((images) => {
+        clearErrors('ad_images');
 
-      presignAndUploadToS3({ images: images.map(onImageSelected), onComplete });
+        presignAndUploadToS3({ images: images.map(onImageSelected), onComplete });
 
-      setImagesUploading(false);
-    });
+        setImagesUploading(false);
+      })
+      .catch((e) => {
+        console.warn(e);
+        setImagesUploading(false);
+      });
   };
 
   return (

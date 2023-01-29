@@ -58,6 +58,7 @@ export default {
     deleted: 'Сховано',
     restore: 'Відновити',
     addImages: 'Додати фото',
+    assign_as_main_image: 'Зробити головним',
     alerts: {
       confirm_delete: 'Ви впевнені, що хочете видалити це оголошення? Після цього, оголошення не можна будет повернути',
       confirm_archive:

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { View, Text, Icon } from 'native-base';
+import { View, Text, Icon, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Styles';
 
-export default function AdImagePickerItem({ image, collection, updateCollection }) {
+export default function AdImagePickerItem({ image, collection, updateCollection, makeMain }) {
   onDelete = () => {
     const newCollection = image.id
       ? collection.map((i) => (i.position == image.position ? { ...i, _destroy: true } : i))
@@ -41,6 +41,11 @@ export default function AdImagePickerItem({ image, collection, updateCollection 
         <Text style={styles.restoreText} onPress={onRestore}>
           {t('ad.restore')}
         </Text>
+      )}
+      {image.position != 0 && (
+        <Button small block dark style={styles.makeMainButton} onPress={makeMain}>
+          <Text>{t('ad.assign_as_main_image')}</Text>
+        </Button>
       )}
     </View>
   );

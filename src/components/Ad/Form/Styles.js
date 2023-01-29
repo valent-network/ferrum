@@ -127,7 +127,7 @@ export default StyleSheet.create({
   adImage: {
     width: 200,
     height: 120,
-    marginRight: 16,
+    marginRight: 0,
     borderRadius: 4,
     backgroundColor: notesColor,
   },
@@ -141,7 +141,8 @@ export default StyleSheet.create({
     color: deletedColor,
   },
   adImagesContainer: {
-    marginVertical: 16,
+    margin: 16,
+    marginLeft: 0,
   },
   adImageContainer: {
     flex: 1,
@@ -150,7 +151,8 @@ export default StyleSheet.create({
     paddingVertical: 8,
   },
   addImageText: {
-    fontWeight: 'bold',
+    fontWeight: '900',
+    fontSize: 18,
   },
   addImageTextError: {
     color: deletedColor,
@@ -171,6 +173,12 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   errorMessageText: {
-    color: 'red',
+    color: deletedColor,
   },
+  makeMainButton: {
+    backgroundColor: activeColor,
+    marginTop: 16,
+    alignSelf: 'center',
+  },
+  makeMainButtonText: { alignSelf: 'center', backgroundColor: notesColor, marginTop: 16, padding: 4 },
 });

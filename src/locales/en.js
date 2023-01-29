@@ -58,6 +58,7 @@ export default {
     deleted: 'Deleted',
     restore: 'Restore',
     addImages: 'Add Images',
+    assign_as_main_image: 'Assign Main',
     alerts: {
       confirm_delete: 'Are you sure you want to delete this ad? This action is irreversible',
       confirm_archive:
