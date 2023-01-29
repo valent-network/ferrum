@@ -42,7 +42,7 @@ export default function AdImagePickerItem({ image, collection, updateCollection,
           {t('ad.restore')}
         </Text>
       )}
-      {image.position != 0 && (
+      {image.position != 0 && !image._destroy && deletable && (
         <Button small block dark style={styles.makeMainButton} onPress={makeMain}>
           <Text>{t('ad.assign_as_main_image')}</Text>
         </Button>
