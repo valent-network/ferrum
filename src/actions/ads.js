@@ -78,7 +78,7 @@ export function createAd(adParams, resetForm) {
     return API.createAd(adParams)
       .then((payload) => {
         dispatch({ type: ActionTypes.CREATE_AD_SUCCESS, ad: payload.data });
-        Navigation.navigate('AdsLists', { id: payload.data.id });
+        Navigation.navigate('Ad', { id: payload.data.id });
         resetForm();
       })
       .catch((error) => {

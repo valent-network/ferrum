@@ -43,7 +43,7 @@ function ChatRoomsSettingsScreen({
   const closeModal = () => setModalVisible(false);
   const onShow = () => {
     navigation.popToTop();
-    navigation.navigate('VisitedAdScreen', { id: chat.ad_id });
+    navigation.navigate('Ad', { id: chat.ad_id });
   };
   const onLeave = () => {
     ActionSheet.show(
