@@ -133,7 +133,6 @@ ChatRoomScreen.navigationOptions = ({ navigation }) => {
       backgroundColor: secondaryColor,
       shadowColor: 'transparent',
       borderBottomWidth: 0,
-      height: 104,
     },
     headerTitle: () => <CurrentChatHeader />,
     headerTitleStyle: { color: lightColor },

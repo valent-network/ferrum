@@ -76,7 +76,6 @@ ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
       backgroundColor: secondaryColor,
       shadowColor: 'transparent',
       borderBottomWidth: 0,
-      height: 104,
     },
     title: i18n.t('nav.titles.chats'),
   };

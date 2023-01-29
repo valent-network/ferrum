@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Segment, Body, Button, Text, Title } from 'native-base';
+import { Platform } from 'react-native';
+import { Container, Header, Title } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import AdsList from 'components/AdsList';
 
-import { primaryColor, secondaryColor, activeColor, lightColor } from 'colors';
-
 import * as ActionTypes from 'actions/types';
+
+import SegmentTabs from './SegmentTabs';
+import Tabs from './Tabs';
+
+import styles from './styles';
 
 const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab }) => {
   const { t } = useTranslation();
@@ -18,41 +21,17 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
     navigation.navigate('Ad', { id: ad.id });
   };
 
+  const tabProps = {
+    currentTab,
+    setCurrentTab,
+  };
+
   return (
     <Container style={styles.mainContainer}>
-      <Header
-        hasSegment
-        iosBarStyle="light-content"
-        noShadow={true}
-        style={{ backgroundColor: secondaryColor, flexDirection: 'column' }}
-      >
-        <Title style={{ color: lightColor }}>{t('nav.titles.ads')}</Title>
+      <Header hasSegment iosBarStyle="light-content" noShadow={true} style={styles.header}>
+        <Title style={styles.title}>{t('nav.titles.ads')}</Title>
       </Header>
-      <Segment style={{ backgroundColor: secondaryColor, paddingHorizontal: 8 }}>
-        <Button
-          style={{ borderColor: activeColor, width: '33.33333%', justifyContent: 'center' }}
-          onPress={() => setCurrentTab('visitedAds')}
-          active={currentTab == 'visitedAds'}
-          first
-        >
-          <Text style={{ color: currentTab == 'visitedAds' ? lightColor : activeColor }}>{t('ads.visited')}</Text>
-        </Button>
-        <Button
-          onPress={() => setCurrentTab('favoriteAds')}
-          style={{ borderColor: activeColor, width: '33.33333%', justifyContent: 'center' }}
-          active={currentTab == 'favoriteAds'}
-        >
-          <Text style={{ color: currentTab == 'favoriteAds' ? lightColor : activeColor }}>{t('ads.favorite')}</Text>
-        </Button>
-        <Button
-          onPress={() => setCurrentTab('myAds')}
-          style={{ borderColor: activeColor, width: '33.33333%', justifyContent: 'center' }}
-          active={currentTab == 'myAds'}
-          last
-        >
-          <Text style={{ color: currentTab == 'myAds' ? lightColor : activeColor }}>{t('ads.myAds')}</Text>
-        </Button>
-      </Segment>
+      {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
       {<AdsList onAdOpened={onAdOpened} ads={ads} isLoading={isLoading} />}
     </Container>
   );
@@ -73,9 +52,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdsListsScreen);
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: primaryColor,
-  },
-});

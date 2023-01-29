@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { Platform } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Icon, Header } from 'native-base';
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
     alignItems: 'center',
+    paddingBottom: Platform.OS === 'android' ? 8 : 0,
   },
   filtersRow: {
     paddingVertical: 12,

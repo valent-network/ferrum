@@ -58,7 +58,6 @@ EditAdScreen.navigationOptions = ({ navigation }) => {
       backgroundColor: secondaryColor,
       shadowColor: 'transparent',
       borderBottomWidth: 0,
-      height: 104,
     },
     title: navigation.state.params.ad.title,
   };
