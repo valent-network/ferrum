@@ -26,7 +26,7 @@ export const clearAccessToken = async () => {
 
 export const getWizardDone = async () => {
   try {
-    return await AsyncStorage.getItem('@AsyncStorage:wizardDone');
+    return await AsyncStorage.getItem('@AsyncStorage:wizardDoneV2');
   } catch (error) {
     return false;
   }
