@@ -78,11 +78,6 @@ export default function myAds(state = initialSetting, action = {}) {
         ...state,
         isCreating: true,
       };
-    case ActionTypes.UPDATE_AD_SUCCESS:
-      return {
-        ...state,
-        isUpdating: false,
-      };
     case ActionTypes.UPDATE_AD_FAILED:
       return {
         ...state,
@@ -107,6 +102,7 @@ export default function myAds(state = initialSetting, action = {}) {
       return {
         ...state,
         list: state.list.map((ad) => (ad.id == action.ad.id ? action.ad : ad)),
+        isUpdating: false,
       };
     default:
       return state;
