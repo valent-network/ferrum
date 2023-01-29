@@ -15,7 +15,7 @@ import * as ActionTypes from 'actions/types';
 
 import { goToSettings } from 'utils';
 
-import { activeColor, secondaryColor } from 'colors';
+import { activeColor, secondaryColor, superActiveColor } from 'colors';
 
 class PermissionsBox extends React.PureComponent {
   onPress = () => (this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions());
@@ -43,12 +43,10 @@ class PermissionsBox extends React.PureComponent {
 
     return (
       <View style={styles.mainContainer}>
-        <Text>{t('feed.permissionBoxText')}</Text>
-        {
-          <Button block style={styles.button} onPress={this.onPress}>
-            <Text>{t('feed.permissionBoxSubmit')}</Text>
-          </Button>
-        }
+        <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
+        <Button small block style={styles.button} onPress={this.onPress}>
+          <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
+        </Button>
       </View>
     );
   }
@@ -76,15 +74,21 @@ PermissionsBox.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: secondaryColor,
+    backgroundColor: activeColor,
     marginHorizontal: 0,
     marginBottom: 16,
-    padding: 12,
+    padding: 6,
     borderColor: activeColor,
     borderRadius: 4,
+    color: superActiveColor,
   },
   button: {
-    marginTop: 12,
-    backgroundColor: activeColor,
+    marginTop: 6,
+    backgroundColor: superActiveColor,
   },
+  buttonText: {
+    color: activeColor,
+    fontWeight: 'bold',
+  },
+  mainText: { fontSize: 13 },
 });

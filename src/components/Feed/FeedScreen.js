@@ -34,7 +34,7 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOpt, isLoading, onRefresh, likeAd, u
           <MultiPicker opt={hopsOpt} />
         </ScrollView>
       </View>
-      <PermissionsBox />
+
       <AdsList
         ads={ads}
         isLoading={isLoading}
@@ -45,6 +45,7 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOpt, isLoading, onRefresh, likeAd, u
         onAdOpened={onAdOpened}
         fromFeed={true}
       />
+      <PermissionsBox />
       <FiltersModal />
     </Container>
   );

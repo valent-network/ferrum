@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Header, Item, Icon, Input, Text, Left, Right } from 'native-base';
-import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
 import Navigation from 'services/Navigation';
@@ -41,11 +41,12 @@ class UserContactsScreen extends React.PureComponent {
     return (
       <Container>
         <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar>
-          <TouchableOpacity activeOpacity={1} onPress={() => Navigation.navigate('ProfileScreen')}>
-            <Left style={styles.topIconContainer}>
-              <Icon name="chevron-back-outline" />
-            </Left>
-          </TouchableOpacity>
+          <Icon
+            name="chevron-back-outline"
+            style={styles.backButton}
+            onPress={() => Navigation.navigate('ProfileScreen')}
+          />
+
           <Item style={styles.searchBar}>
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input
@@ -58,9 +59,7 @@ class UserContactsScreen extends React.PureComponent {
             />
             {query.length > 0 && <Icon name="close-circle" style={styles.inputTextColor} onPress={this.resetQuery} />}
           </Item>
-          <Right style={styles.topIconContainer}></Right>
         </Header>
-        <PermissionsBox />
         <UserContactsList
           userContacts={userContacts}
           isLoading={isLoading}
@@ -68,6 +67,7 @@ class UserContactsScreen extends React.PureComponent {
           onRefresh={onRefresh}
           renderItem={this.renderItem}
         />
+        <PermissionsBox />
       </Container>
     );
   }
@@ -98,9 +98,12 @@ UserContactsScreen.propTypes = {};
 const styles = StyleSheet.create({
   mainHeader: {
     backgroundColor: secondaryColor,
-    flexWrap: 'nowrap',
     borderBottomWidth: 0,
-    paddingBottom: 8,
+    padding: 0,
+    paddingLeft: 0,
+    margin: 0,
+    paddingBottom: Platform.OS === 'android' ? 8 : 0,
+    alignItems: 'center',
   },
   searchBar: {
     borderRadius: 16,
@@ -114,13 +117,5 @@ const styles = StyleSheet.create({
   inputTextColor: {
     color: lightColor,
   },
-  topIconContainer: {
-    height: '100%',
-    minWidth: 57,
-    maxWidth: 57,
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 57,
-    maxHeight: 57,
-  },
+  backButton: { fontSize: Platform.OS === 'android' ? 24 : 33 },
 });

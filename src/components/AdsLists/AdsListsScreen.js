@@ -28,7 +28,13 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
 
   return (
     <Container style={styles.mainContainer}>
-      <Header hasSegment={Platform.OS !== 'android'} hastTabs={Platform.OS === 'android'} iosBarStyle="light-content" noShadow={true} style={styles.header}>
+      <Header
+        hasSegment={Platform.OS !== 'android'}
+        hastTabs={Platform.OS === 'android'}
+        iosBarStyle="light-content"
+        noShadow={true}
+        style={styles.header}
+      >
         <Title style={styles.title}>{t('nav.titles.ads')}</Title>
       </Header>
       {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
