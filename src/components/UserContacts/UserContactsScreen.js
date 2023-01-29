@@ -52,7 +52,7 @@ class UserContactsScreen extends React.PureComponent {
             <Input
               placeholder={t('profile.placeholders.userContactsSearch')}
               placeholderTextColor={disabledColor}
-              style={styles.inputTextColor}
+              style={[styles.inputTextColor, styles.searchBarInput]}
               onChangeText={onUpdateQuery}
               defaultValue={query}
               returnKeyType={'done'}
@@ -113,6 +113,11 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     color: disabledColor,
+    fontSize: 14,
+  },
+  searchBarInput: {
+    fontSize: 14,
+    paddingLeft: 0,
   },
   inputTextColor: {
     color: lightColor,
