@@ -231,7 +231,7 @@ PODS:
     - React-jsi (= 0.64.4)
     - React-perflogger (= 0.64.4)
   - React-jsinspector (0.64.4)
-  - react-native-blob-util (0.17.1):
+  - react-native-blob-util (0.16.4):
     - React-Core
   - react-native-contacts (7.0.5):
     - React-Core
@@ -531,7 +531,7 @@ SPEC CHECKSUMS:
   React-jsi: 64f80675a66899bf0f4a58b8e3908966fa516234
   React-jsiexecutor: 8c077bef1c64430b6034f27df1000d194551e2eb
   React-jsinspector: d4f6973dd474357dbaaf6f52f31ffc713bf3e766
-  react-native-blob-util: 4949dcc0dd5ee25fcb5abe0687f67fa3d5cdf05a
+  react-native-blob-util: 60453b777610c87a22b3524032c0214e8db555db
   react-native-contacts: 0aa99963d8f29099d4725cd0d2f8b6ef5f0d9a2d
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   React-perflogger: 5a890ca0911669421b7611661e9b58f91c805f5c
@@ -563,6 +563,6 @@ SPEC CHECKSUMS:
   toolbar-android: 2a73856e98b750d7e71ce4644d3f41cc98211719
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 15de81416ead5025d13b692ae06128d37e7b1b78
+PODFILE CHECKSUM: bb0289caa94946f5f5c618935f33824591a03134
 
 COCOAPODS: 1.11.3
