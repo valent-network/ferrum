@@ -29,7 +29,7 @@ export function displayError(error) {
     }
     // showNotification(message);
   } else if (error.request) {
-    showNotification(i18n.t('errors.connectionErrorMessage'));
+    showNotification(i18n.t('errors.connectionErrorMessage'), i18n.t('errors.connectionErrorSecondMessage'));
   } else {
     console.warn(error);
   }
