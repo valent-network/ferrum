@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
 import Navigation from 'services/Navigation';
 
 import UserAvatar from 'react-native-user-avatar';
 
-import { Text, ListItem, Left, Body, Right, Thumbnail, Badge, ActionSheet } from 'native-base';
+import { Text, ListItem, Left, Body, Right, Badge, ActionSheet } from 'native-base';
 
 import dayjs from 'dayjs';
 
@@ -60,7 +60,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
     >
       <Left>
         {chat.system ? (
-          <Thumbnail source={RECARIO_LOGO} style={styles.carPhoto} />
+          <Image source={RECARIO_LOGO} style={styles.systemLogoImage} />
         ) : (
           <UserAvatar size={48} name={chat.title || ''} src={chat.photo} bgColor={activeColor} />
         )}
@@ -86,14 +86,12 @@ export default function ChatRoomListItem({ chat, currentUser }) {
 }
 
 const styles = StyleSheet.create({
-  carPhoto: {
+  systemLogoImage: {
     width: 48,
     height: 48,
-    borderTopColor: activeColor,
-    borderLeftColor: activeColor,
-    borderRightColor: superActiveColor,
-    borderBottomColor: superActiveColor,
+    borderColor: superActiveColor,
     borderWidth: 1,
+    borderRadius: 24,
   },
   previewBody: {
     paddingTop: 4,
