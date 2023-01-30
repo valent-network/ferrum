@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Modal, StyleSheet, TouchableOpacity, Keyboard, TextInput } from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity, Keyboard, TextInput, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { View, Icon, Text, Thumbnail, Button, ActionSheet } from 'native-base';
+import { View, Icon, Text, Button, ActionSheet } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
 import UserAvatar from 'react-native-user-avatar';
@@ -14,7 +14,7 @@ import { lightColor, primaryColor, activeColor } from 'colors';
 
 import { onReferralInfoPress } from 'utils';
 
-import RECARIO_LOGO from 'assets/logo.png';
+import REFER from 'assets/refer.png';
 
 function SetReferrerModal({ onClose, selfRefcode }) {
   const [refcode, setRefcode] = useState('');
@@ -143,7 +143,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
           <View style={styles.contentContainer}>
             <KeyboardAwareScrollView bounces={false} keyboardShouldPersistTaps="always">
               <View style={styles.header}>
-                <Thumbnail source={RECARIO_LOGO} />
+                <Image source={REFER} style={styles.picture} />
               </View>
               <View style={styles.refcodeInput}>
                 <View style={styles.singleInputWrapper}>
@@ -309,6 +309,13 @@ const styles = StyleSheet.create({
   userAvatarContainer: {
     width: 48,
     alignSelf: 'center',
+  },
+  picture: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 200,
+    height: 200,
   },
 });
 

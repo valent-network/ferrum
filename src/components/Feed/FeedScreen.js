@@ -16,12 +16,13 @@ import MultiPicker from './Filters/MultiPicker';
 import Funnel from './Filters/Funnel';
 
 import PermissionsBox from './PermissionsBox';
+import ContactsUploading from './ContactsUploading';
 
 import { secondaryColor, activeColor } from 'colors';
 
 const FeedScreen = ({ ads, loadMoreAds, hopsOpt, isLoading, onRefresh, likeAd, unlikeAd, navigation }) => {
   const onAdOpened = (ad) => {
-    navigation.push('Ad', { id: ad.id });
+    navigation.push('FeedAd', { id: ad.id });
   };
   return (
     <Container>
@@ -34,6 +35,7 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOpt, isLoading, onRefresh, likeAd, u
           <MultiPicker opt={hopsOpt} />
         </ScrollView>
       </View>
+      <ContactsUploading />
 
       <AdsList
         ads={ads}

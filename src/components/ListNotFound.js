@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
 import { Icon, Text, Content, Button } from 'native-base';
 
@@ -10,6 +10,8 @@ import Navigation from 'services/Navigation';
 
 import { activeColor } from 'colors';
 
+import NOT_FOUND from 'assets/not-found.gif';
+
 class ListNotFound extends React.PureComponent {
   inviteFriends = () => Navigation.navigate('InviteFriendsScreen');
 
@@ -17,13 +19,11 @@ class ListNotFound extends React.PureComponent {
     const { t, refreshControl, fromFeed } = this.props;
     return (
       <Content contentContainerStyle={styles.notFoundContainer} refreshControl={refreshControl}>
-        <Icon name="ios-sad" style={styles.notFoundIcon} />
+        <Image style={styles.picture} source={NOT_FOUND} />
         <Text style={styles.notFoundText}>{t('listNotFound')}</Text>
         {fromFeed && (
           <Button onPress={this.inviteFriends} style={styles.inviteFriendsButton}>
-            <Icon name="happy-outline" />
             <Text>{t('buttons.listNotfoundInviteFriends')}</Text>
-            <Icon name="happy-outline" />
           </Button>
         )}
       </Content>
@@ -45,5 +45,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  picture: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 200,
+    height: 200,
   },
 });

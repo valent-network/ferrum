@@ -34,7 +34,7 @@ export const getWizardDone = async () => {
 
 export const setWizardDoneValue = async (status) => {
   try {
-    return await AsyncStorage.setItem('@AsyncStorage:wizardDone', status);
+    return await AsyncStorage.setItem('@AsyncStorage:wizardDoneV2', status);
   } catch (error) {
     return false;
   }

@@ -22,11 +22,8 @@ import {
 
 import { onTosPress, random } from 'utils';
 
-import RECARIO_LOGO from 'assets/logo.png';
-
-import FLAG from 'assets/Flag.png';
-import UNION from 'assets/Union.png';
-import ELLIPSE from 'assets/Ellipse.png';
+import UK_FLAG from 'assets/uk-flag.png';
+import PHONE_OTP_GIF from 'assets/phone-otp.gif';
 
 class LoginScreen extends React.Component {
   onInputPhone = (text) => this.props.onInputPhone(text);
@@ -68,50 +65,39 @@ class LoginScreen extends React.Component {
       </Button>
     );
     const codeInput = (
-      <React.Fragment>
-        <H1 style={styles.h1}>{t('login.headers.enterSms')}</H1>
-        <View style={styles.h2Container}>
-          <Text style={styles.h2}>{t('login.headers.smsWasSent')}</Text>
-          <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '').replace(/^\+380/g, '')}</Text>
-        </View>
-        <Item style={styles.codeInput} rounded>
-          <Icon name="ios-key-outline" style={styles.icon} />
-          <Input
-            style={styles.input}
-            placeholder="1234"
-            placeholderTextColor={disabledColor}
-            keyboardType="numeric"
-            textContentType="oneTimeCode"
-            onChangeText={this.onInputCode}
-            maxLength={4}
-            returnKeyType={'done'}
-          />
-        </Item>
-      </React.Fragment>
+      <Item style={styles.codeInput} rounded>
+        <Icon name="ios-key-outline" style={styles.icon} />
+        <Input
+          style={styles.input}
+          placeholder="1234"
+          placeholderTextColor={disabledColor}
+          keyboardType="numeric"
+          textContentType="oneTimeCode"
+          onChangeText={this.onInputCode}
+          maxLength={4}
+          returnKeyType={'done'}
+        />
+      </Item>
     );
     const phoneInput = (
-      <React.Fragment>
-        <H1 style={styles.h1}>{t('login.headers.main')}</H1>
-        <H2 style={styles.h2}>{t('login.headers.secondary')}</H2>
-        <Item rounded style={styles.phoneInput}>
-          <Image source={FLAG} style={styles.flag} />
-          <View style={styles.countryCodeNoteContainer}>
-            <Text style={styles.countryCodeNote}>+380</Text>
-          </View>
-          <TextInputMask
-            type={'custom'}
-            options={this.phoneMaskOptions}
-            placeholder="50 123-45-67"
-            placeholderTextColor={disabledColor}
-            value={phone}
-            includeRawValueInChangeText={true}
-            keyboardType="numeric"
-            onChangeText={this.onChangePhone}
-            style={styles.phoneInputMasked}
-            returnKeyType={'done'}
-          />
-        </Item>
-      </React.Fragment>
+      <Item rounded style={styles.phoneInput}>
+        <Image source={UK_FLAG} style={styles.flag} />
+        <View style={styles.countryCodeNoteContainer}>
+          <Text style={styles.countryCodeNote}>+380</Text>
+        </View>
+        <TextInputMask
+          type={'custom'}
+          options={this.phoneMaskOptions}
+          placeholder="50 123-45-67"
+          placeholderTextColor={disabledColor}
+          value={phone}
+          includeRawValueInChangeText={true}
+          keyboardType="numeric"
+          onChangeText={this.onChangePhone}
+          style={styles.phoneInputMasked}
+          returnKeyType={'done'}
+        />
+      </Item>
     );
     if (isLoading) {
       return (
@@ -124,45 +110,55 @@ class LoginScreen extends React.Component {
     }
 
     return (
-      <View style={styles.wrapperContainer}>
-        <SafeAreaView style={styles.header}>
-          <Image source={RECARIO_LOGO} style={styles.mainLogo} />
-          <Image source={UNION} style={styles.union} />
-          <Image source={ELLIPSE} style={styles.ellipse} />
-        </SafeAreaView>
-        <KeyboardAwareScrollView
-          contentContainerStyle={styles.mainContainer}
-          extraHeight={128}
-          bounces={false}
-          keyboardShouldPersistTaps="always"
-        >
-          <View style={styles.contentContainer}>
-            <View>
-              {step === 1 ? phoneInput : codeInput}
-
-              {step === 1 ? requestButton : signInButton}
+      <KeyboardAwareScrollView extraHeight={128} bounces={false} keyboardShouldPersistTaps="always">
+        <View style={styles.mainContainer}>
+          <SafeAreaView>
+            <View style={styles.headerContainer}>
+              <Image source={PHONE_OTP_GIF} style={{ width: 192, height: 192, alignSelf: 'center' }} />
               {step === 1 && (
-                <Item style={styles.tosContainer}>
-                  <Left>
-                    <View style={styles.tosTextContainer}>
-                      <Text onPress={onTosPress} style={styles.smallFont}>
-                        {t('login.agreeTos')}&nbsp;
-                        <Text style={[styles.activeColor, styles.smallFont]}>{t('login.tos')}</Text>
-                      </Text>
-                    </View>
-                  </Left>
-                  <Right style={styles.switchContainer}>
-                    <Switch
-                      thumbColor={lightColor}
-                      trackColor={trackColor}
-                      ios_backgroundColor={secondaryColor}
-                      onValueChange={this.changeTosAcceptance}
-                      value={this.state.tosAccespted}
-                    />
-                  </Right>
-                </Item>
+                <>
+                  <H1 style={styles.h1}>{t('login.headers.main')}</H1>
+                  <H2 style={styles.h2}>{t('login.headers.secondary')}</H2>
+                </>
+              )}
+
+              {step === 2 && (
+                <>
+                  <H1 style={styles.h1}>{t('login.headers.enterSms')}</H1>
+                  <View style={styles.h2Container}>
+                    <Text style={styles.h2}>{t('login.headers.smsWasSent')}</Text>
+                    <Text style={styles.h2Note}> +380{phone.replace(/[\s-\(\)]/g, '').replace(/^\+380/g, '')}</Text>
+                  </View>
+                </>
               )}
             </View>
+          </SafeAreaView>
+
+          <View style={styles.contentContainer}>
+            {step === 1 ? phoneInput : codeInput}
+
+            {step === 1 ? requestButton : signInButton}
+            {step === 1 && (
+              <Item style={styles.tosContainer}>
+                <Left>
+                  <View style={styles.tosTextContainer}>
+                    <Text onPress={onTosPress} style={styles.smallFont}>
+                      {t('login.agreeTos')}&nbsp;
+                      <Text style={[styles.activeColor, styles.smallFont]}>{t('login.tos')}</Text>
+                    </Text>
+                  </View>
+                </Left>
+                <Right style={styles.switchContainer}>
+                  <Switch
+                    thumbColor={lightColor}
+                    trackColor={trackColor}
+                    ios_backgroundColor={secondaryColor}
+                    onValueChange={this.changeTosAcceptance}
+                    value={this.state.tosAccespted}
+                  />
+                </Right>
+              </Item>
+            )}
             <View style={styles.linksContainer}>
               {step === 2 && (
                 <Text onPress={onReset} style={styles.changePhoneText}>
@@ -177,8 +173,8 @@ class LoginScreen extends React.Component {
               )}
             </View>
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -195,8 +191,15 @@ LoginScreen.propTypes = {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    justifyContent: 'center',
+    marginTop: 0,
+    backgroundColor: primaryColor,
     minHeight: '100%',
+    flex: 1,
+    padding: 16,
+    flexDirection: 'column',
+  },
+  headerContainer: {
+    minHeight: '40%',
   },
   h1: {
     fontWeight: 'bold',
@@ -270,25 +273,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  bottomAbsolute: {
-    paddingTop: 48,
-    color: activeColor,
-    alignSelf: 'center',
-  },
-  contentContainer: {
-    backgroundColor: 'transparent',
-    padding: 24,
-    margin: 0,
-    width: '100%',
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-  },
   icon: {
     color: disabledColor,
   },
   linksContainer: {
     alignItems: 'flex-end',
-    paddingTop: 16,
+    marginTop: 8,
   },
   resendCodeText: { color: activeColor, paddingTop: 24 },
   changePhoneText: { color: activeColor },
@@ -297,18 +287,6 @@ const styles = StyleSheet.create({
   mainLogo: {
     width: 96,
     height: 96,
-  },
-  header: {
-    position: 'absolute',
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    marginTop: 0,
-    backgroundColor: activeColor,
-    height: '20%',
-    width: '100%',
-    borderBottomRightRadius: 50,
-    borderBottomLeftRadius: 0,
   },
   headerText: {
     color: superActiveColor,
@@ -322,17 +300,4 @@ const styles = StyleSheet.create({
   countryCodeNoteContainer: { marginRight: 16 },
   countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
   h2Container: { marginBottom: 8 },
-  union: {
-    position: 'absolute',
-    left: random(100, 200),
-    bottom: 10,
-  },
-  ellipse: {
-    position: 'absolute',
-    top: 40,
-    right: random(100, 200),
-  },
-  wrapperContainer: {
-    backgroundColor: primaryColor,
-  },
 });
