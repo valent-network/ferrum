@@ -19,7 +19,7 @@ export default function BottomTabIcon({ name, tintColor }) {
   let style = tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon;
 
   if (name == 'add-circle-sharp') {
-    style = [style, { marginTop: -24, fontSize: 54 }];
+    style = [style, { marginTop: -6, fontSize: 48 }];
   }
 
   return <Icon name={name} style={style} />;

@@ -163,7 +163,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
       path: 'profile',
       navigationOptions: {
         title: '',
-        tabBarIcon: ({ tintColor }) => <BottomTabIcon name="menu" tintColor={tintColor} />,
+        tabBarIcon: ({ tintColor }) => <BottomTabIcon name="person-circle-outline" tintColor={tintColor} />,
       },
     },
   },

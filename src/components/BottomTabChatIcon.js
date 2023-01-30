@@ -9,7 +9,7 @@ import { activeColor } from 'colors';
 import Navigation from 'services/Navigation';
 
 const BottomTabChatIcon = ({ tintColor, unreadMessagesCount }) => {
-  const icon = <Icon name="chatbubble" style={[styles.activeIcon, { color: tintColor }]} />;
+  const icon = <Icon name="chatbubbles-sharp" style={[styles.activeIcon, { color: tintColor }]} />;
 
   if (unreadMessagesCount === 0) {
     return icon;
