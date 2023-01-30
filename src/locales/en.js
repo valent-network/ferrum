@@ -256,6 +256,7 @@ export default {
   errors: {
     title: 'We are sorry, some error occured :(',
     connectionErrorMessage: 'Internet connection error',
+    connectionErrorSecondMessage: 'Could not connect to the server',
   },
   session: {
     errors: {
