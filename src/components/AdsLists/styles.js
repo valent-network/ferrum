@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { primaryColor, secondaryColor, activeColor, lightColor, superActiveColor } from 'colors';
 
 export default StyleSheet.create({
@@ -6,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: primaryColor,
   },
   header: { backgroundColor: secondaryColor, flexDirection: 'column' },
-  title: { color: lightColor, fontWeight: 'bold' },
+  title: { color: lightColor, fontWeight: 'bold', paddingLeft: (Platform.OS === 'android' ? 8 : 0) },
   segmentButton: { borderColor: activeColor, width: '33.33333%', justifyContent: 'center' },
   tabButton: {
     width: '33.3333%',
