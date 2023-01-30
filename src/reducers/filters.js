@@ -47,6 +47,8 @@ export default function filters(state = initialState, action = {}) {
       };
     case ActionTypes.FILTER_RESET:
       return initialState;
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

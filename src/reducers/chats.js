@@ -63,6 +63,8 @@ export default function chats(state = initialState, action = {}) {
         ...state,
         list: newChatList(state.list, action.chat),
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

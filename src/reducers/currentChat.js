@@ -103,6 +103,8 @@ export default function currentChat(state = initialState, action = {}) {
         id: undefined,
         messages: [],
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

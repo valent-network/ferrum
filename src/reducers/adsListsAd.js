@@ -124,6 +124,8 @@ export default function adsListsAd(state = initialState, action = {}) {
         ...state,
         shouldReset: false,
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

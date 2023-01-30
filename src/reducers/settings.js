@@ -24,6 +24,8 @@ export default function settings(state = initialState, action = {}) {
         ...state,
         currentTabAdsLists: action.tabName,
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

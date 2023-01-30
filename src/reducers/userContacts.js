@@ -90,6 +90,8 @@ export default function userContacts(state = initialState, action = {}) {
         ...state,
         list: state.list.map((c) => (c.id == action.userContactId ? { ...c, is_blocked: action.blocked } : c)),
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

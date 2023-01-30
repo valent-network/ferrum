@@ -56,6 +56,8 @@ export default function user(state = initialState, action = {}) {
         ...state,
         unreadMessagesCount: action.count,
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

@@ -9,6 +9,8 @@ export default function error(state = {}, action = {}) {
         status: action.error.response && action.error.response.status,
         statusText: action.error.response && action.error.response.statusText,
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return {};
     default:
       return {};
   }

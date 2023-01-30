@@ -3,13 +3,13 @@ import equal from 'react-fast-compare';
 
 import { mergeArraysKeepNew } from 'utils';
 
-const initialSetting = {
+const initialState = {
   ads: [],
   isLoading: true,
   modalOpened: false,
 };
 
-export default function feed(state = initialSetting, action = {}) {
+export default function feed(state = initialState, action = {}) {
   switch (action.type) {
     case ActionTypes.GET_FEED_STARTED:
       return {
@@ -96,6 +96,8 @@ export default function feed(state = initialSetting, action = {}) {
         ...state,
         ads: state.ads.map((ad) => (ad.id == action.ad.id ? action.ad : ad)),
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

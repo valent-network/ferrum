@@ -3,12 +3,12 @@ import equal from 'react-fast-compare';
 
 import { mergeArraysKeepNew } from 'utils';
 
-const initialSetting = {
+const initialState = {
   list: [],
   isLoading: true,
 };
 
-export default function visitedAds(state = initialSetting, action = {}) {
+export default function visitedAds(state = initialState, action = {}) {
   switch (action.type) {
     case ActionTypes.GET_VISITED_ADS_STARTED:
       return {
@@ -90,6 +90,8 @@ export default function visitedAds(state = initialSetting, action = {}) {
         ...state,
         list: state.list.map((ad) => (ad.id == action.ad.id ? action.ad : ad)),
       };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }
