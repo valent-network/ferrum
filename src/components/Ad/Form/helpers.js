@@ -25,9 +25,10 @@ export function onlyNumeric(callback) {
 }
 
 export function defaultPickerPropsFor(param, errors) {
+  const platformStyle = Platform.OS === 'android' ? { width: undefined, color: activeColor } : { width: undefined }
   return {
     mode: 'dropdown',
-    style: { width: undefined, color: activeColor },
+    style: platformStyle,
     textStyle: styles.pickerText,
     placeholderStyle: errors ? [styles.pickerPlaceholder, { color: errorColor }] : styles.pickerPlaceholder,
     headerStyle: styles.pickerHeader,
