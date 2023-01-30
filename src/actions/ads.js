@@ -94,7 +94,7 @@ export function updateAd(adParams, resetForm) {
     return API.updateAd(adParams)
       .then((payload) => {
         dispatch({ type: ActionTypes.UPDATE_AD_SUCCESS, ad: payload.data });
-        Navigation.navigate('AdsLists', { id: payload.data.id });
+        Navigation.navigate('Ad', { id: payload.data.id });
         resetForm();
       })
       .catch((error) => {
