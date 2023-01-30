@@ -225,6 +225,7 @@ const AdForm = ({
         collection={adImages}
         updateCollection={updateCollection}
         makeMain={makeMainImage}
+        key={`ad-image-${image.position}`}
       />
     );
   };
