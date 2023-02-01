@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Platform, Image, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller, useWatch } from 'react-hook-form';
-import { Container, Content, View, Form, Icon, Button, Text, Left, Header, Spinner } from 'native-base';
+import { Container, Content, View, Form, Icon, Button, Text, Left, Spinner } from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import styles from './Styles';
-import { defaultPickerPropsFor, handleFocusOnError, ResetPicker, rules } from './helpers';
+import { defaultPickerPropsFor, handleFocusOnError, ResetPicker, rules, AD_IMAGES_PICKER_OPTIONS } from './helpers';
 
 import TextOrNumberInput from './TextOrNumberInput';
 import Textarea from './Textarea';
@@ -17,7 +17,7 @@ import AdImagePickerItem from './AdImagePickerItem';
 import { spinnerColor, activeColor, lightColor } from 'colors';
 import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
 
-import { reposition, AD_IMAGES_PICKER_OPTIONS } from 'utils';
+import { reposition } from 'utils';
 
 const AdForm = ({
   defaultValues,

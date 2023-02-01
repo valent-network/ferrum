@@ -42,7 +42,7 @@ class UserContactsScreen extends React.PureComponent {
       <Container>
         <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar>
           <Icon
-            name="chevron-back-outline"
+            name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
             style={styles.backButton}
             onPress={() => Navigation.navigate('ProfileScreen')}
           />
@@ -100,13 +100,14 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
     borderBottomWidth: 0,
     padding: 0,
-    paddingLeft: 0,
+    paddingLeft: Platform.OS === 'android' ? 16 : 0,
     margin: 0,
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
     alignItems: 'center',
   },
   searchBar: {
     borderRadius: 16,
+    marginLeft: 8,
     backgroundColor: primaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
     alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',

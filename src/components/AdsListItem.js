@@ -16,6 +16,8 @@ import {
   notesColor,
 } from 'colors';
 
+import ImageGallery from 'components/Ad/ImageGallery';
+
 import API from 'services/API';
 
 class AdsListItem extends React.PureComponent {
@@ -55,42 +57,42 @@ class AdsListItem extends React.PureComponent {
     }
 
     return (
-      <React.Fragment>
-        <TouchableOpacity activeOpacity={1} onPress={this.onPress}>
-          <View style={styles.mainContainer}>
-            <View style={styles.imagePreviewContainer}>
-              <View style={styles.detailsContainer}>
-                <View style={styles.detailsRow}>
-                  <Text style={styles.title}>{title}</Text>
-                  {ad.deleted && (
-                    <View style={styles.deletedContainer}>
-                      <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
-                    </View>
-                  )}
-                </View>
-                <View style={styles.detailsRow}>
-                  <Text style={styles.price}>
-                    {price} {category_currency}
-                  </Text>
-                  <Text style={styles.option}>{ad.region}</Text>
-                </View>
-                <Text style={styles.option}>{short_description}</Text>
-
-                <Text style={styles.option}>{knowsText}</Text>
-                <View style={styles.actionsContainer}>
-                  <Icon
-                    name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
-                    onPress={this.favAction}
-                    style={[{}, ad.favorite ? { color: activeColor } : { color: lightColor }]}
-                  />
-                </View>
+      <View style={styles.mainContainer}>
+        <View style={styles.imagePreviewContainer}>
+          <View style={styles.detailsContainer}>
+            <TouchableOpacity activeOpacity={1} onPress={this.onPress.bind(this)}>
+              <View style={styles.detailsRow}>
+                <Text style={styles.title}>{title}</Text>
+                {ad.deleted && (
+                  <View style={styles.deletedContainer}>
+                    <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
+                  </View>
+                )}
               </View>
-              {image && <Image style={styles.imagePreview} source={{ uri: image.url }} />}
-              {!image && <View style={styles.imagePlaceholder}></View>}
-            </View>
+              <View style={styles.detailsRow}>
+                <Text style={styles.price}>
+                  {price} {category_currency}
+                </Text>
+              </View>
+              <Text style={styles.option}>{knowsText}</Text>
+              <Text style={styles.option}>{short_description}</Text>
+
+              <View style={styles.actionsContainer}>
+                <Icon
+                  name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
+                  onPress={this.favAction}
+                  style={[{}, ad.favorite ? { color: activeColor } : { color: lightColor }]}
+                />
+                <Text style={styles.notes}>
+                  {ad.region}, {ad.updated_at}
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-      </React.Fragment>
+          <ImageGallery ad={ad} onPress={this.onPress.bind(this)} imageStyle={{ height: 500 }} withModal={false} />
+          {!image && <View style={styles.imagePlaceholder}></View>}
+        </View>
+      </View>
     );
   }
 }
@@ -128,11 +130,15 @@ const styles = StyleSheet.create({
     color: disabledColor,
     fontSize: 14,
   },
+  notes: {
+    color: disabledColor,
+    fontSize: 14,
+  },
   price: {
     color: priceColor,
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 12,
+    marginBottom: 8,
   },
   mainContainer: {
     height: 500,
@@ -142,10 +148,10 @@ const styles = StyleSheet.create({
     backgroundColor: primaryColor,
   },
   actionsContainer: {
-    backgroundColor: 'transparent',
     color: primaryColor,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   deletedContainer: {
     backgroundColor: secondaryColor,

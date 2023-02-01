@@ -82,3 +82,13 @@ export const rules = {
   region: {},
   city_id: {},
 };
+
+export const AD_IMAGES_PICKER_OPTIONS = {
+  includeBase64: false,
+  compressImageQuality: 0.8,
+  writeTempFile: true,
+  mediaType: 'photo',
+  forceJpg: true,
+  multiple: true,
+  maxFiles: 20,
+};

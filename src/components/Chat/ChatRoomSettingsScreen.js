@@ -66,7 +66,7 @@ function ChatRoomsSettingsScreen({
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
   const toDisplayMembers = friendsAndMembers.filter((f) => f.user_id && membersIds.includes(f.user_id));
   const toDisplayFriends = friendsAndMembers.filter((f) => !membersIds.includes(f.user_id));
-  const imageSource = { uri: chat.photo };
+  const imageSource = { uri: chat.photo, cache: 'force-cache' };
   let toDisplay = toDisplayFriends.length
     ? [
         { separator: t('chat.settings.members') },

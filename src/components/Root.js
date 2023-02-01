@@ -51,7 +51,12 @@ class Root extends React.Component {
 
   handleDeepLink(e) {
     const route = e.url.replace(/.*?:\/\//g, '');
-    // console.warn(route);
+
+    if (/^visited\/ads\/\d+\/$/i.test(route)) {
+      const adId = route.replace(/[^\d]/gi, '');
+      Navigation.navigate('AdsLists');
+      Navigation.push('Ad', { id: adId });
+    }
   }
 
   pushNotificationRouter = (notification) => {
@@ -217,7 +222,7 @@ class Root extends React.Component {
     }
 
     if (accessToken) {
-      return <App uriPrefix="recarioapp://" ref={this.appRef} />;
+      return <App uriPrefix="recarioapp://" enableURLHandling={false} ref={this.appRef} />;
     } else {
       return wizardDone ? <Login /> : <Wizard />;
     }

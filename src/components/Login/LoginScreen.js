@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, Linking, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Switch, Image, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text, Input, Button, Container, Content, Item, Icon, Spinner, View, Left, Right, H1, H2 } from 'native-base';
 
@@ -18,6 +18,7 @@ import {
   secondaryColor,
   spinnerColor,
   superActiveColor,
+  notesColor,
 } from 'colors';
 
 import { onTosPress, random } from 'utils';
@@ -32,7 +33,7 @@ class LoginScreen extends React.Component {
   onSignIn = () => this.props.onSignIn(this.props.phone, this.props.code);
   changeTosAcceptance = () => this.setState({ tosAccespted: !this.state.tosAccespted });
   onChangePhone = (maskedText, rawText) => this.onInputPhone(maskedText);
-  phoneMaskOptions = { mask: '99 999-99-99' };
+  phoneMaskOptions = { mask: '(99)999-99-99' };
 
   constructor(props) {
     super(props);
@@ -41,7 +42,7 @@ class LoginScreen extends React.Component {
 
   render() {
     const { t, phone, code, step, onRequest, onSignIn, onReset, isLoading } = this.props;
-    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 12;
+    const step1IsDisabled = !this.state.tosAccespted || phone.length !== 13;
     const step2IsDisabled = code.length !== 4;
 
     const requestButton = (
@@ -70,7 +71,7 @@ class LoginScreen extends React.Component {
         <Input
           style={styles.input}
           placeholder="1234"
-          placeholderTextColor={disabledColor}
+          placeholderTextColor={notesColor}
           keyboardType="numeric"
           textContentType="oneTimeCode"
           onChangeText={this.onInputCode}
@@ -81,6 +82,7 @@ class LoginScreen extends React.Component {
     );
     const phoneInput = (
       <Item rounded style={styles.phoneInput}>
+        <Icon name="call-outline" style={styles.icon} />
         <Image source={UK_FLAG} style={styles.flag} />
         <View style={styles.countryCodeNoteContainer}>
           <Text style={styles.countryCodeNote}>+380</Text>
@@ -88,8 +90,8 @@ class LoginScreen extends React.Component {
         <TextInputMask
           type={'custom'}
           options={this.phoneMaskOptions}
-          placeholder="50 123-45-67"
-          placeholderTextColor={disabledColor}
+          placeholder="(50)123-45-67"
+          placeholderTextColor={notesColor}
           value={phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
@@ -235,9 +237,11 @@ const styles = StyleSheet.create({
   },
   codeInput: {
     borderRadius: 8,
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    borderColor: lightColor,
+    backgroundColor: secondaryColor,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     height: 52,
   },
   helperActions: {
@@ -252,8 +256,11 @@ const styles = StyleSheet.create({
   activeColor: { color: activeColor },
   phoneInput: {
     borderRadius: 8,
-    backgroundColor: 'transparent',
-    borderColor: lightColor,
+    backgroundColor: secondaryColor,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
     height: 52,
   },
   phoneInputMasked: {
@@ -274,14 +281,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   icon: {
-    color: disabledColor,
+    color: notesColor,
   },
   linksContainer: {
     alignItems: 'flex-end',
     marginTop: 8,
   },
-  resendCodeText: { color: activeColor, paddingTop: 24 },
-  changePhoneText: { color: activeColor },
+  resendCodeText: { color: activeColor, marginTop: 24 },
+  changePhoneText: { color: activeColor, marginTop: 16 },
   disabledColor: { color: disabledColor },
   label: { marginBottom: 8 },
   mainLogo: {
@@ -297,7 +304,7 @@ const styles = StyleSheet.create({
   },
   flag: { marginLeft: 16 },
   h2Note: { color: lightColor, fontWeight: 'bold' },
-  countryCodeNoteContainer: { marginRight: 16 },
+  countryCodeNoteContainer: { marginRight: 0 },
   countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
   h2Container: { marginBottom: 8 },
 });

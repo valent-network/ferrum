@@ -8,6 +8,7 @@ import {
   lightColor,
   disabledColor,
   notesColor,
+  superActiveColor,
 } from 'colors';
 
 export const styles = StyleSheet.create({
@@ -122,12 +123,11 @@ export const styles = StyleSheet.create({
     opacity: 0.75,
   },
   imageGalleryBadgesContainer: {
-    width: '100%',
-    height: 30,
-    marginTop: -30,
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 12,
+    position: 'absolute',
+    right: 8,
+    top: 8,
+    opacity: 1,
+    zIndex: 1000,
   },
   imageGalleryModalContainer: {
     flex: 1,
@@ -135,12 +135,12 @@ export const styles = StyleSheet.create({
     backgroundColor: primaryColor,
   },
   imageGalleryBadge: {
-    backgroundColor: lightColor,
     flexDirection: 'row',
     alignSelf: 'flex-end',
     borderColor: lightColor,
     borderWidth: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: notesColor,
+    opacity: 0.75,
   },
   imageGalleryBadgeIcon: {
     fontSize: 15,

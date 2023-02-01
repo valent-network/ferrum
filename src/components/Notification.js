@@ -75,7 +75,7 @@ export default class Notification extends React.PureComponent {
       <FlingGestureHandler direction={Directions.UP} onHandlerStateChange={this.hide}>
         <Animated.View style={[styles.notificationWrapper, { top: this.animatedPosition }]}>
           <TouchableOpacity activeOpacity={1} onPress={this.onBodyPress} style={styles.notificationBody}>
-            {message.photo && <Thumbnail style={styles.messagePhoto} source={{ uri: message.photo }} />}
+            {message.photo && <Thumbnail style={styles.messagePhoto} source={{ uri: message.photo, cache: 'force-cache' }} />}
             <Text numberOfLines={3} style={styles.notificationBodyText}>
               {message.title && (
                 <Text style={styles.lightColor}>

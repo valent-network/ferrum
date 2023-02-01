@@ -67,7 +67,7 @@ const FiltersModal = ({
   const close = <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />;
 
   return (
-    <Modal animationType="fade" visible={modalVisible}>
+    <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.modalControlsContainer}>
           <H1 style={styles.filtersHeader}>{t('feed.filters.headers.main')}</H1>

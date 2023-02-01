@@ -16,7 +16,7 @@ class OptionsList extends React.PureComponent {
       <View style={styles.mainContainer}>
         {options &&
           Object.keys(options).map((opt, index) => (
-            <Text key={index} style={styles.optionContainer}>
+            <Text selectable key={index} style={styles.optionContainer}>
               {options[opt][0]}: {options[opt][1]}
             </Text>
           ))}

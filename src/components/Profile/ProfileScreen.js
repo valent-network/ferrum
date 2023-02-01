@@ -267,7 +267,7 @@ class ProfileScreen extends React.PureComponent {
                       <Text>Українська / English</Text>
                     </Left>
                     <Right>
-                      <Icon name="chevron-forward-outline" />
+                      <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
                     </Right>
                   </ListItem>
                 )}
@@ -282,7 +282,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.friends')}</Text>
                   </Left>
                   <Right>
-                    <Icon name="chevron-forward-outline" />
+                    <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
                   </Right>
                 </ListItem>
                 <ListItem
@@ -296,7 +296,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.inviteFriends')}</Text>
                   </Left>
                   <Right>
-                    <Icon name="chevron-forward-outline" />
+                    <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>{t('profile.inviteFriendsNote')}</Text>

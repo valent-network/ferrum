@@ -12,6 +12,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     height: 48,
     paddingHorizontal: 16,
+    borderRadius: 16,
   },
   closeIcon: {
     color: lightColor,
@@ -72,7 +73,10 @@ export default StyleSheet.create({
   },
   safeArea: {
     backgroundColor: primaryColor,
-    minHeight: '100%',
+    height: '95%',
+    marginTop: 'auto',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
   },
   submitButtonWrapper: {
     position: 'absolute',

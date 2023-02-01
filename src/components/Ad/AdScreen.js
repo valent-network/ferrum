@@ -116,11 +116,14 @@ class AdScreen extends React.PureComponent {
     }
 
     return (
-      <Container style={styles.mainContainer}>
+      <Container>
         <View style={styles.headerBackground}>
           <Header noShadow={true} iosBarStyle="light-content" style={styles.header}>
             <Left>
-              <Icon name="chevron-back-outline" onPress={Navigation.popToTop} />
+              <Icon
+                name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
+                onPress={Navigation.popToTop}
+              />
             </Left>
             <Right style={styles.actionButtonsContainer}>
               <Icon onPress={this.shareAction} name="share-outline" />
@@ -133,7 +136,12 @@ class AdScreen extends React.PureComponent {
           </Header>
         </View>
         <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
-          <ImageGallery ad={ad} />
+          <ImageGallery
+            ad={ad}
+            imageStyle={{ height: 350, opacity: 0.75 }}
+            badgeStyle={{ right: 8, top: 312, position: 'absolute' }}
+            withModal={true}
+          />
           {ad.images.length === 0 && <View style={styles.imagePlaceholder}></View>}
           <View style={styles.contentContainer}>
             {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}
@@ -188,7 +196,9 @@ class AdScreen extends React.PureComponent {
             {Object.keys(ad.options).length > 0 && <OptionsList ad={ad} />}
 
             <View style={styles.descriptionContainer}>
-              <Text style={styles.descriptionText}>{ad.description}</Text>
+              <Text selectable style={styles.descriptionText}>
+                {ad.description}
+              </Text>
             </View>
           </View>
         </ScrollView>

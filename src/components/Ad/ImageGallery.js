@@ -18,10 +18,12 @@ export default class ImageGallery extends React.Component {
     this.state = { imagesFullscreenOpened: false, currentImageIndex: 0 };
   }
 
-  changeImagesFullscreenOpened = () => {
-    this.setState({
-      imagesFullscreenOpened: !this.state.imagesFullscreenOpened,
-    });
+  handleOnPress = () => {
+    this.props.withModal
+      ? this.setState({
+          imagesFullscreenOpened: !this.state.imagesFullscreenOpened,
+        })
+      : this.props.onPress();
   };
 
   imageMapper = (image) => ({ url: image.url });
@@ -34,8 +36,8 @@ export default class ImageGallery extends React.Component {
     const url = item.url;
 
     return (
-      <TouchableOpacity activeOpacity={1} onPress={this.changeImagesFullscreenOpened}>
-        <Image style={styles.image} source={{ uri: url }} onPress={this.changeImagesFullscreenOpened} />
+      <TouchableOpacity activeOpacity={1} onPress={this.handleOnPress}>
+        <Image style={this.props.imageStyle} source={{ uri: url, cache: 'force-cache' }} />
       </TouchableOpacity>
     );
   };
@@ -46,9 +48,10 @@ export default class ImageGallery extends React.Component {
 
   render() {
     const { images } = this.props.ad;
+    const { withModal } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Carousel
           data={images}
           renderItem={this._renderItem}
@@ -57,39 +60,40 @@ export default class ImageGallery extends React.Component {
           ref={this.setCarouselRef}
           onSnapToItem={this.setCurrentImageIndex}
         />
-
-        <View style={styles.imageGalleryBadgesContainer}>
+        <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
           <Badge style={styles.imageGalleryBadge}>
             <Icon name="images-outline" style={styles.imageGalleryBadgeIcon} />
-            <Text style={styles.ImageGalleryBadgeText}>
-              &nbsp;{this.state.currentImageIndex + 1} / {images.length}
+            <Text style={styles.imageGalleryBadgeText}>
+              &nbsp;{this.state.currentImageIndex + 1} / {this.props.ad.images.length}
             </Text>
           </Badge>
         </View>
 
-        <Modal
-          visible={this.state.imagesFullscreenOpened}
-          transparent={true}
-          animationType="fade"
-          onRequestClose={this.changeImagesFullscreenOpened}
-        >
-          <View style={styles.imageGalleryModalContainer}>
-            <ImageViewer
-              enableSwipeDown={true}
-              enablePreload={true}
-              saveToLocalByLongPress={false}
-              maxOverflow={0}
-              flipThreshold={1}
-              index={this._carousel?.currentIndex}
-              onCancel={this.changeImagesFullscreenOpened}
-              onChange={this.syncCarousel}
-              pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
-              imageUrls={images.map(this.imageMapper)}
-              backgroundColor={primaryColor}
-            />
-          </View>
-        </Modal>
-      </React.Fragment>
+        {withModal && (
+          <Modal
+            visible={this.state.imagesFullscreenOpened}
+            transparent={true}
+            animationType="fade"
+            onRequestClose={this.handleOnPress}
+          >
+            <View style={styles.imageGalleryModalContainer}>
+              <ImageViewer
+                enableSwipeDown={true}
+                enablePreload={true}
+                saveToLocalByLongPress={false}
+                maxOverflow={0}
+                flipThreshold={1}
+                index={this._carousel?.currentIndex}
+                onCancel={this.handleOnPress}
+                onChange={this.syncCarousel}
+                pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
+                imageUrls={images.map(this.imageMapper)}
+                backgroundColor={primaryColor}
+              />
+            </View>
+          </Modal>
+        )}
+      </>
     );
   }
 }

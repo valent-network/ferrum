@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import { Icon } from 'native-base';
 
+import { View, Platform } from 'react-native';
+
+import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
+
 import AdForm from './Form/AdForm';
 
 import { createAd } from 'actions/ads';
@@ -13,16 +17,22 @@ import { secondaryColor, lightColor } from 'colors';
 
 import i18n from 'services/i18n';
 
+import Navigation from 'services/Navigation';
+
 const NewAdScreen = ({ onSubmit, citiesByRegion, categories, isLoading }) => {
   return (
-    <AdForm
-      citiesByRegion={citiesByRegion}
-      categories={categories}
-      onSubmit={onSubmit}
-      isLoading={isLoading}
-      newRecord={true}
-      defaultValues={defaultValues}
-    />
+    <FlingGestureHandler direction={Directions.RIGHT} onHandlerStateChange={() => Navigation.navigate('FeedScreen')}>
+      <View style={{ minHeight: '100%' }}>
+        <AdForm
+          citiesByRegion={citiesByRegion}
+          categories={categories}
+          onSubmit={onSubmit}
+          isLoading={isLoading}
+          newRecord={true}
+          defaultValues={defaultValues}
+        />
+      </View>
+    </FlingGestureHandler>
   );
 };
 
@@ -36,7 +46,13 @@ NewAdScreen.navigationOptions = ({ navigation }) => {
       borderBottomWidth: 0,
     },
     headerTintColor: lightColor,
-    headerLeft: () => <Icon name="chevron-back-outline" onPress={goBack} />,
+    headerLeft: () => (
+      <Icon
+        style={{ marginLeft: Platform.OS === 'android' ? 16 : 0 }}
+        name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
+        onPress={goBack}
+      />
+    ),
     title: i18n.t('nav.titles.createAd'),
   };
 };
