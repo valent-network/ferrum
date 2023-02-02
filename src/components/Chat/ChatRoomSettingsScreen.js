@@ -42,7 +42,7 @@ function ChatRoomsSettingsScreen({
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
   const onShow = () => {
-    navigation.popToTop();
+    // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
     navigation.navigate('Ad', { id: chat.ad_id });
   };
   const onLeave = () => {
