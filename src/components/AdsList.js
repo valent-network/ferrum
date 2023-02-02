@@ -19,7 +19,7 @@ class AdsList extends React.PureComponent {
   _keyExtractor = (item) => item.id.toString();
 
   _onEndReached = async () => {
-    this.props.loadMoreAds[this.props.currentTab]();
+    this.props.fromFeed ? this.props.loadMoreFeedAds() : this.props.loadMoreAds[this.props.currentTab]();
   };
 
   // https://github.com/facebook/react-native/issues/26610
@@ -30,19 +30,12 @@ class AdsList extends React.PureComponent {
   );
 
   render() {
-    const { ads, isLoading, fromFeed } = this.props;
+    const { ads, isLoading, fromFeed, onRefreshFeed, onRefresh, currentTab } = this.props;
+    const onRefreshTab = fromFeed ? onRefreshFeed : onRefresh[currentTab];
     const refreshControl = isLoading ? (
-      <RefreshControl
-        refreshing={true}
-        tintColor={lightColor}
-        onRefresh={this.props.onRefresh[this.props.currentTab]}
-      />
+      <RefreshControl refreshing={true} tintColor={lightColor} onRefresh={onRefreshTab} />
     ) : (
-      <RefreshControl
-        refreshing={false}
-        tintColor={lightColor}
-        onRefresh={this.props.onRefresh[this.props.currentTab]}
-      />
+      <RefreshControl refreshing={false} tintColor={lightColor} onRefresh={onRefreshTab} />
     );
 
     if (ads.length === 0) {

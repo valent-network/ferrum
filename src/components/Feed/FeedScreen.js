@@ -51,8 +51,8 @@ const FeedScreen = ({
       <AdsList
         ads={ads}
         isLoading={isLoading}
-        onRefresh={onRefresh}
-        loadMoreAds={loadMoreAds}
+        onRefreshFeed={onRefresh}
+        loadMoreFeedAds={loadMoreAds}
         likeAd={likeAd}
         unlikeAd={unlikeAd}
         onAdOpened={onAdOpened}
