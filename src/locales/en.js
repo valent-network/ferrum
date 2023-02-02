@@ -34,7 +34,7 @@ export default {
     permissionBoxSubmit: 'Grant',
     contactsProcessingText: 'Processing contacts book...',
     search: {
-      placeholder: 'BMW X6 2016...',
+      placeholder: 'Title',
     },
     filters: {
       headers: {
@@ -139,10 +139,10 @@ export default {
       setMyName: 'Save',
     },
     placeholders: {
-      introduceFriend: 'Introduce your friend...',
-      yourName: 'Your name...',
-      message: 'Message...',
-      loadMore: 'Load more...',
+      introduceFriend: "Your friendʼs name for others",
+      yourName: 'Your name for others',
+      message: 'Message',
+      loadMore: 'Load more',
     },
     system: {
       init: 'asked about this ad',
@@ -174,7 +174,7 @@ export default {
       unblock: 'Unblock',
     },
     placeholders: {
-      userContactsSearch: 'Search...',
+      userContactsSearch: 'Name',
     },
     labels: {
       name: 'Name',

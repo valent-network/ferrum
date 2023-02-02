@@ -34,7 +34,7 @@ export default {
     permissionBoxSubmit: 'Надати дозвіл',
     contactsProcessingText: 'Контактна книга обробляється...',
     search: {
-      placeholder: 'BMW X6 2016...',
+      placeholder: 'Назва оголошення',
     },
     filters: {
       headers: {
@@ -139,10 +139,10 @@ export default {
       setMyName: 'Зберегти',
     },
     placeholders: {
-      introduceFriend: 'Представити друга...',
-      yourName: "Ваше ім'я...",
-      message: 'Повідомлення...',
-      loadMore: 'Завантажити ще...',
+      introduceFriend: 'Імʼя друга для інших',
+      yourName: "Ваше ім'я для інших",
+      message: 'Повідомлення',
+      loadMore: 'Завантажити ще',
     },
     system: {
       init: 'цікавиться цим оголошенням',
@@ -174,7 +174,7 @@ export default {
       unblock: 'Розблокувати',
     },
     placeholders: {
-      userContactsSearch: 'Пошук...',
+      userContactsSearch: 'Імʼя чи назва контакту',
     },
     labels: {
       name: "Ім'я",
