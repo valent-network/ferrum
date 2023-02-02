@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
     padding: 16,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
