@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     marginVertical: 8,
     backgroundColor: secondaryColor,
     borderRadius: 4,
-    width: '100%',
+    minWidth: '100%',
     justifyContent: 'center',
   },
   actionText: {
