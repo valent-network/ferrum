@@ -7,7 +7,7 @@ import { Text, ListItem, Left, Right, Body, Icon, ActionSheet } from 'native-bas
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor, warningColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 class UserContactsListItem extends React.PureComponent {

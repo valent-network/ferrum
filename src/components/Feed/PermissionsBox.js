@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color: activeColor,
     fontWeight: 'bold',
   },
-  mainText: { fontSize: 13, paddingLeft: 96 },
+  mainText: { fontSize: 13, paddingLeft: 96, color: secondaryColor },
   picture: {
     position: 'absolute',
     left: 0,

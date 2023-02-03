@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { lightColor, spinnerColor, secondaryColor } from 'colors';
+import { simpleColor, spinnerColor, secondaryColor } from 'colors';
 
 import { getChatRooms } from 'actions/chat';
 
@@ -23,7 +23,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset, current
 
   const renderItem = ({ item, index }) => <ChatRoomListItem chat={item} currentUser={currentUser} />;
 
-  const refreshControl = <RefreshControl refreshing={isLoading} tintColor={lightColor} onRefresh={onEndReached} />;
+  const refreshControl = <RefreshControl refreshing={isLoading} tintColor={spinnerColor} onRefresh={onEndReached} />;
 
   if (chats.length === 0) {
     return isLoading ? (
@@ -69,8 +69,8 @@ function mapDispatchToProps(dispatch) {
 ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
   return {
     headerShown: true,
-    headerTitleStyle: { color: lightColor },
-    headerTintColor: lightColor,
+    headerTitleStyle: { color: simpleColor },
+    headerTintColor: simpleColor,
     headerBackTitleVisible: false,
     headerStyle: {
       backgroundColor: secondaryColor,

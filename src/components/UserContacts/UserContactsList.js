@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, primaryColor, lightColor, spinnerColor } from 'colors';
+import { activeColor, primaryColor, simpleColor, spinnerColor, secondaryColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 import ListNotFound from 'components/ListNotFound';
@@ -14,8 +14,8 @@ class UserContactsList extends React.PureComponent {
   onEndReached = async () => this.props.loadMoreUserContacts();
 
   onRefresh = this.props.onRefresh;
-  refreshControlLoading = (<RefreshControl refreshing={true} tintColor={lightColor} onRefresh={this.onRefresh} />);
-  refreshControlStable = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.onRefresh} />);
+  refreshControlLoading = (<RefreshControl refreshing={true} tintColor={spinnerColor} onRefresh={this.onRefresh} />);
+  refreshControlStable = (<RefreshControl refreshing={false} tintColor={spinnerColor} onRefresh={this.onRefresh} />);
 
   render() {
     const { userContacts, isLoading, renderItem } = this.props;
@@ -46,7 +46,7 @@ UserContactsList.propTypes = {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     borderWidth: 0,
   },
 });

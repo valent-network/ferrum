@@ -8,7 +8,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, secondaryColor, disabledColor, notesColor } from 'colors';
+import { activeColor, secondaryColor, disabledColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {

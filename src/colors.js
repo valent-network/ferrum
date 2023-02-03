@@ -1,33 +1,19 @@
 import { StyleSheet } from 'react-native';
 
+export const primaryColor = '#fff';
+export const secondaryColor = '#F7F7F7';
+export const simpleColor = '#435465';
 export const activeColor = '#0057B8';
-
 export const superActiveColor = '#FFDD00';
-
-export const primaryColor = '#000';
-
-export const secondaryColor = '#121212';
-
-export const spinnerColor = '#c9c9c9';
-
-//
-
-export const lightColor = '#c9c9c9';
-
-export const disabledColor = 'rgba(255,255,255,0.5)';
-
-export const notesColor = '#333';
-
-//
-
-export const warningColor = '#d43';
-
 export const priceColor = '#85bb65';
 
-export const deletedColor = '#f11';
+//
 
-export const errorColor = '#f11';
+export const spinnerColor = activeColor;
+export const disabledColor = 'rgba(128,128,128,0.75)';
+export const deletedColor = '#d43';
+export const errorColor = '#d43';
 
 //
 
-export const trackColor = { true: activeColor, false: secondaryColor };
+export const trackColor = { true: superActiveColor, false: secondaryColor };

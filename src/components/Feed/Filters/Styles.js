@@ -1,5 +1,13 @@
 import { StyleSheet, Platform } from 'react-native';
-import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secondaryColor } from 'colors';
+import {
+  activeColor,
+  trackColor,
+  primaryColor,
+  simpleColor,
+  disabledColor,
+  secondaryColor,
+  superActiveColor,
+} from 'colors';
 
 export default StyleSheet.create({
   modalContainer: {
@@ -14,13 +22,13 @@ export default StyleSheet.create({
     borderRadius: 16,
   },
   closeIcon: {
-    color: lightColor,
+    color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',
     height: 48,
   },
   resetControl: {
-    color: lightColor,
+    color: simpleColor,
     alignSelf: 'center',
     fontSize: 14,
   },
@@ -44,10 +52,13 @@ export default StyleSheet.create({
     backgroundColor: secondaryColor,
   },
   filterBoxText: {
-    color: lightColor,
+    color: simpleColor,
+  },
+  activeFilterBoxText: {
+    color: secondaryColor,
   },
   activeFilterBox: {
-    borderColor: lightColor,
+    borderColor: simpleColor,
     borderWidth: 1,
     borderRadius: 2,
     marginRight: 12,
@@ -68,7 +79,11 @@ export default StyleSheet.create({
   },
   filterItem: {
     fontSize: 18,
-    color: lightColor,
+    color: simpleColor,
+  },
+  activeFilterItem: {
+    fontSize: 18,
+    color: secondaryColor,
   },
   safeArea: {
     backgroundColor: primaryColor,
@@ -103,7 +118,7 @@ export default StyleSheet.create({
     paddingBottom: 96,
   },
   inputTextColor: {
-    color: lightColor,
+    color: simpleColor,
   },
   searchBarInput: {
     fontSize: 14,

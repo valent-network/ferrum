@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './styles';
 
-import { secondaryColor, lightColor, activeColor } from 'colors';
+import { secondaryColor, simpleColor, activeColor } from 'colors';
 
 export default function Tabs({ currentTab, setCurrentTab }) {
   const { t } = useTranslation();
@@ -17,14 +17,14 @@ export default function Tabs({ currentTab, setCurrentTab }) {
         active={currentTab == 'visitedAds'}
         first
       >
-        <Icon style={{ color: currentTab === 'visitedAds' ? activeColor : lightColor }} name="eye-outline" />
+        <Icon style={{ color: currentTab === 'visitedAds' ? activeColor : simpleColor }} name="eye-outline" />
       </Button>
       <Button
         onPress={() => setCurrentTab('favoriteAds')}
         style={currentTab == 'favoriteAds' ? styles.activeTabButton : styles.tabButton}
         active={currentTab == 'favoriteAds'}
       >
-        <Icon style={{ color: currentTab === 'favoriteAds' ? activeColor : lightColor }} name="heart-circle-outline" />
+        <Icon style={{ color: currentTab === 'favoriteAds' ? activeColor : simpleColor }} name="heart-circle-outline" />
       </Button>
       <Button
         onPress={() => setCurrentTab('myAds')}
@@ -32,7 +32,7 @@ export default function Tabs({ currentTab, setCurrentTab }) {
         active={currentTab == 'myAds'}
         last
       >
-        <Icon style={{ color: currentTab === 'myAds' ? activeColor : lightColor }} name="cart-outline" />
+        <Icon style={{ color: currentTab === 'myAds' ? activeColor : simpleColor }} name="cart-outline" />
       </Button>
     </View>
   );

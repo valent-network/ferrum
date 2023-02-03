@@ -29,7 +29,7 @@ import OptionsList from './OptionsList';
 import Navigation from 'services/Navigation';
 
 import { styles } from './Styles';
-import { activeColor, lightColor, spinnerColor } from 'colors';
+import { activeColor, simpleColor, spinnerColor, secondaryColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -97,13 +97,10 @@ class AdScreen extends React.PureComponent {
     Navigation.navigate('EditAdScreen', { ad: this.props.ad });
   };
 
-  favIconActiveStyles = [styles.icon, styles.activeColor];
-  favIconDefaultStyles = [styles.icon, styles.mainColor];
-
   render() {
     const { t, ad, currentAdFriends, askFriendsIsLoading, isLoading, actionsLoading, onRefresh } = this.props;
-    const refreshControl = <RefreshControl tintColor={lightColor} refreshing={isLoading} onRefresh={onRefresh} />;
-    const colorStyle = ad.favorite ? this.favIconActiveStyles : this.favIconDefaultStyles;
+    const refreshControl = <RefreshControl tintColor={spinnerColor} refreshing={isLoading} onRefresh={onRefresh} />;
+    const colorStyle = [styles.icon, ad.favorite ? styles.activeColor : styles.mainColor];
 
     if (isLoading && typeof ad.id === 'undefined') {
       return (
@@ -118,19 +115,20 @@ class AdScreen extends React.PureComponent {
     return (
       <Container>
         <View style={styles.headerBackground}>
-          <Header noShadow={true} iosBarStyle="light-content" style={styles.header}>
+          <Header noShadow={true} iosBarStyle="dark-content" style={styles.header}>
             <Left>
               <Icon
-                name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
+                name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
+                style={[styles.icon, { color: secondaryColor }]}
                 onPress={Navigation.popToTop}
               />
             </Left>
             <Right style={styles.actionButtonsContainer}>
-              <Icon onPress={this.shareAction} name="share-outline" />
+              <Icon style={[styles.icon, { color: secondaryColor }]} onPress={this.shareAction} name="share-outline" />
               <Icon
                 onPress={this.favAction}
                 style={colorStyle}
-                name={ad.favorite ? 'heart-circle-outline' : 'heart-circle-sharp'}
+                name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
               />
             </Right>
           </Header>

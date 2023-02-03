@@ -10,7 +10,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { getReferrer, setReferrer } from 'actions/profile';
 
-import { lightColor, primaryColor, activeColor } from 'colors';
+import { simpleColor, primaryColor, activeColor } from 'colors';
 
 import { onReferralInfoPress } from 'utils';
 
@@ -153,7 +153,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[0]}
                     onKeyPress={handleChar(0)}
                     placeholder="R"
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -164,7 +164,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[1]}
                     onKeyPress={handleChar(1)}
                     placeholder="E"
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -175,7 +175,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[2]}
                     onKeyPress={handleChar(2)}
                     placeholder="C"
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -186,7 +186,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[3]}
                     onKeyPress={handleChar(3)}
                     placeholder="A"
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -197,7 +197,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[4]}
                     onKeyPress={handleChar(4)}
                     placeholder="R"
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-start',
-    color: lightColor,
+    color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   singleInput: {
     fontSize: 32,
     textAlign: 'center',
-    borderBottomColor: lightColor,
+    borderBottomColor: simpleColor,
     borderBottomWidth: 1,
     color: activeColor,
   },

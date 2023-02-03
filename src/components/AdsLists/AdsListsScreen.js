@@ -31,7 +31,7 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
       <Header
         hasSegment={Platform.OS !== 'android'}
         hastTabs={Platform.OS === 'android'}
-        iosBarStyle="light-content"
+        iosBarStyle="dark-content"
         noShadow={true}
         style={styles.header}
       >

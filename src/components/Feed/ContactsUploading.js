@@ -5,7 +5,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Spinner, View, Text, Content, Icon } from 'native-base';
 import { withTranslation } from 'react-i18next';
 
-import { lightColor } from 'colors';
+import { superActiveColor } from 'colors';
 
 import { checkContactsPermissions } from 'actions/phoneContacts';
 
@@ -28,7 +28,7 @@ class ContactsUploading extends React.PureComponent {
       <View style={styles.centered}>
         <Image style={styles.picture} source={CONTACTS_UPLOADING} />
         <Text>{this.props.t('feed.contactsProcessingText')}</Text>
-        <Spinner size="small" style={{ alignSelf: 'center' }} color={lightColor} />
+        <Spinner size="small" style={{ alignSelf: 'center' }} color={superActiveColor} />
       </View>
     );
   }

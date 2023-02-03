@@ -10,10 +10,10 @@ export default function MultiPickerItem({ filterValue, filterId, onPress, active
 
   return (
     <View key={filterId} style={active ? styles.activeFilterBox : styles.filterBox}>
-      <Text onPress={onPress} style={styles.filterBoxText}>
+      <Text onPress={onPress} style={active ? styles.activeFilterBoxText : styles.filterBoxText}>
         {filterValue}
         &nbsp;
-        <Icon name={iconName} style={styles.filterItem} />
+        <Icon name={iconName} style={active ? styles.activeFilterItem : styles.filterItem} />
       </Text>
     </View>
   );

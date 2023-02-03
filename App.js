@@ -29,7 +29,7 @@ import Root from 'components/Root';
 import getTheme from 'native-base-theme/components';
 import nativeBaseThemeVariables from 'native-base-theme/variables/platform';
 
-import { darkColor, lightColor, primaryColor } from 'colors';
+import { darkColor, simpleColor, primaryColor } from 'colors';
 
 // console.disableYellowBox = true;
 
@@ -38,7 +38,7 @@ const App = () => {
     const themeVariables = {
       ...nativeBaseThemeVariables,
       containerBgColor: primaryColor,
-      textColor: lightColor,
+      textColor: simpleColor,
     }
     const theme = getTheme(themeVariables);
 

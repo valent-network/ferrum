@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, Content, List, ListItem, Radio, Left, Right, Container, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-import { primaryColor, lightColor, secondaryColor } from 'colors';
+import { primaryColor, simpleColor, secondaryColor } from 'colors';
 import { getCachedLocale, setCachedLocale } from 'services/AsyncStorage';
 import i18n from 'services/i18n';
 import API from 'services/API';
@@ -74,11 +74,11 @@ LanguageScreen.navigationOptions = ({ navigation }) => {
       },
     },
     headerTitle: i18n.t('nav.titles.language'),
-    headerTitleStyle: { color: lightColor },
+    headerTitleStyle: { color: simpleColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: lightColor,
+    headerTintColor: simpleColor,
   };
 };
 

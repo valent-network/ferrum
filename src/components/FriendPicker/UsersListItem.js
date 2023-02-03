@@ -6,7 +6,7 @@ import UserAvatar from 'react-native-user-avatar';
 import { Text, ListItem, Left, Right, Body, Icon } from 'native-base';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
-import { activeColor, disabledColor, primaryColor, secondaryColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor, primaryColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 export default class UsersListItem extends React.PureComponent {
@@ -61,8 +61,8 @@ UsersListItem.propTypes = {};
 const styles = StyleSheet.create({
   mainContainer: {
     borderBottomWidth: 0.5,
-    borderBottomColor: secondaryColor,
-    backgroundColor: primaryColor,
+    borderBottomColor: primaryColor,
+    backgroundColor: secondaryColor,
   },
   contactPhoneStyle: {
     fontSize: 12,

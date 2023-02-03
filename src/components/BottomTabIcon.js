@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import React from 'react';
 import { Icon } from 'native-base';
 
-import { activeColor, disabledColor } from 'colors';
+import { disabledColor, activeColor, simpleColor } from 'colors';
 
 const styles = StyleSheet.create({
   activeIcon: {
@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
   },
   inactiveIcon: {
     fontSize: 24,
-    color: disabledColor,
+    color: simpleColor,
   },
 });
 
 export default function BottomTabIcon({ name, tintColor }) {
-  let style = tintColor === disabledColor ? styles.inactiveIcon : styles.activeIcon;
+  let style = tintColor === simpleColor ? styles.inactiveIcon : styles.activeIcon;
 
   if (name == 'add-circle-sharp') {
     style = [style, { marginTop: -6, fontSize: 48 }];

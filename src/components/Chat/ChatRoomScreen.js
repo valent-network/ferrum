@@ -10,7 +10,7 @@ import en from 'dayjs/locale/en-gb';
 
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from 'actions/types';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from 'actions/chat';
-import { lightColor, primaryColor, secondaryColor, spinnerColor } from 'colors';
+import { simpleColor, primaryColor, secondaryColor, spinnerColor } from 'colors';
 import { localizedSystemMessage } from 'utils';
 import { serverChannel } from 'services/ServerChannel';
 
@@ -135,11 +135,11 @@ ChatRoomScreen.navigationOptions = ({ navigation }) => {
       borderBottomWidth: 0,
     },
     headerTitle: () => <CurrentChatHeader />,
-    headerTitleStyle: { color: lightColor },
+    headerTitleStyle: { color: simpleColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: lightColor,
+    headerTintColor: simpleColor,
     headerRight: () => <CurrentChatActions />,
   };
 };

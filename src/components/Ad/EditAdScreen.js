@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AdForm from './Form/AdForm';
 
 import { updateAd } from 'actions/ads';
-import { lightColor, secondaryColor } from 'colors';
+import { simpleColor, secondaryColor } from 'colors';
 import i18n from 'services/i18n';
 
 const EditAdScreen = ({ navigation, onSubmit, citiesByRegion, categories, isLoading }) => {
@@ -51,8 +51,8 @@ function mapDispatchToProps(dispatch) {
 EditAdScreen.navigationOptions = ({ navigation }) => {
   return {
     headerShown: true,
-    headerTitleStyle: { color: lightColor },
-    headerTintColor: lightColor,
+    headerTitleStyle: { color: simpleColor },
+    headerTintColor: simpleColor,
     headerBackTitleVisible: false,
     headerStyle: {
       backgroundColor: secondaryColor,

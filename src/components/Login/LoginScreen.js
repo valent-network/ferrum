@@ -12,13 +12,12 @@ import { withTranslation } from 'react-i18next';
 import {
   activeColor,
   trackColor,
-  lightColor,
+  simpleColor,
   primaryColor,
   disabledColor,
   secondaryColor,
   spinnerColor,
   superActiveColor,
-  notesColor,
 } from 'colors';
 
 import { onTosPress, random } from 'utils';
@@ -71,7 +70,7 @@ class LoginScreen extends React.Component {
         <Input
           style={styles.input}
           placeholder="1234"
-          placeholderTextColor={notesColor}
+          placeholderTextColor={disabledColor}
           keyboardType="numeric"
           textContentType="oneTimeCode"
           onChangeText={this.onInputCode}
@@ -91,7 +90,7 @@ class LoginScreen extends React.Component {
           type={'custom'}
           options={this.phoneMaskOptions}
           placeholder="(50)123-45-67"
-          placeholderTextColor={notesColor}
+          placeholderTextColor={disabledColor}
           value={phone}
           includeRawValueInChangeText={true}
           keyboardType="numeric"
@@ -152,7 +151,7 @@ class LoginScreen extends React.Component {
                 </Left>
                 <Right style={styles.switchContainer}>
                   <Switch
-                    thumbColor={lightColor}
+                    thumbColor={simpleColor}
                     trackColor={trackColor}
                     ios_backgroundColor={secondaryColor}
                     onValueChange={this.changeTosAcceptance}
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
   h1: {
     fontWeight: 'bold',
     marginBottom: 8,
-    color: lightColor,
+    color: simpleColor,
   },
   h2: {
     fontSize: 16,
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 17,
-    color: lightColor,
+    color: simpleColor,
     padding: 0,
     margin: 0,
   },
@@ -267,7 +266,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: '100%',
     width: '100%',
-    color: lightColor,
+    color: simpleColor,
     fontWeight: 'bold',
     borderWidth: 0,
   },
@@ -281,7 +280,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   icon: {
-    color: notesColor,
+    color: disabledColor,
   },
   linksContainer: {
     alignItems: 'flex-end',
@@ -303,8 +302,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   flag: { marginLeft: 16 },
-  h2Note: { color: lightColor, fontWeight: 'bold' },
+  h2Note: { color: simpleColor, fontWeight: 'bold' },
   countryCodeNoteContainer: { marginRight: 0 },
-  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: lightColor },
+  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: simpleColor },
   h2Container: { marginBottom: 8 },
 });

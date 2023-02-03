@@ -5,9 +5,8 @@ import {
   primaryColor,
   priceColor,
   deletedColor,
-  lightColor,
+  simpleColor,
   disabledColor,
-  notesColor,
   superActiveColor,
 } from 'colors';
 
@@ -29,7 +28,7 @@ export const styles = StyleSheet.create({
   headerBackground: {
     backgroundColor: 'transparent',
     width: '100%',
-    color: lightColor,
+    color: simpleColor,
     position: 'absolute',
     zIndex: 10,
     margin: 0,
@@ -52,6 +51,7 @@ export const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     fontSize: 24,
+    color: simpleColor,
   },
   price: {
     color: priceColor,
@@ -85,7 +85,8 @@ export const styles = StyleSheet.create({
     marginTop: 8,
   },
   descriptionText: {
-    fontSize: 13,
+    fontSize: 15,
+    lineHeight: 15 * 1.5,
   },
   actionButtonsContainer: {
     flexDirection: 'row',
@@ -114,7 +115,7 @@ export const styles = StyleSheet.create({
     color: activeColor,
   },
   mainColor: {
-    color: lightColor,
+    color: secondaryColor,
   },
   mainContainer: {
     backgroundColor: primaryColor,
@@ -137,23 +138,23 @@ export const styles = StyleSheet.create({
   imageGalleryBadge: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    borderColor: lightColor,
+    borderColor: secondaryColor,
     borderWidth: 1,
-    backgroundColor: notesColor,
+    backgroundColor: disabledColor,
     opacity: 0.75,
     paddingBottom: 0,
   },
   imageGalleryBadgeIcon: {
     fontSize: 15,
-    color: lightColor,
+    color: secondaryColor,
   },
   imageGalleryBadgeText: {
-    color: lightColor,
+    color: secondaryColor,
     fontSize: 15,
   },
   imagePlaceholder: {
     height: 350,
     width: '100%',
-    backgroundColor: notesColor,
+    backgroundColor: disabledColor,
   },
 });

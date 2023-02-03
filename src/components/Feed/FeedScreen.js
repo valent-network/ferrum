@@ -37,7 +37,7 @@ const FeedScreen = ({
 
   return (
     <Container>
-      <Header style={styles.mainHeader} iosBarStyle="light-content" noShadow={true} searchBar rounded>
+      <Header style={styles.mainHeader} iosBarStyle="dark-content" noShadow={true} searchBar rounded>
         <SearchBar />
       </Header>
       <View style={styles.filtersRow}>
@@ -95,7 +95,9 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
   },
   filtersRow: {
-    paddingVertical: 12,
+    padding: 8,
+    paddingTop: 0,
+    backgroundColor: secondaryColor,
   },
 });
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, lightColor, disabledColor, secondaryColor, spinnerColor, notesColor } from 'colors';
+import { activeColor, simpleColor, disabledColor, secondaryColor, spinnerColor } from 'colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -141,11 +141,11 @@ function mapDispatchToProps(dispatch) {
 ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
   return {
     title: '',
-    headerTitleStyle: { color: lightColor },
+    headerTitleStyle: { color: simpleColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: lightColor,
+    headerTintColor: simpleColor,
     headerShown: true,
     headerTransparent: true,
   };
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     backgroundColor: secondaryColor,
-    borderColor: notesColor,
+    borderColor: disabledColor,
     height: 48,
   },
   separatorText: {

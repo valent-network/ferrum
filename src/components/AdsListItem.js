@@ -8,12 +8,12 @@ import { Text, Icon } from 'native-base';
 import {
   priceColor,
   disabledColor,
-  lightColor,
+  simpleColor,
   primaryColor,
   secondaryColor,
   activeColor,
   errorColor,
-  notesColor,
+  superActiveColor,
 } from 'colors';
 
 import ImageGallery from 'components/Ad/ImageGallery';
@@ -81,7 +81,7 @@ class AdsListItem extends React.PureComponent {
                 <Icon
                   name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
                   onPress={this.favAction}
-                  style={[{}, ad.favorite ? { color: activeColor } : { color: lightColor }]}
+                  style={[{}, ad.favorite ? { color: activeColor } : { color: secondaryColor }]}
                 />
                 <Text style={styles.notes}>
                   {ad.region}, {ad.updated_at}
@@ -104,7 +104,7 @@ AdsListItem.propTypes = {};
 const styles = StyleSheet.create({
   title: {
     marginBottom: 8,
-    color: lightColor,
+    color: secondaryColor,
     fontSize: 24,
   },
   imagePreviewContainer: {
@@ -127,11 +127,11 @@ const styles = StyleSheet.create({
   },
   option: {
     marginBottom: 12,
-    color: disabledColor,
+    color: secondaryColor,
     fontSize: 14,
   },
   notes: {
-    color: disabledColor,
+    color: secondaryColor,
     fontSize: 14,
   },
   price: {
@@ -171,6 +171,6 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     width: '100%',
     height: '100%',
-    backgroundColor: notesColor,
+    backgroundColor: disabledColor,
   },
 });

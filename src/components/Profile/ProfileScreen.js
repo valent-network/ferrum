@@ -40,7 +40,15 @@ import { deleteContacts } from 'actions/userContacts';
 
 import { goToSettings, onTosPress, onPrivacyPress, onReferralInfoPress, notification as UINotification } from 'utils';
 
-import { activeColor, lightColor, disabledColor, secondaryColor, deletedColor, primaryColor } from 'colors';
+import {
+  activeColor,
+  simpleColor,
+  disabledColor,
+  secondaryColor,
+  deletedColor,
+  primaryColor,
+  spinnerColor,
+} from 'colors';
 
 class ProfileScreen extends React.PureComponent {
   constructor(props) {
@@ -129,7 +137,7 @@ class ProfileScreen extends React.PureComponent {
     );
   };
 
-  refreshControl = (<RefreshControl refreshing={false} tintColor={lightColor} onRefresh={this.props.onRefresh} />);
+  refreshControl = (<RefreshControl refreshing={false} tintColor={spinnerColor} onRefresh={this.props.onRefresh} />);
 
   openSetReferrerModal = () => this.setState({ referrerModalVisible: true });
   closeSetReferrerModal = () => {
@@ -420,7 +428,7 @@ styles = StyleSheet.create({
     color: activeColor,
   },
   nameInput: {
-    color: lightColor,
+    color: simpleColor,
     fontSize: 14,
     height: '100%',
     padding: 0,

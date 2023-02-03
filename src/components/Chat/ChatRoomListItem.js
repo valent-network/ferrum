@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   chatRow: {
     marginBottom: 8,
-    borderBottomWidth: 0.6,
+    borderBottomWidth: 1,
     borderBottomColor: secondaryColor,
   },
   centered: {

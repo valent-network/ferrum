@@ -6,7 +6,7 @@ import { InputToolbar, Send, LoadEarlier } from 'react-native-gifted-chat';
 
 import i18n from 'services/i18n';
 
-import { activeColor, primaryColor, lightColor, secondaryColor } from 'colors';
+import { activeColor, primaryColor, simpleColor, secondaryColor } from 'colors';
 
 const renderLoadEarlier = (props) => <LoadEarlier label={i18n.t('chat.placeholders.loadMore')} {...props} />;
 
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
   },
   textInput: {
-    color: lightColor,
+    color: simpleColor,
   },
   sendContainer: {
     justifyContent: 'center',

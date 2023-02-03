@@ -9,7 +9,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { updateUserName } from 'actions/profile';
 
-import { lightColor, activeColor, secondaryColor, disabledColor, warningColor, primaryColor } from 'colors';
+import { simpleColor, activeColor, secondaryColor, disabledColor, primaryColor, deletedColor } from 'colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const { t } = useTranslation();
@@ -54,7 +54,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                     value={userName}
                     onChangeText={setUserName}
                     placeholder={t('chat.placeholders.yourName')}
-                    placeholderTextColor={lightColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </Item>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-start',
-    color: lightColor,
+    color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     padding: 16,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   introduceOption: { fontSize: 18, marginRight: 8 },
-  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: lightColor },
+  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: simpleColor },
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
-  friendInfo: { color: lightColor, alignSelf: 'center', textAlign: 'center' },
+  friendInfo: { color: simpleColor, alignSelf: 'center', textAlign: 'center' },
   emptyUserNameContainer: {
-    backgroundColor: warningColor,
+    backgroundColor: deletedColor,
     padding: 16,
     borderRadius: 8,
     marginTop: 16,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
   introHeader: { marginVertical: 16 },
   nameInput: {
-    color: lightColor,
+    color: simpleColor,
   },
   userAvatarContainer: {
     width: 48,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text, Thumbnail } from 'native-base';
-import { activeColor, lightColor, primaryColor } from 'colors';
+import { activeColor, secondaryColor, primaryColor } from 'colors';
 
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 
@@ -80,13 +80,13 @@ export default class Notification extends React.PureComponent {
             )}
             <Text numberOfLines={3} style={styles.notificationBodyText}>
               {message.title && (
-                <Text style={styles.lightColor}>
+                <Text style={styles.textColor}>
                   {message.title}
                   {'\n'}
                 </Text>
               )}
               {message.name && (
-                <Text style={styles.lightColor}>
+                <Text style={styles.textColor}>
                   {message.name}
                   {'\n'}
                 </Text>
@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   notificationBodyText: {
-    color: lightColor,
+    color: secondaryColor,
     fontSize: 14,
     flex: 1,
   },
   close: {
-    color: lightColor,
+    color: secondaryColor,
     fontSize: 18,
   },
   messagePhoto: {
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     height: 36,
     marginRight: 12,
   },
-  lightColor: {
-    color: lightColor,
+  textColor: {
+    color: secondaryColor,
   },
 });

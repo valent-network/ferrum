@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, lightColor, spinnerColor } from 'colors';
+import { activeColor, simpleColor, spinnerColor } from 'colors';
 
 import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
@@ -33,9 +33,9 @@ class AdsList extends React.PureComponent {
     const { ads, isLoading, fromFeed, onRefreshFeed, onRefresh, currentTab } = this.props;
     const onRefreshTab = fromFeed ? onRefreshFeed : onRefresh[currentTab];
     const refreshControl = isLoading ? (
-      <RefreshControl refreshing={true} tintColor={lightColor} onRefresh={onRefreshTab} />
+      <RefreshControl refreshing={true} tintColor={spinnerColor} onRefresh={onRefreshTab} />
     ) : (
-      <RefreshControl refreshing={false} tintColor={lightColor} onRefresh={onRefreshTab} />
+      <RefreshControl refreshing={false} tintColor={spinnerColor} onRefresh={onRefreshTab} />
     );
 
     if (ads.length === 0) {

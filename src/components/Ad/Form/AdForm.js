@@ -14,7 +14,7 @@ import Textarea from './Textarea';
 import Picker from './Picker';
 import AdImagePicker from './AdImagePicker';
 import AdImagePickerItem from './AdImagePickerItem';
-import { spinnerColor, activeColor, lightColor } from 'colors';
+import { spinnerColor, activeColor, simpleColor } from 'colors';
 import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
 
 import { reposition } from 'utils';

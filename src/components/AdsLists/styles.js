@@ -1,12 +1,12 @@
 import { StyleSheet, Platform } from 'react-native';
-import { primaryColor, secondaryColor, activeColor, lightColor, superActiveColor } from 'colors';
+import { primaryColor, secondaryColor, activeColor, simpleColor, superActiveColor } from 'colors';
 
 export default StyleSheet.create({
   mainContainer: {
     backgroundColor: primaryColor,
   },
   header: { backgroundColor: secondaryColor, flexDirection: 'column' },
-  title: { color: lightColor, fontWeight: 'bold', paddingLeft: Platform.OS === 'android' ? 16 : 0 },
+  title: { color: simpleColor, fontWeight: 'bold', paddingLeft: Platform.OS === 'android' ? 16 : 0 },
   segmentButton: { borderColor: activeColor, width: '33.33333%', justifyContent: 'center' },
   tabButton: {
     width: '33.3333%',

@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
 import {
   priceColor,
-  lightColor,
+  simpleColor,
   primaryColor,
   secondaryColor,
   activeColor,
   notesColor,
   errorColor,
   deletedColor,
+  disabledColor,
 } from 'colors';
 
 export default StyleSheet.create({
@@ -21,7 +22,7 @@ export default StyleSheet.create({
   },
   textArea: {
     backgroundColor: secondaryColor,
-    color: lightColor,
+    color: simpleColor,
     borderColor: secondaryColor,
     borderTopWidth: 1,
     borderLeftWidth: 1,
@@ -48,7 +49,7 @@ export default StyleSheet.create({
     height: 1,
   },
   inputContainer: {
-    color: lightColor,
+    color: simpleColor,
     backgroundColor: secondaryColor,
     borderBottomWidth: 0,
     marginTop: 16,
@@ -58,12 +59,12 @@ export default StyleSheet.create({
     marginLeft: 0,
   },
   input: {
-    color: lightColor,
+    color: simpleColor,
   },
   labelText: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: lightColor,
+    color: simpleColor,
   },
   labelTextError: {
     color: errorColor,
@@ -71,7 +72,7 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   pickerText: {
-    color: lightColor,
+    color: simpleColor,
     paddingLeft: 0,
   },
   pickerPlaceholder: {
@@ -87,15 +88,15 @@ export default StyleSheet.create({
   pickerHeader: {
     backgroundColor: primaryColor,
     borderBottomColor: notesColor,
-    color: lightColor,
+    color: simpleColor,
   },
   pickerItemStyle: {
     borderBottomColor: notesColor,
     marginLeft: 0,
     paddingLeft: 8,
   },
-  headerBackButton: { color: lightColor },
-  headerTitle: { color: lightColor },
+  headerBackButton: { color: simpleColor },
+  headerTitle: { color: simpleColor },
   submitButtonWrapper: { margin: 8, marginBottom: 32, padding: 0 },
   submitButton: {},
   charLimitContainer: {
@@ -104,7 +105,7 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
   },
-  charLimitText: { color: notesColor, fontSize: 12, alignSelf: 'flex-end' },
+  charLimitText: { color: disabledColor, fontSize: 12, alignSelf: 'flex-end' },
   currency: {
     color: priceColor,
     fontSize: 18,
@@ -159,7 +160,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   restoreText: {
-    color: lightColor,
+    color: simpleColor,
     position: 'absolute',
     bottom: 0,
     padding: 16,
