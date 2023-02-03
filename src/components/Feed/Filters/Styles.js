@@ -44,8 +44,8 @@ export default StyleSheet.create({
   },
   filterBox: {
     borderColor: activeColor,
-    borderWidth: 0.2,
-    borderRadius: 2,
+    borderWidth: 1,
+    borderRadius: 32,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
@@ -60,7 +60,7 @@ export default StyleSheet.create({
   activeFilterBox: {
     borderColor: simpleColor,
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 32,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',

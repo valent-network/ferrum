@@ -48,6 +48,7 @@ import {
   deletedColor,
   primaryColor,
   spinnerColor,
+  superActiveColor,
 } from 'colors';
 
 class ProfileScreen extends React.PureComponent {
@@ -259,7 +260,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.contactsBook')}</Text>
                   </Left>
                   <Right>
-                    <Text style={styles.activeColor}>{t('actions.delete')}</Text>
+                    <Text style={styles.deletedColor}>{t('actions.delete')}</Text>
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>{t('profile.deleteContactsNote')}</Text>
@@ -290,7 +291,10 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.friends')}</Text>
                   </Left>
                   <Right>
-                    <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
+                    <Icon
+                      style={styles.mainColor}
+                      name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'}
+                    />
                   </Right>
                 </ListItem>
                 <ListItem
@@ -304,7 +308,10 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.inviteFriends')}</Text>
                   </Left>
                   <Right>
-                    <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
+                    <Icon
+                      style={styles.mainColor}
+                      name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'}
+                    />
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>{t('profile.inviteFriendsNote')}</Text>
@@ -323,7 +330,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text style={styles.bottomLinks}>{t('profile.labels.support')}</Text>
                   </Left>
                   <Right>
-                    <Icon name="chatbubbles-outline" />
+                    <Icon style={styles.mainColor} name="chatbubbles-outline" />
                   </Right>
                 </ListItem>
                 <ListItem
@@ -365,7 +372,7 @@ class ProfileScreen extends React.PureComponent {
                     <Text>{t('profile.labels.signOut')}</Text>
                   </Left>
                   <Right>
-                    <Icon name="log-out-outline" />
+                    <Icon style={styles.deletedColor} name="log-out-outline" />
                   </Right>
                 </ListItem>
               </List>
@@ -425,7 +432,13 @@ styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   activeColor: {
-    color: activeColor,
+    color: superActiveColor,
+  },
+  mainColor: {
+    color: simpleColor,
+  },
+  deletedColor: {
+    color: deletedColor,
   },
   nameInput: {
     color: simpleColor,

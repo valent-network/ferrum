@@ -10,7 +10,7 @@ export const priceColor = '#85bb65';
 //
 
 export const spinnerColor = activeColor;
-export const disabledColor = 'rgba(128,128,128,0.75)';
+export const disabledColor = '#d3d3d3';
 export const deletedColor = '#d43';
 export const errorColor = '#d43';
 

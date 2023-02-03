@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
   },
   separator: {
-    borderWidth: 0.5,
+    borderWidth: 5,
     borderColor: secondaryColor,
     marginTop: 8,
     marginBottom: 8,
@@ -147,6 +147,7 @@ export const styles = StyleSheet.create({
   imageGalleryBadgeIcon: {
     fontSize: 15,
     color: secondaryColor,
+    alignSelf: 'center',
   },
   imageGalleryBadgeText: {
     color: secondaryColor,

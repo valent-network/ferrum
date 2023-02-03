@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import styles from './Styles';
 import { onlyNumeric, rules } from './helpers';
 
+import { disabledColor } from 'colors';
+
 export default function TextOrNumberInput({ field, paramName, paramType, localized_name, errors, placeholder }) {
   const { t } = useTranslation();
 
@@ -27,6 +29,7 @@ export default function TextOrNumberInput({ field, paramName, paramType, localiz
         returnKeyType="next"
         keyboardType={keyboardType}
         placeholder={placeholder}
+        placeholderTextColor={disabledColor}
         ref={setRef}
       />
       {rules[paramName]?.maxLength && (

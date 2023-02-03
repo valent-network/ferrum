@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   optionContainer: {
     borderWidth: 1,
     borderColor: activeColor,
-    marginRight: 4,
-    marginBottom: 4,
-    borderRadius: 4,
+    marginRight: 8,
+    marginBottom: 8,
+    borderRadius: 8,
     fontSize: 14,
-    padding: 6,
+    padding: 8,
   },
   sourceIcon: {
     fontSize: 15,

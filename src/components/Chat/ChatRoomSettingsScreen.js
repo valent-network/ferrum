@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, simpleColor, disabledColor, secondaryColor, spinnerColor } from 'colors';
+import { activeColor, simpleColor, disabledColor, secondaryColor, spinnerColor, deletedColor } from 'colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -80,9 +80,7 @@ function ChatRoomsSettingsScreen({
   const renderItem = ({ item }) => {
     const friendPhoneNumber = friendsAndMembers.filter((f) => f.user_id === item.user_id)[0]?.phone_number;
     return item.separator ? (
-      <Separator bordered style={styles.separator}>
-        <Text style={styles.separatorText}>{item.separator}</Text>
-      </Separator>
+      <Text style={styles.separatorText}>{item.separator}</Text>
     ) : (
       <AdFriend
         friend={item}
@@ -159,9 +157,10 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   leaveChat: {
-    color: activeColor,
-    fontSize: 13,
+    color: deletedColor,
+    fontSize: 14,
     marginBottom: 16,
+    paddingRight: 16,
     textAlign: 'right',
   },
   infoContainer: {
@@ -176,12 +175,15 @@ const styles = StyleSheet.create({
     height: 48,
   },
   separatorText: {
-    fontSize: 16,
-    color: disabledColor,
+    fontSize: 18,
+    color: simpleColor,
+    marginLeft: 16,
+    paddingVertical: 16,
+    fontWeight: 'bold',
   },
   leaveIcon: {
     fontSize: 14,
-    color: activeColor,
+    color: deletedColor,
   },
 });
 

@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor, superActiveColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor, superActiveColor, simpleColor } from 'colors';
 
 import { leaveChat } from 'actions/chat';
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   smallFont: {
-    color: disabledColor,
+    color: simpleColor,
     fontSize: 13,
   },
   title: {

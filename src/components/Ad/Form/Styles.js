@@ -87,7 +87,7 @@ export default StyleSheet.create({
   },
   pickerHeader: {
     backgroundColor: primaryColor,
-    borderBottomColor: notesColor,
+    borderBottomColor: disabledColor,
     color: simpleColor,
   },
   pickerItemStyle: {
