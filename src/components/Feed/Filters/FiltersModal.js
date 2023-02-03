@@ -74,8 +74,13 @@ const FiltersModal = ({
           {filtersPresent && reset}
           {close}
         </View>
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always" bounces={false} extraHeight={296}>
-          <View style={styles.modalContainer}>
+        <KeyboardAwareScrollView
+          style={styles.modalContainer}
+          keyboardShouldPersistTaps="always"
+          bounces={false}
+          extraHeight={296}
+        >
+          <View>
             <Content>
               <Form style={styles.filtersForm}>
                 {!!categoryOpts && <MultiPicker opt={categoryOpts} />}

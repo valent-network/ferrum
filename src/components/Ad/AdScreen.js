@@ -147,7 +147,11 @@ class AdScreen extends React.PureComponent {
             {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}
 
             {ad.my_ad && !actionsLoading && (
-              <View style={styles.actions}>
+              <ScrollView
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                contentContainerStyle={styles.actions}
+              >
                 {!ad.deleted && (
                   <Text style={styles.actionText} onPress={this.archiveAd}>
                     <Icon style={styles.actionIcon} name="eye-off-outline" /> {t('actions.archive')}
@@ -164,7 +168,7 @@ class AdScreen extends React.PureComponent {
                 <Text style={styles.actionText} onPress={this.editAd}>
                   <Icon style={styles.actionIcon} name="create-outline" /> {t('actions.edit')}
                 </Text>
-              </View>
+              </ScrollView>
             )}
 
             <Text style={styles.title}>{ad.title}</Text>

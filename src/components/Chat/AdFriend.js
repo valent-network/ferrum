@@ -39,7 +39,6 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
       {!membersIds.includes(friend.user_id) && (
         <Right>
           <Button
-            small
             style={styles.addButton}
             onPress={
               friend.user_id

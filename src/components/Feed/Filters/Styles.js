@@ -4,7 +4,6 @@ import { activeColor, trackColor, primaryColor, lightColor, disabledColor, secon
 export default StyleSheet.create({
   modalContainer: {
     backgroundColor: primaryColor,
-    flex: 1,
     padding: 16,
   },
   modalControlsContainer: {
@@ -79,13 +78,9 @@ export default StyleSheet.create({
     borderTopRightRadius: 24,
   },
   submitButtonWrapper: {
-    position: 'absolute',
     bottom: 24,
-    width: '100%',
-    marginVertical: 32,
-    paddingVertical: 32,
+    paddingBottom: 16,
     paddingHorizontal: 16,
-    marginBottom: 24,
   },
   submitButton: {
     backgroundColor: activeColor,

@@ -91,15 +91,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     padding: 16,
     marginVertical: 8,
     backgroundColor: secondaryColor,
     borderRadius: 4,
+    width: '100%',
+    justifyContent: 'center',
   },
   actionText: {
     color: activeColor,
+    marginRight: 16,
   },
   actionIcon: {
     fontSize: 15,
@@ -127,7 +128,6 @@ export const styles = StyleSheet.create({
     right: 8,
     top: 8,
     opacity: 1,
-    zIndex: 1000,
   },
   imageGalleryModalContainer: {
     flex: 1,
@@ -141,14 +141,15 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: notesColor,
     opacity: 0.75,
+    paddingBottom: 0,
   },
   imageGalleryBadgeIcon: {
     fontSize: 15,
     color: lightColor,
-    lineHeight: 20,
   },
   imageGalleryBadgeText: {
     color: lightColor,
+    fontSize: 15,
   },
   imagePlaceholder: {
     height: 350,

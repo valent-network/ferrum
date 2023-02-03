@@ -26,13 +26,7 @@ export default ({ chat }) => {
         {chat.messages[0].text.length > 15 && '...'}
         {'\n'}
       </Text>
-      <Button
-        small
-        block
-        dark
-        style={styles.button}
-        onPress={() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id })}
-      >
+      <Button style={styles.button} onPress={() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id })}>
         <Text>{t('ad.buttons.continueChat')}</Text>
       </Button>
     </View>

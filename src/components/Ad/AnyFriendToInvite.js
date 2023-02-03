@@ -14,7 +14,7 @@ export default ({ openFriendPickerModal }) => {
       <Text note style={styles.smallFont}>
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
-      <Button small block dark style={styles.button} onPress={openFriendPickerModal}>
+      <Button style={styles.button} onPress={openFriendPickerModal}>
         <Text>{t('ad.buttons.selectFriend')}</Text>
       </Button>
     </View>

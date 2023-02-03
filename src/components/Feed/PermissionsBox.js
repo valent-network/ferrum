@@ -33,7 +33,7 @@ class PermissionsBox extends React.PureComponent {
         <View style={styles.mainContainer}>
           <Image style={styles.picture} source={NOT_ALLOWED} />
           <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
-          <Button small block style={styles.button} onPress={this.onPress}>
+          <Button block style={styles.button} onPress={this.onPress}>
             <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
           </Button>
         </View>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color: activeColor,
     fontWeight: 'bold',
   },
-  mainText: { fontSize: 16, paddingLeft: 96 },
+  mainText: { fontSize: 13, paddingLeft: 96 },
   picture: {
     position: 'absolute',
     left: 0,

@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 
 import { View, Platform } from 'react-native';
 
-import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
+import { FlingGestureHandler, Directions, State } from 'react-native-gesture-handler';
 
 import AdForm from './Form/AdForm';
 
@@ -17,23 +17,31 @@ import { secondaryColor, lightColor } from 'colors';
 
 import i18n from 'services/i18n';
 
-import Navigation from 'services/Navigation';
-
-const NewAdScreen = ({ onSubmit, citiesByRegion, categories, isLoading }) => {
-  return (
-    <FlingGestureHandler direction={Directions.RIGHT} onHandlerStateChange={() => Navigation.navigate('FeedScreen')}>
-      <View style={{ minHeight: '100%' }}>
-        <AdForm
-          citiesByRegion={citiesByRegion}
-          categories={categories}
-          onSubmit={onSubmit}
-          isLoading={isLoading}
-          newRecord={true}
-          defaultValues={defaultValues}
-        />
-      </View>
-    </FlingGestureHandler>
+const NewAdScreen = ({ onSubmit, navigation, citiesByRegion, categories, isLoading }) => {
+  const form = (
+    <AdForm
+      citiesByRegion={citiesByRegion}
+      categories={categories}
+      onSubmit={onSubmit}
+      isLoading={isLoading}
+      newRecord={true}
+      defaultValues={defaultValues}
+    />
   );
+  const handleRightSwap = ({ nativeEvent }) => {
+    if (nativeEvent.state === State.ACTIVE) {
+      navigation.navigate('FeedScreen');
+    }
+  };
+  if (Platform.OS === 'android') {
+    return form;
+  } else {
+    return (
+      <FlingGestureHandler direction={Directions.RIGHT} onHandlerStateChange={handleRightSwap}>
+        <View style={{ minHeight: '100%' }}>{form}</View>
+      </FlingGestureHandler>
+    );
+  }
 };
 
 NewAdScreen.navigationOptions = ({ navigation }) => {

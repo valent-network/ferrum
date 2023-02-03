@@ -62,7 +62,7 @@ export default class ImageGallery extends React.Component {
         />
         <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
           <Badge style={styles.imageGalleryBadge}>
-            <Icon name="images-outline" style={styles.imageGalleryBadgeIcon} />
+            <Icon allowFontScaling={true} name="images-outline" style={styles.imageGalleryBadgeIcon} />
             <Text style={styles.imageGalleryBadgeText}>
               &nbsp;{this.state.currentImageIndex + 1} / {this.props.ad.images.length}
             </Text>

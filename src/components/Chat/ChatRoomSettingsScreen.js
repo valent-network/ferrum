@@ -102,17 +102,16 @@ function ChatRoomsSettingsScreen({
           <Text onPress={onShow}>
             {chat.title}
             {'\n'}
-            {<Text style={styles.activeColor}>{t('chat.settings.more')}</Text>}
+            {<Text style={{ color: activeColor }}>{t('chat.settings.more')}</Text>}
           </Text>
         )}
 
         {!chat.ad_id && <Text>{chat.title}</Text>}
-
-        <Text style={styles.activeColor} onPress={onLeave}>
-          {t('chat.settings.leaveChat')}&nbsp;
-          <Icon name="log-out-outline" style={styles.leaveIcon} />
-        </Text>
       </View>
+      <Text style={styles.leaveChat} onPress={onLeave}>
+        {t('chat.settings.leaveChat')}&nbsp;
+        <Icon name="log-out-outline" style={styles.leaveIcon} />
+      </Text>
       {isLoading ? (
         <Spinner color={spinnerColor} />
       ) : (
@@ -156,10 +155,14 @@ const styles = StyleSheet.create({
   adPhoto: {
     width: '100%',
     height: 350,
+    maxHeight: '30%',
     opacity: 0.75,
   },
-  activeColor: {
+  leaveChat: {
     color: activeColor,
+    fontSize: 13,
+    marginBottom: 16,
+    textAlign: 'right',
   },
   infoContainer: {
     flexDirection: 'row',

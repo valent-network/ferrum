@@ -28,9 +28,6 @@ export default ({ friend, prepareInvitation }) => {
         {friend.phone_number}
       </Text>
       <Button
-        small
-        block
-        dark
         style={styles.button}
         onPress={
           friend.user_id
