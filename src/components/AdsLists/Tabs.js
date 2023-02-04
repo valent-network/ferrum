@@ -10,7 +10,7 @@ export default function Tabs({ currentTab, setCurrentTab }) {
   const { t } = useTranslation();
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row', backgroundColor: 'red' }}>
       <Button
         style={currentTab == 'visitedAds' ? styles.activeTabButton : styles.tabButton}
         onPress={() => setCurrentTab('visitedAds')}

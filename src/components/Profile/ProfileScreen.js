@@ -276,7 +276,10 @@ class ProfileScreen extends React.PureComponent {
                       <Text style={{ color: textColor }}>Українська / English</Text>
                     </Left>
                     <Right>
-                      <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
+                      <Icon
+                        style={styles.mainColor}
+                        name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'}
+                      />
                     </Right>
                   </ListItem>
                 )}

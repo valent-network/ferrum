@@ -145,7 +145,7 @@ class LoginScreen extends React.Component {
                   <View style={styles.tosTextContainer}>
                     <Text onPress={onTosPress} style={styles.smallFont}>
                       {t('login.agreeTos')}&nbsp;
-                      <Text style={[styles.activeColor, styles.smallFont]}>{t('login.tos')}</Text>
+                      <Text style={[styles.smallFont, styles.activeColor]}>{t('login.tos')}</Text>
                     </Text>
                   </View>
                 </Left>
@@ -270,6 +270,10 @@ const styles = StyleSheet.create({
     color: textColor,
     fontWeight: 'bold',
     borderWidth: 0,
+    padding: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   switchContainer: { flex: 0 },
   tosContainer: {
@@ -302,9 +306,9 @@ const styles = StyleSheet.create({
   goButton: {
     fontWeight: 'bold',
   },
-  flag: { marginLeft: 16 },
+  flag: { marginRight: -16 },
   h2Note: { color: textColor, fontWeight: 'bold' },
-  countryCodeNoteContainer: { marginRight: 0 },
+  countryCodeNoteContainer: { marginRight: 0, height: '100%', justifyContent: 'center' },
   countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: textColor },
   h2Container: { marginBottom: 8 },
 });

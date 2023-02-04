@@ -14,7 +14,7 @@ import Textarea from './Textarea';
 import Picker from './Picker';
 import AdImagePicker from './AdImagePicker';
 import AdImagePickerItem from './AdImagePickerItem';
-import { spinnerColor, activeColor, textColor, primaryColor } from 'colors';
+import { spinnerColor, activeColor, textColor, primaryColor, activeTextColor } from 'colors';
 import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
 
 import { reposition } from 'utils';
@@ -391,7 +391,7 @@ const AdForm = ({
           {isLoading || imagesUploading ? (
             <Spinner color={spinnerColor} />
           ) : (
-            <Text style={{ color: textColor }}>{newRecord ? t('actions.create') : t('actions.update')}</Text>
+            <Text style={{ color: activeTextColor }}>{newRecord ? t('actions.create') : t('actions.update')}</Text>
           )}
         </Button>
       </View>
