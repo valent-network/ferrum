@@ -29,15 +29,13 @@ class PermissionsBox extends React.PureComponent {
     if (permissionsGiven) return null;
 
     return (
-      <>
-        <View style={styles.mainContainer}>
-          <Image style={styles.picture} source={NOT_ALLOWED} />
-          <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
-          <Button block style={styles.button} onPress={this.onPress}>
-            <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
-          </Button>
-        </View>
-      </>
+      <View style={styles.mainContainer}>
+        <Image style={styles.picture} source={NOT_ALLOWED} />
+        <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
+        <Button block style={styles.button} onPress={this.onPress}>
+          <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
+        </Button>
+      </View>
     );
   }
 }
@@ -66,13 +64,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     marginBottom: 16,
     padding: 6,
-    borderColor: activeColor,
-    borderRadius: 4,
     color: superActiveColor,
   },
   button: {
-    marginTop: 12,
     backgroundColor: superActiveColor,
+    marginTop: 8,
   },
   buttonText: {
     color: activeColor,
@@ -84,5 +80,6 @@ const styles = StyleSheet.create({
     left: 0,
     width: 96,
     height: 96,
+    zIndex: 100,
   },
 });

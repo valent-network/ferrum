@@ -40,7 +40,7 @@ function FriendPickerModal({ userContacts, isLoading, onRefresh, loadMoreUserCon
 const styles = StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     backgroundColor: secondaryColor,
   },
   contentContainer: {
@@ -50,11 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: secondaryColor,
   },
   closeIcon: {
-    alignSelf: 'flex-start',
     color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',
-    paddingLeft: 12,
+    paddingRight: 12,
   },
   modalWrapper: {
     flex: 1,

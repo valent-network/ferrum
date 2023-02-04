@@ -153,7 +153,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[0]}
                     onKeyPress={handleChar(0)}
                     placeholder="R"
-                    placeholderTextColor={secondaryColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -164,7 +164,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[1]}
                     onKeyPress={handleChar(1)}
                     placeholder="E"
-                    placeholderTextColor={secondaryColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -175,7 +175,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[2]}
                     onKeyPress={handleChar(2)}
                     placeholder="C"
-                    placeholderTextColor={secondaryColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -186,7 +186,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[3]}
                     onKeyPress={handleChar(3)}
                     placeholder="A"
-                    placeholderTextColor={secondaryColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -197,7 +197,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[4]}
                     onKeyPress={handleChar(4)}
                     placeholder="R"
-                    placeholderTextColor={secondaryColor}
+                    placeholderTextColor={simpleColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -244,15 +244,14 @@ const styles = StyleSheet.create({
   modalControlsContainer: {
     justifyContent: 'space-between',
     marginLeft: 16,
-    marginTop: 36,
   },
   contentContainer: {
-    padding: 16,
     flex: 1,
+    paddingHorizontal: 16,
   },
   closeIcon: {
-    alignSelf: 'flex-start',
-    color: secondaryColor,
+    alignSelf: 'flex-end',
+    color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -261,12 +260,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: simpleColor,
+    backgroundColor: secondaryColor,
     paddingVertical: 16,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-    paddingTop: 48,
-    height: '90%',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    height: '95%',
   },
   emptyArea: {
     height: '100%',
@@ -274,7 +272,7 @@ const styles = StyleSheet.create({
   noteText: {
     fontSize: 16,
     marginBottom: 8,
-    color: secondaryColor,
+    color: simpleColor,
   },
   confirmButton: {
     backgroundColor: activeColor,
@@ -283,7 +281,7 @@ const styles = StyleSheet.create({
   notFound: {
     fontSize: 100,
     marginVertical: 16,
-    color: secondaryColor,
+    color: simpleColor,
   },
   notFoundContainer: {
     alignItems: 'center',
@@ -295,7 +293,7 @@ const styles = StyleSheet.create({
   singleInput: {
     fontSize: 32,
     textAlign: 'center',
-    borderBottomColor: secondaryColor,
+    borderBottomColor: simpleColor,
     borderBottomWidth: 1,
     color: superActiveColor,
   },

@@ -109,14 +109,13 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
 const styles = StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   contentContainer: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 16,
     flexDirection: 'column',
   },
   closeIcon: {
-    alignSelf: 'flex-start',
     color: simpleColor,
     fontSize: 48,
     fontWeight: 'bold',

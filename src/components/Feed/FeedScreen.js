@@ -18,7 +18,7 @@ import Funnel from './Filters/Funnel';
 import PermissionsBox from './PermissionsBox';
 import ContactsUploading from './ContactsUploading';
 
-import { secondaryColor, activeColor } from 'colors';
+import { secondaryColor, activeColor, primaryColor } from 'colors';
 
 const FeedScreen = ({
   ads,
@@ -88,7 +88,7 @@ FeedScreen.navigationOptions = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
     alignItems: 'center',
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   filtersRow: {
     padding: 8,
     paddingTop: 0,
-    backgroundColor: secondaryColor,
   },
 });
 

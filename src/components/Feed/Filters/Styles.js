@@ -11,7 +11,6 @@ import {
 
 export default StyleSheet.create({
   modalContainer: {
-    backgroundColor: primaryColor,
     padding: 16,
   },
   modalControlsContainer: {
@@ -86,7 +85,7 @@ export default StyleSheet.create({
     color: secondaryColor,
   },
   safeArea: {
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     height: '95%',
     marginTop: 'auto',
     borderTopLeftRadius: 24,
@@ -106,7 +105,7 @@ export default StyleSheet.create({
   },
   searchBar: {
     borderRadius: 16,
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
     alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
   },
