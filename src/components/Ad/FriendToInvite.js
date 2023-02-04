@@ -7,7 +7,7 @@ import { Text, View, Button } from 'native-base';
 
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor, primaryColor } from 'colors';
+import { secondaryColor, activeColor, primaryColor, simpleColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 export default ({ friend, prepareInvitation }) => {
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   smallFont: {
-    fontSize: 10,
+    fontSize: 12,
+    color: simpleColor,
   },
 });

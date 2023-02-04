@@ -5,7 +5,7 @@ import { Text, View, Button } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
-import { activeColor } from 'colors';
+import { activeColor, simpleColor } from 'colors';
 
 import { initiateChatRoom } from 'actions/chat';
 import InvitationModal from 'components/Chat/InvitationModal';
@@ -45,8 +45,8 @@ class AskFriend extends React.PureComponent {
     return (
       <View>
         {direct_friend && (
-          <Text>
-            {t('ad.postedBy')} {direct_friend.name}
+          <Text style={{ color: simpleColor }}>
+            {t('ad.postedBy')} <Text style={{ fontWeight: 'bold' }}>{direct_friend.name}</Text>
           </Text>
         )}
 

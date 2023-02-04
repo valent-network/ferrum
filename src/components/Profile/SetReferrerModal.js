@@ -10,7 +10,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { getReferrer, setReferrer } from 'actions/profile';
 
-import { simpleColor, primaryColor, activeColor } from 'colors';
+import { simpleColor, primaryColor, activeColor, secondaryColor, superActiveColor } from 'colors';
 
 import { onReferralInfoPress } from 'utils';
 
@@ -153,7 +153,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[0]}
                     onKeyPress={handleChar(0)}
                     placeholder="R"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={secondaryColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -164,7 +164,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[1]}
                     onKeyPress={handleChar(1)}
                     placeholder="E"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={secondaryColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -175,7 +175,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[2]}
                     onKeyPress={handleChar(2)}
                     placeholder="C"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={secondaryColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -186,7 +186,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[3]}
                     onKeyPress={handleChar(3)}
                     placeholder="A"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={secondaryColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -197,7 +197,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[4]}
                     onKeyPress={handleChar(4)}
                     placeholder="R"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={secondaryColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -210,11 +210,11 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                   <View style={styles.userAvatarContainer}>
                     <UserAvatar size={48} name={user.name || ''} src={user.avatar} bgColor={activeColor} />
                   </View>
-                  <Text>
+                  <Text style={styles.noteText}>
                     {user.name} {t('profile.referrer.friendInvitesYou')}
                   </Text>
                   <Button style={styles.confirmButton} onPress={confirmInvitation} block>
-                    <Text>{t('profile.referrer.buttons.accepting')}</Text>
+                    <Text style={styles.noteText}>{t('profile.referrer.buttons.accepting')}</Text>
                   </Button>
                 </View>
               )}
@@ -222,14 +222,14 @@ function SetReferrerModal({ onClose, selfRefcode }) {
               {user.notFound && selfRefcode !== refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
-                  <Text>{t('profile.referrer.errors.userNotFound')}</Text>
+                  <Text style={styles.noteText}>{t('profile.referrer.errors.userNotFound')}</Text>
                 </View>
               )}
 
               {selfRefcode === refcode && (
                 <View style={styles.notFoundContainer}>
                   <Icon name="ios-sad" style={styles.notFound} />
-                  <Text>{t('profile.referrer.errors.selfInvitation')}</Text>
+                  <Text style={styles.noteText}>{t('profile.referrer.errors.selfInvitation')}</Text>
                 </View>
               )}
             </KeyboardAwareScrollView>
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-start',
-    color: simpleColor,
+    color: secondaryColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -261,12 +261,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   wrp: {
-    backgroundColor: primaryColor,
+    backgroundColor: simpleColor,
     paddingVertical: 16,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     paddingTop: 48,
-    height: '100%',
+    height: '90%',
   },
   emptyArea: {
     height: '100%',
@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
   noteText: {
     fontSize: 16,
     marginBottom: 8,
+    color: secondaryColor,
   },
   confirmButton: {
     backgroundColor: activeColor,
@@ -282,6 +283,7 @@ const styles = StyleSheet.create({
   notFound: {
     fontSize: 100,
     marginVertical: 16,
+    color: secondaryColor,
   },
   notFoundContainer: {
     alignItems: 'center',
@@ -293,9 +295,9 @@ const styles = StyleSheet.create({
   singleInput: {
     fontSize: 32,
     textAlign: 'center',
-    borderBottomColor: simpleColor,
+    borderBottomColor: secondaryColor,
     borderBottomWidth: 1,
-    color: activeColor,
+    color: superActiveColor,
   },
   refcodeInput: {
     flexDirection: 'row',

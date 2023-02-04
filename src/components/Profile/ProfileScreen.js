@@ -48,7 +48,6 @@ import {
   deletedColor,
   primaryColor,
   spinnerColor,
-  superActiveColor,
 } from 'colors';
 
 class ProfileScreen extends React.PureComponent {
@@ -193,7 +192,7 @@ class ProfileScreen extends React.PureComponent {
                   <Left>
                     <Text>{t('profile.labels.refCode')}</Text>
                   </Left>
-                  <Text style={styles.disabledText}>{user.refcode}</Text>
+                  <Text style={styles.readOnlyText}>{user.refcode}</Text>
                   <Icon style={styles.copyButton} name="copy" />
                 </ListItem>
                 <ListItem
@@ -205,7 +204,7 @@ class ProfileScreen extends React.PureComponent {
                   <Left>
                     <Text>{t('profile.labels.phoneNumber')}</Text>
                   </Left>
-                  <Text style={styles.disabledText}>{user.phoneNumber}</Text>
+                  <Text style={styles.readOnlyText}>{user.phoneNumber}</Text>
                 </ListItem>
 
                 {!user.referrer.refcode && (
@@ -226,7 +225,7 @@ class ProfileScreen extends React.PureComponent {
                         <Text>{t('profile.labels.referrer')}</Text>
                       </Left>
                       <Right>
-                        <Text style={styles.disabledText}>{user.referrer.refcode}</Text>
+                        <Text style={styles.readOnlyText}>{user.referrer.refcode}</Text>
                       </Right>
                     </ListItem>
                     {user.referrer && (
@@ -418,8 +417,9 @@ styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
-  disabledText: {
-    color: disabledColor,
+  readOnlyText: {
+    color: simpleColor,
+    fontWeight: 'bold',
   },
   noteText: {
     fontSize: 14,
@@ -432,7 +432,7 @@ styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   activeColor: {
-    color: superActiveColor,
+    color: activeColor,
   },
   mainColor: {
     color: simpleColor,
@@ -471,7 +471,7 @@ styles = StyleSheet.create({
     color: activeColor,
   },
   label: {
-    color: disabledColor,
+    color: simpleColor,
   },
   referrerContainer: {
     flexDirection: 'row',

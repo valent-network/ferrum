@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor } from 'colors';
+import { secondaryColor, activeColor, simpleColor } from 'colors';
 import Navigation from 'services/Navigation';
 
 export default ({ chat }) => {
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   smallFont: {
-    fontSize: 10,
+    fontSize: 12,
+    color: simpleColor,
   },
 });

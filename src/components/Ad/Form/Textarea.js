@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Styles';
 import { rules } from './helpers';
+import { disabledColor } from 'colors';
 
 export default function AdTextarea({ field, rowSpan, paramName, errors }) {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ export default function AdTextarea({ field, rowSpan, paramName, errors }) {
         rowSpan={rowSpan}
         bordered
         placeholder={t(`ad.params.placeholders.${paramName}`)}
+        placeholderTextColor={disabledColor}
         onChangeText={field.onChange}
         onBlur={field.onBlur}
         value={field.value}

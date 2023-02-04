@@ -12,6 +12,18 @@ import { primaryColor, simpleColor } from 'colors';
 
 const ImageViewerPageAnimationTimeoutMs = 150;
 
+const ImageHeader = ({ currentIndex, allSize, onClose }) => {
+  return (
+    <View style={styles.imageModalHeader}>
+      <Text style={styles.imageModalIndex}>
+        {' '}
+        {currentIndex + 1}/{allSize}{' '}
+      </Text>
+      <Icon name="close-outline" style={styles.imageModalCloseIcon} onPress={onClose} />
+    </View>
+  );
+};
+
 export default class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +74,6 @@ export default class ImageGallery extends React.Component {
         />
         <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
           <Badge style={styles.imageGalleryBadge}>
-            <Icon allowFontScaling={true} name="images-outline" style={styles.imageGalleryBadgeIcon} />
             <Text style={styles.imageGalleryBadgeText}>
               &nbsp;{this.state.currentImageIndex + 1} / {this.props.ad.images.length}
             </Text>
@@ -72,7 +83,7 @@ export default class ImageGallery extends React.Component {
         {withModal && (
           <Modal
             visible={this.state.imagesFullscreenOpened}
-            transparent={true}
+            transparent={false}
             animationType="fade"
             onRequestClose={this.handleOnPress}
           >
@@ -89,6 +100,10 @@ export default class ImageGallery extends React.Component {
                 pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
                 imageUrls={images.map(this.imageMapper)}
                 backgroundColor={primaryColor}
+                renderHeader={(currentIndex, allSize) => (
+                  <ImageHeader currentIndex={currentIndex} allSize={images.length} onClose={this.handleOnPress} />
+                )}
+                renderIndicator={() => null}
               />
             </View>
           </Modal>

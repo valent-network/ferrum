@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RefreshControl, ScrollView, Share } from 'react-native';
+import { RefreshControl, ScrollView, Share, SafeAreaView } from 'react-native';
 
 import {
   Text,

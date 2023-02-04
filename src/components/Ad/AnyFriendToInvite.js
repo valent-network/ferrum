@@ -3,7 +3,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Text, View, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor } from 'colors';
+import { secondaryColor, activeColor, simpleColor } from 'colors';
 
 export default ({ openFriendPickerModal }) => {
   const { t } = useTranslation();
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   smallFont: {
-    fontSize: 10,
+    fontSize: 12,
+    color: simpleColor,
   },
 });

@@ -8,7 +8,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { withTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, primaryColor, secondaryColor } from 'colors';
+import { activeColor, simpleColor, primaryColor, secondaryColor } from 'colors';
 
 import { invitationalSMS } from 'utils';
 
@@ -19,7 +19,7 @@ class UsersListItem extends React.PureComponent {
     return (
       <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent" style={styles.mainContainer}>
         <Left>
-          <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={secondaryColor} />
+          <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={simpleColor} />
         </Left>
         <Body>
           <Text>{contact.name}</Text>
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   },
   contactPhoneStyle: {
     fontSize: 12,
-    color: disabledColor,
+    color: simpleColor,
   },
 });

@@ -149,6 +149,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomScreen);
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    minHeight: '100%',
     backgroundColor: secondaryColor,
   },
   spinnerContainer: {
