@@ -22,7 +22,7 @@ import AdsListsScreen from 'components/AdsLists/AdsListsScreen';
 import BottomTabChatIcon from 'components/BottomTabChatIcon';
 import BottomTabIcon from 'components/BottomTabIcon';
 
-import { activeColor, primaryColor, disabledColor, secondaryColor, superActiveColor, simpleColor } from 'colors';
+import { activeColor, primaryColor, disabledColor, secondaryColor, superActiveColor, textColor } from 'colors';
 
 const defaultNavigationOptions = {
   cardStyle: {
@@ -177,7 +177,7 @@ const bottomTabsNavigator = createBottomTabNavigator(
         paddingTop: 4,
       },
       activeTintColor: activeColor,
-      inactiveTintColor: simpleColor,
+      inactiveTintColor: textColor,
     },
   },
 );

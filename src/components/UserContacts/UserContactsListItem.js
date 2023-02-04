@@ -7,7 +7,7 @@ import { Text, ListItem, Left, Right, Body, Icon, ActionSheet } from 'native-bas
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor, simpleColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor, textColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 class UserContactsListItem extends React.PureComponent {
@@ -71,7 +71,7 @@ class UserContactsListItem extends React.PureComponent {
               size={48}
               name={contact.name || this.user?.name || ''}
               src={this.user?.avatar}
-              bgColor={this.user ? activeColor : simpleColor}
+              bgColor={this.user ? activeColor : textColor}
             />
           </Left>
           <Body>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   contactPhoneStyle: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
   blockedUser: {
     opacity: 0.2,

@@ -12,7 +12,7 @@ import { withTranslation } from 'react-i18next';
 import {
   activeColor,
   trackColor,
-  simpleColor,
+  textColor,
   primaryColor,
   disabledColor,
   secondaryColor,
@@ -168,7 +168,7 @@ class LoginScreen extends React.Component {
               )}
               {step === 2 && (
                 <Text onPress={this.onRequest} style={styles.resendCodeText}>
-                  <Text style={{ color: simpleColor }}>{t('login.didntReceive')}</Text>
+                  <Text style={{ color: textColor }}>{t('login.didntReceive')}</Text>
                   &nbsp; {t('login.tryAgain')}
                 </Text>
               )}
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   h1: {
     fontWeight: 'bold',
     marginBottom: 8,
-    color: simpleColor,
+    color: textColor,
   },
   h2: {
     fontSize: 16,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 17,
-    color: simpleColor,
+    color: textColor,
     padding: 0,
     margin: 0,
   },
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
   activeColor: { color: activeColor },
   phoneInput: {
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: '100%',
     width: '100%',
-    color: simpleColor,
+    color: textColor,
     fontWeight: 'bold',
     borderWidth: 0,
   },
@@ -303,8 +303,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   flag: { marginLeft: 16 },
-  h2Note: { color: simpleColor, fontWeight: 'bold' },
+  h2Note: { color: textColor, fontWeight: 'bold' },
   countryCodeNoteContainer: { marginRight: 0 },
-  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: simpleColor },
+  countryCodeNote: { fontWeight: 'bold', fontSize: 18, color: textColor },
   h2Container: { marginBottom: 8 },
 });

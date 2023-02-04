@@ -3,7 +3,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Text, View, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor, simpleColor } from 'colors';
+import { secondaryColor, activeColor, textColor } from 'colors';
 
 export default ({ openFriendPickerModal }) => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export default ({ openFriendPickerModal }) => {
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
       <Button style={styles.button} onPress={openFriendPickerModal}>
-        <Text style={{ color: simpleColor }}>{t('ad.buttons.selectFriend')}</Text>
+        <Text style={{ color: textColor }}>{t('ad.buttons.selectFriend')}</Text>
       </Button>
     </View>
   );
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
 });

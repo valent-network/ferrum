@@ -8,7 +8,7 @@ import { Text, Icon } from 'native-base';
 import {
   priceColor,
   disabledColor,
-  simpleColor,
+  textColor,
   primaryColor,
   secondaryColor,
   activeColor,

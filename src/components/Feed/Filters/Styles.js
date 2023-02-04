@@ -3,7 +3,7 @@ import {
   activeColor,
   trackColor,
   primaryColor,
-  simpleColor,
+  textColor,
   disabledColor,
   secondaryColor,
   superActiveColor,
@@ -21,27 +21,27 @@ export default StyleSheet.create({
     borderRadius: 16,
   },
   closeIcon: {
-    color: simpleColor,
+    color: textColor,
     fontSize: 48,
     fontWeight: 'bold',
     height: 48,
   },
   resetControl: {
-    color: simpleColor,
+    color: textColor,
     alignSelf: 'center',
     fontSize: 14,
   },
   filtersHeader: {
     borderBottomWidth: 0,
     alignSelf: 'center',
-    color: simpleColor,
+    color: textColor,
   },
   filterTitle: {
     marginTop: 16,
     marginBottom: 12,
     fontWeight: 'bold',
     fontSize: 16,
-    color: simpleColor,
+    color: textColor,
   },
   filterBox: {
     borderColor: activeColor,
@@ -53,13 +53,13 @@ export default StyleSheet.create({
     backgroundColor: secondaryColor,
   },
   filterBoxText: {
-    color: simpleColor,
+    color: textColor,
   },
   activeFilterBoxText: {
     color: secondaryColor,
   },
   activeFilterBox: {
-    borderColor: simpleColor,
+    borderColor: textColor,
     borderWidth: 1,
     borderRadius: 32,
     marginRight: 12,
@@ -80,7 +80,7 @@ export default StyleSheet.create({
   },
   filterItem: {
     fontSize: 18,
-    color: simpleColor,
+    color: textColor,
   },
   activeFilterItem: {
     fontSize: 18,
@@ -119,7 +119,7 @@ export default StyleSheet.create({
     paddingBottom: 96,
   },
   inputTextColor: {
-    color: simpleColor,
+    color: textColor,
   },
   searchBarInput: {
     fontSize: 14,

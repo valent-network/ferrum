@@ -13,7 +13,7 @@ import { createAd } from 'actions/ads';
 
 import { defaultValues } from './Form/helpers';
 
-import { secondaryColor, simpleColor } from 'colors';
+import { secondaryColor, textColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -53,10 +53,10 @@ NewAdScreen.navigationOptions = ({ navigation }) => {
       shadowColor: 'transparent',
       borderBottomWidth: 0,
     },
-    headerTintColor: simpleColor,
+    headerTintColor: textColor,
     headerLeft: () => (
       <Icon
-        style={{ color: simpleColor, marginLeft: Platform.OS === 'android' ? 16 : 0 }}
+        style={{ color: textColor, marginLeft: Platform.OS === 'android' ? 16 : 0 }}
         name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
         onPress={goBack}
       />

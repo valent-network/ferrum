@@ -27,7 +27,7 @@ class ContactsUploading extends React.PureComponent {
     return (
       <View style={styles.centered}>
         <Image style={styles.picture} source={CONTACTS_UPLOADING} />
-        <Text style={{ color: simpleColor }}>{this.props.t('feed.contactsProcessingText')}</Text>
+        <Text style={{ color: textColor }}>{this.props.t('feed.contactsProcessingText')}</Text>
         <Spinner size="small" style={{ alignSelf: 'center' }} color={superActiveColor} />
       </View>
     );

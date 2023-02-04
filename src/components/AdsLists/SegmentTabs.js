@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './styles';
 
-import { secondaryColor, simpleColor, activeColor } from 'colors';
+import { secondaryColor, textColor, activeColor } from 'colors';
 
 export default function SegmentTabs({ currentTab, setCurrentTab }) {
   const { t } = useTranslation();

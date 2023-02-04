@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import {
   priceColor,
-  simpleColor,
+  textColor,
   primaryColor,
   secondaryColor,
   activeColor,
@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   textArea: {
     backgroundColor: secondaryColor,
-    color: simpleColor,
+    color: textColor,
     borderColor: secondaryColor,
     borderTopWidth: 1,
     borderLeftWidth: 1,
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     height: 1,
   },
   inputContainer: {
-    color: simpleColor,
+    color: textColor,
     backgroundColor: secondaryColor,
     borderBottomWidth: 0,
     marginTop: 16,
@@ -59,12 +59,12 @@ export default StyleSheet.create({
     marginLeft: 0,
   },
   input: {
-    color: simpleColor,
+    color: textColor,
   },
   labelText: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: simpleColor,
+    color: textColor,
   },
   labelTextError: {
     color: errorColor,
@@ -72,7 +72,7 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   pickerText: {
-    color: simpleColor,
+    color: textColor,
     paddingLeft: 0,
   },
   pickerPlaceholder: {
@@ -88,15 +88,15 @@ export default StyleSheet.create({
   pickerHeader: {
     backgroundColor: primaryColor,
     borderBottomColor: disabledColor,
-    color: simpleColor,
+    color: textColor,
   },
   pickerItemStyle: {
     borderBottomColor: notesColor,
     marginLeft: 0,
     paddingLeft: 8,
   },
-  headerBackButton: { color: simpleColor },
-  headerTitle: { color: simpleColor },
+  headerBackButton: { color: textColor },
+  headerTitle: { color: textColor },
   submitButtonWrapper: { margin: 8, marginBottom: 32, padding: 0 },
   submitButton: {},
   charLimitContainer: {
@@ -154,7 +154,7 @@ export default StyleSheet.create({
   addImageText: {
     fontWeight: '900',
     fontSize: 18,
-    color: simpleColor,
+    color: textColor,
   },
   addImageTextError: {
     color: deletedColor,
@@ -162,7 +162,7 @@ export default StyleSheet.create({
     fontSize: 18,
   },
   restoreText: {
-    color: simpleColor,
+    color: textColor,
     position: 'absolute',
     top: 0,
     padding: 16,

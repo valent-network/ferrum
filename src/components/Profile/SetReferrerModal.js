@@ -10,7 +10,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { getReferrer, setReferrer } from 'actions/profile';
 
-import { simpleColor, primaryColor, activeColor, secondaryColor, superActiveColor } from 'colors';
+import { textColor, primaryColor, activeColor, secondaryColor, superActiveColor } from 'colors';
 
 import { onReferralInfoPress } from 'utils';
 
@@ -153,7 +153,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[0]}
                     onKeyPress={handleChar(0)}
                     placeholder="R"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={textColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -164,7 +164,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[1]}
                     onKeyPress={handleChar(1)}
                     placeholder="E"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={textColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -175,7 +175,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[2]}
                     onKeyPress={handleChar(2)}
                     placeholder="C"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={textColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -186,7 +186,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[3]}
                     onKeyPress={handleChar(3)}
                     placeholder="A"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={textColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -197,7 +197,7 @@ function SetReferrerModal({ onClose, selfRefcode }) {
                     ref={charInputs[4]}
                     onKeyPress={handleChar(4)}
                     placeholder="R"
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={textColor}
                     returnKeyType={'done'}
                   />
                 </View>
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     alignSelf: 'flex-end',
-    color: simpleColor,
+    color: textColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   noteText: {
     fontSize: 16,
     marginBottom: 8,
-    color: simpleColor,
+    color: textColor,
   },
   confirmButton: {
     backgroundColor: activeColor,
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   notFound: {
     fontSize: 100,
     marginVertical: 16,
-    color: simpleColor,
+    color: textColor,
   },
   notFoundContainer: {
     alignItems: 'center',
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   singleInput: {
     fontSize: 32,
     textAlign: 'center',
-    borderBottomColor: simpleColor,
+    borderBottomColor: textColor,
     borderBottomWidth: 1,
     color: superActiveColor,
   },

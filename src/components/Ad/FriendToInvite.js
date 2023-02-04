@@ -7,7 +7,7 @@ import { Text, View, Button } from 'native-base';
 
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor, primaryColor, simpleColor } from 'colors';
+import { secondaryColor, activeColor, primaryColor, textColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 export default ({ friend, prepareInvitation }) => {
@@ -35,7 +35,7 @@ export default ({ friend, prepareInvitation }) => {
             : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
         }
       >
-        <Text style={{ color: simpleColor }}>
+        <Text style={{ color: textColor }}>
           {friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend')}
         </Text>
       </Button>
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
 });

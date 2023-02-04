@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor, superActiveColor, simpleColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor, superActiveColor, textColor } from 'colors';
 
 import { leaveChat } from 'actions/chat';
 
@@ -67,7 +67,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
       </Left>
       <Body style={styles.previewBody}>
         <Text style={styles.title}>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
-        <Text style={{ color: simpleColor }}>
+        <Text style={{ color: textColor }}>
           {lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? t('chat.you') : lastMessage.user.name)}
         </Text>
 
@@ -77,7 +77,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
         <Text style={[styles.smallFont, styles.centered]}>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
           <Badge style={styles.unreadBadge}>
-            <Text style={{ color: simpleColor }}>{chat.new_messages_count}</Text>
+            <Text style={{ color: textColor }}>{chat.new_messages_count}</Text>
           </Badge>
         )}
       </Right>
@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   smallFont: {
-    color: simpleColor,
+    color: textColor,
     fontSize: 13,
   },
   title: {
     fontWeight: 'bold',
-    color: simpleColor,
+    color: textColor,
   },
   notes: {
     paddingTop: 6,

@@ -8,7 +8,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { withTranslation } from 'react-i18next';
 
-import { activeColor, simpleColor, primaryColor, secondaryColor } from 'colors';
+import { activeColor, textColor, primaryColor, secondaryColor } from 'colors';
 
 import { invitationalSMS } from 'utils';
 
@@ -19,10 +19,10 @@ class UsersListItem extends React.PureComponent {
     return (
       <ListItem noIndent thumbnail noBorder activeOpacity={1} underlayColor="transparent" style={styles.mainContainer}>
         <Left>
-          <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={simpleColor} />
+          <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={textColor} />
         </Left>
         <Body>
-          <Text style={{ color: simpleColor }}>{contact.name}</Text>
+          <Text style={{ color: textColor }}>{contact.name}</Text>
           <Text style={styles.contactPhoneStyle}>{contact.phone}</Text>
         </Body>
         <Right>
@@ -30,7 +30,7 @@ class UsersListItem extends React.PureComponent {
             style={styles.actionButton}
             onPress={() => invitationalSMS(contact.phone, t('profile.inviteFriendSMSText'))}
           >
-            <Text style={{ color: simpleColor }}>{t('buttons.invite')}</Text>
+            <Text style={{ color: textColor }}>{t('buttons.invite')}</Text>
           </Button>
         </Right>
       </ListItem>
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   },
   contactPhoneStyle: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
 });

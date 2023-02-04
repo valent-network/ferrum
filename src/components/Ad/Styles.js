@@ -5,7 +5,7 @@ import {
   primaryColor,
   priceColor,
   deletedColor,
-  simpleColor,
+  textColor,
   disabledColor,
   superActiveColor,
 } from 'colors';
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   headerBackground: {
     backgroundColor: 'transparent',
     width: '100%',
-    color: simpleColor,
+    color: textColor,
     position: 'absolute',
     zIndex: 10,
     margin: 0,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     fontSize: 24,
-    color: simpleColor,
+    color: textColor,
   },
   price: {
     color: priceColor,
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 15,
     lineHeight: 15 * 1.5,
-    color: simpleColor,
+    color: textColor,
   },
   actionButtonsContainer: {
     flexDirection: 'row',
@@ -138,7 +138,7 @@ export const styles = StyleSheet.create({
   imageGalleryBadge: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    backgroundColor: simpleColor,
+    backgroundColor: textColor,
     opacity: 0.5,
     paddingBottom: 0,
   },
@@ -161,7 +161,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     zIndex: 1000,
   },
-  imageModalIndex: { color: simpleColor },
-  imageModalIndexCloseIcon: { color: simpleColor },
-  imageModalCloseIcon: { color: simpleColor },
+  imageModalIndex: { color: textColor },
+  imageModalIndexCloseIcon: { color: textColor },
+  imageModalCloseIcon: { color: textColor },
 });

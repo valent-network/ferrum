@@ -8,7 +8,7 @@ import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './Styles';
 
-import { primaryColor, simpleColor } from 'colors';
+import { primaryColor, textColor } from 'colors';
 
 const ImageViewerPageAnimationTimeoutMs = 150;
 

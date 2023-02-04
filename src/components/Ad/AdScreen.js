@@ -29,7 +29,7 @@ import OptionsList from './OptionsList';
 import Navigation from 'services/Navigation';
 
 import { styles } from './Styles';
-import { activeColor, simpleColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
+import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
 
 import i18n from 'services/i18n';
 

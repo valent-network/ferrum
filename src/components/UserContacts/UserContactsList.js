@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, primaryColor, simpleColor, spinnerColor, secondaryColor } from 'colors';
+import { activeColor, primaryColor, textColor, spinnerColor, secondaryColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 import ListNotFound from 'components/ListNotFound';

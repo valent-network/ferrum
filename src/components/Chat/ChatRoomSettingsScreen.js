@@ -5,7 +5,7 @@ import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'na
 
 import {
   activeColor,
-  simpleColor,
+  textColor,
   disabledColor,
   secondaryColor,
   spinnerColor,
@@ -105,14 +105,14 @@ function ChatRoomsSettingsScreen({
       <Image source={imageSource} style={styles.adPhoto} />
       <View style={styles.infoContainer}>
         {chat.ad_id && (
-          <Text style={{ color: simpleColor }} onPress={onShow}>
+          <Text style={{ color: textColor }} onPress={onShow}>
             {chat.title}
             {'\n'}
             {<Text style={{ color: activeColor }}>{t('chat.settings.more')}</Text>}
           </Text>
         )}
 
-        {!chat.ad_id && <Text style={{ color: simpleColor }}>{chat.title}</Text>}
+        {!chat.ad_id && <Text style={{ color: textColor }}>{chat.title}</Text>}
       </View>
       <Text style={styles.leaveChat} onPress={onLeave}>
         {t('chat.settings.leaveChat')}&nbsp;
@@ -147,11 +147,11 @@ function mapDispatchToProps(dispatch) {
 ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
   return {
     title: '',
-    headerTitleStyle: { color: simpleColor },
+    headerTitleStyle: { color: textColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: simpleColor,
+    headerTintColor: textColor,
     headerShown: true,
     headerTransparent: true,
   };
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   separatorText: {
     fontSize: 18,
-    color: simpleColor,
+    color: textColor,
     marginLeft: 16,
     paddingVertical: 16,
     fontWeight: 'bold',

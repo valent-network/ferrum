@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { simpleColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
+import { textColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
 
 import { getChatRooms } from 'actions/chat';
 
@@ -69,8 +69,8 @@ function mapDispatchToProps(dispatch) {
 ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
   return {
     headerShown: true,
-    headerTitleStyle: { color: simpleColor },
-    headerTintColor: simpleColor,
+    headerTitleStyle: { color: textColor },
+    headerTintColor: textColor,
     headerBackTitleVisible: false,
     headerStyle: {
       backgroundColor: secondaryColor,

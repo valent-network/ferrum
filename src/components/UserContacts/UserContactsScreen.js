@@ -15,7 +15,7 @@ import { loadMoreUserContacts, getAll, updateQuery, toggleBlock } from 'actions/
 import { filterByContact } from 'actions/feed';
 import PermissionsBox from 'components/Feed/PermissionsBox';
 
-import { primaryColor, secondaryColor, simpleColor, disabledColor } from 'colors';
+import { primaryColor, secondaryColor, textColor, disabledColor } from 'colors';
 
 class UserContactsScreen extends React.PureComponent {
   typingTimer = null;
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   },
   inputTextColor: {
-    color: simpleColor,
+    color: textColor,
   },
-  backButton: { color: simpleColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
+  backButton: { color: textColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
 });

@@ -19,7 +19,7 @@ const BottomTabChatIcon = ({ tintColor, unreadMessagesCount }) => {
     <FooterTab style={styles.footerTab}>
       <Button badge vertical activeOpacity={1} onPress={() => Navigation.navigate('ChatRoomsListScreen')}>
         <Badge style={styles.badge}>
-          <Text style={{ color: simpleColor }}>{unreadMessagesCount}</Text>
+          <Text style={{ color: textColor }}>{unreadMessagesCount}</Text>
         </Badge>
         {icon}
       </Button>

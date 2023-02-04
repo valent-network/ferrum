@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
-import { secondaryColor, activeColor, simpleColor } from 'colors';
+import { secondaryColor, activeColor, textColor } from 'colors';
 import Navigation from 'services/Navigation';
 
 export default ({ chat }) => {
@@ -27,7 +27,7 @@ export default ({ chat }) => {
         {'\n'}
       </Text>
       <Button style={styles.button} onPress={() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id })}>
-        <Text style={{ color: simpleColor }}>{t('ad.buttons.continueChat')}</Text>
+        <Text style={{ color: textColor }}>{t('ad.buttons.continueChat')}</Text>
       </Button>
     </View>
   );
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
-    color: simpleColor,
+    color: textColor,
   },
 });

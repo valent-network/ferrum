@@ -42,7 +42,7 @@ import { goToSettings, onTosPress, onPrivacyPress, onReferralInfoPress, notifica
 
 import {
   activeColor,
-  simpleColor,
+  textColor,
   disabledColor,
   secondaryColor,
   deletedColor,
@@ -190,7 +190,7 @@ class ProfileScreen extends React.PureComponent {
                   onPress={this.copyRefcode}
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.refCode')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.refCode')}</Text>
                   </Left>
                   <Text style={styles.readOnlyText}>{user.refcode}</Text>
                   <Icon style={styles.copyButton} name="copy" />
@@ -202,14 +202,14 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.phoneNumber')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.phoneNumber')}</Text>
                   </Left>
                   <Text style={styles.readOnlyText}>{user.phoneNumber}</Text>
                 </ListItem>
 
                 {!user.referrer.refcode && (
                   <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
-                    <Text style={{ color: simpleColor }}>{t('profile.actions.enterRefCode')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.actions.enterRefCode')}</Text>
                   </Button>
                 )}
 
@@ -222,7 +222,7 @@ class ProfileScreen extends React.PureComponent {
                       underlayColor="transparent"
                     >
                       <Left>
-                        <Text style={{ color: simpleColor }}>{t('profile.labels.referrer')}</Text>
+                        <Text style={{ color: textColor }}>{t('profile.labels.referrer')}</Text>
                       </Left>
                       <Right>
                         <Text style={styles.readOnlyText}>{user.referrer.refcode}</Text>
@@ -256,7 +256,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.contactsBook')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.contactsBook')}</Text>
                   </Left>
                   <Right>
                     <Text style={styles.deletedColor}>{t('actions.delete')}</Text>
@@ -272,7 +272,7 @@ class ProfileScreen extends React.PureComponent {
                     underlayColor="transparent"
                   >
                     <Left>
-                      <Text style={{ color: simpleColor }}>Українська / English</Text>
+                      <Text style={{ color: textColor }}>Українська / English</Text>
                     </Left>
                     <Right>
                       <Icon name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'} />
@@ -287,7 +287,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.friends')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.friends')}</Text>
                   </Left>
                   <Right>
                     <Icon
@@ -304,7 +304,7 @@ class ProfileScreen extends React.PureComponent {
                   underlayColor="transparent"
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.inviteFriends')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.inviteFriends')}</Text>
                   </Left>
                   <Right>
                     <Icon
@@ -368,7 +368,7 @@ class ProfileScreen extends React.PureComponent {
                   style={[styles.itemContainer, styles.withBorderBottom]}
                 >
                   <Left>
-                    <Text style={{ color: simpleColor }}>{t('profile.labels.signOut')}</Text>
+                    <Text style={{ color: textColor }}>{t('profile.labels.signOut')}</Text>
                   </Left>
                   <Right>
                     <Icon style={styles.deletedColor} name="log-out-outline" />
@@ -418,13 +418,13 @@ styles = StyleSheet.create({
     flex: 1,
   },
   readOnlyText: {
-    color: simpleColor,
+    color: textColor,
     fontWeight: 'bold',
   },
   noteText: {
     fontSize: 14,
     padding: 16,
-    color: simpleColor,
+    color: textColor,
   },
   itemContainer: {
     backgroundColor: primaryColor,
@@ -436,13 +436,13 @@ styles = StyleSheet.create({
     color: activeColor,
   },
   mainColor: {
-    color: simpleColor,
+    color: textColor,
   },
   deletedColor: {
     color: deletedColor,
   },
   nameInput: {
-    color: simpleColor,
+    color: textColor,
     fontSize: 14,
     height: '100%',
     padding: 0,
@@ -472,7 +472,7 @@ styles = StyleSheet.create({
     color: activeColor,
   },
   label: {
-    color: simpleColor,
+    color: textColor,
   },
   referrerContainer: {
     flexDirection: 'row',
@@ -484,6 +484,6 @@ styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   bottomLinks: {
-    color: simpleColor,
+    color: textColor,
   },
 });

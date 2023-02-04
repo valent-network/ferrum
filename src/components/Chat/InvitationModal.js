@@ -9,7 +9,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { updateUserName } from 'actions/profile';
 
-import { simpleColor, activeColor, secondaryColor, disabledColor, primaryColor, deletedColor } from 'colors';
+import { textColor, activeColor, secondaryColor, disabledColor, primaryColor, deletedColor } from 'colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const { t } = useTranslation();
@@ -41,13 +41,13 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               <UserAvatar size={48} name={friend.name || ''} src={friend.avatar} bgColor={activeColor} />
             </View>
             <Text style={styles.friendInfo}>
-              <Text style={{ color: simpleColor, fontSize: 22 }}>{friend.name}</Text>
+              <Text style={{ color: textColor, fontSize: 22 }}>{friend.name}</Text>
               {'\n'}
               {friend.phone_number}
             </Text>
             {!userNamePresent && (
               <View style={styles.emptyUserNameContainer}>
-                <Text style={{ color: simpleColor }}>{t('chat.nameYourselfText')}</Text>
+                <Text style={{ color: textColor }}>{t('chat.nameYourselfText')}</Text>
                 <Item>
                   <Input
                     style={styles.nameInput}
@@ -64,7 +64,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                   onPress={() => updateUserName(userName)}
                   style={!userName || !userName.length ? styles.disabledSubmitButton : styles.activeSubmitButton}
                 >
-                  <Text style={{ color: simpleColor }}>{t('chat.buttons.setMyName')}</Text>
+                  <Text style={{ color: textColor }}>{t('chat.buttons.setMyName')}</Text>
                 </Button>
               </View>
             )}
@@ -74,7 +74,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               <TouchableOpacity key={n} onPress={() => setName(n)}>
                 <View style={styles.introduceNameContainer}>
                   <Icon name={name === n ? 'ellipse' : 'ellipse-outline'} style={styles.introduceOption} />
-                  <Text style={{ color: simpleColor }}>{n}</Text>
+                  <Text style={{ color: textColor }}>{n}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -97,7 +97,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}
             >
-              <Text style={{ color: simpleColor }}>{t('chat.buttons.addFriend')}</Text>
+              <Text style={{ color: textColor }}>{t('chat.buttons.addFriend')}</Text>
             </Button>
           </View>
         </View>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   closeIcon: {
-    color: simpleColor,
+    color: textColor,
     fontSize: 48,
     fontWeight: 'bold',
   },
@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
   emptyArea: {
     height: '100%',
   },
-  introduceOption: { fontSize: 18, marginRight: 8, color: simpleColor },
-  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: simpleColor },
+  introduceOption: { fontSize: 18, marginRight: 8, color: textColor },
+  activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: textColor },
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
-  friendInfo: { color: simpleColor, alignSelf: 'center', textAlign: 'center' },
+  friendInfo: { color: textColor, alignSelf: 'center', textAlign: 'center' },
   emptyUserNameContainer: {
     backgroundColor: deletedColor,
     padding: 16,
@@ -152,9 +152,9 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
-  introHeader: { marginVertical: 16, color: simpleColor },
+  introHeader: { marginVertical: 16, color: textColor },
   nameInput: {
-    color: simpleColor,
+    color: textColor,
   },
   userAvatarContainer: {
     width: 48,

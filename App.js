@@ -26,7 +26,7 @@ import Notification from 'components/Notification';
 
 import Root from 'components/Root';
 
-import { darkColor, simpleColor, primaryColor } from 'colors';
+import { darkColor, textColor, primaryColor } from 'colors';
 
 // console.disableYellowBox = true;
 

@@ -12,7 +12,7 @@ import * as ActionTypes from 'actions/types';
 
 import { applyFilter, resetFilters } from 'actions/feed';
 
-import { simpleColor } from 'colors';
+import { textColor } from 'colors';
 
 import styles from './Styles';
 
@@ -129,7 +129,7 @@ const FiltersModal = ({
         </KeyboardAwareScrollView>
         <View style={styles.submitButtonWrapper}>
           <Button block onPress={onClose} style={styles.submitButton}>
-            <Text style={{ color: simpleColor }}>{t('feed.filters.submit')}</Text>
+            <Text style={{ color: textColor }}>{t('feed.filters.submit')}</Text>
           </Button>
         </View>
       </SafeAreaView>

@@ -11,7 +11,7 @@ import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from 'actions/userContacts';
 
-import { primaryColor, simpleColor, activeColor, secondaryColor } from 'colors';
+import { primaryColor, textColor, activeColor, secondaryColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -48,11 +48,11 @@ InviteFriendsScreen.navigationOptions = ({ navigation }) => {
       },
     },
     headerTitle: i18n.t('nav.titles.inviteFriends'),
-    headerTitleStyle: { color: simpleColor },
+    headerTitleStyle: { color: textColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: simpleColor,
+    headerTintColor: textColor,
     headerRight: () => <Icon name="share-outline" style={styles.socialShare} onPress={shareAction} />,
   };
 };

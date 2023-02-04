@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
 
-import { activeColor, simpleColor, spinnerColor } from 'colors';
+import { activeColor, textColor, spinnerColor } from 'colors';
 
 import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
