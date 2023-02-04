@@ -59,6 +59,8 @@ class AdsListItem extends React.PureComponent {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.imagePreviewContainer}>
+          <ImageGallery ad={ad} onPress={this.onPress.bind(this)} imageStyle={{ height: 350 }} withModal={false} />
+          {!image && <View style={styles.imagePlaceholder}></View>}
           <View style={styles.detailsContainer}>
             <TouchableOpacity activeOpacity={1} onPress={this.onPress.bind(this)}>
               <View style={styles.detailsRow}>
@@ -81,7 +83,7 @@ class AdsListItem extends React.PureComponent {
                 <Icon
                   name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
                   onPress={this.favAction}
-                  style={[{}, ad.favorite ? { color: activeColor } : { color: secondaryColor }]}
+                  style={[{}, ad.favorite ? { color: activeColor } : { color: textColor }]}
                 />
                 <Text style={styles.notes}>
                   {ad.region}, {ad.updated_at}
@@ -89,8 +91,6 @@ class AdsListItem extends React.PureComponent {
               </View>
             </TouchableOpacity>
           </View>
-          <ImageGallery ad={ad} onPress={this.onPress.bind(this)} imageStyle={{ height: 500 }} withModal={false} />
-          {!image && <View style={styles.imagePlaceholder}></View>}
         </View>
       </View>
     );
@@ -104,7 +104,7 @@ AdsListItem.propTypes = {};
 const styles = StyleSheet.create({
   title: {
     marginBottom: 8,
-    color: secondaryColor,
+    color: textColor,
     fontSize: 24,
   },
   imagePreviewContainer: {
@@ -117,21 +117,14 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    width: '100%',
-    justifyContent: 'flex-end',
-    bottom: 0,
-
-    position: 'absolute',
-    zIndex: 100000,
   },
   option: {
     marginBottom: 12,
-    color: secondaryColor,
+    color: textColor,
     fontSize: 14,
   },
   notes: {
-    color: secondaryColor,
+    color: textColor,
     fontSize: 14,
   },
   price: {

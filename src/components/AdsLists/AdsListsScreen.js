@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Container, Header, Title } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
@@ -37,7 +37,9 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
       >
         <Title style={styles.title}>{t('nav.titles.ads')}</Title>
       </Header>
-      {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
+      <View style={{ marginBottom: 24 }}>
+        {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
+      </View>
       {<AdsList onAdOpened={onAdOpened} ads={ads} isLoading={isLoading} />}
     </Container>
   );
