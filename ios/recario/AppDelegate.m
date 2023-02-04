@@ -29,7 +29,7 @@
                                                    moduleName:@"recario"
                                             initialProperties:nil];
 
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:1];
+  rootView.backgroundColor = UIColor.linkColor;
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

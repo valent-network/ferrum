@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,12 +14,12 @@
             <rect key="frame" x="0.0" y="0.0" width="428" height="869"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lc3-jF-oQ0">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="spatial" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lc3-jF-oQ0">
                     <rect key="frame" x="104" y="341" width="221" height="187"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBlueColor"/>
             <nil key="simulatedStatusBarMetrics"/>
             <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="172.42990654205607" y="339.52483801295898"/>
@@ -26,5 +27,8 @@
     </objects>
     <resources>
         <image name="logo.png" width="220.75" height="186.25"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
