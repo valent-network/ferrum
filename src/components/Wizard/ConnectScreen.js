@@ -9,6 +9,8 @@ import PICTURE from 'assets/wizard-connect.png';
 
 import styles from './styles';
 
+import { primaryColor } from 'colors';
+
 class ConnectScreen extends React.PureComponent {
   nextStep = () => {
     this.props.navigation.navigate('ContactsRequestScreen');

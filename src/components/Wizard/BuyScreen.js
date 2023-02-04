@@ -9,6 +9,8 @@ import PICTURE from 'assets/wizard-buy.png';
 
 import styles from './styles';
 
+import { primaryColor } from 'colors';
+
 class BuyScreen extends React.PureComponent {
   nextStep = () => {
     this.props.navigation.navigate('SellScreen');

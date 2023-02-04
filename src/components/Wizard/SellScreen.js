@@ -9,6 +9,8 @@ import PICTURE from 'assets/wizard-sell.png';
 
 import styles from './styles';
 
+import { primaryColor } from 'colors';
+
 class SellScreen extends React.PureComponent {
   nextStep = () => {
     this.props.navigation.navigate('ConnectScreen');

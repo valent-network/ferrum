@@ -16,6 +16,8 @@ import PICTURE from 'assets/wizard-notifications.gif';
 
 import styles from './styles';
 
+import { primaryColor } from 'colors';
+
 class NotificationsRequestScreen extends React.PureComponent {
   nextStep = () => {
     this.props.setWizardDone();

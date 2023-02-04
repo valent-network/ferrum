@@ -14,6 +14,8 @@ import PICTURE from 'assets/wizard-contacts.gif';
 
 import styles from './styles';
 
+import { primaryColor } from 'colors';
+
 class ContactsRequestScreen extends React.PureComponent {
   goTo = () => {
     const { setWizardDone } = this.props;
