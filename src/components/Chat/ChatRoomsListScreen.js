@@ -6,7 +6,7 @@ import { Text, Container, Content, List, Spinner } from 'native-base';
 
 import ChatRoomListItem from './ChatRoomListItem';
 
-import { simpleColor, spinnerColor, secondaryColor } from 'colors';
+import { simpleColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
 
 import { getChatRooms } from 'actions/chat';
 
@@ -27,7 +27,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset, current
 
   if (chats.length === 0) {
     return isLoading ? (
-      <Container>
+      <Container style={{ backgroundColor: primaryColor }}>
         <Content>
           <Spinner color={spinnerColor} />
         </Content>
@@ -38,7 +38,7 @@ function ChatRoomsListScreen({ chats, isLoading, getChatRoomsWithOffset, current
   }
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: primaryColor }}>
       <SafeAreaView style={styles.safeContainer}>
         <FlatList
           data={chats}

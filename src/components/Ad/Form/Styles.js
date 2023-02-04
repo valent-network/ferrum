@@ -154,15 +154,17 @@ export default StyleSheet.create({
   addImageText: {
     fontWeight: '900',
     fontSize: 18,
+    color: simpleColor,
   },
   addImageTextError: {
     color: deletedColor,
     fontWeight: 'bold',
+    fontSize: 18,
   },
   restoreText: {
     color: simpleColor,
     position: 'absolute',
-    bottom: 0,
+    top: 0,
     padding: 16,
     fontWeight: 'bold',
   },

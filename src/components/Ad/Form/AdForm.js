@@ -14,7 +14,7 @@ import Textarea from './Textarea';
 import Picker from './Picker';
 import AdImagePicker from './AdImagePicker';
 import AdImagePickerItem from './AdImagePickerItem';
-import { spinnerColor, activeColor, simpleColor } from 'colors';
+import { spinnerColor, activeColor, simpleColor, primaryColor } from 'colors';
 import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
 
 import { reposition } from 'utils';
@@ -30,7 +30,7 @@ const AdForm = ({
 }) => {
   if (!categories.length) {
     return (
-      <Container>
+      <Container style={{ backgroundColor: primaryColor }}>
         <Content>
           <Spinner color={spinnerColor} />
         </Content>
@@ -261,7 +261,7 @@ const AdForm = ({
   };
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: primaryColor }}>
       <Content padder enableResetScrollToCoords={false}>
         <Form>
           <View style={[styles.pickerContainer, { padding: 8, paddingVertical: 16 }]}>
@@ -272,7 +272,7 @@ const AdForm = ({
               error={errors.ad_images}
             />
             {!defaultValues.native && (
-              <Text>
+              <Text style={{ color: simpleColor }}>
                 <Icon name="information-circle" style={styles.infoIcon} />
                 {t('ad.params.notes.ad_images_non_native')}
               </Text>
@@ -391,7 +391,7 @@ const AdForm = ({
           {isLoading || imagesUploading ? (
             <Spinner color={spinnerColor} />
           ) : (
-            <Text>{newRecord ? t('actions.create') : t('actions.update')}</Text>
+            <Text style={{ color: simpleColor }}>{newRecord ? t('actions.create') : t('actions.update')}</Text>
           )}
         </Button>
       </View>

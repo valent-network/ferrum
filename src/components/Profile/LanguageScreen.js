@@ -23,12 +23,12 @@ function LanguageScreen({ navigation }) {
   }
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: primaryColor }}>
       <Content>
         <List>
           <ListItem selected={locale === 'uk'} onPress={() => changeLocale('uk')}>
             <Left>
-              <Text>🇺🇦 Українська</Text>
+              <Text style={{ color: simpleColor }}>🇺🇦 Українська</Text>
             </Left>
             <Right>
               <Radio selected={locale === 'uk'} onPress={() => changeLocale('uk')} />
@@ -36,7 +36,7 @@ function LanguageScreen({ navigation }) {
           </ListItem>
           <ListItem selected={locale === 'en'} onPress={() => changeLocale('en')}>
             <Left>
-              <Text>🇬🇧 English</Text>
+              <Text style={{ color: simpleColor }}>🇬🇧 English</Text>
             </Left>
             <Right>
               <Radio selected={locale === 'en'} onPress={() => changeLocale('en')} />
@@ -45,14 +45,14 @@ function LanguageScreen({ navigation }) {
         </List>
 
         <View style={styles.notes}>
-          <Text>
+          <Text style={{ color: simpleColor }}>
             Для того, щоб весь контент було коректно перекладено відповідно до ваших налаштувань, може знадобитись
             перезавантаження додатку. Вибачте за незручності
           </Text>
         </View>
 
         <View style={styles.notes}>
-          <Text>
+          <Text style={{ color: simpleColor }}>
             In order to correctly translate everything, application reload may be required. We are sorry for this
             inconvenience
           </Text>

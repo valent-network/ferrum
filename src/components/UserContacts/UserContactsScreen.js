@@ -39,7 +39,7 @@ class UserContactsScreen extends React.PureComponent {
     };
 
     return (
-      <Container>
+      <Container style={{ backgroundColor: primaryColor }}>
         <Header style={styles.mainHeader} iosBarStyle="dark-content" noShadow={true} searchBar>
           <Icon
             name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
@@ -123,5 +123,5 @@ const styles = StyleSheet.create({
   inputTextColor: {
     color: simpleColor,
   },
-  backButton: { fontSize: Platform.OS === 'android' ? 24 : 33 },
+  backButton: { color: simpleColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
 });

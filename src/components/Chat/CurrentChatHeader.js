@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { decOfNum } from 'utils';
-import { spinnerColor } from 'colors';
+import { spinnerColor, simpleColor } from 'colors';
 
 import Navigation from 'services/Navigation';
 
@@ -28,9 +28,11 @@ const HeaderTitle = ({ chat, isLoading, navigation }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.centered}>
-        <Text numberOfLines={1}>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
+        <Text style={{ color: simpleColor }} numberOfLines={1}>
+          {chat.system ? t('chat.systemChatTitle') : chat.title}
+        </Text>
         {chatRoomUsersCount > 0 && !chat.system && (
-          <Text>
+          <Text style={{ color: simpleColor }}>
             {chatRoomUsersCount} {membersWord}
           </Text>
         )}

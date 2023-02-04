@@ -87,6 +87,7 @@ export const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 15,
     lineHeight: 15 * 1.5,
+    color: simpleColor,
   },
   actionButtonsContainer: {
     flexDirection: 'row',
@@ -162,4 +163,5 @@ export const styles = StyleSheet.create({
   },
   imageModalIndex: { color: simpleColor },
   imageModalIndexCloseIcon: { color: simpleColor },
+  imageModalCloseIcon: { color: simpleColor },
 });

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Text, View, Icon } from 'native-base';
 import { withTranslation } from 'react-i18next';
 
-import { activeColor } from 'colors';
+import { activeColor, simpleColor } from 'colors';
 
 class OptionsList extends React.PureComponent {
   goToAdSource = () => Linking.openURL(this.props.ad.url);
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 14,
     padding: 8,
+    color: simpleColor,
   },
   sourceIcon: {
     fontSize: 15,

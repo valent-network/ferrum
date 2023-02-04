@@ -46,7 +46,9 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
                 : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
             }
           >
-            <Text>{friend.user_id ? t('chat.buttons.addFriend') : t('ad.buttons.inviteFriend')}</Text>
+            <Text style={{ color: simpleColor }}>
+              {friend.user_id ? t('chat.buttons.addFriend') : t('ad.buttons.inviteFriend')}
+            </Text>
           </Button>
         </Right>
       )}

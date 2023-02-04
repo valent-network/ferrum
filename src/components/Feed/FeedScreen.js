@@ -36,7 +36,7 @@ const FeedScreen = ({
   };
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: primaryColor }}>
       <Header style={styles.mainHeader} iosBarStyle="dark-content" noShadow={true} searchBar rounded>
         <SearchBar />
       </Header>

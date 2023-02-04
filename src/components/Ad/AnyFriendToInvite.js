@@ -15,7 +15,7 @@ export default ({ openFriendPickerModal }) => {
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
       <Button style={styles.button} onPress={openFriendPickerModal}>
-        <Text>{t('ad.buttons.selectFriend')}</Text>
+        <Text style={{ color: simpleColor }}>{t('ad.buttons.selectFriend')}</Text>
       </Button>
     </View>
   );

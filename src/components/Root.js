@@ -28,7 +28,7 @@ import { getSettings } from 'actions/settings';
 
 import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnread } from 'actions/chat';
 
-import { activeColor, spinnerColor } from 'colors';
+import { activeColor, spinnerColor, primaryColor } from 'colors';
 
 import { getCachedLocale, getAccessToken, getWizardDone, getPushToken } from 'services/AsyncStorage';
 
@@ -213,7 +213,7 @@ class Root extends React.Component {
 
     if (isLoading || this.state.wizardLoading) {
       return (
-        <Container>
+        <Container style={{ backgroundColor: primaryColor }}>
           <Content>
             <Spinner color={spinnerColor} />
           </Content>

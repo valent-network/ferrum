@@ -19,7 +19,7 @@ class SellScreen extends React.PureComponent {
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        <Container>
+        <Container style={{ backgroundColor: primaryColor }}>
           <Content>
             <Image style={styles.picture} source={PICTURE} />
             <H1 style={styles.h1}>{t('wizzard.sellH1')}</H1>

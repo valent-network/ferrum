@@ -102,7 +102,7 @@ class LoginScreen extends React.Component {
     );
     if (isLoading) {
       return (
-        <Container>
+        <Container style={{ backgroundColor: primaryColor }}>
           <Content>
             <Spinner color={spinnerColor} />
           </Content>
@@ -151,7 +151,7 @@ class LoginScreen extends React.Component {
                 </Left>
                 <Right style={styles.switchContainer}>
                   <Switch
-                    thumbColor={simpleColor}
+                    thumbColor={secondaryColor}
                     trackColor={trackColor}
                     ios_backgroundColor={secondaryColor}
                     onValueChange={this.changeTosAcceptance}
@@ -168,7 +168,7 @@ class LoginScreen extends React.Component {
               )}
               {step === 2 && (
                 <Text onPress={this.onRequest} style={styles.resendCodeText}>
-                  <Text>{t('login.didntReceive')}</Text>
+                  <Text style={{ color: simpleColor }}>{t('login.didntReceive')}</Text>
                   &nbsp; {t('login.tryAgain')}
                 </Text>
               )}
@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
   },
   smallFont: {
     fontSize: 12,
+    color: simpleColor,
   },
   activeColor: { color: activeColor },
   phoneInput: {
@@ -273,7 +274,7 @@ const styles = StyleSheet.create({
   switchContainer: { flex: 0 },
   tosContainer: {
     borderBottomWidth: 0,
-    marginTop: 8,
+    marginTop: 16,
   },
   tosTextContainer: {
     flexDirection: 'row',

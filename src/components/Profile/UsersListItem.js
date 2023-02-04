@@ -22,7 +22,7 @@ class UsersListItem extends React.PureComponent {
           <UserAvatar size={48} name={contact.name || ''} src={null} bgColor={simpleColor} />
         </Left>
         <Body>
-          <Text>{contact.name}</Text>
+          <Text style={{ color: simpleColor }}>{contact.name}</Text>
           <Text style={styles.contactPhoneStyle}>{contact.phone}</Text>
         </Body>
         <Right>
@@ -30,7 +30,7 @@ class UsersListItem extends React.PureComponent {
             style={styles.actionButton}
             onPress={() => invitationalSMS(contact.phone, t('profile.inviteFriendSMSText'))}
           >
-            <Text>{t('buttons.invite')}</Text>
+            <Text style={{ color: simpleColor }}>{t('buttons.invite')}</Text>
           </Button>
         </Right>
       </ListItem>

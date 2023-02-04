@@ -3,7 +3,15 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
-import { activeColor, simpleColor, disabledColor, secondaryColor, spinnerColor, deletedColor } from 'colors';
+import {
+  activeColor,
+  simpleColor,
+  disabledColor,
+  secondaryColor,
+  spinnerColor,
+  deletedColor,
+  primaryColor,
+} from 'colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
 
@@ -93,18 +101,18 @@ function ChatRoomsSettingsScreen({
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: primaryColor }}>
       <Image source={imageSource} style={styles.adPhoto} />
       <View style={styles.infoContainer}>
         {chat.ad_id && (
-          <Text onPress={onShow}>
+          <Text style={{ color: simpleColor }} onPress={onShow}>
             {chat.title}
             {'\n'}
             {<Text style={{ color: activeColor }}>{t('chat.settings.more')}</Text>}
           </Text>
         )}
 
-        {!chat.ad_id && <Text>{chat.title}</Text>}
+        {!chat.ad_id && <Text style={{ color: simpleColor }}>{chat.title}</Text>}
       </View>
       <Text style={styles.leaveChat} onPress={onLeave}>
         {t('chat.settings.leaveChat')}&nbsp;

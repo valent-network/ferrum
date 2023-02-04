@@ -56,7 +56,7 @@ NewAdScreen.navigationOptions = ({ navigation }) => {
     headerTintColor: simpleColor,
     headerLeft: () => (
       <Icon
-        style={{ marginLeft: Platform.OS === 'android' ? 16 : 0 }}
+        style={{ color: simpleColor, marginLeft: Platform.OS === 'android' ? 16 : 0 }}
         name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
         onPress={goBack}
       />

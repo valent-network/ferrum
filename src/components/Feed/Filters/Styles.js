@@ -34,12 +34,14 @@ export default StyleSheet.create({
   filtersHeader: {
     borderBottomWidth: 0,
     alignSelf: 'center',
+    color: simpleColor,
   },
   filterTitle: {
     marginTop: 16,
     marginBottom: 12,
     fontWeight: 'bold',
     fontSize: 16,
+    color: simpleColor,
   },
   filterBox: {
     borderColor: activeColor,

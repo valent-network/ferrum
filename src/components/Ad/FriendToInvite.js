@@ -35,7 +35,9 @@ export default ({ friend, prepareInvitation }) => {
             : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
         }
       >
-        <Text>{friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend')}</Text>
+        <Text style={{ color: simpleColor }}>
+          {friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend')}
+        </Text>
       </Button>
     </View>
   );

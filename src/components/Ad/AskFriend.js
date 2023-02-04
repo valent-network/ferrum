@@ -46,7 +46,7 @@ class AskFriend extends React.PureComponent {
       <View>
         {direct_friend && (
           <Text style={{ color: simpleColor }}>
-            {t('ad.postedBy')} <Text style={{ fontWeight: 'bold' }}>{direct_friend.name}</Text>
+            {t('ad.postedBy')} <Text style={{ fontWeight: 'bold', color: simpleColor }}>{direct_friend.name}</Text>
           </Text>
         )}
 

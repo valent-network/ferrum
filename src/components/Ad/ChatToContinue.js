@@ -27,7 +27,7 @@ export default ({ chat }) => {
         {'\n'}
       </Text>
       <Button style={styles.button} onPress={() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id })}>
-        <Text>{t('ad.buttons.continueChat')}</Text>
+        <Text style={{ color: simpleColor }}>{t('ad.buttons.continueChat')}</Text>
       </Button>
     </View>
   );

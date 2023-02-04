@@ -41,20 +41,20 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               <UserAvatar size={48} name={friend.name || ''} src={friend.avatar} bgColor={activeColor} />
             </View>
             <Text style={styles.friendInfo}>
-              {friend.name}
+              <Text style={{ color: simpleColor, fontSize: 22 }}>{friend.name}</Text>
               {'\n'}
               {friend.phone_number}
             </Text>
             {!userNamePresent && (
               <View style={styles.emptyUserNameContainer}>
-                <Text>{t('chat.nameYourselfText')}</Text>
+                <Text style={{ color: simpleColor }}>{t('chat.nameYourselfText')}</Text>
                 <Item>
                   <Input
                     style={styles.nameInput}
                     value={userName}
                     onChangeText={setUserName}
                     placeholder={t('chat.placeholders.yourName')}
-                    placeholderTextColor={simpleColor}
+                    placeholderTextColor={disabledColor}
                     returnKeyType={'done'}
                   />
                 </Item>
@@ -64,7 +64,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
                   onPress={() => updateUserName(userName)}
                   style={!userName || !userName.length ? styles.disabledSubmitButton : styles.activeSubmitButton}
                 >
-                  <Text>{t('chat.buttons.setMyName')}</Text>
+                  <Text style={{ color: simpleColor }}>{t('chat.buttons.setMyName')}</Text>
                 </Button>
               </View>
             )}
@@ -74,7 +74,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               <TouchableOpacity key={n} onPress={() => setName(n)}>
                 <View style={styles.introduceNameContainer}>
                   <Icon name={name === n ? 'ellipse' : 'ellipse-outline'} style={styles.introduceOption} />
-                  <Text>{n}</Text>
+                  <Text style={{ color: simpleColor }}>{n}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -97,7 +97,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}
             >
-              <Text>{t('chat.buttons.addFriend')}</Text>
+              <Text style={{ color: simpleColor }}>{t('chat.buttons.addFriend')}</Text>
             </Button>
           </View>
         </View>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   emptyArea: {
     height: '100%',
   },
-  introduceOption: { fontSize: 18, marginRight: 8 },
+  introduceOption: { fontSize: 18, marginRight: 8, color: simpleColor },
   activeSubmitButton: { backgroundColor: activeColor, marginVertical: 24, color: simpleColor },
   disabledSubmitButton: { backgroundColor: 'grey', marginVertical: 24 },
   friendInfo: { color: simpleColor, alignSelf: 'center', textAlign: 'center' },
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   introduceNameContainer: { flexDirection: 'row', paddingVertical: 8 },
-  introHeader: { marginVertical: 16 },
+  introHeader: { marginVertical: 16, color: simpleColor },
   nameInput: {
     color: simpleColor,
   },

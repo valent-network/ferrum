@@ -3,6 +3,8 @@ import { Image } from 'react-native';
 import { View, Text, Icon, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
+import { simpleColor } from 'colors';
+
 import styles from './Styles';
 
 export default function AdImagePickerItem({ image, collection, updateCollection, makeMain }) {
@@ -44,7 +46,7 @@ export default function AdImagePickerItem({ image, collection, updateCollection,
       )}
       {image.position != 0 && !image._destroy && deletable && (
         <Button block dark style={styles.makeMainButton} onPress={makeMain}>
-          <Text>{t('ad.assign_as_main_image')}</Text>
+          <Text style={{ color: simpleColor }}>{t('ad.assign_as_main_image')}</Text>
         </Button>
       )}
     </View>

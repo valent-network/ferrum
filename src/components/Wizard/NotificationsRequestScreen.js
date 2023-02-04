@@ -32,7 +32,7 @@ class NotificationsRequestScreen extends React.PureComponent {
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        <Container>
+        <Container style={{ backgroundColor: primaryColor }}>
           <Content contentContainerStyle={styles.contentContainer}>
             <Image style={styles.picture} source={PICTURE} />
             <H1 style={styles.h1}>{t('wizzard.notificationsH1')}</H1>

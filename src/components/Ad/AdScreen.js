@@ -29,7 +29,7 @@ import OptionsList from './OptionsList';
 import Navigation from 'services/Navigation';
 
 import { styles } from './Styles';
-import { activeColor, simpleColor, spinnerColor, secondaryColor } from 'colors';
+import { activeColor, simpleColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -104,7 +104,7 @@ class AdScreen extends React.PureComponent {
 
     if (isLoading && typeof ad.id === 'undefined') {
       return (
-        <Container>
+        <Container style={{ backgroundColor: primaryColor }}>
           <Content>
             <Spinner color={spinnerColor} />
           </Content>
@@ -113,7 +113,7 @@ class AdScreen extends React.PureComponent {
     }
 
     return (
-      <Container>
+      <Container style={{ backgroundColor: primaryColor }}>
         <View style={styles.headerBackground}>
           <Header noShadow={true} iosBarStyle="dark-content" style={styles.header}>
             <Left>
