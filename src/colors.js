@@ -1,13 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Appearance } from 'react-native';
 
-export const primaryColor = '#fff';
-export const secondaryColor = '#F7F7F7';
-export const textColor = '#121212';
-export const activeColor = '#0057B8';
-export const activeTextColor = '#F7F7F7';
-export const superActiveColor = '#FFDD00';
-export const activeBorderColor = '#121212';
-export const disabledColor = '#d3d3d3';
+const systemColorScheme = Appearance.getColorScheme();
+
+export const primaryColor = systemColorScheme === 'dark' ? '#000' : '#fff';
+export const secondaryColor = systemColorScheme === 'dark' ? '#121212' : '#F7F7F7';
+export const textColor = systemColorScheme === 'dark' ? '#efefef' : '#121212';
+export const activeColor = systemColorScheme === 'dark' ? '#0057B8' : '#0057B8';
+export const activeTextColor = systemColorScheme === 'dark' ? '#efefef' : '#F7F7F7';
+export const superActiveColor = systemColorScheme === 'dark' ? '#FFDD00' : '#FFDD00';
+export const activeBorderColor = systemColorScheme === 'dark' ? '#efefef' : '#121212';
+export const disabledColor = systemColorScheme === 'dark' ? '#aaa' : '#d3d3d3';
 
 //
 

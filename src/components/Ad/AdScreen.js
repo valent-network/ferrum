@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RefreshControl, ScrollView, Share, SafeAreaView } from 'react-native';
+import { RefreshControl, ScrollView, Share, SafeAreaView, Appearance } from 'react-native';
 
 import {
   Text,
@@ -115,7 +115,11 @@ class AdScreen extends React.PureComponent {
     return (
       <Container style={{ backgroundColor: primaryColor }}>
         <View style={styles.headerBackground}>
-          <Header noShadow={true} iosBarStyle="dark-content" style={styles.header}>
+          <Header
+            noShadow={true}
+            iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
+            style={styles.header}
+          >
             <Left>
               <Icon
                 name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}

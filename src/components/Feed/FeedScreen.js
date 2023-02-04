@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Appearance } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Icon, Header } from 'native-base';
@@ -37,7 +37,13 @@ const FeedScreen = ({
 
   return (
     <Container style={{ backgroundColor: primaryColor }}>
-      <Header style={styles.mainHeader} iosBarStyle="dark-content" noShadow={true} searchBar rounded>
+      <Header
+        style={styles.mainHeader}
+        iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
+        noShadow={true}
+        searchBar
+        rounded
+      >
         <SearchBar />
       </Header>
       <View style={styles.filtersRow}>

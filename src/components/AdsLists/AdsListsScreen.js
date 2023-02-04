@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Platform, View } from 'react-native';
+import { Platform, View, Appearance } from 'react-native';
 import { Container, Header, Title } from 'native-base';
 import { useTranslation } from 'react-i18next';
 
@@ -31,7 +31,7 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
       <Header
         hasSegment={Platform.OS !== 'android'}
         hastTabs={Platform.OS === 'android'}
-        iosBarStyle="dark-content"
+        iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
         noShadow={true}
         style={styles.header}
       >

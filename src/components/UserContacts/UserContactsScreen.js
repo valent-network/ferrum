@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Header, Item, Icon, Input, Text, Left, Right } from 'native-base';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Appearance } from 'react-native';
 import { withTranslation } from 'react-i18next';
 
 import Navigation from 'services/Navigation';
@@ -40,7 +40,12 @@ class UserContactsScreen extends React.PureComponent {
 
     return (
       <Container style={{ backgroundColor: primaryColor }}>
-        <Header style={styles.mainHeader} iosBarStyle="dark-content" noShadow={true} searchBar>
+        <Header
+          style={styles.mainHeader}
+          iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
+          noShadow={true}
+          searchBar
+        >
           <Icon
             name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
             style={styles.backButton}

@@ -12,7 +12,7 @@ import codePush from 'react-native-code-push';
 //   });
 // }
 
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet, StatusBar, Appearance } from 'react-native';
 
 import { Root as NativeBaseRoot, StyleProvider } from 'native-base';
 
@@ -35,7 +35,7 @@ const App = () => {
 
     return (
       <View style={styles.mainContainer}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle={Appearance.getColorScheme() === 'light' ? "dark-content" : "light-content"} />
         <Notification ref={notificationRef} />
         <Provider store={store}>
           <NativeBaseRoot>
