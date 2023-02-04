@@ -26,21 +26,12 @@ import Notification from 'components/Notification';
 
 import Root from 'components/Root';
 
-import getTheme from 'native-base-theme/components';
-import nativeBaseThemeVariables from 'native-base-theme/variables/platform';
-
 import { darkColor, simpleColor, primaryColor } from 'colors';
 
 // console.disableYellowBox = true;
 
 const App = () => {
     const notificationRef = (ref) => (notification.ref = ref);
-    const themeVariables = {
-      ...nativeBaseThemeVariables,
-      containerBgColor: primaryColor,
-      textColor: simpleColor,
-    }
-    const theme = getTheme(themeVariables);
 
     return (
       <View style={styles.mainContainer}>
@@ -48,9 +39,7 @@ const App = () => {
         <Notification ref={notificationRef} />
         <Provider store={store}>
           <NativeBaseRoot>
-            <StyleProvider style={theme}>
-              <Root />
-            </StyleProvider>
+            <Root />
           </NativeBaseRoot>
         </Provider>
       </View>
