@@ -65,6 +65,7 @@ export default class ImageGallery extends React.Component {
     return (
       <>
         <Carousel
+          inactiveSlideScale={1}
           data={images}
           renderItem={this._renderItem}
           itemWidth={this.windowWidth}
