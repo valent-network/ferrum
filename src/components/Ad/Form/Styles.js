@@ -5,7 +5,6 @@ import {
   primaryColor,
   secondaryColor,
   activeColor,
-  notesColor,
   errorColor,
   deletedColor,
   disabledColor,
@@ -88,12 +87,18 @@ export default StyleSheet.create({
   pickerHeader: {
     backgroundColor: primaryColor,
     borderBottomColor: disabledColor,
-    color: textColor,
+    borderBottomWidth: 0,
   },
   pickerItemStyle: {
-    borderBottomColor: notesColor,
     marginLeft: 0,
     paddingLeft: 8,
+    borderTopWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: disabledColor,
+    backgroundColor: primaryColor,
+  },
+  pickerTextStyle: {
+    color: textColor,
   },
   headerBackButton: { color: textColor },
   headerTitle: { color: textColor },
@@ -118,6 +123,10 @@ export default StyleSheet.create({
   resetPickerIcon: {
     fontSize: 24,
     paddingRight: 8,
+    color: textColor,
+  },
+  pickerModalStyle: {
+    backgroundColor: primaryColor,
   },
   pickerLabelContainer: {
     flexDirection: 'row',
@@ -130,7 +139,7 @@ export default StyleSheet.create({
     height: 120,
     marginRight: 0,
     borderRadius: 4,
-    backgroundColor: notesColor,
+    backgroundColor: disabledColor,
   },
   adImageDeleted: {
     opacity: 0.3,
@@ -152,7 +161,7 @@ export default StyleSheet.create({
     paddingVertical: 8,
   },
   addImageText: {
-    fontWeight: '900',
+    fontWeight: 'bold',
     fontSize: 18,
     color: textColor,
   },
@@ -183,5 +192,5 @@ export default StyleSheet.create({
     marginTop: 16,
     alignSelf: 'center',
   },
-  makeMainButtonText: { alignSelf: 'center', backgroundColor: notesColor, marginTop: 16, padding: 4 },
+  makeMainButtonText: { alignSelf: 'center', backgroundColor: disabledColor, marginTop: 16, padding: 4 },
 });

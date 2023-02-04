@@ -30,7 +30,7 @@ function SearchBar({ onReset, onSearch, query }) {
         defaultValue={query}
         returnKeyType={'done'}
       />
-      {query.length > 0 && <Icon name="close-circle" style={styles.inputTextColor} onPress={onReset} />}
+      {query.length > 0 && <Icon name="close-circle" style={{ color: disabledColor }} onPress={onReset} />}
     </Item>
   );
 }

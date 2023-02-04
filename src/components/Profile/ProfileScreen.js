@@ -48,6 +48,7 @@ import {
   deletedColor,
   primaryColor,
   spinnerColor,
+  activeTextColor,
 } from 'colors';
 
 class ProfileScreen extends React.PureComponent {
@@ -209,7 +210,7 @@ class ProfileScreen extends React.PureComponent {
 
                 {!user.referrer.refcode && (
                   <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
-                    <Text style={{ color: textColor }}>{t('profile.actions.enterRefCode')}</Text>
+                    <Text style={{ color: activeTextColor }}>{t('profile.actions.enterRefCode')}</Text>
                   </Button>
                 )}
 

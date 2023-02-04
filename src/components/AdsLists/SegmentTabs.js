@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './styles';
 
-import { secondaryColor, textColor, activeColor } from 'colors';
+import { secondaryColor, textColor, activeColor, activeTextColor } from 'colors';
 
 export default function SegmentTabs({ currentTab, setCurrentTab }) {
   const { t } = useTranslation();
@@ -17,17 +17,17 @@ export default function SegmentTabs({ currentTab, setCurrentTab }) {
         active={currentTab == 'visitedAds'}
         first
       >
-        <Text style={{ color: currentTab == 'visitedAds' ? secondaryColor : activeColor }}>{t('ads.visited')}</Text>
+        <Text style={{ color: currentTab == 'visitedAds' ? activeTextColor : activeColor }}>{t('ads.visited')}</Text>
       </Button>
       <Button
         onPress={() => setCurrentTab('favoriteAds')}
         style={styles.segmentButton}
         active={currentTab == 'favoriteAds'}
       >
-        <Text style={{ color: currentTab == 'favoriteAds' ? secondaryColor : activeColor }}>{t('ads.favorite')}</Text>
+        <Text style={{ color: currentTab == 'favoriteAds' ? activeTextColor : activeColor }}>{t('ads.favorite')}</Text>
       </Button>
       <Button onPress={() => setCurrentTab('myAds')} style={styles.segmentButton} active={currentTab == 'myAds'} last>
-        <Text style={{ color: currentTab == 'myAds' ? secondaryColor : activeColor }}>{t('ads.myAds')}</Text>
+        <Text style={{ color: currentTab == 'myAds' ? activeTextColor : activeColor }}>{t('ads.myAds')}</Text>
       </Button>
     </Segment>
   );

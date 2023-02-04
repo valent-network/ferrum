@@ -57,7 +57,9 @@ class UserContactsScreen extends React.PureComponent {
               defaultValue={query}
               returnKeyType={'done'}
             />
-            {query.length > 0 && <Icon name="close-circle" style={styles.inputTextColor} onPress={this.resetQuery} />}
+            {query.length > 0 && (
+              <Icon name="close-circle" style={{ color: disabledColor }} onPress={this.resetQuery} />
+            )}
           </Item>
         </Header>
         <UserContactsList
@@ -97,7 +99,7 @@ UserContactsScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
     borderBottomWidth: 0,
     padding: 0,
     paddingLeft: Platform.OS === 'android' ? 16 : 0,
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   searchBar: {
     borderRadius: 16,
     marginLeft: 8,
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     marginTop: Platform.OS === 'android' ? 32 : 0,
     alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
   },

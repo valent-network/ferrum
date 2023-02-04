@@ -8,7 +8,7 @@ import { withTranslation } from 'react-i18next';
 
 import Navigation from 'services/Navigation';
 
-import { activeColor, textColor } from 'colors';
+import { activeColor, textColor, activeTextColor } from 'colors';
 
 import NOT_FOUND from 'assets/not-found.gif';
 
@@ -23,7 +23,7 @@ class ListNotFound extends React.PureComponent {
         <Text style={styles.notFoundText}>{t('listNotFound')}</Text>
         {fromFeed && (
           <Button onPress={this.inviteFriends} style={styles.inviteFriendsButton}>
-            <Text style={{ color: textColor }}>{t('buttons.listNotfoundInviteFriends')}</Text>
+            <Text style={{ color: activeTextColor }}>{t('buttons.listNotfoundInviteFriends')}</Text>
           </Button>
         )}
       </Content>

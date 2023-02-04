@@ -35,6 +35,8 @@ export function defaultPickerPropsFor(param, errors) {
     headerBackButtonTextStyle: styles.headerBackButton,
     headerTitleStyle: styles.headerTitle,
     itemStyle: styles.pickerItemStyle,
+    itemTextStyle: styles.pickerTextStyle,
+    modalStyle: styles.pickerModalStyle,
     headerBackButtonText: I18n.t('actions.back'),
     placeholder: I18n.t(`ad.params.placeholders.${param}`),
     iosHeader: I18n.t(`ad.params.${param}`),

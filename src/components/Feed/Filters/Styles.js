@@ -7,6 +7,8 @@ import {
   disabledColor,
   secondaryColor,
   superActiveColor,
+  activeTextColor,
+  activeBorderColor,
 } from 'colors';
 
 export default StyleSheet.create({
@@ -56,10 +58,10 @@ export default StyleSheet.create({
     color: textColor,
   },
   activeFilterBoxText: {
-    color: secondaryColor,
+    color: activeTextColor,
   },
   activeFilterBox: {
-    borderColor: textColor,
+    borderColor: activeBorderColor,
     borderWidth: 1,
     borderRadius: 32,
     marginRight: 12,
@@ -82,9 +84,13 @@ export default StyleSheet.create({
     fontSize: 18,
     color: textColor,
   },
+  activeFilterIcon: {
+    color: activeTextColor,
+    fontSize: 18,
+  },
   activeFilterItem: {
     fontSize: 18,
-    color: secondaryColor,
+    color: activeTextColor,
   },
   safeArea: {
     backgroundColor: secondaryColor,

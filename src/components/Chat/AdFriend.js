@@ -8,7 +8,7 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, secondaryColor, disabledColor, textColor } from 'colors';
+import { activeColor, secondaryColor, disabledColor, textColor, activeTextColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
 export default function AdFriend({ friend, chat, openInviteFriendModal, friendPhoneNumber }) {
@@ -46,7 +46,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
                 : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
             }
           >
-            <Text style={{ color: textColor }}>
+            <Text style={{ color: activeTextColor }}>
               {friend.user_id ? t('chat.buttons.addFriend') : t('ad.buttons.inviteFriend')}
             </Text>
           </Button>

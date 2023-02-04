@@ -13,7 +13,7 @@ import * as ActionTypes from 'actions/types';
 
 import { goToSettings } from 'utils';
 
-import { activeColor, secondaryColor, superActiveColor } from 'colors';
+import { activeColor, secondaryColor, superActiveColor, activeTextColor } from 'colors';
 
 import NOT_ALLOWED from 'assets/not-allowed.png';
 
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     marginBottom: 16,
     padding: 6,
-    color: superActiveColor,
   },
   button: {
     backgroundColor: superActiveColor,
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     color: activeColor,
     fontWeight: 'bold',
   },
-  mainText: { fontSize: 13, paddingLeft: 96, color: secondaryColor },
+  mainText: { fontSize: 13, paddingLeft: 96, color: activeTextColor },
   picture: {
     position: 'absolute',
     left: 0,
