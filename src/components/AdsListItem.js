@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { withTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
 
 import { Text, Icon } from 'native-base';
 
@@ -20,6 +21,8 @@ import ImageGallery from 'components/Ad/ImageGallery';
 
 import API from 'services/API';
 
+import i18n from 'services/i18n';
+
 class AdsListItem extends React.PureComponent {
   onPress = () => this.props.onPress(this.props.ad);
 
@@ -33,6 +36,10 @@ class AdsListItem extends React.PureComponent {
     const { title, image, price, short_description, friend_name_and_total, category_currency } = this.props.ad;
 
     const { t, ad } = this.props;
+
+    const updatedAt = dayjs(dayjs().startOf('day')).isBefore(ad.updated_at)
+      ? dayjs(ad.updated_at).locale(i18n.language).format('HH:mm')
+      : dayjs(ad.updated_at).locale(i18n.language).format('D MMMM');
 
     let knowsText, handsCountString;
 
@@ -86,7 +93,7 @@ class AdsListItem extends React.PureComponent {
                   style={[{}, ad.favorite ? { color: activeColor } : { color: textColor }]}
                 />
                 <Text style={styles.notes}>
-                  {ad.region}, {ad.updated_at}
+                  {ad.region}, {updatedAt}
                 </Text>
               </View>
             </TouchableOpacity>

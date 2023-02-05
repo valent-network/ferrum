@@ -57,7 +57,7 @@ export default function AdScreen({
     });
   const favAction = () => (ad.favorite ? unlikeAd(ad) : likeAd(ad));
   const unarchiveAdAction = () => unarchiveAd(ad.id);
-  const editAd = () => Navigation.navigate('EditAdScreen', { ad: ad });
+  const editAdAction = () => Navigation.navigate('EditAdScreen', { ad: ad });
   const deleteAdAction = () =>
     ActionSheet.show(
       {

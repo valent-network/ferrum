@@ -19,14 +19,14 @@ import { leaveChat } from 'actions/chat';
 import RECARIO_LOGO from 'assets/logo.png';
 
 export default function ChatRoomListItem({ chat, currentUser }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const lastMessage = chat.messages[0];
   const onPress = () => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
 
   const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
-    ? dayjs(lastMessage.createdAt).locale('ru').format('HH:mm')
-    : dayjs(lastMessage.createdAt).locale('ru').format('D MMM');
+    ? dayjs(lastMessage.createdAt).locale(i18n.language).format('HH:mm')
+    : dayjs(lastMessage.createdAt).locale(i18n.language).format('D MMM');
   let messagePreview = lastMessage ? lastMessage.text.replace(/\n/g, ' ') : '';
   messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
 
