@@ -29,7 +29,7 @@ import OptionsList from './OptionsList';
 import Navigation from 'services/Navigation';
 
 import { styles } from './Styles';
-import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor } from 'colors';
+import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor, activeTextColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -110,12 +110,12 @@ export default function AdScreen({
           <Left>
             <Icon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-              style={[styles.icon, { color: secondaryColor }]}
+              style={[styles.icon, { color: activeTextColor }]}
               onPress={Navigation.popToTop}
             />
           </Left>
           <Right style={styles.actionButtonsContainer}>
-            <Icon style={[styles.icon, { color: secondaryColor }]} onPress={shareAction} name="share-outline" />
+            <Icon style={[styles.icon, { color: activeTextColor }]} onPress={shareAction} name="share-outline" />
             <Icon
               onPress={favAction}
               style={colorStyle}

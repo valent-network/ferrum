@@ -18,6 +18,7 @@ import {
   secondaryColor,
   spinnerColor,
   superActiveColor,
+  activeTextColor,
 } from 'colors';
 
 import { onTosPress, random } from 'utils';
@@ -153,7 +154,7 @@ class LoginScreen extends React.Component {
                   <Switch
                     thumbColor={secondaryColor}
                     trackColor={trackColor}
-                    ios_backgroundColor={secondaryColor}
+                    ios_backgroundColor={activeTextColor}
                     onValueChange={this.changeTosAcceptance}
                     value={this.state.tosAccespted}
                   />
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 16,
     marginBottom: 8,
-    color: disabledColor,
+    color: textColor,
   },
   button: {
     marginTop: 12,

@@ -179,6 +179,7 @@ export default StyleSheet.create({
   },
   infoIcon: {
     fontSize: 14,
+    color: textColor,
   },
   errorMessageContainer: {
     flexDirection: 'row',

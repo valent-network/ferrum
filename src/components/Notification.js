@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Text, Thumbnail } from 'native-base';
-import { activeColor, secondaryColor, primaryColor } from 'colors';
+import { activeColor, secondaryColor, primaryColor, activeTextColor, superActiveColor } from 'colors';
 
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 
@@ -102,24 +102,23 @@ export default class Notification extends React.PureComponent {
 
 const styles = StyleSheet.create({
   notificationWrapper: {
-    marginTop: 20,
+    marginTop: 24,
     position: 'absolute',
     backgroundColor: activeColor,
     zIndex: 100000,
     width: '90%',
     alignSelf: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowColor: primaryColor,
+    shadowColor: activeTextColor,
     shadowOffset: {
-      width: 0,
-      height: 12,
+      width: 8,
+      height: 8,
     },
-    shadowOpacity: 0.58,
+    shadowOpacity: 0.32,
     shadowRadius: 16.0,
     elevation: 24,
   },
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   notificationBodyText: {
-    color: secondaryColor,
+    color: activeTextColor,
     fontSize: 14,
     flex: 1,
   },
@@ -144,6 +143,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   textColor: {
-    color: secondaryColor,
+    color: activeTextColor,
   },
 });

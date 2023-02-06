@@ -5,7 +5,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Spinner, View, Text, Content, Icon } from 'native-base';
 import { withTranslation } from 'react-i18next';
 
-import { superActiveColor } from 'colors';
+import { superActiveColor, textColor } from 'colors';
 
 import { checkContactsPermissions } from 'actions/phoneContacts';
 
