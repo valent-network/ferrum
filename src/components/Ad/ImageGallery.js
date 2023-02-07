@@ -6,23 +6,14 @@ import { TouchableOpacity, Image, Modal, Dimensions, SafeAreaView } from 'react-
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
 
-import { styles } from './Styles';
+import ImageHeader from './ImageHeader';
+import ImageSlide from './ImageSlide';
+
+import styles from './Styles';
 
 import { primaryColor, textColor } from 'colors';
 
 const ImageViewerPageAnimationTimeoutMs = 150;
-
-const ImageHeader = ({ currentIndex, allSize, onClose }) => {
-  return (
-    <View style={styles.imageModalHeader}>
-      <Text style={styles.imageModalIndex}>
-        {' '}
-        {currentIndex + 1}/{allSize}{' '}
-      </Text>
-      <Icon name="close-outline" style={styles.imageModalCloseIcon} onPress={onClose} />
-    </View>
-  );
-};
 
 export default class ImageGallery extends React.Component {
   constructor(props) {
@@ -44,19 +35,9 @@ export default class ImageGallery extends React.Component {
     setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs);
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
 
-  _renderItem = ({ item, index }) => {
-    const url = item.url;
+  _renderItem = ({ item }) => <ImageSlide url={item.url} onPress={this.handleOnPress} />;
 
-    return (
-      <TouchableOpacity activeOpacity={1} onPress={this.handleOnPress}>
-        <Image style={this.props.imageStyle} source={{ uri: url, cache: 'force-cache' }} />
-      </TouchableOpacity>
-    );
-  };
-
-  setCarouselRef = (c) => {
-    this._carousel = c;
-  };
+  setCarouselRef = (c) => (this._carousel = c);
 
   render() {
     const { images } = this.props.ad;
@@ -66,7 +47,7 @@ export default class ImageGallery extends React.Component {
       <>
         <Carousel
           inactiveSlideScale={1}
-          data={images}
+          data={withModal ? images : images.slice(0, 5)}
           renderItem={this._renderItem}
           itemWidth={this.windowWidth}
           sliderWidth={this.windowWidth}

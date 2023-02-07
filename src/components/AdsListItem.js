@@ -66,10 +66,10 @@ class AdsListItem extends React.PureComponent {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.imagePreviewContainer}>
-          <ImageGallery ad={ad} onPress={this.onPress.bind(this)} imageStyle={{ height: 350 }} withModal={false} />
+          <ImageGallery ad={ad} onPress={this.onPress} withModal={false} />
           {!image && <View style={styles.imagePlaceholder}></View>}
           <View style={styles.detailsContainer}>
-            <TouchableOpacity activeOpacity={1} onPress={this.onPress.bind(this)}>
+            <TouchableOpacity activeOpacity={1} onPress={this.onPress}>
               <View style={styles.detailsRow}>
                 <Text style={styles.title}>{title}</Text>
                 {ad.deleted && (
@@ -92,9 +92,7 @@ class AdsListItem extends React.PureComponent {
                   onPress={this.favAction}
                   style={[{}, ad.favorite ? { color: activeColor } : { color: textColor }]}
                 />
-                <Text style={styles.notes}>
-                  {ad.region}, {updatedAt}
-                </Text>
+                <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
               </View>
             </TouchableOpacity>
           </View>

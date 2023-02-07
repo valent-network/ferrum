@@ -28,7 +28,7 @@ import OptionsList from './OptionsList';
 
 import Navigation from 'services/Navigation';
 
-import { styles } from './Styles';
+import styles from './Styles';
 import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor, activeTextColor } from 'colors';
 
 import i18n from 'services/i18n';
@@ -48,7 +48,7 @@ export default function AdScreen({
 }) {
   const { t } = useTranslation();
   const refreshControl = <RefreshControl tintColor={spinnerColor} refreshing={isLoading} onRefresh={onRefresh} />;
-  const colorStyle = [styles.icon, ad.favorite ? styles.activeColor : styles.mainColor];
+  const colorStyle = [styles.icon, ad.favorite ? styles.activeColor : styles.activeTextColor];
 
   const shareAction = () =>
     Share.share({

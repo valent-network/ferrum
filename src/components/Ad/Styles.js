@@ -8,9 +8,10 @@ import {
   textColor,
   disabledColor,
   superActiveColor,
+  activeTextColor,
 } from 'colors';
 
-export const styles = StyleSheet.create({
+export default styles = StyleSheet.create({
   oldPricesContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -115,8 +116,8 @@ export const styles = StyleSheet.create({
   activeColor: {
     color: activeColor,
   },
-  mainColor: {
-    color: secondaryColor,
+  activeTextColor: {
+    color: activeTextColor,
   },
   mainContainer: {
     backgroundColor: primaryColor,
