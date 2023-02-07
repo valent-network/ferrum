@@ -60,10 +60,19 @@ function getSystemLocale() {
     NativeModules.SettingsManager.settings.AppleLanguages
   ) {
     locales = NativeModules.SettingsManager.settings.AppleLanguages;
-    locale = locales.map((l) => l.substr(0, 2)).filter((l) => ['uk', 'en'].includes(l))[0];
+    locales = locales.map((l) => l.substr(0, 2)).filter((l) => ['uk', 'en'].includes(l));
+
     // Android
   } else if (NativeModules.I18nManager) {
-    locale = NativeModules.I18nManager.localeIdentifier;
+    locales = [NativeModules.I18nManager.localeIdentifier.substr(0, 2)];
+  }
+
+  if (locales.includes('uk')) {
+    locale = 'uk';
+  } else if (locales.includes('en')) {
+    locale = 'en';
+  } else {
+    locale = 'uk';
   }
 
   if (typeof locale === 'undefined') {
