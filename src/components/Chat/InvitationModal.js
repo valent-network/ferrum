@@ -9,7 +9,15 @@ import UserAvatar from 'react-native-user-avatar';
 
 import { updateUserName } from 'actions/profile';
 
-import { textColor, activeColor, secondaryColor, disabledColor, primaryColor, deletedColor } from 'colors';
+import {
+  textColor,
+  activeColor,
+  secondaryColor,
+  disabledColor,
+  primaryColor,
+  deletedColor,
+  activeTextColor,
+} from 'colors';
 
 function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
   const { t } = useTranslation();
@@ -97,7 +105,7 @@ function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
               style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}
             >
-              <Text style={{ color: textColor }}>{t('chat.buttons.addFriend')}</Text>
+              <Text style={{ color: activeTextColor }}>{t('chat.buttons.addFriend')}</Text>
             </Button>
           </View>
         </View>

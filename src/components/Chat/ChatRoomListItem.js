@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from 'react-i18next';
 
-import { activeColor, disabledColor, secondaryColor, superActiveColor, textColor } from 'colors';
+import { activeColor, disabledColor, secondaryColor, superActiveColor, textColor, activeTextColor } from 'colors';
 
 import { leaveChat } from 'actions/chat';
 
@@ -77,7 +77,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
         <Text style={[styles.smallFont, styles.centered]}>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
           <Badge style={styles.unreadBadge}>
-            <Text style={{ color: textColor }}>{chat.new_messages_count}</Text>
+            <Text style={{ color: activeTextColor }}>{chat.new_messages_count}</Text>
           </Badge>
         )}
       </Right>

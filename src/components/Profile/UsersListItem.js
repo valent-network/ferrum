@@ -8,7 +8,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { withTranslation } from 'react-i18next';
 
-import { activeColor, textColor, primaryColor, secondaryColor } from 'colors';
+import { activeColor, textColor, primaryColor, secondaryColor, activeTextColor } from 'colors';
 
 import { invitationalSMS } from 'utils';
 
@@ -30,7 +30,7 @@ class UsersListItem extends React.PureComponent {
             style={styles.actionButton}
             onPress={() => invitationalSMS(contact.phone, t('profile.inviteFriendSMSText'))}
           >
-            <Text style={{ color: textColor }}>{t('buttons.invite')}</Text>
+            <Text style={{ color: activeTextColor }}>{t('buttons.invite')}</Text>
           </Button>
         </Right>
       </ListItem>
