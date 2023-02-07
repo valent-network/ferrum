@@ -56,7 +56,11 @@ class AskFriend extends React.PureComponent {
             <ChatToContinue chat={c} key={`chat-${c.id}`} />
           ))}
           {friends.map((f) => (
-            <FriendToInvite friend={f} key={`friend-${f.id}`} prepareInvitation={this.prepareInvitation} />
+            <FriendToInvite
+              friend={f}
+              key={`friend-${f.id}-hops-${f.idx}`}
+              prepareInvitation={this.prepareInvitation}
+            />
           ))}
         </ScrollView>
 
