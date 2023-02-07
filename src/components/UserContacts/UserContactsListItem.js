@@ -53,7 +53,7 @@ class UserContactsListItem extends React.PureComponent {
 
   render() {
     const { contact } = this.props;
-    const phoneStyle = this.user ? { color: activeColor, fontWeight: 'bold' } : {};
+    const phoneStyle = this.user ? { color: activeColor, fontWeight: 'bold' } : { color: textColor };
 
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.openMore}>
