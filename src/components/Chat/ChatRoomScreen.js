@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, TouchableOpacity, AppState } from 'react-native';
+import { StyleSheet, TouchableOpacity, AppState, SafeAreaView } from 'react-native';
 import { GiftedChat, SystemMessage } from 'react-native-gifted-chat';
 import { Container, Content, Spinner, Text } from 'native-base';
 import { useTranslation } from 'react-i18next';
@@ -33,29 +33,22 @@ function ChatRoomScreen({
   resetCurrentChat,
 }) {
   const chatRoomId = navigation.state.params.chatRoomId;
-
-  if (!chatRoomId) {
-    return <SpinnerScreen />;
-  }
-
-  useEffect(() => {
-    const focusListener = navigation.addListener('willFocus', onConnect);
-    const blurListener = navigation.addListener('willBlur', onDisconnect);
-    AppState.addEventListener('change', appStateHandle);
-
-    if (!currentChatId) {
-      onConnect();
-    }
-
-    return () => {
-      focusListener.remove();
-      blurListener.remove();
-      onDisconnect();
-      AppState.removeEventListener('change', appStateHandle);
-    };
-  }, []);
-
   const { t, i18n } = useTranslation();
+  const userName = chat.chat_room_users.filter((cru) => cru.user_id === userId)[0]?.name;
+  const giftedChatOptions = {
+    user: { _id: userId, name: userName },
+    messages: messages,
+    locale: i18n.language === 'en' ? en : uk,
+    onLoadEarlier: () => getMessages(chatRoomId, messages.length),
+    loadEarlier: shouldLoadEarlier,
+    onSend: (message) => onSend(message[0], chatRoomId),
+    onLongPress: (context, message) => onMessageLongPress(userId, message, onDelete),
+    renderSystemMessage: (props) => {
+      props.currentMessage.text = localizedSystemMessage(props.currentMessage);
+
+      return <SystemMessage {...props} />;
+    },
+  };
 
   const onConnect = useCallback(() => {
     setCurrentChat(chatRoomId);
@@ -79,26 +72,26 @@ function ChatRoomScreen({
     }
   };
 
-  if (!chat.id) {
+  useEffect(() => {
+    const focusListener = navigation.addListener('willFocus', onConnect);
+    const blurListener = navigation.addListener('willBlur', onDisconnect);
+    AppState.addEventListener('change', appStateHandle);
+
+    if (!currentChatId) {
+      onConnect();
+    }
+
+    return () => {
+      focusListener.remove();
+      blurListener.remove();
+      onDisconnect();
+      AppState.removeEventListener('change', appStateHandle);
+    };
+  }, []);
+
+  if (!chat.id || !chatRoomId || typeof chatRoomId === 'undefined' || typeof chat.id === 'undefined') {
     return <SpinnerScreen />;
   }
-
-  const userName = chat.chat_room_users.filter((cru) => cru.user_id === userId)[0].name;
-
-  const giftedChatOptions = {
-    user: { _id: userId, name: userName },
-    messages: messages,
-    locale: i18n.language === 'en' ? en : uk,
-    onLoadEarlier: () => getMessages(chatRoomId, messages.length),
-    loadEarlier: shouldLoadEarlier,
-    onSend: (message) => onSend(message[0], chatRoomId),
-    onLongPress: (context, message) => onMessageLongPress(userId, message, onDelete),
-    renderSystemMessage: (props) => {
-      props.currentMessage.text = localizedSystemMessage(props.currentMessage);
-
-      return <SystemMessage {...props} />;
-    },
-  };
 
   return (
     <Container style={styles.mainContainer}>

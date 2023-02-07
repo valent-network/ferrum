@@ -2,7 +2,7 @@ import * as ActionTypes from 'actions/types';
 import equal from 'react-fast-compare';
 import { mergeArraysKeepNew } from 'utils';
 
-const initialState = { list: [], isLoading: false };
+const initialState = { list: [], isLoading: true };
 
 export default function chats(state = initialState, action = {}) {
   switch (action.type) {

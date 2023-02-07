@@ -98,11 +98,7 @@ export default function currentChat(state = initialState, action = {}) {
         };
       }
     case ActionTypes.RESET_CURRENT_CHAT:
-      return {
-        ...state,
-        id: undefined,
-        messages: [],
-      };
+      return initialState;
     case ActionTypes.SIGN_OUT_SUCCESS:
       return initialState;
     default:
