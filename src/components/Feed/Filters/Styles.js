@@ -144,4 +144,5 @@ export default StyleSheet.create({
     fontSize: 18,
     color: activeColor,
   },
+  activeTextColor: { color: activeTextColor },
 });

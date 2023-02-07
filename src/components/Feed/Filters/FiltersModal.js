@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal, SafeAreaView } from 'react-native';
@@ -13,6 +13,7 @@ import * as ActionTypes from 'actions/types';
 import { applyFilter, resetFilters } from 'actions/feed';
 
 import { activeTextColor } from 'colors';
+import { positionSorter } from 'utils';
 
 import styles from './Styles';
 
@@ -41,17 +42,18 @@ const FiltersModal = ({
     localized_name: t('feed.filters.headers.category'),
     values: categoriesValues,
   };
+  const categoryOptsMultipicker = useCallback(<MultiPicker opt={categoryOpts} />, [categoryOpts]);
 
   applyMinPrice = (event) => applyFilter('min_price', event.nativeEvent.text);
   applyMaxPrice = (event) => applyFilter('max_price', event.nativeEvent.text);
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     setMinPrice(null);
     setMaxPrice(null);
     filterReset();
-  };
+  }, [setMaxPrice, setMinPrice, filterReset]);
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     if (minPrice) {
       applyFilter('min_price', minPrice);
     }
@@ -59,7 +61,7 @@ const FiltersModal = ({
       applyFilter('max_price', maxPrice);
     }
     switchModalVisible();
-  };
+  }, [minPrice, maxPrice]);
 
   const reset = (
     <H3 onPress={onReset} style={styles.resetControl}>
@@ -67,6 +69,17 @@ const FiltersModal = ({
     </H3>
   );
   const close = <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />;
+
+  const mapper = useCallback((opt) => <MultiPicker key={`opt-${opt.id}`} opt={opt} />);
+
+  const submitButton = useCallback(
+    <View style={styles.submitButtonWrapper}>
+      <Button block onPress={onClose} style={styles.submitButton}>
+        <Text style={styles.activeTextColor}>{t('feed.filters.submit')}</Text>
+      </Button>
+    </View>,
+    [onClose],
+  );
 
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -85,12 +98,12 @@ const FiltersModal = ({
           <View>
             <Content>
               <Form style={styles.filtersForm}>
-                {!!categoryOpts && <MultiPicker opt={categoryOpts} />}
+                {!!categoryOpts && categoryOptsMultipicker}
 
                 {!!currentCategory && (
                   <>
                     <H2 style={styles.filterTitle}>
-                      {t('feed.filters.headers.price')}, {currentCategory.currency}
+                      {`${t('feed.filters.headers.price')}, ${currentCategory.currency}`}
                     </H2>
                     <View style={styles.rangeItemWrapper}>
                       <Item style={styles.rangeItem}>
@@ -119,19 +132,12 @@ const FiltersModal = ({
                   </>
                 )}
 
-                {!!pickerOpts &&
-                  pickerOpts
-                    .sort((a, b) => a.position - b.position)
-                    .map((opt) => <MultiPicker key={`opt-${opt.id}`} opt={opt} />)}
+                {!!pickerOpts && pickerOpts.sort(positionSorter).map(mapper)}
               </Form>
             </Content>
           </View>
         </KeyboardAwareScrollView>
-        <View style={styles.submitButtonWrapper}>
-          <Button block onPress={onClose} style={styles.submitButton}>
-            <Text style={{ color: activeTextColor }}>{t('feed.filters.submit')}</Text>
-          </Button>
-        </View>
+        {submitButton}
       </SafeAreaView>
     </Modal>
   );

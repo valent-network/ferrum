@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon, Badge, Text, Button, FooterTab } from 'native-base';
 
-import { activeColor } from 'colors';
+import { deletedColor, activeTextColor } from 'colors';
 
 import Navigation from 'services/Navigation';
 
@@ -19,7 +19,7 @@ const BottomTabChatIcon = ({ tintColor, unreadMessagesCount }) => {
     <FooterTab style={styles.footerTab}>
       <Button badge vertical activeOpacity={1} onPress={() => Navigation.navigate('ChatRoomsListScreen')}>
         <Badge style={styles.badge}>
-          <Text style={{ color: textColor }}>{unreadMessagesCount}</Text>
+          <Text style={{ color: activeTextColor }}>{unreadMessagesCount}</Text>
         </Badge>
         {icon}
       </Button>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   badge: {
-    backgroundColor: activeColor,
+    backgroundColor: deletedColor,
   },
   footerTab: {
     backgroundColor: 'transparent', // for Android,

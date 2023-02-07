@@ -60,3 +60,5 @@ export function localizedSystemMessage(message) {
 export const reposition = (i, index) => {
   return { ...i, position: index };
 };
+
+export const positionSorter = (a, b) => a.position - b.position;

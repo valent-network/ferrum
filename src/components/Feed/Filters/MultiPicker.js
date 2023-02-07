@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View } from 'react-native';
 import { Text } from 'native-base';
@@ -19,7 +19,7 @@ function MultiPicker({ filters, applyFilter, opt: { localized_name, name, values
         {values
           .sort((a, b) => a.position - b.position)
           .map((filterValue) => {
-            const onPress = () => applyFilter(name, filterValue);
+            const onPress = useCallback(() => applyFilter(name, filterValue), [name]);
             const active = activeFilters.filter((f) => f == filterValue.id).length === 1;
             const iconName =
               activeFilters.filter((f) => f == filterValue.id).length === 1

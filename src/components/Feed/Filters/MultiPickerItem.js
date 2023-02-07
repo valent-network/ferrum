@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { View, Text, Icon } from 'native-base';
 
 import styles from './Styles';
@@ -7,12 +8,11 @@ import { disabledColor, activeColor } from 'colors';
 
 export default function MultiPickerItem({ filterValue, filterId, onPress, active, iconName }) {
   return (
-    <View key={filterId} style={active ? styles.activeFilterBox : styles.filterBox}>
-      <Text onPress={onPress} style={active ? styles.activeFilterBoxText : styles.filterBoxText}>
-        {filterValue}
-        &nbsp;
+    <TouchableOpacity activeOpacity={1} onPress={onPress}>
+      <View key={filterId} style={active ? styles.activeFilterBox : styles.filterBox}>
+        <Text style={active ? styles.activeFilterBoxText : styles.filterBoxText}>{`${filterValue} `}</Text>
         <Icon name={iconName} style={active ? styles.activeFilterItem : styles.filterItem} />
-      </Text>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 }
