@@ -114,6 +114,7 @@ export default StyleSheet.create({
   searchBar: {
     borderRadius: 16,
     backgroundColor: secondaryColor,
+    marginRight: 16,
     marginTop: Platform.OS === 'android' ? 32 : 0,
     alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
   },

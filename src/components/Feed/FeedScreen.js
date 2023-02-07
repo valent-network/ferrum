@@ -20,17 +20,7 @@ import ContactsUploading from './ContactsUploading';
 
 import { secondaryColor, activeColor, primaryColor } from 'colors';
 
-const FeedScreen = ({
-  ads,
-  loadMoreAds,
-  hopsOptions,
-  categoriesLoaded,
-  isLoading,
-  onRefresh,
-  likeAd,
-  unlikeAd,
-  navigation,
-}) => {
+const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeAd, unlikeAd, navigation }) => {
   const onAdOpened = (ad) => {
     navigation.push('FeedAd', { id: ad.id });
   };
@@ -44,11 +34,11 @@ const FeedScreen = ({
         searchBar
         rounded
       >
+        <Funnel />
         <SearchBar />
       </Header>
       <View style={styles.filtersRow}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {categoriesLoaded && <Funnel />}
           <MultiPicker opt={hopsOptions} />
         </ScrollView>
       </View>
@@ -74,7 +64,6 @@ function mapStateToProps(state) {
   return {
     ads: state.feed.ads,
     isLoading: state.feed.isLoading,
-    categoriesLoaded: state.settings.categories.length > 0,
     hopsOptions: { name: 'hops_count', values: state.settings.hopsOptions },
   };
 }

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal, SafeAreaView } from 'react-native';
-import { View, Text, Item, Icon, Input, Button, H1, H2, H3, Form, Label, Content } from 'native-base';
+import { View, Text, Item, Icon, Input, Button, H1, H2, H3, Form, Label, Content, Spinner } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ import * as ActionTypes from 'actions/types';
 
 import { applyFilter, resetFilters } from 'actions/feed';
 
-import { activeTextColor } from 'colors';
+import { activeTextColor, spinnerColor } from 'colors';
 import { positionSorter } from 'utils';
 
 import styles from './Styles';
@@ -98,7 +98,7 @@ const FiltersModal = ({
           <View>
             <Content>
               <Form style={styles.filtersForm}>
-                {!!categoryOpts && categoryOptsMultipicker}
+                {categoryOpts.values.length > 0 ? categoryOptsMultipicker : <Spinner color={spinnerColor} />}
 
                 {!!currentCategory && (
                   <>
@@ -145,6 +145,7 @@ const FiltersModal = ({
 
 function mapStateToProps(state) {
   return {
+    categoriesLoaded: state.settings.categories.length > 0,
     category_id: state.filters.category_id,
     min_price: state.filters.min_price,
     max_price: state.filters.max_price,

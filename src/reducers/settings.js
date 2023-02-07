@@ -1,7 +1,12 @@
 import * as ActionTypes from 'actions/types';
 
 const initialState = {
-  hopsOptions: [],
+  hopsOptions: [
+    { name: '🤝', id: 0 },
+    { name: '🤝🤝', id: 1 },
+    { name: '🤝🤝🤝', id: 2 },
+    { name: '🤝🤝🤝🤝', id: 3 },
+  ],
   citiesByRegion: {},
   categories: [],
   currentTabAdsLists: 'favoriteAds',
@@ -12,7 +17,6 @@ export default function settings(state = initialState, action = {}) {
     case ActionTypes.GET_SETTINGS_SUCCESS:
       return {
         ...state,
-        hopsOptions: action.settings.hops_options,
         citiesByRegion: action.settings.cities,
         categories: action.settings.categories,
       };
