@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { activeColor, disabledColor, primaryColor } from 'colors';
+import { activeColor, disabledColor, primaryColor, textColor } from 'colors';
 
 export default StyleSheet.create({
   h1: {
     textAlign: 'left',
     paddingHorizontal: 16,
     fontWeight: 'bold',
+    color: textColor,
   },
   mainContainer: {
     alignItems: 'center',
@@ -14,11 +15,10 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
   },
   textBlock: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 15,
     width: '100%',
     marginBottom: 24,
-    color: disabledColor,
+    color: textColor,
   },
   goButton: {
     backgroundColor: activeColor,
