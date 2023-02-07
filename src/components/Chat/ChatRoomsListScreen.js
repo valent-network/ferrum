@@ -68,7 +68,7 @@ function mapDispatchToProps(dispatch) {
 
 ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
   return {
-    headerShown: true,
+    headerShown: false,
     headerTitleStyle: { color: textColor },
     headerTintColor: textColor,
     headerBackTitleVisible: false,

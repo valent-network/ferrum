@@ -36,10 +36,17 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
         style={styles.header}
       >
         <Title style={styles.title}>{t('nav.titles.ads')}</Title>
+        {Platform.OS !== 'android' && (
+          <View style={{ marginBottom: 24 }}>
+            {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
+          </View>
+        )}
       </Header>
-      <View style={{ marginBottom: 24 }}>
-        {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
-      </View>
+      {Platform.OS === 'android' && (
+        <View style={{ marginBottom: 24 }}>
+          {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}
+        </View>
+      )}
       {<AdsList onAdOpened={onAdOpened} ads={ads} isLoading={isLoading} />}
     </Container>
   );

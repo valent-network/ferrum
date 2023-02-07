@@ -6,7 +6,13 @@ export default StyleSheet.create({
     backgroundColor: primaryColor,
   },
   header: { backgroundColor: secondaryColor, flexDirection: 'column' },
-  title: { color: textColor, fontWeight: 'bold', paddingLeft: Platform.OS === 'android' ? 16 : 0 },
+  title: {
+    color: textColor,
+    fontWeight: 'bold',
+    marginTop: Platform.OS === 'android' ? 0 : 16,
+    paddingLeft: Platform.OS === 'android' ? 16 : 0,
+    padding: 0,
+  },
   segmentButton: { borderColor: activeColor, width: '33.33333%', justifyContent: 'center' },
   tabButton: {
     width: '33.3333%',
