@@ -9,17 +9,16 @@ import Navigation from 'services/Navigation';
 
 import UserContactsList from './UserContactsList';
 import UserContactsListItem from './UserContactsListItem';
+import SearchBar from './SearchBar';
 
-import { loadMoreUserContacts, getAll, updateQuery, toggleBlock } from 'actions/userContacts';
+import { loadMoreUserContacts, getAll, toggleBlock } from 'actions/userContacts';
 
 import { filterByContact } from 'actions/feed';
 import PermissionsBox from 'components/Feed/PermissionsBox';
 
-import { primaryColor, secondaryColor, textColor, disabledColor } from 'colors';
+import { primaryColor, secondaryColor, textColor } from 'colors';
 
 class UserContactsScreen extends React.PureComponent {
-  typingTimer = null;
-
   renderItem = ({ item, index }) => (
     <UserContactsListItem
       contact={item}
@@ -28,44 +27,18 @@ class UserContactsScreen extends React.PureComponent {
     />
   );
 
-  resetQuery = () => this.props.updateQuery('');
+  goBack = () => Navigation.navigate('ProfileScreen');
+  backIconName = Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline';
+  iosBarStyle = Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content';
 
   render() {
-    const { t, userContacts, isLoading, query, updateQuery, loadMoreUserContacts, onRefresh, filterByContact } =
-      this.props;
-    const onUpdateQuery = (query) => {
-      clearTimeout(this.typingTimer);
-      this.typingTimer = setTimeout(() => updateQuery(query), 200);
-    };
+    const { userContacts, isLoading, updateQuery, loadMoreUserContacts, onRefresh, filterByContact } = this.props;
 
     return (
-      <Container style={{ backgroundColor: primaryColor }}>
-        <Header
-          style={styles.mainHeader}
-          iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
-          noShadow={true}
-          searchBar
-        >
-          <Icon
-            name={Platform.OS === 'android' ? 'arrow-back-outline' : 'chevron-back-outline'}
-            style={styles.backButton}
-            onPress={() => Navigation.navigate('ProfileScreen')}
-          />
-
-          <Item style={styles.searchBar}>
-            <Icon name="ios-search" style={styles.searchIcon} />
-            <Input
-              placeholder={t('profile.placeholders.userContactsSearch')}
-              placeholderTextColor={disabledColor}
-              style={[styles.inputTextColor, styles.searchBarInput]}
-              onChangeText={onUpdateQuery}
-              defaultValue={query}
-              returnKeyType={'done'}
-            />
-            {query.length > 0 && (
-              <Icon name="close-circle" style={{ color: disabledColor }} onPress={this.resetQuery} />
-            )}
-          </Item>
+      <Container style={styles.mainContainer}>
+        <Header style={styles.mainHeader} iosBarStyle={this.iosBarStyle} noShadow={true} searchBar>
+          <Icon name={this.backIconName} style={styles.backButton} onPress={this.goBack} />
+          <SearchBar />
         </Header>
         <UserContactsList
           userContacts={userContacts}
@@ -83,7 +56,6 @@ class UserContactsScreen extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     userContacts: state.userContacts.list,
-    query: state.userContacts.query,
     isLoading: state.userContacts.isLoading,
   };
 }
@@ -93,7 +65,6 @@ function mapDispatchToProps(dispatch) {
     loadMoreUserContacts: () => dispatch(loadMoreUserContacts()),
     onRefresh: () => dispatch(getAll()),
     filterByContact: (name) => dispatch(filterByContact(name)),
-    updateQuery: (query) => dispatch(updateQuery(query)),
     toggleBlock: (userContactId) => dispatch(toggleBlock(userContactId)),
   };
 }
@@ -104,7 +75,7 @@ UserContactsScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   mainHeader: {
-    backgroundColor: primaryColor,
+    backgroundColor: secondaryColor,
     borderBottomWidth: 0,
     padding: 0,
     paddingLeft: Platform.OS === 'android' ? 16 : 0,
@@ -112,23 +83,6 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
     alignItems: 'center',
   },
-  searchBar: {
-    borderRadius: 16,
-    marginLeft: 8,
-    backgroundColor: secondaryColor,
-    marginTop: Platform.OS === 'android' ? 32 : 0,
-    alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
-  },
-  searchIcon: {
-    color: disabledColor,
-    fontSize: 14,
-  },
-  searchBarInput: {
-    fontSize: 14,
-    paddingLeft: 0,
-  },
-  inputTextColor: {
-    color: textColor,
-  },
+  mainContainer: { backgroundColor: primaryColor },
   backButton: { color: textColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
 });

@@ -79,16 +79,6 @@ const NewAdNavigator = createStackNavigator(
   },
 );
 
-const UserContactsNavigator = createStackNavigator(
-  {
-    UserContactsScreen: { screen: UserContactsScreen, navigationOptions: { headerShown: false }, path: '' },
-  },
-  {
-    initialRouteName: 'UserContactsScreen',
-    defaultNavigationOptions: defaultNavigationOptions,
-  },
-);
-
 const ProfileNavigator = createStackNavigator(
   {
     ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false }, path: '' },
@@ -98,7 +88,7 @@ const ProfileNavigator = createStackNavigator(
       path: '',
     },
     UserContacts: {
-      screen: UserContactsNavigator,
+      screen: UserContactsScreen,
       path: '',
       navigationOptions: {
         headerShown: false,
