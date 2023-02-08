@@ -7,8 +7,11 @@ import codePush from 'react-native-code-push';
 //   const ReactRedux = require('react-redux');
 //   whyDidYouRender(React, {
 //     trackAllPureComponents: true,
-//     onlyLogs: true,
+//     onlyLogs: false,
+//     collapseGroups: true,
+//     exclude: [/^VirtualizedList/],
 //     trackExtraHooks: [[ReactRedux, 'useSelector']],
+//     // notifier: ({Component, displayName, hookName, prevProps, prevState, prevHook, nextProps, nextState, nextHook, reason, options, ownerDataMap}) => console.log(`<${displayName} /> ${prevProps} --- ${nextProps} [${reason}]`)
 //   });
 // }
 
