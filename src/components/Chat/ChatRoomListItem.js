@@ -67,7 +67,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
       </Left>
       <Body style={styles.previewBody}>
         <Text style={styles.title}>{chat.system ? t('chat.systemChatTitle') : chat.title}</Text>
-        <Text style={{ color: textColor }}>
+        <Text style={styles.textColor}>
           {lastMessage?.user?._id && (lastMessage.user._id === currentUser._id ? t('chat.you') : lastMessage.user.name)}
         </Text>
 
@@ -77,7 +77,7 @@ export default function ChatRoomListItem({ chat, currentUser }) {
         <Text style={[styles.smallFont, styles.centered]}>{lastMessageDateString}</Text>
         {chat.new_messages_count > 0 && (
           <Badge style={styles.unreadBadge}>
-            <Text style={{ color: activeTextColor }}>{chat.new_messages_count}</Text>
+            <Text style={styles.activeTextColor}>{chat.new_messages_count}</Text>
           </Badge>
         )}
       </Right>
@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
   },
+  textColor: { color: textColor },
+  activeTextColor: { color: activeTextColor },
   unreadBadge: {
     backgroundColor: activeColor,
     transform: [{ scale: 0.6 }],

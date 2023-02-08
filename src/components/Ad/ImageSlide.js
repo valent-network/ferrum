@@ -6,21 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { secondaryColor, spinnerColor, textColor } from 'colors';
 import { AD_IMAGE_HEIGHT } from 'utils';
 
-function ImageSlide({ url, onPress, cover }) {
+function ImageSlide({ source, onPress }) {
   const { t } = useTranslation();
-  const priority = cover ? FastImage.priority.high : FastImage.priority.normal;
-  const imageSource = {
-    uri: url,
-    priority: priority,
-  };
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const onLoad = () => setIsLoading(false);
-  const onLoadStart = () => setIsLoading(true);
-  const onError = () => {
+  const onLoad = useCallback(() => setIsLoading(false), []);
+  const onLoadStart = useCallback(() => setIsLoading(true), []);
+  const onError = useCallback(() => {
     setError(true);
     setIsLoading(false);
-  };
+  }, []);
 
   return (
     <TouchableOpacity activeOpacity={1} onPress={onPress} style={styles.mainContainer}>
@@ -37,7 +32,7 @@ function ImageSlide({ url, onPress, cover }) {
       {!error && (
         <FastImage
           style={styles.fastImage}
-          source={imageSource}
+          source={source}
           resizeMode={FastImage.resizeMode.cover}
           onLoad={onLoad}
           onLoadStart={onLoadStart}
@@ -49,7 +44,11 @@ function ImageSlide({ url, onPress, cover }) {
   );
 }
 
-export default ImageSlide;
+function arePropsEqual(oldProps, newProps) {
+  return oldProps.source.uri === newProps.source.uri && oldProps.source.priority === newProps.source.priority;
+}
+
+export default React.memo(({ source, onPress }) => <ImageSlide source={source} onPress={onPress} />, arePropsEqual);
 
 const styles = StyleSheet.create({
   mainContainer: { height: AD_IMAGE_HEIGHT },

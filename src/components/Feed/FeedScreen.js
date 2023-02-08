@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Platform, Appearance } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -21,9 +21,12 @@ import ContactsUploading from './ContactsUploading';
 import { secondaryColor, activeColor, primaryColor } from 'colors';
 
 const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeAd, unlikeAd, navigation }) => {
-  const onAdOpened = (ad) => {
-    navigation.push('FeedAd', { id: ad.id });
-  };
+  const onAdOpened = useCallback(
+    (ad) => {
+      navigation.push('FeedAd', { id: ad.id });
+    },
+    [navigation],
+  );
 
   return (
     <Container style={{ backgroundColor: primaryColor }}>
@@ -39,7 +42,11 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeA
       </Header>
       <View style={styles.filtersRow}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <MultiPicker opt={hopsOptions} />
+          <MultiPicker
+            name={hopsOptions.name}
+            localized_name={hopsOptions.localized_name}
+            values={hopsOptions.values}
+          />
         </ScrollView>
       </View>
       <ContactsUploading />

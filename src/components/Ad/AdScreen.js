@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshControl, ScrollView, Share, SafeAreaView, Appearance } from 'react-native';
 
@@ -47,51 +47,63 @@ export default function AdScreen({
   unarchiveAd,
 }) {
   const { t } = useTranslation();
-  const refreshControl = <RefreshControl tintColor={spinnerColor} refreshing={isLoading} onRefresh={onRefresh} />;
+  const refreshControl = useCallback(
+    <RefreshControl tintColor={spinnerColor} refreshing={isLoading} onRefresh={onRefresh} />,
+    [isLoading, onRefresh],
+  );
   const colorStyle = [styles.icon, ad.favorite ? styles.activeColor : styles.activeTextColor];
 
-  const shareAction = () =>
-    Share.share({
-      message: `${i18n.t('ad.shareText')} https://recar.io/ads/${ad.id}`,
-      title: ad.title,
-    });
-  const favAction = () => (ad.favorite ? unlikeAd(ad) : likeAd(ad));
-  const unarchiveAdAction = () => unarchiveAd(ad.id);
-  const editAdAction = () => Navigation.navigate('EditAdScreen', { ad: ad });
-  const deleteAdAction = () =>
-    ActionSheet.show(
-      {
-        title: t('ad.alerts.confirm_delete'),
-        options: [t('actions.delete'), t('actions.cancel')],
-        cancelButtonIndex: 1,
-        destructiveButtonIndex: 0,
-      },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            return deleteAd(ad.id);
-        }
-      },
-    );
-  const archiveAdAction = () =>
-    ActionSheet.show(
-      {
-        title: t('ad.alerts.confirm_archive'),
-        options: [t('actions.archive'), t('actions.cancel')],
-        cancelButtonIndex: 1,
-        destructiveButtonIndex: 0,
-      },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            return archiveAd(ad.id);
-        }
-      },
-    );
+  const shareAction = useCallback(
+    () =>
+      Share.share({
+        message: `${i18n.t('ad.shareText')} https://recar.io/ads/${ad.id}`,
+        title: ad.title,
+      }),
+    [ad],
+  );
+  const favAction = useCallback(() => (ad.favorite ? unlikeAd(ad) : likeAd(ad)), [ad]);
+  const unarchiveAdAction = useCallback(() => unarchiveAd(ad.id), [ad]);
+  const editAdAction = useCallback(() => Navigation.navigate('EditAdScreen', { ad: ad }), [ad]);
+  const deleteAdAction = useCallback(
+    () =>
+      ActionSheet.show(
+        {
+          title: t('ad.alerts.confirm_delete'),
+          options: [t('actions.delete'), t('actions.cancel')],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0,
+        },
+        (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              return deleteAd(ad.id);
+          }
+        },
+      ),
+    [ad],
+  );
+  const archiveAdAction = useCallback(
+    () =>
+      ActionSheet.show(
+        {
+          title: t('ad.alerts.confirm_archive'),
+          options: [t('actions.archive'), t('actions.cancel')],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0,
+        },
+        (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              return archiveAd(ad.id);
+          }
+        },
+      ),
+    [ad],
+  );
 
   if (isLoading && typeof ad.id === 'undefined') {
     return (
-      <Container style={{ backgroundColor: primaryColor }}>
+      <Container style={styles.mainContainer}>
         <Content>
           <Spinner color={spinnerColor} />
         </Content>
@@ -100,7 +112,7 @@ export default function AdScreen({
   }
 
   return (
-    <Container style={{ backgroundColor: primaryColor }}>
+    <Container style={styles.mainContainer}>
       <View style={styles.headerBackground}>
         <Header
           noShadow={true}
@@ -110,12 +122,12 @@ export default function AdScreen({
           <Left>
             <Icon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-              style={[styles.icon, { color: activeTextColor }]}
+              style={[styles.icon, styles.activeTextColor]}
               onPress={Navigation.popToTop}
             />
           </Left>
           <Right style={styles.actionButtonsContainer}>
-            <Icon style={[styles.icon, { color: activeTextColor }]} onPress={shareAction} name="share-outline" />
+            <Icon style={[styles.icon, styles.activeTextColor]} onPress={shareAction} name="share-outline" />
             <Icon
               onPress={favAction}
               style={colorStyle}
@@ -151,9 +163,7 @@ export default function AdScreen({
           )}
 
           <Text style={styles.title}>{ad.title}</Text>
-          <Text style={styles.price}>
-            {ad.price} {ad.category_currency}
-          </Text>
+          <Text style={styles.price}>{`${ad.price} ${ad.category_currency}`}</Text>
 
           <View style={styles.oldPricesContainer}>
             {ad.prices.map((v, index) => (

@@ -42,7 +42,9 @@ const FiltersModal = ({
     localized_name: t('feed.filters.headers.category'),
     values: categoriesValues,
   };
-  const categoryOptsMultipicker = useCallback(<MultiPicker opt={categoryOpts} />, [categoryOpts]);
+  const categoryOptsMultipicker = (
+    <MultiPicker name={categoryOpts.name} localized_name={categoryOpts.localized_name} values={categoryOpts.values} />
+  );
 
   applyMinPrice = (event) => applyFilter('min_price', event.nativeEvent.text);
   applyMaxPrice = (event) => applyFilter('max_price', event.nativeEvent.text);
@@ -70,7 +72,9 @@ const FiltersModal = ({
   );
   const close = <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />;
 
-  const mapper = useCallback((opt) => <MultiPicker key={`opt-${opt.id}`} opt={opt} />);
+  const mapper = useCallback((opt) => (
+    <MultiPicker key={`opt-${opt.id}`} name={opt.name} localized_name={opt.localized_name} values={opt.values} />
+  ));
 
   const submitButton = useCallback(
     <View style={styles.submitButtonWrapper}>

@@ -39,6 +39,14 @@ class AdsList extends React.PureComponent {
     FastImage.preload(this.coverPhotos);
   };
 
+  refreshControl = (isLoading) => (
+    <RefreshControl
+      refreshing={isLoading}
+      tintColor={spinnerColor}
+      onRefresh={this.props.fromFeed ? this.props.onRefreshFeed : this.props.onRefresh[this.props.currentTab]}
+    />
+  );
+
   // https://github.com/facebook/react-native/issues/26610
   flatListBugFix = { right: 1 };
 
@@ -47,19 +55,13 @@ class AdsList extends React.PureComponent {
   );
 
   render() {
-    const { ads, isLoading, fromFeed, onRefreshFeed, onRefresh, currentTab } = this.props;
-    const onRefreshTab = fromFeed ? onRefreshFeed : onRefresh[currentTab];
-    const refreshControl = isLoading ? (
-      <RefreshControl refreshing={true} tintColor={spinnerColor} onRefresh={onRefreshTab} />
-    ) : (
-      <RefreshControl refreshing={false} tintColor={spinnerColor} onRefresh={onRefreshTab} />
-    );
+    const { ads, isLoading, fromFeed } = this.props;
 
     if (ads.length === 0) {
       return isLoading ? (
         <Spinner color={spinnerColor} />
       ) : (
-        <ListNotFound refreshControl={refreshControl} fromFeed={fromFeed} />
+        <ListNotFound refreshControl={this.refreshControl(isLoading)} fromFeed={fromFeed} />
       );
     }
 
@@ -68,7 +70,7 @@ class AdsList extends React.PureComponent {
         data={ads}
         initialNumToRender={3}
         scrollIndicatorInsets={this.flatListBugFix}
-        refreshControl={refreshControl}
+        refreshControl={this.refreshControl(isLoading)}
         keyExtractor={this._keyExtractor}
         onEndReached={this._onEndReached}
         renderItem={this._renderItem}

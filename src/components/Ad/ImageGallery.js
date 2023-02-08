@@ -6,6 +6,7 @@ import { TouchableOpacity, Image, Modal, Dimensions, SafeAreaView } from 'react-
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
 import { withTranslation } from 'react-i18next';
+import FastImage from 'react-native-fast-image';
 
 import ImageHeader from './ImageHeader';
 import ImageSlide from './ImageSlide';
@@ -26,7 +27,16 @@ class ImageGallery extends React.Component {
 
   syncCarousel = (index) => setTimeout(() => this._carousel?.snapToItem(index, false, true), this.animateTime);
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
-  _renderItem = ({ item }) => <ImageSlide cover={item.position === 0} url={item.url} onPress={this.handleOnPress} />;
+  _renderItem = ({ item }) => (
+    <ImageSlide
+      source={
+        item.position === 0
+          ? { priority: FastImage.priority.high, uri: item.url }
+          : { priority: FastImage.priority.normal, uri: item.url }
+      }
+      onPress={this.handleOnPress}
+    />
+  );
   setCarouselRef = (c) => (this._carousel = c);
   renderHeader = (currentIndex, allSize) => (
     <ImageHeader currentIndex={currentIndex} allSize={this.props.ad.images.length} onClose={this.handleOnPress} />
@@ -58,7 +68,7 @@ class ImageGallery extends React.Component {
           <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
             <Badge style={styles.imageGalleryBadge}>
               <Text style={styles.imageGalleryBadgeText}>
-                &nbsp;{this.state.currentImageIndex + 1} / {images.length}
+                {`${this.state.currentImageIndex + 1} / ${images.length}`}
               </Text>
             </Badge>
           </View>

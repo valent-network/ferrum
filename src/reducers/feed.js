@@ -49,7 +49,9 @@ export default function feed(state = initialState, action = {}) {
     case ActionTypes.GET_FEED_WITH_OFFSET_SUCCESS:
       return {
         ...state,
-        ads: mergeArraysKeepNew([...state.ads, ...action.ads], (it) => it.id),
+        ads: equal(state.ads, action.ads)
+          ? state.ads
+          : mergeArraysKeepNew([...state.ads, ...action.ads], (it) => it.id),
       };
     case ActionTypes.GET_FEED_WITH_OFFSET_FAILED:
       return {

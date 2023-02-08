@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -9,7 +9,10 @@ import { deletedColor, activeTextColor } from 'colors';
 import Navigation from 'services/Navigation';
 
 const BottomTabChatIcon = ({ tintColor, unreadMessagesCount }) => {
-  const icon = <Icon name="chatbubbles-sharp" style={[styles.activeIcon, { color: tintColor }]} />;
+  const icon = useCallback(<Icon name="chatbubbles-sharp" style={[styles.activeIcon, { color: tintColor }]} />, [
+    tintColor,
+  ]);
+  const onPress = useCallback(() => Navigation.navigate('ChatRoomsListScreen'));
 
   if (unreadMessagesCount === 0) {
     return icon;
@@ -17,9 +20,9 @@ const BottomTabChatIcon = ({ tintColor, unreadMessagesCount }) => {
 
   return (
     <FooterTab style={styles.footerTab}>
-      <Button badge vertical activeOpacity={1} onPress={() => Navigation.navigate('ChatRoomsListScreen')}>
+      <Button badge vertical activeOpacity={1} onPress={onPress}>
         <Badge style={styles.badge}>
-          <Text style={{ color: activeTextColor }}>{unreadMessagesCount}</Text>
+          <Text style={styles.activeTextColor}>{unreadMessagesCount}</Text>
         </Badge>
         {icon}
       </Button>
@@ -50,4 +53,5 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
   },
+  activeTextColor: { color: activeTextColor },
 });

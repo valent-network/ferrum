@@ -9,7 +9,7 @@ import MultiPickerItem from './MultiPickerItem';
 
 import { applyFilter } from 'actions/feed';
 
-function MultiPicker({ filters, applyFilter, opt: { localized_name, name, values } }) {
+function MultiPicker({ filters, applyFilter, localized_name, name, values }) {
   const activeFilters = filters[name] || [];
 
   return (
