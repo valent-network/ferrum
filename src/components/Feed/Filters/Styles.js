@@ -107,10 +107,6 @@ export default StyleSheet.create({
   submitButton: {
     backgroundColor: activeColor,
   },
-  switchFilter: {
-    flexDirection: 'row',
-    marginTop: 12,
-  },
   searchBar: {
     borderRadius: 16,
     backgroundColor: secondaryColor,
