@@ -10,6 +10,7 @@ import ListNotFound from 'components/ListNotFound';
 
 class UserContactsList extends React.PureComponent {
   keyExtractor = (item) => item.id.toString();
+  flatListBugFix = { right: 1 };
 
   onEndReached = async () => this.props.loadMoreUserContacts();
 
@@ -27,6 +28,7 @@ class UserContactsList extends React.PureComponent {
 
     return (
       <FlatList
+        scrollIndicatorInsets={this.flatListBugFix}
         data={userContacts}
         refreshControl={refreshControl}
         keyExtractor={this.keyExtractor}
