@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
+import { ScrollView, Platform } from 'react-native';
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
 import { AD_IMAGE_HEIGHT } from 'utils';
@@ -13,6 +13,7 @@ import {
   spinnerColor,
   deletedColor,
   primaryColor,
+  activeTextColor,
 } from 'colors';
 
 import { FlatList, Image, StyleSheet } from 'react-native';
@@ -25,6 +26,11 @@ import { mergeArraysKeepNew } from 'utils';
 
 import InvitationModal from './InvitationModal';
 import AdFriend from './AdFriend';
+
+import i18n from 'services/i18n';
+import Navigation from 'services/Navigation';
+
+const flatListBugFix = { right: 1 };
 
 function ChatRoomsSettingsScreen({
   chat,
@@ -51,21 +57,26 @@ function ChatRoomsSettingsScreen({
   const [friendToInvite, setFriendToInvite] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const onShow = () => {
-    // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
-    navigation.navigate('Ad', { id: chat.ad_id });
-  };
-  const onLeave = () => {
-    ActionSheet.show(
-      {
-        options: [t('chat.actions.leave'), t('chat.actions.cancel')],
-        cancelButtonIndex: 1,
-        destructiveButtonIndex: 0,
-        title: t('chat.settings.leaveChatTitle'),
-      },
-      (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
-    );
-  };
+
+  useEffect(() => {
+    const onShow = () => {
+      // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
+      navigation.navigate('Ad', { id: chat.ad_id });
+    };
+    const onLeave = () => {
+      ActionSheet.show(
+        {
+          options: [t('chat.actions.leave'), t('chat.actions.cancel')],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0,
+          title: t('chat.settings.leaveChatTitle'),
+        },
+        (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
+      );
+    };
+
+    navigation.setParams({ onShow: onShow, onLeave: onLeave });
+  }, []);
 
   const openInviteFriendModal = (friend) => {
     setFriendToInvite(friend);
@@ -103,30 +114,22 @@ function ChatRoomsSettingsScreen({
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
   return (
-    <Container style={{ backgroundColor: primaryColor }}>
+    <ScrollView horizontal={false} scrollIndicatorInsets={flatListBugFix} style={styles.mainContainer}>
       <Image source={imageSource} style={styles.adPhoto} />
-      <View style={styles.infoContainer}>
-        {chat.ad_id && (
-          <Text style={{ color: textColor }} onPress={onShow}>
-            {chat.title}
-            {'\n'}
-            {<Text style={{ color: activeColor }}>{t('chat.settings.more')}</Text>}
-          </Text>
-        )}
-
-        {!chat.ad_id && <Text style={{ color: textColor }}>{chat.title}</Text>}
-      </View>
-      <Text style={styles.leaveChat} onPress={onLeave}>
-        {t('chat.settings.leaveChat')}&nbsp;
-        <Icon name="log-out-outline" style={styles.leaveIcon} />
-      </Text>
       {isLoading ? (
         <Spinner color={spinnerColor} />
       ) : (
-        <FlatList data={toDisplay} refreshing={isLoading} keyExtractor={keyExtractor} renderItem={renderItem} />
+        <FlatList
+          nestedScrollEnabled
+          data={toDisplay}
+          scrollIndicatorInsets={flatListBugFix}
+          refreshing={isLoading}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+        />
       )}
       {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={addUser} />}
-    </Container>
+    </ScrollView>
   );
 }
 
@@ -153,9 +156,38 @@ ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
-    headerTintColor: textColor,
+    headerTintColor: activeTextColor,
     headerShown: true,
     headerTransparent: true,
+    headerLeft: () => {
+      return (
+        <Icon
+          name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
+          style={[styles.icon, styles.activeTextColor]}
+          onPress={() => navigation.goBack()}
+        />
+      );
+    },
+    headerTitle: () => {
+      const { chat, onShow } = navigation.state.params;
+
+      if (!chat.ad_id) return null;
+
+      return (
+        <>
+          <Text style={{ color: activeTextColor, textAlign: 'center' }} onPress={onShow}>
+            <Text style={{ color: activeTextColor, fontWeight: 'bold' }}>{chat.title}</Text>
+            {'\n'}
+            <Text style={[styles.activeTextColor, { textDecorationLine: 'underline' }]}>
+              {i18n.t('chat.settings.more')}
+            </Text>
+          </Text>
+        </>
+      );
+    },
+    headerRight: () => (
+      <Icon name="log-out-outline" style={styles.leaveIcon} onPress={navigation.state.params.onLeave} />
+    ),
   };
 };
 
@@ -163,7 +195,6 @@ const styles = StyleSheet.create({
   adPhoto: {
     width: '100%',
     height: AD_IMAGE_HEIGHT,
-    maxHeight: '30%',
     opacity: 0.75,
   },
   leaveChat: {
@@ -172,12 +203,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingRight: 16,
     textAlign: 'right',
-  },
-  infoContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
   },
   separator: {
     backgroundColor: secondaryColor,
@@ -192,8 +217,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   leaveIcon: {
-    fontSize: 14,
-    color: deletedColor,
+    color: activeTextColor,
+    marginRight: 16,
+  },
+  mainContainer: {
+    backgroundColor: primaryColor,
+    minHeight: '100%',
+    minWidth: '100%',
+  },
+  icon: {
+    marginRight: 8,
+    marginLeft: 16,
+  },
+  activeColor: {
+    color: activeColor,
+  },
+  activeTextColor: {
+    color: activeTextColor,
   },
 });
 

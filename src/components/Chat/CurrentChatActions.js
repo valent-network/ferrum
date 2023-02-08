@@ -11,7 +11,7 @@ import Navigation from 'services/Navigation';
 import { activeColor } from 'colors';
 
 const HeaderActions = ({ chat, isLoading }) => {
-  if (isLoading || chat.system) {
+  if (isLoading || chat.system || !chat.ad_id) {
     return null;
   }
 
