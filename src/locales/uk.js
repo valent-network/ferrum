@@ -97,6 +97,10 @@ export default {
         price: '24022022',
       },
     },
+    errors: {
+      imageNotLoaded: 'Не вдалося завантажити фото',
+      imageProcessing: 'Фото оброблюється, будь ласка, спробуйте пізніше',
+    },
     buttons: {
       selectFriend: 'Обрати',
       inviteFriend: 'Запросити',

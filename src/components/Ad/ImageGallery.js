@@ -5,62 +5,72 @@ import { Text, Badge, Icon, View } from 'native-base';
 import { TouchableOpacity, Image, Modal, Dimensions, SafeAreaView } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
+import { withTranslation } from 'react-i18next';
 
 import ImageHeader from './ImageHeader';
 import ImageSlide from './ImageSlide';
 
 import styles from './Styles';
 
-import { primaryColor, textColor } from 'colors';
+import { primaryColor, textColor, secondaryColor } from 'colors';
 
-const ImageViewerPageAnimationTimeoutMs = 150;
-
-export default class ImageGallery extends React.Component {
+class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = { imagesFullscreenOpened: false, currentImageIndex: 0 };
   }
 
-  handleOnPress = () => {
-    this.props.withModal
-      ? this.setState({
-          imagesFullscreenOpened: !this.state.imagesFullscreenOpened,
-        })
-      : this.props.onPress();
-  };
-
-  imageMapper = (image) => ({ url: image.url });
   windowWidth = Dimensions.get('window').width;
-  syncCarousel = (index) =>
-    setTimeout(() => this._carousel?.snapToItem(index, false, true), ImageViewerPageAnimationTimeoutMs);
+  animateTime = 150;
+  imageURLs = this.props.ad.images.map((image) => ({ url: image.url }));
+
+  syncCarousel = (index) => setTimeout(() => this._carousel?.snapToItem(index, false, true), this.animateTime);
   setCurrentImageIndex = (index) => this.setState({ currentImageIndex: index });
-
-  _renderItem = ({ item }) => <ImageSlide url={item.url} onPress={this.handleOnPress} />;
-
+  _renderItem = ({ item }) => <ImageSlide cover={item.position === 0} url={item.url} onPress={this.handleOnPress} />;
   setCarouselRef = (c) => (this._carousel = c);
+  renderHeader = (currentIndex, allSize) => (
+    <ImageHeader currentIndex={currentIndex} allSize={this.props.ad.images.length} onClose={this.handleOnPress} />
+  );
+  renderIndicator = () => null;
+  openViewerModal = () => this.setState({ imagesFullscreenOpened: !this.state.imagesFullscreenOpened });
+  handleOnPress = () => (this.props.withModal ? this.openViewerModal() : this.props.onPress());
 
   render() {
     const { images } = this.props.ad;
-    const { withModal } = this.props;
+    const { t, withModal } = this.props;
 
     return (
       <>
-        <Carousel
-          inactiveSlideScale={1}
-          data={withModal ? images : images.slice(0, 5)}
-          renderItem={this._renderItem}
-          itemWidth={this.windowWidth}
-          sliderWidth={this.windowWidth}
-          ref={this.setCarouselRef}
-          onSnapToItem={this.setCurrentImageIndex}
-        />
-        <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
-          <Badge style={styles.imageGalleryBadge}>
-            <Text style={styles.imageGalleryBadgeText}>
-              &nbsp;{this.state.currentImageIndex + 1} / {this.props.ad.images.length}
-            </Text>
-          </Badge>
-        </View>
+        {images.length > 0 && (
+          <Carousel
+            inactiveSlideScale={1}
+            initialNumToRender={3}
+            windowSize={3}
+            data={images}
+            renderItem={this._renderItem}
+            itemWidth={this.windowWidth}
+            sliderWidth={this.windowWidth}
+            ref={this.setCarouselRef}
+            onSnapToItem={this.setCurrentImageIndex}
+          />
+        )}
+        {images.length > 0 && (
+          <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
+            <Badge style={styles.imageGalleryBadge}>
+              <Text style={styles.imageGalleryBadgeText}>
+                &nbsp;{this.state.currentImageIndex + 1} / {images.length}
+              </Text>
+            </Badge>
+          </View>
+        )}
+
+        {images.length === 0 && (
+          <TouchableOpacity onPress={this.handleOnPress}>
+            <View style={styles.imageProcessingPlaceholder}>
+              <Text style={styles.imageProcessingText}>{t('ad.errors.imageProcessing')}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
 
         {withModal && (
           <Modal
@@ -79,13 +89,11 @@ export default class ImageGallery extends React.Component {
                 index={this._carousel?.currentIndex}
                 onCancel={this.handleOnPress}
                 onChange={this.syncCarousel}
-                pageAnimateTime={ImageViewerPageAnimationTimeoutMs}
-                imageUrls={images.map(this.imageMapper)}
+                pageAnimateTime={this.animateTime}
+                imageUrls={this.props.ad.images.map((image) => ({ url: image.url }))}
                 backgroundColor={primaryColor}
-                renderHeader={(currentIndex, allSize) => (
-                  <ImageHeader currentIndex={currentIndex} allSize={images.length} onClose={this.handleOnPress} />
-                )}
-                renderIndicator={() => null}
+                renderHeader={this.renderHeader}
+                renderIndicator={this.renderIndicator}
               />
             </View>
           </Modal>
@@ -94,6 +102,8 @@ export default class ImageGallery extends React.Component {
     );
   }
 }
+
+export default withTranslation()(ImageGallery);
 
 ImageGallery.propTypes = {
   ad: PropTypes.object.isRequired,

@@ -1,3 +1,4 @@
+import FastImage from 'react-native-fast-image';
 import * as ActionTypes from 'actions/types';
 import API from 'services/API';
 import { displayError } from 'actions/errors';
@@ -59,6 +60,8 @@ export function signOut(all) {
       .then((signOutPayload) => {
         if (signOutPayload.data.message === 'ok') {
           clearAccessToken();
+          FastImage.clearMemoryCache();
+          FastImage.clearDiskCache();
           API.clearAccessToken();
           clearAuthPhone().then((phone) => {
             dispatch({ type: ActionTypes.SIGN_OUT_SUCCESS });

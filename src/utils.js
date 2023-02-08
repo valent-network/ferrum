@@ -62,3 +62,5 @@ export const reposition = (i, index) => {
 };
 
 export const positionSorter = (a, b) => a.position - b.position;
+
+export const AD_IMAGE_HEIGHT = 350;

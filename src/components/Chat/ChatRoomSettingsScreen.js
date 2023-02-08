@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
 
+import { AD_IMAGE_HEIGHT } from 'utils';
+
 import {
   activeColor,
   textColor,
@@ -160,7 +162,7 @@ ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   adPhoto: {
     width: '100%',
-    height: 350,
+    height: AD_IMAGE_HEIGHT,
     maxHeight: '30%',
     opacity: 0.75,
   },

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
 import { Spinner } from 'native-base';
+import FastImage from 'react-native-fast-image';
 
 import { activeColor, textColor, spinnerColor } from 'colors';
 
@@ -18,8 +19,24 @@ import { likeAd, unlikeAd } from 'actions/favoriteAds';
 class AdsList extends React.PureComponent {
   _keyExtractor = (item) => item.id.toString();
 
+  coverPhotos = (coverPhotos = this.props.ads.flatMap((ad) =>
+    ad.images
+      .filter((i) => i.position === 0)
+      .map((i) => {
+        return { uri: i.url };
+      }),
+  ));
+
   _onEndReached = async () => {
     this.props.fromFeed ? this.props.loadMoreFeedAds() : this.props.loadMoreAds[this.props.currentTab]();
+  };
+
+  componentDidUpdate = () => {
+    FastImage.preload(this.coverPhotos);
+  };
+
+  componentDidMount = () => {
+    FastImage.preload(this.coverPhotos);
   };
 
   // https://github.com/facebook/react-native/issues/26610
@@ -49,6 +66,7 @@ class AdsList extends React.PureComponent {
     return (
       <FlatList
         data={ads}
+        initialNumToRender={3}
         scrollIndicatorInsets={this.flatListBugFix}
         refreshControl={refreshControl}
         keyExtractor={this._keyExtractor}

@@ -125,13 +125,7 @@ export default function AdScreen({
         </Header>
       </View>
       <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
-        <ImageGallery
-          ad={ad}
-          imageStyle={{ height: 350, opacity: 0.75 }}
-          badgeStyle={{ right: 8, top: 312, position: 'absolute' }}
-          withModal={true}
-        />
-        {ad.images.length === 0 && <View style={styles.imagePlaceholder}></View>}
+        <ImageGallery ad={ad} badgeStyle={styles.badgeStyleForAdScreen} withModal={true} />
         <View style={styles.contentContainer}>
           {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}
 

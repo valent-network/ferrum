@@ -97,6 +97,10 @@ export default {
         price: '24022022',
       },
     },
+    errors: {
+      imageNotLoaded: 'Could not download photo',
+      imageProcessing: 'Photo is processing, please try again later',
+    },
     buttons: {
       selectFriend: 'Select',
       inviteFriend: 'Invite',

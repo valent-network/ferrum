@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { AD_IMAGE_HEIGHT } from 'utils';
 import {
   activeColor,
   secondaryColor,
@@ -123,7 +124,7 @@ export default styles = StyleSheet.create({
     backgroundColor: primaryColor,
   },
   image: {
-    height: 350,
+    height: AD_IMAGE_HEIGHT,
     opacity: 0.75,
   },
   imageGalleryBadgesContainer: {
@@ -148,7 +149,7 @@ export default styles = StyleSheet.create({
     fontSize: 14,
   },
   imagePlaceholder: {
-    height: 350,
+    height: AD_IMAGE_HEIGHT,
     width: '100%',
     backgroundColor: disabledColor,
   },
@@ -165,4 +166,13 @@ export default styles = StyleSheet.create({
   imageModalIndex: { color: textColor },
   imageModalIndexCloseIcon: { color: textColor },
   imageModalCloseIcon: { color: textColor },
+  badgeStyleForAdScreen: { right: 8, top: 312, position: 'absolute' },
+  imageProcessingPlaceholder: {
+    height: AD_IMAGE_HEIGHT,
+    backgroundColor: secondaryColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
+  },
+  imageProcessingText: { color: textColor, textAlign: 'center' },
 });
