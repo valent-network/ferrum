@@ -45,12 +45,12 @@ class AdsListItem extends React.PureComponent {
 
     if (friend_name_and_total) {
       if (friend_name_and_total.friend_hands === 1) {
-        knowsText =
-          friend_name_and_total.count > 0
-            ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
-                'ads.knowsMorePostfix',
-              )}...`
-            : `${t('ad.postedBy')} ${friend_name_and_total.name}`;
+        knowsText = `${t('ad.postedBy')} ${friend_name_and_total.name}`;
+        // friend_name_and_total.count > 0
+        //   ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
+        //       'ads.knowsMorePostfix',
+        //     )}...`
+        //   : `${t('ad.postedBy')} ${friend_name_and_total.name}`;
       } else {
         knowsText =
           friend_name_and_total.count > 0
