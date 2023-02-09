@@ -28,12 +28,9 @@ export default styles = StyleSheet.create({
     width: '100%',
   },
   headerBackground: {
-    backgroundColor: 'transparent',
     width: '100%',
-    color: textColor,
     position: 'absolute',
     zIndex: 10,
-    margin: 0,
   },
   sourceContainer: {
     margin: 12,
