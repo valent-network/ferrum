@@ -73,6 +73,11 @@ const AdForm = ({
     return { label: c.name, value: c.id };
   });
   const activeCategory = categories.filter((c) => c.id == categoryId)[0];
+
+  if (activeCategory) {
+    activeCategory.ad_option_types.forEach((opt) => register(`options[${opt.name}]`));
+  }
+
   const categoriesOptsCollection = categories.map((c) => {
     return { label: c.name, value: c.id };
   });
