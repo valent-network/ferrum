@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { RefreshControl, ScrollView, Share, SafeAreaView, Appearance } from 'react-native';
+import { RefreshControl, ScrollView, Share, SafeAreaView, Appearance, Animated } from 'react-native';
 
 import {
   Text,
@@ -33,6 +33,10 @@ import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor, act
 
 import i18n from 'services/i18n';
 
+import { withAnimated, animateHeaderHelper } from 'utils';
+
+const AnimatedIcon = Animated.createAnimatedComponent(withAnimated(Icon));
+
 export default function AdScreen({
   ad,
   currentAdFriends,
@@ -51,7 +55,6 @@ export default function AdScreen({
     <RefreshControl tintColor={spinnerColor} refreshing={isLoading} onRefresh={onRefresh} />,
     [isLoading, onRefresh],
   );
-  const colorStyle = [styles.icon, ad.favorite ? styles.activeColor : styles.activeTextColor];
 
   const shareAction = useCallback(
     () =>
@@ -101,6 +104,8 @@ export default function AdScreen({
     [ad],
   );
 
+  const [onScroll, setCalculatedHeaderHeight, bgInterpolation, textInterpolation] = animateHeaderHelper();
+
   if (isLoading && typeof ad.id === 'undefined') {
     return (
       <Container style={styles.mainContainer}>
@@ -113,30 +118,43 @@ export default function AdScreen({
 
   return (
     <Container style={styles.mainContainer}>
-      <View style={styles.headerBackground}>
+      <Animated.View
+        style={[styles.headerBackground, { backgroundColor: bgInterpolation }]}
+        onLayout={setCalculatedHeaderHeight}
+      >
         <Header
           noShadow={true}
           iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
-          style={styles.header}
+          style={[styles.header]}
         >
           <Left>
-            <Icon
+            <AnimatedIcon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-              style={[styles.icon, styles.activeTextColor]}
+              style={[styles.icon, { color: textInterpolation }]}
               onPress={Navigation.popToTop}
             />
           </Left>
           <Right style={styles.actionButtonsContainer}>
-            <Icon style={[styles.icon, styles.activeTextColor]} onPress={shareAction} name="share-outline" />
-            <Icon
+            <AnimatedIcon
+              style={[styles.icon, { color: textInterpolation }]}
+              onPress={shareAction}
+              name="share-outline"
+            />
+            <AnimatedIcon
               onPress={favAction}
-              style={colorStyle}
+              style={[styles.icon, ad.favorite ? styles.activeColor : { color: textInterpolation }]}
               name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
             />
           </Right>
         </Header>
-      </View>
-      <ScrollView refreshControl={refreshControl} showsVerticalScrollIndicator={false}>
+      </Animated.View>
+      <ScrollView
+        horizontal={false}
+        refreshControl={refreshControl}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={onScroll}
+      >
         <ImageGallery ad={ad} badgeStyle={styles.badgeStyleForAdScreen} withModal={true} />
         <View style={styles.contentContainer}>
           {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}

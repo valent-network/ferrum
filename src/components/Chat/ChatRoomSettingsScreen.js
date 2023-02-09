@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Platform } from 'react-native';
-import { Text, View, Container, ActionSheet, Spinner, Separator, Icon } from 'native-base';
+import { ScrollView, Platform, Animated, Appearance } from 'react-native';
+import { Text, View, Container, ActionSheet, Spinner, Separator, Icon, Header, Left, Right } from 'native-base';
 
 import { AD_IMAGE_HEIGHT } from 'utils';
 
@@ -30,7 +30,10 @@ import AdFriend from './AdFriend';
 import i18n from 'services/i18n';
 import Navigation from 'services/Navigation';
 
+import { withAnimated, animateHeaderHelper } from 'utils';
+
 const flatListBugFix = { right: 1 };
+const AnimatedIcon = Animated.createAnimatedComponent(withAnimated(Icon));
 
 function ChatRoomsSettingsScreen({
   chat,
@@ -58,25 +61,21 @@ function ChatRoomsSettingsScreen({
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
-  useEffect(() => {
-    const onShow = () => {
-      // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
-      navigation.navigate('Ad', { id: chat.ad_id });
-    };
-    const onLeave = () => {
-      ActionSheet.show(
-        {
-          options: [t('chat.actions.leave'), t('chat.actions.cancel')],
-          cancelButtonIndex: 1,
-          destructiveButtonIndex: 0,
-          title: t('chat.settings.leaveChatTitle'),
-        },
-        (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
-      );
-    };
-
-    navigation.setParams({ onShow: onShow, onLeave: onLeave });
-  }, []);
+  const onShow = useCallback(() => {
+    // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
+    navigation.navigate('Ad', { id: chat.ad_id });
+  }, [chat.ad_id]);
+  const onLeave = useCallback(() => {
+    ActionSheet.show(
+      {
+        options: [t('chat.actions.leave'), t('chat.actions.cancel')],
+        cancelButtonIndex: 1,
+        destructiveButtonIndex: 0,
+        title: t('chat.settings.leaveChatTitle'),
+      },
+      (buttonIndex) => buttonIndex === 0 && leaveChat(chat.id),
+    );
+  }, [chat.id]);
 
   const openInviteFriendModal = (friend) => {
     setFriendToInvite(friend);
@@ -113,23 +112,68 @@ function ChatRoomsSettingsScreen({
   };
   const addUser = (userId, name) => addUserToChat(chat.id, userId, name);
 
+  const [onScroll, setCalculatedHeaderHeight, bgInterpolation, textInterpolation] = animateHeaderHelper();
+
   return (
-    <ScrollView horizontal={false} scrollIndicatorInsets={flatListBugFix} style={styles.mainContainer}>
-      <Image source={imageSource} style={styles.adPhoto} />
-      {isLoading ? (
-        <Spinner color={spinnerColor} />
-      ) : (
-        <FlatList
-          nestedScrollEnabled
-          data={toDisplay}
-          scrollIndicatorInsets={flatListBugFix}
-          refreshing={isLoading}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-        />
-      )}
-      {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={addUser} />}
-    </ScrollView>
+    <>
+      <Animated.View
+        style={[styles.headerBackground, { backgroundColor: bgInterpolation }]}
+        onLayout={setCalculatedHeaderHeight}
+      >
+        <Header
+          noShadow={true}
+          iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
+          style={[styles.header]}
+        >
+          <Left>
+            <AnimatedIcon
+              name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
+              style={[styles.icon, { color: textInterpolation }]}
+              onPress={() => navigation.goBack()}
+            />
+          </Left>
+          {chat.ad_id && (
+            <Animated.Text style={{ color: textInterpolation, textAlign: 'center' }} onPress={onShow}>
+              <Animated.Text style={{ color: textInterpolation, fontWeight: 'bold' }}>{chat.title}</Animated.Text>
+              {'\n'}
+              <Animated.Text style={[{ color: textInterpolation, textDecorationLine: 'underline' }]}>
+                {i18n.t('chat.settings.more')}
+              </Animated.Text>
+            </Animated.Text>
+          )}
+          <Right style={styles.actionButtonsContainer}>
+            <AnimatedIcon
+              name="log-out-outline"
+              style={[styles.leaveIcon, { color: textInterpolation }]}
+              onPress={onLeave}
+            />
+          </Right>
+        </Header>
+      </Animated.View>
+      <ScrollView
+        horizontal={false}
+        scrollIndicatorInsets={flatListBugFix}
+        style={styles.mainContainer}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={onScroll}
+      >
+        <Image source={imageSource} style={styles.adPhoto} />
+        {isLoading ? (
+          <Spinner color={spinnerColor} />
+        ) : (
+          <FlatList
+            nestedScrollEnabled
+            data={toDisplay}
+            scrollIndicatorInsets={flatListBugFix}
+            refreshing={isLoading}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+          />
+        )}
+        {modalVisible && <InvitationModal friend={friendToInvite} onClose={closeModal} onSubmit={addUser} />}
+      </ScrollView>
+    </>
   );
 }
 
@@ -157,37 +201,8 @@ ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
     headerTruncatedBackTitle: () => null,
     headerBackTitleVisible: false,
     headerTintColor: activeTextColor,
-    headerShown: true,
+    headerShown: false,
     headerTransparent: true,
-    headerLeft: () => {
-      return (
-        <Icon
-          name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-          style={[styles.icon, styles.activeTextColor]}
-          onPress={() => navigation.goBack()}
-        />
-      );
-    },
-    headerTitle: () => {
-      const { chat, onShow } = navigation.state.params;
-
-      if (!chat.ad_id) return null;
-
-      return (
-        <>
-          <Text style={{ color: activeTextColor, textAlign: 'center' }} onPress={onShow}>
-            <Text style={{ color: activeTextColor, fontWeight: 'bold' }}>{chat.title}</Text>
-            {'\n'}
-            <Text style={[styles.activeTextColor, { textDecorationLine: 'underline' }]}>
-              {i18n.t('chat.settings.more')}
-            </Text>
-          </Text>
-        </>
-      );
-    },
-    headerRight: () => (
-      <Icon name="log-out-outline" style={styles.leaveIcon} onPress={navigation.state.params.onLeave} />
-    ),
   };
 };
 
@@ -196,6 +211,20 @@ const styles = StyleSheet.create({
     width: '100%',
     height: AD_IMAGE_HEIGHT,
     opacity: 0.75,
+  },
+  headerBackground: {
+    width: '100%',
+    position: 'absolute',
+    zIndex: 10,
+  },
+  header: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0,
+    paddingTop: 0,
+    padding: 0,
+    margin: 0,
+    width: '100%',
+    alignItems: 'center',
   },
   leaveChat: {
     color: deletedColor,
