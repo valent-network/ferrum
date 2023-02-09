@@ -88,7 +88,7 @@ function animatedHeaderStyles(scrolling, headerHeight) {
       ? ['rgba(0,0,0,0)', 'rgba(120,120,120,0.5)', 'rgba(241,241,241,1)']
       : ['rgba(255,255,255,0)', 'rgba(120,120,120,0.5)', 'rgba(0,0,0,1)'];
   const textColorsOutputRange =
-    systemColorScheme === 'light' ? ['rgb(214,241,241)', 'rgb(31,31,31)'] : ['rgb(214,241,241)', 'rgb(239,239,239)'];
+    systemColorScheme === 'light' ? ['rgb(241,241,241)', 'rgb(31,31,31)'] : ['rgb(241,241,241)', 'rgb(241,241,241)'];
 
   const bgInterpolation = scrolling.interpolate({
     inputRange: [fullVisibleHeaderY * 0.75, fullVisibleHeaderY * 0.9, fullVisibleHeaderY],
