@@ -66,21 +66,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-ChatRoomsListScreen.navigationOptions = ({ navigation }) => {
-  return {
-    headerShown: false,
-    headerTitleStyle: { color: textColor },
-    headerTintColor: textColor,
-    headerBackTitleVisible: false,
-    headerStyle: {
-      backgroundColor: secondaryColor,
-      shadowColor: 'transparent',
-      borderBottomWidth: 0,
-    },
-    title: i18n.t('nav.titles.chats'),
-  };
-};
-
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomsListScreen);
 
 const styles = StyleSheet.create({

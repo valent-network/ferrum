@@ -107,10 +107,6 @@ export default styles = StyleSheet.create({
     fontSize: 15,
     color: activeColor,
   },
-  icon: {
-    marginRight: 8,
-    marginLeft: 16,
-  },
   activeColor: {
     color: activeColor,
   },

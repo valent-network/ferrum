@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, Platform, Animated, Appearance } from 'react-native';
-import { Text, View, Container, ActionSheet, Spinner, Separator, Icon, Header, Left, Right } from 'native-base';
+import { Text, View, Container, ActionSheet, Spinner, Separator, Icon, Header, Left, Right, Body } from 'native-base';
+import FastImage from 'react-native-fast-image';
 
 import { AD_IMAGE_HEIGHT } from 'utils';
 
@@ -26,6 +27,7 @@ import { mergeArraysKeepNew } from 'utils';
 
 import InvitationModal from './InvitationModal';
 import AdFriend from './AdFriend';
+import ImageSlide from 'components/Ad/ImageSlide';
 
 import i18n from 'services/i18n';
 import Navigation from 'services/Navigation';
@@ -86,7 +88,6 @@ function ChatRoomsSettingsScreen({
   const membersIds = chat.chat_room_users.map((cru) => cru.user_id);
   const toDisplayMembers = friendsAndMembers.filter((f) => f.user_id && membersIds.includes(f.user_id));
   const toDisplayFriends = friendsAndMembers.filter((f) => !membersIds.includes(f.user_id));
-  const imageSource = { uri: chat.photo, cache: 'force-cache' };
   let toDisplay = toDisplayFriends.length
     ? [
         { separator: t('chat.settings.members') },
@@ -125,28 +126,30 @@ function ChatRoomsSettingsScreen({
           iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
           style={[styles.header]}
         >
-          <Left>
+          <Left style={{ maxWidth: '20%' }}>
             <AnimatedIcon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-              style={[styles.icon, { color: textInterpolation }]}
+              style={{ color: textInterpolation }}
               onPress={() => navigation.goBack()}
             />
           </Left>
           {chat.ad_id && (
-            <Animated.Text style={{ color: textInterpolation, textAlign: 'center' }} onPress={onShow}>
-              <Animated.Text style={{ color: textInterpolation, fontWeight: 'bold' }}>{chat.title}</Animated.Text>
-              {'\n'}
-              <Animated.Text style={[{ color: textInterpolation, textDecorationLine: 'underline' }]}>
+            <Body>
+              <Animated.Text
+                style={{ color: textInterpolation, textAlign: 'center', fontWeight: 'bold' }}
+                onPress={onShow}
+              >
+                {chat.title}
+              </Animated.Text>
+              <Animated.Text
+                style={[{ color: textInterpolation, textDecorationLine: 'underline', textAlign: 'center' }]}
+              >
                 {i18n.t('chat.settings.more')}
               </Animated.Text>
-            </Animated.Text>
+            </Body>
           )}
-          <Right style={styles.actionButtonsContainer}>
-            <AnimatedIcon
-              name="log-out-outline"
-              style={[styles.leaveIcon, { color: textInterpolation }]}
-              onPress={onLeave}
-            />
+          <Right style={[styles.actionButtonsContainer, { maxWidth: '20%' }]}>
+            <AnimatedIcon name="log-out-outline" style={{ color: textInterpolation }} onPress={onLeave} />
           </Right>
         </Header>
       </Animated.View>
@@ -158,7 +161,7 @@ function ChatRoomsSettingsScreen({
         scrollEventThrottle={16}
         onScroll={onScroll}
       >
-        <Image source={imageSource} style={styles.adPhoto} />
+        <ImageSlide source={{ priority: FastImage.priority.high, uri: chat.photo }} onPress={onShow} />
         {isLoading ? (
           <Spinner color={spinnerColor} />
         ) : (
@@ -192,19 +195,6 @@ function mapDispatchToProps(dispatch) {
     leaveChat: (chatRoomId) => dispatch(leaveChat(chatRoomId)),
   };
 }
-
-ChatRoomsSettingsScreen.navigationOptions = ({ navigation }) => {
-  return {
-    title: '',
-    headerTitleStyle: { color: textColor },
-    headerBackTitle: () => null,
-    headerTruncatedBackTitle: () => null,
-    headerBackTitleVisible: false,
-    headerTintColor: activeTextColor,
-    headerShown: false,
-    headerTransparent: true,
-  };
-};
 
 const styles = StyleSheet.create({
   adPhoto: {
@@ -245,18 +235,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     fontWeight: 'bold',
   },
-  leaveIcon: {
-    color: activeTextColor,
-    marginRight: 16,
-  },
   mainContainer: {
     backgroundColor: primaryColor,
     minHeight: '100%',
     minWidth: '100%',
-  },
-  icon: {
-    marginRight: 8,
-    marginLeft: 16,
   },
   activeColor: {
     color: activeColor,

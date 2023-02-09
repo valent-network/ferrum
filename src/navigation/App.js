@@ -32,8 +32,8 @@ const defaultNavigationOptions = {
 
 const ChatNavigator = createStackNavigator(
   {
-    ChatRoomsListScreen: { screen: ChatRoomsListScreen, path: '' },
-    ChatRoomSettingsScreen: { screen: ChatRoomSettingsScreen, path: '' },
+    ChatRoomsListScreen: { screen: ChatRoomsListScreen, path: '', navigationOptions: { headerShown: false } },
+    ChatRoomSettingsScreen: { screen: ChatRoomSettingsScreen, path: '', navigationOptions: { headerShown: false } },
     ChatRoomScreen: { screen: ChatRoomScreen, path: 'chat/:id' },
   },
   {
