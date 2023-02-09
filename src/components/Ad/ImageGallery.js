@@ -74,12 +74,18 @@ class ImageGallery extends React.Component {
           </View>
         )}
 
-        {images.length === 0 && (
+        {images.length === 0 && !withModal && (
           <TouchableOpacity onPress={this.handleOnPress}>
             <View style={styles.imageProcessingPlaceholder}>
               <Text style={styles.imageProcessingText}>{t('ad.errors.imageProcessing')}</Text>
             </View>
           </TouchableOpacity>
+        )}
+
+        {images.length === 0 && withModal && (
+          <View style={styles.imageProcessingPlaceholder}>
+            <Text style={styles.imageProcessingText}>{t('ad.errors.imageProcessing')}</Text>
+          </View>
         )}
 
         {withModal && (

@@ -12,13 +12,18 @@ function ImageSlide({ source, onPress }) {
   const [error, setError] = useState(false);
   const onLoad = useCallback(() => setIsLoading(false), []);
   const onLoadStart = useCallback(() => setIsLoading(true), []);
+  const doNothing = useCallback(() => {}, []);
   const onError = useCallback(() => {
     setError(true);
     setIsLoading(false);
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={1} onPress={onPress} style={styles.mainContainer}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={!error && !isLoading ? onPress : doNothing}
+      style={styles.mainContainer}
+    >
       {error && (
         <View style={styles.error}>
           <Text style={styles.errorText}>{t('ad.errors.imageNotLoaded')}</Text>
