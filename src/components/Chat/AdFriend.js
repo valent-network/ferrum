@@ -31,7 +31,9 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
         bgColor={friend.user_id ? activeColor : secondaryColor}
       />
       <Body>
-        <Text style={friend.user_id && membersIds.includes(friend.user_id) ? { color: activeColor } : {}}>
+        <Text
+          style={friend.user_id && membersIds.includes(friend.user_id) ? { color: activeColor } : { color: textColor }}
+        >
           {friend.name}
         </Text>
         <Text style={styles.contactPhoneStyle}>{friendPhoneNumber}</Text>
