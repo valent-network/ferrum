@@ -94,7 +94,7 @@ export default {
         category_id: 'Оберіть',
         region: 'Оберіть',
         city_id: 'Оберіть',
-        price: '24022022',
+        price: '1000',
       },
     },
     errors: {
@@ -191,6 +191,7 @@ export default {
       tos: 'Правила користування',
       privacy: 'Політика приватності',
       signOut: 'Вийти',
+      referrer: 'Запросив',
     },
     referrer: {
       callToAction: 'Запроси друга',

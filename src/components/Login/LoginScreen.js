@@ -90,7 +90,7 @@ class LoginScreen extends React.Component {
         <TextInputMask
           type={'custom'}
           options={this.phoneMaskOptions}
-          placeholder="(50)123-45-67"
+          placeholder="(00)000-00-00"
           placeholderTextColor={disabledColor}
           value={phone}
           includeRawValueInChangeText={true}

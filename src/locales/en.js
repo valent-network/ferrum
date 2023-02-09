@@ -94,7 +94,7 @@ export default {
         category_id: 'Choose',
         region: 'Choose',
         city_id: 'Choose',
-        price: '24022022',
+        price: '1000',
       },
     },
     errors: {
@@ -191,6 +191,7 @@ export default {
       tos: 'Terms of service',
       privacy: 'Privacy policy',
       signOut: 'Sign out',
+      referrer: 'Invited by',
     },
     referrer: {
       callToAction: 'Invite your friend and make Recario even more useful for yourself!',
