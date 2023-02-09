@@ -110,7 +110,6 @@ export function deleteAd(adId) {
     return API.deleteAd(adId)
       .then((payload) => {
         const state = getState();
-        dispatch({ type: ActionTypes.DELETE_AD_SUCCESS, adId: adId });
         Navigation.popToTop();
         if (adId === state.adsListsAd.currentAd.id) {
           dispatch({ type: ActionTypes.RESET_ADS_LISTS_AD });
@@ -118,6 +117,7 @@ export function deleteAd(adId) {
         if (adId === state.feedAd.currentAd.id) {
           dispatch({ type: ActionTypes.RESET_FEED_AD });
         }
+        dispatch({ type: ActionTypes.DELETE_AD_SUCCESS, adId: adId });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.DELETE_AD_STARTED, adId: adId });

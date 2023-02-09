@@ -21,11 +21,11 @@ class AdScreenContainer extends React.PureComponent {
   };
 
   componentDidMount() {
-    const { ad, loadAd, isLoading, navigation, shouldNotReset } = this.props;
+    const { ad, loadAd, isLoading, navigation, shouldNotReset, shouldPopToTopOnFocus } = this.props;
 
     shouldNotReset();
 
-    if (isLoading) return;
+    if (isLoading || shouldPopToTopOnFocus) return;
 
     if (parseInt(ad.id) == parseInt(navigation.state.params.id)) return;
 
@@ -33,7 +33,7 @@ class AdScreenContainer extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const { ad, navigation, shouldPopToTopOnFocus, shouldNotReset, loadAd } = this.props;
+    const { ad, navigation, shouldPopToTopOnFocus, loadAd, isLoading } = this.props;
 
     this.focusListener = navigation.addListener('didFocus', () => {
       if (shouldPopToTopOnFocus) {
@@ -41,6 +41,8 @@ class AdScreenContainer extends React.PureComponent {
         // shouldNotReset();
       }
     });
+
+    if (isLoading || shouldPopToTopOnFocus) return;
 
     if (parseInt(ad.id) == parseInt(navigation.state.params.id)) return;
 
@@ -66,6 +68,7 @@ class AdScreenContainer extends React.PureComponent {
       archiveAd,
       unarchiveAd,
       actionsLoading,
+      newAdLoading,
     } = this.props;
 
     const shouldReset = parseInt(ad.id) != parseInt(navigation.state.params.id);
@@ -83,12 +86,13 @@ class AdScreenContainer extends React.PureComponent {
         isLoading={shouldReset || isLoading}
         actionsLoading={actionsLoading}
         onRefresh={this.onRefresh}
+        newAdLoading={newAdLoading}
       />
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     ad: state.feedAd.currentAd,
     isLoading: state.feedAd.isLoading,
@@ -96,6 +100,7 @@ function mapStateToProps(state) {
     currentAdFriends: state.feedAd.currentAdFriends,
     actionsLoading: state.feedAd.currentAd.actionsLoading,
     shouldPopToTopOnFocus: state.feedAd.shouldReset,
+    newAdLoading: ownProps.navigation.state.params.id !== state.feedAd.currentAd?.id,
   };
 }
 

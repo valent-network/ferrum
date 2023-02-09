@@ -20,8 +20,6 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { loadAd } from 'actions/ads';
-
 import ImageGallery from './ImageGallery';
 import AskFriend from './AskFriend';
 import OptionsList from './OptionsList';
@@ -42,6 +40,7 @@ export default function AdScreen({
   currentAdFriends,
   askFriendsIsLoading,
   isLoading,
+  newAdLoading,
   actionsLoading,
   onRefresh,
   likeAd,
@@ -106,7 +105,7 @@ export default function AdScreen({
 
   const [onScroll, setCalculatedHeaderHeight, bgInterpolation, textInterpolation] = animateHeaderHelper();
 
-  if (isLoading && typeof ad.id === 'undefined') {
+  if (isLoading && newAdLoading) {
     return (
       <Container style={styles.mainContainer}>
         <Content>
