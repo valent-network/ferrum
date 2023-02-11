@@ -69,6 +69,24 @@ export function applyFilter(filterKey, filterValue) {
   };
 }
 
+export function applyHopsCountFilter() {
+  return function (dispatch, getState) {
+    const state = getState();
+    const currentHopsCount = state.filters.hops_count[0];
+    let hopsCount;
+
+    if (typeof currentHopsCount === 'undefined') {
+      hopsCount = { id: 0 };
+    } else if (currentHopsCount === 1) {
+      hopsCount = { id: 1 };
+    } else {
+      hopsCount = { id: currentHopsCount + 1 };
+    }
+
+    dispatch(applyFilter('hops_count', hopsCount));
+  };
+}
+
 export function resetFilters() {
   return function (dispatch) {
     dispatch({ type: ActionTypes.FILTER_RESET });

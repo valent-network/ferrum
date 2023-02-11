@@ -3,24 +3,35 @@ import { Platform, Appearance } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Icon, Header } from 'native-base';
-import { StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, View, Text } from 'react-native';
 
 import AdsList from 'components/AdsList';
 
-import { loadMoreAds, getAll } from 'actions/feed';
+import { loadMoreAds, getAll, applyHopsCountFilter } from 'actions/feed';
 import { likeAd, unlikeAd } from 'actions/favoriteAds';
 
 import FiltersModal from './Filters/FiltersModal';
 import SearchBar from './Filters/SearchBar';
 import MultiPicker from './Filters/MultiPicker';
+import MultiPickerItem from './Filters/MultiPickerItem';
 import Funnel from './Filters/Funnel';
 
 import PermissionsBox from './PermissionsBox';
 import ContactsUploading from './ContactsUploading';
 
-import { secondaryColor, activeColor, primaryColor } from 'colors';
+import { secondaryColor, activeColor, primaryColor, textColor, activeBorderColor } from 'colors';
 
-const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeAd, unlikeAd, navigation }) => {
+const FeedScreen = ({
+  ads,
+  loadMoreAds,
+  isLoading,
+  onRefresh,
+  likeAd,
+  unlikeAd,
+  hopsCount,
+  applyHopsCountFilter,
+  navigation,
+}) => {
   const onAdOpened = useCallback(
     (ad) => {
       navigation.push('FeedAd', { id: ad.id });
@@ -29,7 +40,7 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeA
   );
 
   return (
-    <Container style={{ backgroundColor: primaryColor }}>
+    <Container style={styles.mainContainer}>
       <Header
         style={styles.mainHeader}
         iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
@@ -39,16 +50,13 @@ const FeedScreen = ({ ads, loadMoreAds, hopsOptions, isLoading, onRefresh, likeA
       >
         <Funnel />
         <SearchBar />
+        <TouchableOpacity activeOpacity={1} onPress={applyHopsCountFilter}>
+          <View key={'hopsCountF'} style={hopsCount >= 0 ? styles.activeFilterBox : styles.filterBox}>
+            <Text style={[styles.filterBoxText, hopsCount >= 0 && { opacity: 1 }]}>🤝</Text>
+            <Text style={[styles.filterBoxText, hopsCount >= 1 && { opacity: 1 }]}>🤝</Text>
+          </View>
+        </TouchableOpacity>
       </Header>
-      <View style={styles.filtersRow}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <MultiPicker
-            name={hopsOptions.name}
-            localized_name={hopsOptions.localized_name}
-            values={hopsOptions.values}
-          />
-        </ScrollView>
-      </View>
       <ContactsUploading />
 
       <AdsList
@@ -71,7 +79,7 @@ function mapStateToProps(state) {
   return {
     ads: state.feed.ads,
     isLoading: state.feed.isLoading,
-    hopsOptions: { name: 'hops_count', values: state.settings.hopsOptions },
+    hopsCount: state.filters.hops_count[0],
   };
 }
 
@@ -81,6 +89,7 @@ function mapDispatchToProps(dispatch) {
     likeAd: (adId) => dispatch(likeAd(adId)),
     unlikeAd: (adId) => dispatch(unlikeAd(adId)),
     onRefresh: () => dispatch(getAll()),
+    applyHopsCountFilter: () => dispatch(applyHopsCountFilter()),
   };
 }
 
@@ -89,6 +98,7 @@ FeedScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  mainContainer: { backgroundColor: primaryColor },
   mainHeader: {
     backgroundColor: primaryColor,
     flexWrap: 'nowrap',
@@ -99,6 +109,29 @@ const styles = StyleSheet.create({
   filtersRow: {
     padding: 8,
     paddingTop: 0,
+  },
+  activeFilterBox: {
+    borderColor: activeBorderColor,
+    borderWidth: 1,
+    borderRadius: 32,
+    marginRight: 12,
+    padding: 6,
+    flexDirection: 'row',
+    backgroundColor: activeColor,
+  },
+  filterBox: {
+    borderColor: activeColor,
+    borderWidth: 1,
+    borderRadius: 32,
+    marginRight: 12,
+    padding: 6,
+    flexDirection: 'row',
+    backgroundColor: secondaryColor,
+  },
+  filterBoxText: {
+    color: textColor,
+    fontSize: 12,
+    opacity: 0.5,
   },
 });
 

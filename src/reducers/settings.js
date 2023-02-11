@@ -1,12 +1,6 @@
 import * as ActionTypes from 'actions/types';
 
 const initialState = {
-  hopsOptions: [
-    { name: '🤝', id: 0 },
-    { name: '🤝🤝', id: 1 },
-    { name: '🤝🤝🤝', id: 2 },
-    { name: '🤝🤝🤝🤝', id: 3 },
-  ],
   citiesByRegion: {},
   categories: [],
   currentTabAdsLists: 'favoriteAds',
