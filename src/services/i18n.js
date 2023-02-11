@@ -60,14 +60,18 @@ function getSystemLocale() {
     NativeModules.SettingsManager.settings.AppleLanguages
   ) {
     locales = NativeModules.SettingsManager.settings.AppleLanguages;
-    locales = locales.map((l) => l.substr(0, 2)).filter((l) => ['uk', 'en'].includes(l));
+    locales = locales.map((l) => l.substr(0, 2));
 
     // Android
   } else if (NativeModules.I18nManager) {
     locales = [NativeModules.I18nManager.localeIdentifier.substr(0, 2)];
   }
 
-  if (locales.includes('uk')) {
+  if (locales[0] === 'uk') {
+    locale = 'uk';
+  } else if (locales[0] === 'en') {
+    locale = 'en';
+  } else if (locales.includes('uk')) {
     locale = 'uk';
   } else if (locales.includes('en')) {
     locale = 'en';
