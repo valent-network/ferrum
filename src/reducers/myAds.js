@@ -106,6 +106,11 @@ export default function myAds(state = initialState, action = {}) {
       };
     case ActionTypes.SIGN_OUT_SUCCESS:
       return initialState;
+    case ActionTypes.GET_ADS_LISTS_AD_SUCCESS:
+      return {
+        ...state,
+        list: state.list.map((ad) => (ad.id == action.ad.id ? action.ad : ad)),
+      };
     default:
       return state;
   }
