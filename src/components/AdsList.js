@@ -55,7 +55,9 @@ class AdsList extends React.PureComponent {
   );
 
   render() {
-    const { ads, isLoading, fromFeed } = this.props;
+    const { ads, isLoading, fromFeed, initialContactsProcessing } = this.props;
+
+    if (fromFeed && initialContactsProcessing) return null;
 
     if (ads.length === 0) {
       return isLoading ? (
@@ -82,6 +84,7 @@ class AdsList extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     currentTab: state.settings.currentTabAdsLists,
+    initialContactsProcessing: !state.user.contactsProcessed && state.user.userContactsCount === 0,
   };
 }
 
