@@ -70,6 +70,13 @@ export default {
       maxLength: 'Too long, maximum length is:',
       max: 'Too big number, maximum is:',
       pattern: 'Wrong format',
+      imageSize: { title: 'Some photos were not added', message: 'Maximum file size must not exceed 5MB' },
+    },
+    toasts: {
+      createSuccess: 'Ad was created successfully. Please wait until photos are finished processing and update',
+      deleteSuccess: 'Ad was deleted successfully',
+      updateSuccess:
+        'Ad was updated successfully. Please wait until photos are finished processing if they were updated too',
     },
     params: {
       title: 'Title',
@@ -194,7 +201,8 @@ export default {
       referrer: 'Invited by',
     },
     referrer: {
-      callToAction: 'Invite your friend and make Recario even more useful for yourself!',
+      callToAction:
+        'Provide the code of the person who has invited you to Recario, this will ensure long-lasting bonuses for both of you',
       friendInvitesYou: 'invites you to explore Recario together',
       buttons: {
         accepting: 'I accept the invitation',
