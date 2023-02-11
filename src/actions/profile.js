@@ -18,6 +18,9 @@ export function getProfile() {
       .then((payload) => {
         PushNotification.setApplicationIconBadgeNumber(payload.data.unread_messages_count);
         dispatch({ type: ActionTypes.GET_PROFILE_SUCCESS, user: payload.data });
+        if (payload.data.user_contacts_count > 0) {
+          dispatch({ type: ActionTypes.UPDATE_CONTACTS_FINISHED });
+        }
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.GET_PROFILE_FAILED });
