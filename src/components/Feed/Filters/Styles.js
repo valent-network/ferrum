@@ -86,7 +86,7 @@ export default StyleSheet.create({
   },
   activeFilterIcon: {
     color: activeTextColor,
-    fontSize: 18,
+    fontSize: 13,
   },
   activeFilterItem: {
     fontSize: 18,
@@ -138,7 +138,7 @@ export default StyleSheet.create({
     maxHeight: 52,
   },
   filterIcon: {
-    fontSize: 18,
+    fontSize: 12,
     color: activeColor,
   },
   activeTextColor: { color: activeTextColor },
