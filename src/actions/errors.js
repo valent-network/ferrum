@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { notification } from 'utils';
 import i18n from 'services/i18n';
 
-function showNotification(title, message) {
+export function showNotification(title, message) {
   if (Platform.OS === 'ios') {
     notification.ref.show({ message: { title, message } });
   } else {
