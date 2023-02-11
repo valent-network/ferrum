@@ -24,9 +24,13 @@ export default function ChatRoomListItem({ chat, currentUser }) {
   const lastMessage = chat.messages[0];
   const onPress = () => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id, title: chat.title });
 
-  const lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
+  let lastMessageDateString = dayjs(dayjs().startOf('day')).isBefore(lastMessage.createdAt)
     ? dayjs(lastMessage.createdAt).locale(i18n.language).format('HH:mm')
     : dayjs(lastMessage.createdAt).locale(i18n.language).format('D MMM');
+  lastMessageDateString =
+    dayjs().year() === parseInt(dayjs(lastMessage.createdAt).format('YYYY'))
+      ? lastMessageDateString
+      : `${lastMessageDateString} ${dayjs(lastMessage.createdAt).format('YYYY')}`;
   let messagePreview = lastMessage ? lastMessage.text.replace(/\n/g, ' ') : '';
   messagePreview = messagePreview.length > 20 ? `${messagePreview.substring(0, 20)}...` : messagePreview;
 

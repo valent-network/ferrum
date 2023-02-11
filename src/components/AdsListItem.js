@@ -37,9 +37,13 @@ class AdsListItem extends React.PureComponent {
 
     const { t, ad } = this.props;
 
-    const updatedAt = dayjs(dayjs().startOf('day')).isBefore(ad.updated_at)
+    let updatedAt = dayjs(dayjs().startOf('day')).isBefore(ad.updated_at)
       ? dayjs(ad.updated_at).locale(i18n.language).format('HH:mm')
       : dayjs(ad.updated_at).locale(i18n.language).format('D MMMM');
+    updatedAt =
+      dayjs().year() === parseInt(dayjs(ad.updated_at).format('YYYY'))
+        ? updatedAt
+        : `${updatedAt} ${dayjs(ad.updated_at).format('YYYY')}`;
 
     let knowsText, handsCountString;
 
@@ -92,7 +96,11 @@ class AdsListItem extends React.PureComponent {
                   onPress={this.favAction}
                   style={[{}, ad.favorite ? { color: activeColor } : { color: textColor }]}
                 />
-                <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
+                {ad.region ? (
+                  <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
+                ) : (
+                  <Text style={styles.notes}>{updatedAt}</Text>
+                )}
               </View>
             </TouchableOpacity>
           </View>
