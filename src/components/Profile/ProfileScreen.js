@@ -286,7 +286,7 @@ class ProfileScreen extends React.PureComponent {
                 <ListItem
                   style={[styles.itemContainer, styles.withBorderBottom]}
                   noIndent
-                  onPress={() => this.props.navigation.push('UserContacts')}
+                  onPress={() => this.props.navigation.push('UserContactsScreen')}
                   activeOpacity={1}
                   underlayColor="transparent"
                 >

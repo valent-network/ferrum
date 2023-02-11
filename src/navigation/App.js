@@ -82,12 +82,18 @@ const NewAdNavigator = createStackNavigator(
 const ProfileNavigator = createStackNavigator(
   {
     ProfileScreen: { screen: ProfileScreen, navigationOptions: { headerShown: false }, path: '' },
-    InviteFriendsScreen: { screen: InviteFriendsScreen, path: '' },
+    InviteFriendsScreen: {
+      screen: InviteFriendsScreen,
+      path: '',
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
     LanguageScreen: {
       screen: LanguageScreen,
       path: '',
     },
-    UserContacts: {
+    UserContactsScreen: {
       screen: UserContactsScreen,
       path: '',
       navigationOptions: {
