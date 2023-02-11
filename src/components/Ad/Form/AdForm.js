@@ -7,7 +7,14 @@ import { Container, Content, View, Form, Icon, Button, Text, Left, Spinner } fro
 import ImagePicker from 'react-native-image-crop-picker';
 
 import styles from './Styles';
-import { defaultPickerPropsFor, handleFocusOnError, ResetPicker, rules, AD_IMAGES_PICKER_OPTIONS } from './helpers';
+import {
+  defaultPickerPropsFor,
+  handleFocusOnError,
+  ResetPicker,
+  rules,
+  AD_IMAGES_PICKER_OPTIONS,
+  AD_IMAGE_SIZE_LIMIT_BYTES,
+} from './helpers';
 
 import TextOrNumberInput from './TextOrNumberInput';
 import Textarea from './Textarea';
@@ -16,6 +23,7 @@ import AdImagePicker from './AdImagePicker';
 import AdImagePickerItem from './AdImagePickerItem';
 import { spinnerColor, activeColor, textColor, primaryColor, activeTextColor } from 'colors';
 import { presignAndUploadToS3, onAdImagePickerImageSelected } from 'actions/ads';
+import { showNotification } from 'actions/errors';
 
 import { reposition } from 'utils';
 
@@ -253,9 +261,18 @@ const AdForm = ({
 
     ImagePicker.openPicker(AD_IMAGES_PICKER_OPTIONS)
       .then((images) => {
+        const validImages = images.filter((i) => i.size <= AD_IMAGE_SIZE_LIMIT_BYTES);
         clearErrors('ad_images');
 
-        presignAndUploadToS3({ images: images.map(onImageSelected), onComplete });
+        if (validImages.length != images.length) {
+          showNotification(t('ad.formErrors.imageSize.title'), t('ad.formErrors.imageSize.message'));
+        }
+
+        if (validImages.length > 0) {
+          presignAndUploadToS3({ images: validImages.map(onImageSelected), onComplete });
+        } else if (adImages.length === 0) {
+          setError('ad_images', { type: 'required' });
+        }
 
         setImagesUploading(false);
       })

@@ -94,3 +94,5 @@ export const AD_IMAGES_PICKER_OPTIONS = {
   multiple: true,
   maxFiles: 20,
 };
+
+export const AD_IMAGE_SIZE_LIMIT_BYTES = 5000000;
