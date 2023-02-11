@@ -5,6 +5,8 @@ import API from 'services/API';
 import { displayError } from 'actions/errors';
 
 import Navigation from 'services/Navigation';
+import { notification as UINotification } from 'utils';
+import i18n from 'services/i18n';
 
 export function loadAd(id) {
   return function (dispatch, getState) {
@@ -77,6 +79,17 @@ export function createAd(adParams, resetForm) {
     dispatch({ type: ActionTypes.CREATE_AD_STARTED, adParams: adParams });
     return API.createAd(adParams)
       .then((payload) => {
+        const messageText = i18n.t('ad.toasts.createSuccess');
+        if (Platform.OS === 'ios') {
+          UINotification.ref.show({ message: messageText });
+        } else {
+          PushNotification.localNotification({
+            message: messageText,
+            largeIcon: '',
+            smallIcon: '',
+            channelId: 'messages',
+          });
+        }
         dispatch({ type: ActionTypes.CREATE_AD_SUCCESS, ad: payload.data });
         Navigation.navigate('Ad', { id: payload.data.id });
         resetForm();
@@ -93,6 +106,17 @@ export function updateAd(adParams, resetForm) {
     dispatch({ type: ActionTypes.UPDATE_AD_STARTED, adParams: adParams });
     return API.updateAd(adParams)
       .then((payload) => {
+        const messageText = i18n.t('ad.toasts.updateSuccess');
+        if (Platform.OS === 'ios') {
+          UINotification.ref.show({ message: messageText });
+        } else {
+          PushNotification.localNotification({
+            message: messageText,
+            largeIcon: '',
+            smallIcon: '',
+            channelId: 'messages',
+          });
+        }
         dispatch({ type: ActionTypes.UPDATE_AD_SUCCESS, ad: payload.data });
         Navigation.navigate('Ad', { id: payload.data.id });
         resetForm();
@@ -110,6 +134,17 @@ export function deleteAd(adId) {
     return API.deleteAd(adId)
       .then((payload) => {
         const state = getState();
+        const messageText = i18n.t('ad.toasts.deleteSuccess');
+        if (Platform.OS === 'ios') {
+          UINotification.ref.show({ message: messageText });
+        } else {
+          PushNotification.localNotification({
+            message: messageText,
+            largeIcon: '',
+            smallIcon: '',
+            channelId: 'messages',
+          });
+        }
         Navigation.popToTop();
         if (adId === state.adsListsAd.currentAd.id) {
           dispatch({ type: ActionTypes.RESET_ADS_LISTS_AD });
