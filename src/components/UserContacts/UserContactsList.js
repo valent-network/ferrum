@@ -48,7 +48,6 @@ UserContactsList.propTypes = {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: primaryColor,
     borderWidth: 0,
   },
 });

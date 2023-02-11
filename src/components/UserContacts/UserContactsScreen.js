@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Header, Item, Icon, Input, Text, Left, Right } from 'native-base';
 import { StyleSheet, Platform, Appearance } from 'react-native';
-import { withTranslation } from 'react-i18next';
 
 import Navigation from 'services/Navigation';
 
@@ -69,7 +68,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(UserContactsScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(UserContactsScreen);
 
 UserContactsScreen.propTypes = {};
 

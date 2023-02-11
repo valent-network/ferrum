@@ -163,7 +163,7 @@ export default StyleSheet.create({
   addImageText: {
     fontWeight: 'bold',
     fontSize: 18,
-    color: textColor,
+    color: activeColor,
   },
   addImageTextError: {
     color: deletedColor,
