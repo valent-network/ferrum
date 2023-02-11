@@ -35,6 +35,9 @@ export function getAll() {
         if (!equal(payload.data, state.userContacts.list)) {
           dispatch({ type: ActionTypes.GET_USER_CONTACTS_NEW_CONTACTS, list: payload.data });
         }
+        if (payload.data.length > 0) {
+          dispatch({ type: ActionTypes.UPDATE_CONTACTS_FINISHED });
+        }
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.GET_USER_CONTACTS_FAILED });
