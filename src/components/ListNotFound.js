@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Image } from 'react-native';
-
+import FastImage from 'react-native-fast-image';
 import { Icon, Text, Content, Button } from 'native-base';
-
 import { withTranslation } from 'react-i18next';
 
 import Navigation from 'services/Navigation';
@@ -19,7 +18,7 @@ class ListNotFound extends React.PureComponent {
     const { t, refreshControl, fromFeed } = this.props;
     return (
       <Content contentContainerStyle={styles.notFoundContainer} refreshControl={refreshControl}>
-        <Image style={styles.picture} source={NOT_FOUND} />
+        <FastImage style={styles.picture} source={NOT_FOUND} />
         <Text style={styles.notFoundText}>{t('listNotFound')}</Text>
         {fromFeed && (
           <Button onPress={this.inviteFriends} style={styles.inviteFriendsButton}>

@@ -2,11 +2,9 @@ import React from 'react';
 import { StyleSheet, Switch, Image, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text, Input, Button, Container, Content, Item, Icon, Spinner, View, Left, Right, H1, H2 } from 'native-base';
-
+import FastImage from 'react-native-fast-image';
 import { TextInputMask } from 'react-native-masked-text';
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
 import { withTranslation } from 'react-i18next';
 
 import {
@@ -116,7 +114,7 @@ class LoginScreen extends React.Component {
         <View style={styles.mainContainer}>
           <SafeAreaView>
             <View style={styles.headerContainer}>
-              <Image source={PHONE_OTP_GIF} style={{ width: 192, height: 192, alignSelf: 'center' }} />
+              <FastImage source={PHONE_OTP_GIF} style={{ width: 192, height: 192, alignSelf: 'center' }} />
               {step === 1 && (
                 <>
                   <H1 style={styles.h1}>{t('login.headers.main')}</H1>

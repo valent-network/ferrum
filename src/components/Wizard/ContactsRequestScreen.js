@@ -10,7 +10,7 @@ import { withTranslation } from 'react-i18next';
 
 import { setWizardDone } from 'actions/sessions';
 
-import PICTURE from 'assets/wizard-contacts.gif';
+import PICTURE from 'assets/wizard-contacts.png';
 
 import styles from './styles';
 

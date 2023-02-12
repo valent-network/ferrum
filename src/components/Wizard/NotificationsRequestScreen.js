@@ -12,7 +12,7 @@ import { withTranslation } from 'react-i18next';
 
 import { setWizardDone } from 'actions/sessions';
 
-import PICTURE from 'assets/wizard-notifications.gif';
+import PICTURE from 'assets/wizard-notifications.png';
 
 import styles from './styles';
 

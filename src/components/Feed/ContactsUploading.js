@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Image } from 'react-native';
 import { Spinner, View, Text, Content, Icon } from 'native-base';
 import { withTranslation } from 'react-i18next';
+import FastImage from 'react-native-fast-image';
 
 import { superActiveColor, textColor } from 'colors';
 
@@ -26,7 +27,7 @@ class ContactsUploading extends React.PureComponent {
 
     return (
       <View style={styles.centered}>
-        <Image style={styles.picture} source={CONTACTS_UPLOADING} />
+        <FastImage style={styles.picture} source={CONTACTS_UPLOADING} />
         <Text style={{ color: textColor }}>{this.props.t('feed.contactsProcessingText')}</Text>
         <Spinner size="small" style={{ alignSelf: 'center' }} color={superActiveColor} />
       </View>
