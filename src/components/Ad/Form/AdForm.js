@@ -401,22 +401,21 @@ const AdForm = ({
                 />
               ))}
         </Form>
+        <View style={styles.submitButtonWrapper}>
+          <Button
+            disabled={imagesUploading}
+            style={styles.submitButton}
+            block
+            onPress={handleSubmit(onSubmitWithReset, onError)}
+          >
+            {isLoading || imagesUploading ? (
+              <Spinner color={spinnerColor} />
+            ) : (
+              <Text style={{ color: activeTextColor }}>{newRecord ? t('actions.create') : t('actions.update')}</Text>
+            )}
+          </Button>
+        </View>
       </Content>
-
-      <View style={styles.submitButtonWrapper}>
-        <Button
-          disabled={imagesUploading}
-          style={styles.submitButton}
-          block
-          onPress={handleSubmit(onSubmitWithReset, onError)}
-        >
-          {isLoading || imagesUploading ? (
-            <Spinner color={spinnerColor} />
-          ) : (
-            <Text style={{ color: activeTextColor }}>{newRecord ? t('actions.create') : t('actions.update')}</Text>
-          )}
-        </Button>
-      </View>
     </Container>
   );
 };

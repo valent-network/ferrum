@@ -102,7 +102,7 @@ export default StyleSheet.create({
   },
   headerBackButton: { color: textColor },
   headerTitle: { color: textColor },
-  submitButtonWrapper: { margin: 8, marginBottom: 32, padding: 0 },
+  submitButtonWrapper: { marginTop: 16, marginBottom: 32, padding: 0 },
   submitButton: {},
   charLimitContainer: {
     backgroundColor: secondaryColor,
