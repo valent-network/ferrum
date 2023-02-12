@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Platform, Animated, Appearance } from 'react-native';
+import { ScrollView, Platform, Animated, Appearance, TouchableOpacity } from 'react-native';
 import { Text, View, Container, ActionSheet, Spinner, Separator, Icon, Header, Left, Right, Body } from 'native-base';
 import FastImage from 'react-native-fast-image';
 
@@ -135,17 +135,16 @@ function ChatRoomsSettingsScreen({
           </Left>
           {chat.ad_id && (
             <Body>
-              <Animated.Text
-                style={{ color: textInterpolation, textAlign: 'center', fontWeight: 'bold' }}
-                onPress={onShow}
-              >
-                {chat.title}
-              </Animated.Text>
-              <Animated.Text
-                style={[{ color: textInterpolation, textDecorationLine: 'underline', textAlign: 'center' }]}
-              >
-                {i18n.t('chat.settings.more')}
-              </Animated.Text>
+              <TouchableOpacity activeOpacity={1} onPress={onShow} style={{ width: '100%' }}>
+                <Animated.Text style={{ color: textInterpolation, textAlign: 'center', fontWeight: 'bold' }}>
+                  {chat.title}
+                </Animated.Text>
+                <Animated.Text
+                  style={[{ color: textInterpolation, textDecorationLine: 'underline', textAlign: 'center' }]}
+                >
+                  {i18n.t('chat.settings.more')}
+                </Animated.Text>
+              </TouchableOpacity>
             </Body>
           )}
           <Right style={[styles.actionButtonsContainer, { maxWidth: '20%' }]}>
