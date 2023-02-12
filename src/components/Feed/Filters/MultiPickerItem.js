@@ -11,7 +11,7 @@ export default function MultiPickerItem({ filterValue, filterId, onPress, active
     <TouchableOpacity activeOpacity={1} onPress={onPress}>
       <View key={filterId} style={active ? styles.activeFilterBox : styles.filterBox}>
         <Text style={active ? styles.activeFilterBoxText : styles.filterBoxText}>{`${filterValue} `}</Text>
-        <Icon name={iconName} style={active ? styles.activeFilterItem : styles.filterItem} />
+        <Icon allowFontScaling={true} name={iconName} style={active ? styles.activeFilterItem : styles.filterItem} />
       </View>
     </TouchableOpacity>
   );

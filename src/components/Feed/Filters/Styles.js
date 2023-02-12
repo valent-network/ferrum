@@ -48,22 +48,26 @@ export default StyleSheet.create({
   filterBox: {
     borderColor: activeColor,
     borderWidth: 1,
-    borderRadius: 32,
+    borderRadius: 16,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: secondaryColor,
   },
   filterBoxText: {
     color: textColor,
+    fontSize: 18,
   },
   activeFilterBoxText: {
     color: activeTextColor,
+    fontSize: 18,
   },
   activeFilterBox: {
     borderColor: activeBorderColor,
     borderWidth: 1,
-    borderRadius: 32,
+    borderRadius: 16,
     marginRight: 12,
     padding: 6,
     flexDirection: 'row',
@@ -81,7 +85,7 @@ export default StyleSheet.create({
     marginTop: 12,
   },
   filterItem: {
-    fontSize: 18,
+    fontSize: 22,
     color: textColor,
   },
   activeFilterIcon: {
@@ -89,7 +93,7 @@ export default StyleSheet.create({
     fontSize: 13,
   },
   activeFilterItem: {
-    fontSize: 18,
+    fontSize: 22,
     color: activeTextColor,
   },
   safeArea: {
@@ -110,6 +114,12 @@ export default StyleSheet.create({
   searchBar: {
     borderRadius: 16,
     backgroundColor: secondaryColor,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'auto',
+    flex: 1,
+    paddingTop: 0,
     marginRight: 16,
     marginTop: Platform.OS === 'android' ? 32 : 0,
     alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
@@ -125,7 +135,7 @@ export default StyleSheet.create({
     color: textColor,
   },
   searchBarInput: {
-    fontSize: 14,
+    fontSize: 12,
     paddingLeft: 0,
   },
   topIconContainer: {

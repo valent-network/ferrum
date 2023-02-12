@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: textColor,
   },
+  middleIcon: { fontSize: 36 },
 });
 
 export default function BottomTabIcon({ name, tintColor }) {
   let style = tintColor === textColor ? styles.inactiveIcon : styles.activeIcon;
 
   if (name == 'add-circle-sharp') {
-    style = [style, { marginTop: -6, fontSize: 48 }];
+    style = [style, styles.middleIcon];
   }
 
   return <Icon name={name} style={style} />;

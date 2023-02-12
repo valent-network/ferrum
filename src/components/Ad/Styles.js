@@ -136,6 +136,7 @@ export default styles = StyleSheet.create({
     backgroundColor: textColor,
     opacity: 0.5,
     paddingBottom: 0,
+    paddingTop: 0,
   },
   imageGalleryBadgeText: {
     color: secondaryColor,

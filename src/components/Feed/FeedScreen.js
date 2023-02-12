@@ -46,12 +46,14 @@ const FeedScreen = ({
         iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
         noShadow={true}
         searchBar
-        rounded
       >
         <Funnel />
         <SearchBar />
         <TouchableOpacity activeOpacity={1} onPress={applyHopsCountFilter}>
-          <View key={'hopsCountF'} style={hopsCount >= 0 ? styles.activeFilterBox : styles.filterBox}>
+          <View
+            key={'hopsCountF'}
+            style={[hopsCount >= 0 ? styles.activeFilterBox : styles.filterBox, { marginRight: 0 }]}
+          >
             <Text style={[styles.filterBoxText, hopsCount >= 0 && { opacity: 1 }]}>🤝</Text>
             <Text style={[styles.filterBoxText, hopsCount >= 1 && { opacity: 1 }]}>🤝</Text>
           </View>
@@ -104,6 +106,8 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     borderBottomWidth: 0,
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
   },
   filtersRow: {
