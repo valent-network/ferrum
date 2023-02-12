@@ -30,7 +30,7 @@ export default {
   },
   feed: {
     permissionBoxText:
-      'Recario requiers access to contacts book in order to show your friends who are selling their cars right now',
+      'Recario requiers access to contacts book in order to show your friends who active ads right now',
     permissionBoxSubmit: 'Grant',
     contactsProcessingText: 'Processing contacts book...',
     search: {
@@ -38,7 +38,7 @@ export default {
     },
     filters: {
       headers: {
-        knowThrough: 'Know Through',
+        knowThrough: 'Know through',
         main: 'Filters',
         reset: 'Reset',
         price: 'Price',
@@ -50,15 +50,15 @@ export default {
     },
   },
   ad: {
-    shareText: 'Hi! You may know the seller:',
-    invitationText: "Hey I've found your car, take a look here — https://recar.io/get",
+    shareText: 'Hi! You may know the author of this ad',
+    invitationText: "Hey I've found your ad, take a look here — https://recar.io/get",
     discussWithFriend: 'Discuss with a friend',
     postedBy: 'Posted by',
     options: { source: 'Source' },
     deleted: 'Deleted',
     restore: 'Restore',
     addImages: 'Add Images',
-    assign_as_main_image: 'Assign Main',
+    assign_as_main_image: 'Cover',
     alerts: {
       confirm_delete: 'Are you sure you want to delete this ad? This action is irreversible',
       confirm_archive:
@@ -91,12 +91,12 @@ export default {
         title: 'Main title of the ad',
         description: 'Full ad text',
         short_description: 'Short description to be shown in the feed',
-        ad_images: 'First photo will become the main photo of the ad',
+        ad_images: 'First photo will become the cover of the ad',
         ad_images_non_native: "Please, re-upload the photos we've found on external resources",
       },
       placeholders: {
         title: 'iPhone 15, in stock',
-        description: 'Detailed description including for example delivery and return conditions',
+        description: 'Detailed description including, for example, delivery and return conditions',
         short_description: 'Short description to be show in the feed',
         category_id: 'Choose',
         region: 'Choose',
@@ -127,14 +127,14 @@ export default {
     systemChatTitle: 'Recario',
     you: 'You',
     introHeader: 'Your friend name for other chat members:',
-    nameYourselfText: 'To start chat, please choose how others can address you by name:',
+    nameYourselfText: 'To start the chat, please choose how others can address you by name:',
     oneMember: 'member',
     twoMembers: 'members',
     threeMembers: 'members',
     settings: {
       more: 'More',
       members: 'Members',
-      mayKnow: 'Friends may know the seller',
+      mayKnow: 'Friends may know the author',
       leaveChat: 'Leave chat',
       leaveChatTitle: 'You will lose access to all the messages unless somebody from this chat invites you back',
     },
@@ -162,16 +162,16 @@ export default {
     },
   },
   profile: {
-    shareTitle: 'Recario — buy and sell cars through friends and mates',
+    shareTitle: 'Recario — buy and sell goods and services through friends and mates',
     shareMessage: 'Get Recario: https://recar.io/get',
     inviteFriendSMSText:
-      "Hi, see what I've got — its so easy to buy or sell a car through your friends and mates! https://recar.io/get",
+      "Hi, see what I've got — its so easy to buy and sell anything through your friends and mates! https://recar.io/get",
     deleteContactsNote:
-      'Keep in mind to turn off permission to your contacts in settings to not get them synchronized again after application reload',
+      'Keep in mind to turn off permissions to your contacts book in the settings to not get it synchronized again after application reloads',
     inviteFriendsNote:
-      'The more friends in Recario — the more benefits you get. Even if your friends are personally not interested in buying or selling cars, they may have friends and mates who do',
+      'The more friends in Recario — the more benefits you get. Even if your friends are not active right now, they may have friends and mates who are',
     nameNotPresent: 'No name',
-    contactsSuccessfullyDeleted: 'Contacts successfully deleted',
+    contactsSuccessfullyDeleted: 'Contacts book successfully deleted',
     actions: {
       changeAvatarTitle: 'Change profile picture',
       deleteContactsTitle:
@@ -243,7 +243,7 @@ export default {
     buySubmit: 'Good idea',
     sellPros1: 'Be sure, if you are reached through recommendations — it means you are «doing it in the right way»',
     sellPros2:
-      'Feel comfortable to work with those you care about and be plesae with making their lives better. Do not spend your time and efforts to those who do not deserve it',
+      'Feel comfortable to work with those you care about and be pleased with making their lives better. Do not spend your time and efforts on those who do not deserve it',
     sellPros3: 'Build long-lasting relationships with customers, that will survive any troubles',
     sellH1: 'Sell to those you know',
     sellSubmit: 'Indeed',
