@@ -137,6 +137,10 @@ export default styles = StyleSheet.create({
     opacity: 0.5,
     paddingBottom: 0,
     paddingTop: 0,
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingHorizontal: 8,
+    borderRadius: 16,
   },
   imageGalleryBadgeText: {
     color: secondaryColor,
@@ -156,6 +160,9 @@ export default styles = StyleSheet.create({
     top: 48,
     width: '100%',
     zIndex: 1000,
+  },
+  spanIcon: {
+    opacity: 0,
   },
   imageModalIndex: { color: textColor },
   imageModalIndexCloseIcon: { color: textColor },

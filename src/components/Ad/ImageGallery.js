@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, Badge, Icon, View } from 'native-base';
+import { Text, Icon, View } from 'native-base';
 import { TouchableOpacity, Image, Modal, Dimensions, SafeAreaView } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Carousel from 'react-native-snap-carousel';
@@ -66,11 +66,11 @@ class ImageGallery extends React.Component {
         )}
         {images.length > 0 && (
           <View style={this.props.badgeStyle || styles.imageGalleryBadgesContainer}>
-            <Badge style={styles.imageGalleryBadge}>
+            <View style={styles.imageGalleryBadge}>
               <Text style={styles.imageGalleryBadgeText}>
                 {`${this.state.currentImageIndex + 1} / ${images.length}`}
               </Text>
-            </Badge>
+            </View>
           </View>
         )}
 
