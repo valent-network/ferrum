@@ -34,6 +34,8 @@ import { initiateSystemChatRoom } from 'actions/chat';
 
 import SetReferrerModal from './SetReferrerModal';
 
+import PermissionsBox from 'components/Feed/PermissionsBox';
+
 import { signOut } from 'actions/sessions';
 
 import { deleteContacts } from 'actions/userContacts';
@@ -169,6 +171,7 @@ class ProfileScreen extends React.PureComponent {
               {t('actions.edit')}
             </Text>
           </View>
+
           <View style={styles.optionsContainer}>
             <View>
               <List>
@@ -264,6 +267,7 @@ class ProfileScreen extends React.PureComponent {
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>{t('profile.deleteContactsNote')}</Text>
+                <PermissionsBox />
                 {Platform.OS === 'android' && (
                   <ListItem
                     style={[styles.itemContainer, styles.withBorderBottom]}

@@ -42,6 +42,7 @@ export default function userContacts(state = initialState, action = {}) {
       return {
         ...state,
         permissionsRequested: false,
+        permissionsGiven: false,
       };
     case ActionTypes.CONTACTS_PERMISSIONS_WERE_REQUESTED:
       return {

@@ -16,7 +16,6 @@ import MultiPicker from './Filters/MultiPicker';
 import MultiPickerItem from './Filters/MultiPickerItem';
 import Funnel from './Filters/Funnel';
 
-import PermissionsBox from './PermissionsBox';
 import ContactsUploading from './ContactsUploading';
 
 import styles from './Filters/Styles';
@@ -91,7 +90,6 @@ const FeedScreen = ({
         onAdOpened={onAdOpened}
         fromFeed={true}
       />
-      <PermissionsBox />
       <FiltersModal />
     </Container>
   );

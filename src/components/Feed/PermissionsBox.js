@@ -13,7 +13,7 @@ import * as ActionTypes from 'actions/types';
 
 import { goToSettings } from 'utils';
 
-import { activeColor, secondaryColor, superActiveColor, activeTextColor } from 'colors';
+import { activeColor, secondaryColor, superActiveColor, textColor, activeTextColor } from 'colors';
 
 import NOT_ALLOWED from 'assets/not-allowed.png';
 
@@ -60,22 +60,22 @@ PermissionsBox.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: activeColor,
     marginHorizontal: 0,
     marginBottom: 16,
     padding: 6,
   },
   button: {
-    backgroundColor: superActiveColor,
+    backgroundColor: activeColor,
     marginTop: 8,
   },
   buttonText: {
-    color: activeColor,
+    color: activeTextColor,
     fontWeight: 'bold',
   },
-  mainText: { fontSize: 13, paddingLeft: 96, color: activeTextColor },
+  mainText: { fontSize: 13, paddingLeft: 96, color: textColor },
   picture: {
     position: 'absolute',
+    zIndex: 100,
     left: 0,
     width: 96,
     height: 96,
