@@ -22,7 +22,7 @@ class SearchBar extends React.PureComponent {
 
     return (
       <Item style={styles.searchBar}>
-        <Icon name="ios-search" style={styles.searchIcon} />
+        <Icon allowFontScaling={true} name="ios-search" style={styles.searchIcon} />
         <Input
           placeholder={t('profile.placeholders.userContactsSearch')}
           placeholderTextColor={disabledColor}
@@ -31,7 +31,9 @@ class SearchBar extends React.PureComponent {
           defaultValue={query}
           returnKeyType={'done'}
         />
-        {query.length > 0 && <Icon name="close-circle" style={styles.resetIcon} onPress={this.resetQuery} />}
+        {query.length > 0 && (
+          <Icon allowFontScaling={true} name="close-circle" style={styles.resetIcon} onPress={this.resetQuery} />
+        )}
       </Item>
     );
   }
@@ -53,22 +55,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Se
 
 const styles = StyleSheet.create({
   searchBar: {
-    borderRadius: 16,
+    borderRadius: 48,
     marginLeft: 8,
+    marginRight: 8,
     backgroundColor: primaryColor,
-    marginTop: Platform.OS === 'android' ? 32 : 0,
-    alignSelf: Platform.OS === 'android' ? 'flex-end' : 'center',
+    alignSelf: 'center',
+    marginBottom: 'auto',
+    marginTop: 'auto',
   },
   searchIcon: {
     color: disabledColor,
-    fontSize: 14,
+    fontSize: 18,
   },
   searchBarInput: {
-    fontSize: 14,
-    paddingLeft: 0,
+    fontSize: 18,
   },
   inputTextColor: {
     color: textColor,
   },
-  resetIcon: { color: disabledColor, fontSize: 14 },
+  resetIcon: { color: disabledColor, fontSize: 18 },
 });

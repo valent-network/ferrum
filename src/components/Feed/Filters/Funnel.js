@@ -9,7 +9,7 @@ import styles from './Styles';
 
 const Funnel = ({ filtersPresent, switchModalVisible }) => (
   <TouchableOpacity activeOpacity={1} onPress={switchModalVisible}>
-    <View style={filtersPresent ? styles.activeFilterBox : styles.filterBox}>
+    <View style={[filtersPresent ? styles.activeFilterBox : styles.filterBox, styles.funnel]}>
       <Icon
         allowFontScaling={true}
         name={'filter'}

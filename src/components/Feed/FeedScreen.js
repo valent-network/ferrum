@@ -19,6 +19,8 @@ import Funnel from './Filters/Funnel';
 import PermissionsBox from './PermissionsBox';
 import ContactsUploading from './ContactsUploading';
 
+import styles from './Filters/Styles';
+
 import { secondaryColor, activeColor, primaryColor, textColor, activeBorderColor } from 'colors';
 
 const FeedScreen = ({
@@ -54,8 +56,26 @@ const FeedScreen = ({
             key={'hopsCountF'}
             style={[hopsCount >= 0 ? styles.activeFilterBox : styles.filterBox, { marginRight: 0 }]}
           >
-            <Text style={[styles.filterBoxText, hopsCount >= 0 && { opacity: 1 }]}>🤝</Text>
-            <Text style={[styles.filterBoxText, hopsCount >= 1 && { opacity: 1 }]}>🤝</Text>
+            <Text
+              style={[
+                { opacity: 0.5 },
+                styles.filterBoxText,
+                { fontSize: Platform.OS === 'android' ? 18 : 12 },
+                hopsCount >= 0 && { opacity: 1 },
+              ]}
+            >
+              🤝
+            </Text>
+            <Text
+              style={[
+                { opacity: 0.5 },
+                styles.filterBoxText,
+                { fontSize: Platform.OS === 'android' ? 18 : 12 },
+                hopsCount >= 1 && { opacity: 1 },
+              ]}
+            >
+              🤝
+            </Text>
           </View>
         </TouchableOpacity>
       </Header>
@@ -98,45 +118,5 @@ function mapDispatchToProps(dispatch) {
 FeedScreen.navigationOptions = ({ navigation }) => {
   return { header: () => null, title: '' };
 };
-
-const styles = StyleSheet.create({
-  mainContainer: { backgroundColor: primaryColor },
-  mainHeader: {
-    backgroundColor: primaryColor,
-    flexWrap: 'nowrap',
-    borderBottomWidth: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingBottom: Platform.OS === 'android' ? 8 : 0,
-  },
-  filtersRow: {
-    padding: 8,
-    paddingTop: 0,
-  },
-  activeFilterBox: {
-    borderColor: activeBorderColor,
-    borderWidth: 1,
-    borderRadius: 32,
-    marginRight: 12,
-    padding: 6,
-    flexDirection: 'row',
-    backgroundColor: activeColor,
-  },
-  filterBox: {
-    borderColor: activeColor,
-    borderWidth: 1,
-    borderRadius: 32,
-    marginRight: 12,
-    padding: 6,
-    flexDirection: 'row',
-    backgroundColor: secondaryColor,
-  },
-  filterBoxText: {
-    color: textColor,
-    fontSize: 12,
-    opacity: 0.5,
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);

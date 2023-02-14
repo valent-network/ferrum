@@ -21,7 +21,7 @@ function SearchBar({ onReset, onSearch, query }) {
 
   return (
     <Item style={styles.searchBar}>
-      <Icon name="ios-search" style={styles.searchIcon} />
+      <Icon allowFontScaling={true} name="ios-search" style={styles.searchIcon} />
       <Input
         placeholder={t('feed.search.placeholder')}
         placeholderTextColor={disabledColor}
@@ -30,7 +30,9 @@ function SearchBar({ onReset, onSearch, query }) {
         defaultValue={query}
         returnKeyType={'done'}
       />
-      {query.length > 0 && <Icon name="close-circle" style={{ color: disabledColor }} onPress={onReset} />}
+      {query.length > 0 && (
+        <Icon allowFontScaling={true} name="close-circle" style={styles.resetIcon} onPress={onReset} />
+      )}
     </Item>
   );
 }

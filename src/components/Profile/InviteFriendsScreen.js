@@ -32,9 +32,9 @@ function InviteFriendsScreen({ isLoading, userContacts, loadMoreUserContacts, on
   return (
     <Container style={styles.mainContainer}>
       <Header style={styles.mainHeader} iosBarStyle={iosBarStyle} noShadow={true} searchBar>
-        <Icon name={backIconName} style={styles.backButton} onPress={goBack} />
+        <Icon allowFontScaling={true} name={backIconName} style={styles.backButton} onPress={goBack} />
         <SearchBar />
-        <Icon name="share-outline" style={styles.socialShare} onPress={shareAction} />
+        <Icon allowFontScaling={true} name="share-outline" style={styles.socialShare} onPress={shareAction} />
       </Header>
       <UserContactsList
         userContacts={userContacts}
@@ -65,11 +65,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(InviteFriendsScreen)
 
 const styles = StyleSheet.create({
   socialShare: {
-    marginRight: 8,
-    marginLeft: 16,
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: Platform.OS === 'android' ? 24 : 33,
     color: activeColor,
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    paddingBottom: 0,
+    paddingTop: 0,
   },
   mainHeader: {
     backgroundColor: secondaryColor,
@@ -79,7 +81,15 @@ const styles = StyleSheet.create({
     margin: 0,
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 0,
+    paddingBottom: 0,
+    paddingTop: 0,
   },
   mainContainer: { backgroundColor: primaryColor },
-  backButton: { color: textColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
+  backButton: {
+    color: textColor,
+    fontSize: Platform.OS === 'android' ? 24 : 33,
+    alignSelf: 'center',
+  },
 });

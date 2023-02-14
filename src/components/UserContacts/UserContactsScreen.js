@@ -81,7 +81,11 @@ const styles = StyleSheet.create({
     margin: 0,
     paddingBottom: Platform.OS === 'android' ? 8 : 0,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 0,
+    paddingBottom: 0,
+    paddingTop: 0,
   },
   mainContainer: { backgroundColor: primaryColor },
-  backButton: { color: textColor, fontSize: Platform.OS === 'android' ? 24 : 33 },
+  backButton: { color: textColor, fontSize: Platform.OS === 'android' ? 24 : 33, alignSelf: 'center' },
 });

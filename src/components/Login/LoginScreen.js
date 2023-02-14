@@ -150,7 +150,7 @@ class LoginScreen extends React.Component {
                 </Left>
                 <Right style={styles.switchContainer}>
                   <Switch
-                    thumbColor={secondaryColor}
+                    thumbColor={activeTextColor}
                     trackColor={trackColor}
                     ios_backgroundColor={activeTextColor}
                     onValueChange={this.changeTosAcceptance}
