@@ -132,8 +132,8 @@ android {
         applicationId "com.viktorvsk.recario"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 41
-        versionName "41.0"
+        versionCode 42
+        versionName "42.0"
         multiDexEnabled true
         dexOptions {
             javaMaxHeapSize "4g"
