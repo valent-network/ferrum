@@ -13,7 +13,6 @@ import SearchBar from './SearchBar';
 import { loadMoreUserContacts, getAll, toggleBlock } from 'actions/userContacts';
 
 import { filterByContact } from 'actions/feed';
-import PermissionsBox from 'components/Feed/PermissionsBox';
 
 import { primaryColor, secondaryColor, textColor } from 'colors';
 
@@ -46,7 +45,6 @@ class UserContactsScreen extends React.PureComponent {
           onRefresh={onRefresh}
           renderItem={this.renderItem}
         />
-        <PermissionsBox />
       </Container>
     );
   }
