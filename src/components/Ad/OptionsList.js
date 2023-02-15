@@ -57,5 +57,6 @@ const styles = StyleSheet.create({
   },
   sourceIcon: {
     fontSize: 15,
+    color: textColor,
   },
 });
