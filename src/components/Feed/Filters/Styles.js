@@ -23,6 +23,20 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    paddingRight: 0,
+    paddingLeft: 0,
+    marginLeft: 0,
+  },
+  mainHeaderBody: { height: '100%', justifyContent: 'center', marginRight: 0, marginLeft: 8 },
+  mainHeaderRight: {
+    flex: null,
+    height: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 0,
+    paddingTop: 0,
+    marginLeft: Platform.OS === 'android' ? 16 : 8,
+    marginRight: 8,
   },
   modalControlsContainer: {
     flexDirection: 'row',
@@ -41,10 +55,6 @@ export default StyleSheet.create({
     color: textColor,
     alignSelf: 'center',
     fontSize: 14,
-  },
-  resetIcon: {
-    color: disabledColor,
-    fontSize: 18,
   },
   filtersHeader: {
     borderBottomWidth: 0,
@@ -122,31 +132,11 @@ export default StyleSheet.create({
   submitButton: {
     backgroundColor: activeColor,
   },
-  searchBar: {
-    borderRadius: 48,
-    backgroundColor: secondaryColor,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 'auto',
-    marginRight: 8,
-    marginLeft: 8,
-    alignSelf: 'center',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-  searchIcon: {
-    color: disabledColor,
-    fontSize: 18,
-  },
   filtersForm: {
     paddingBottom: 96,
   },
   inputTextColor: {
     color: textColor,
-  },
-  searchBarInput: {
-    fontSize: 18,
   },
   topIconContainer: {
     height: '100%',
@@ -158,7 +148,7 @@ export default StyleSheet.create({
     maxHeight: 52,
   },
   filterIcon: {
-    fontSize: Platform.OS === 'android' ? 18 : 12,
+    fontSize: 18,
     color: activeColor,
     alignSelf: 'center',
     marginTop: 'auto',
@@ -168,7 +158,7 @@ export default StyleSheet.create({
     marginRight: 0,
   },
   activeFilterIcon: {
-    fontSize: Platform.OS === 'android' ? 18 : 12,
+    fontSize: 18,
     color: activeTextColor,
     alignSelf: 'center',
     marginTop: 'auto',
@@ -178,5 +168,4 @@ export default StyleSheet.create({
     marginRight: 0,
   },
   activeTextColor: { color: activeTextColor },
-  funnel: { marginRight: 0, fontSize: 12 },
 });
