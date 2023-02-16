@@ -129,19 +129,19 @@ export default function AdScreen({
           <Left>
             <AnimatedIcon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
-              style={[styles.icon, { color: textInterpolation }]}
+              style={{ color: textInterpolation }}
               onPress={Navigation.popToTop}
             />
           </Left>
           <Right style={styles.actionButtonsContainer}>
             <AnimatedIcon
-              style={[styles.icon, { color: textInterpolation, marginRight: 16 }]}
+              style={{ color: textInterpolation, marginRight: 16 }}
               onPress={shareAction}
               name="share-outline"
             />
             <AnimatedIcon
               onPress={favAction}
-              style={[styles.icon, ad.favorite ? styles.activeColor : { color: textInterpolation }]}
+              style={ad.favorite ? styles.activeColor : { color: textInterpolation }}
               name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
             />
           </Right>
