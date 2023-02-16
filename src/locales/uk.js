@@ -39,7 +39,7 @@ export default {
     filters: {
       headers: {
         knowThrough: 'Знаю через',
-        main: 'Критерії пошуку',
+        main: 'Фільтри',
         reset: 'Прибрати',
         price: 'Вартість',
         category: 'Категорія',
