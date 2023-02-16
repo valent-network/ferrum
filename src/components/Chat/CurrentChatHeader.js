@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
-import { View, Text, Spinner } from 'native-base';
+import { View, Text, Spinner, Title, Subtitle } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -28,13 +28,13 @@ const HeaderTitle = ({ chat, isLoading, navigation }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.centered}>
-        <Text style={{ color: textColor }} numberOfLines={1}>
+        <Title style={{ color: textColor }} numberOfLines={1}>
           {chat.system ? t('chat.systemChatTitle') : chat.title}
-        </Text>
+        </Title>
         {chatRoomUsersCount > 0 && !chat.system && (
-          <Text style={{ color: textColor }}>
+          <Subtitle style={{ color: textColor }}>
             {chatRoomUsersCount} {membersWord}
-          </Text>
+          </Subtitle>
         )}
       </View>
     </TouchableOpacity>
