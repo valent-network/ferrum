@@ -172,6 +172,8 @@ class ProfileScreen extends React.PureComponent {
             </Text>
           </View>
 
+          <PermissionsBox />
+
           <View style={styles.optionsContainer}>
             <View>
               <List>
@@ -267,7 +269,6 @@ class ProfileScreen extends React.PureComponent {
                   </Right>
                 </ListItem>
                 <Text style={styles.noteText}>{t('profile.deleteContactsNote')}</Text>
-                <PermissionsBox />
                 {Platform.OS === 'android' && (
                   <ListItem
                     style={[styles.itemContainer, styles.withBorderBottom]}

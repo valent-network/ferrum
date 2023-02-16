@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { View, Text, Button } from 'native-base';
+import { View, Text, Button, Icon } from 'native-base';
 
 import { withTranslation } from 'react-i18next';
 
@@ -13,9 +13,7 @@ import * as ActionTypes from 'actions/types';
 
 import { goToSettings } from 'utils';
 
-import { activeColor, secondaryColor, superActiveColor, textColor, activeTextColor } from 'colors';
-
-import NOT_ALLOWED from 'assets/not-allowed.png';
+import { activeColor, textColor, activeTextColor, primaryColor, deletedColor } from 'colors';
 
 class PermissionsBox extends React.PureComponent {
   onPress = () => (this.props.permissionsRequested ? goToSettings() : this.props.requestContactsPermissions());
@@ -30,8 +28,10 @@ class PermissionsBox extends React.PureComponent {
 
     return (
       <View style={styles.mainContainer}>
-        <Image style={styles.picture} source={NOT_ALLOWED} />
-        <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
+        <Text style={styles.mainText}>
+          <Icon name="alert-circle" style={styles.info} />
+          {t('feed.permissionBoxText')}
+        </Text>
         <Button block style={styles.button} onPress={this.onPress}>
           <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
         </Button>
@@ -60,25 +60,21 @@ PermissionsBox.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginHorizontal: 0,
-    marginBottom: 16,
-    padding: 6,
+    paddingBottom: 16,
+    backgroundColor: primaryColor,
+    paddingHorizontal: 16,
   },
   button: {
     backgroundColor: activeColor,
-    marginTop: 8,
+    marginTop: 16,
   },
   buttonText: {
     color: activeTextColor,
     fontWeight: 'bold',
   },
-  mainText: { fontSize: 13, paddingLeft: 96, color: textColor },
-  picture: {
-    position: 'absolute',
-    zIndex: 100,
-    left: 0,
-    width: 96,
-    height: 96,
-    zIndex: 100,
+  mainText: { fontSize: 15, color: textColor },
+  info: {
+    color: deletedColor,
+    fontSize: 24,
   },
 });
