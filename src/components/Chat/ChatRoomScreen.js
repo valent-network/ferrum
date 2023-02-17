@@ -51,6 +51,8 @@ function ChatRoomScreen({
   };
 
   const onConnect = useCallback(() => {
+    if (typeof chatRoomId === 'undefined') return;
+
     setCurrentChat(chatRoomId);
     serverChannel.connectToChatRoomChannel(chatRoomId);
     getMessages(chatRoomId);
@@ -59,7 +61,7 @@ function ChatRoomScreen({
   const onDisconnect = useCallback(() => {
     resetCurrentChat();
     serverChannel.disconnectChatRoomChannel();
-  }, []);
+  });
 
   const appStateHandle = () => {
     switch (AppState.currentState) {
