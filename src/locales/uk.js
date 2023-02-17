@@ -1,9 +1,11 @@
 export default {
   listNotFound: 'Жодного результату',
+  noUserName: 'Без імені',
   nav: {
     titles: {
       feed: 'Стрічка',
       chats: 'Чати',
+      systemChats: 'Системні чати',
       myAds: 'Мої оголошення',
       inviteFriends: 'Запросити друзів',
       language: 'Налаштування мови',

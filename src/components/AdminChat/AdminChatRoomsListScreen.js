@@ -68,7 +68,7 @@ AdminChatRoomsListScreen.navigationOptions = ({ navigation }) => {
       shadowColor: 'transparent',
       borderBottomWidth: 0,
     },
-    headerTitle: () => <Title style={styles.title}>SYSTEM</Title>,
+    headerTitle: () => <Title style={styles.title}>{i18n.t('nav.titles.systemChats')}</Title>,
     headerTitleStyle: { color: textColor },
     headerBackTitle: () => null,
     headerTruncatedBackTitle: () => null,

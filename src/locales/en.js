@@ -1,9 +1,11 @@
 export default {
   listNotFound: 'Not found',
+  noUserName: 'No Name',
   nav: {
     titles: {
       feed: 'Feed',
       chats: 'Chats',
+      systemChats: 'System Chats',
       myAds: 'My Ads',
       inviteFriends: 'Invite Friends',
       language: 'Language',

@@ -139,7 +139,7 @@ export function newMessage(chat, myMessage = false) {
 
     const shouldShowUINoitifcation = !myMessage && messageUserId !== currentUserId;
 
-    const chatPhoto = chat.system ? LOGO_URL : chatPhoto;
+    const chatPhoto = chat.system ? LOGO_URL : chat.photo;
     const chatTitle = chat.system ? message.user.name : chat.title;
 
     if (currentChatId === chat.id) {

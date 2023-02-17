@@ -351,7 +351,7 @@ class ProfileScreen extends React.PureComponent {
                     underlayColor="transparent"
                   >
                     <Left>
-                      <Text style={{ color: textColor }}>{t('profile.labels.adminChatRoomsList')}</Text>
+                      <Text style={{ color: textColor }}>{t('nav.titles.systemChats')}</Text>
                       {user.unreadAdminMessagesCount > 0 && (
                         <Badge style={styles.unreadBadge}>
                           <Text style={styles.activeTextColor}>{user.unreadAdminMessagesCount}</Text>
