@@ -5,6 +5,7 @@ import API from 'services/API';
 import { localizedSystemMessage, notification as UINotification } from 'utils';
 import { serverChannel } from 'services/ServerChannel';
 import Navigation from 'services/Navigation';
+import i18n from 'services/i18n';
 import { displayError } from 'actions/errors';
 
 export function getAdminChatRooms(offset = 0) {
@@ -53,7 +54,7 @@ export function newAdminMessage(chat, myMessage = false) {
     const messageUserId = message.user._id;
 
     const chatPhoto = chat.system ? firstUser?.avatar : chat.photo;
-    const chatTitle = chat.system ? 'SYSTEM' : chat.title;
+    const chatTitle = chat.system ? firstUser?.name || i18n.t('noUserName') : chat.title;
 
     // This is how we are currently going to determine if the message should
     // have sender name in notification. We can't omit sender name in all system
