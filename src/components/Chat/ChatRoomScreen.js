@@ -54,7 +54,7 @@ function ChatRoomScreen({
     if (typeof chatRoomId === 'undefined') return;
 
     setCurrentChat(chatRoomId);
-    serverChannel.connectToChatRoomChannel(chatRoomId);
+    serverChannel.connectToChatRoomChannel(chatRoomId, 'user');
     getMessages(chatRoomId);
   }, [chatRoomId]);
 

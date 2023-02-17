@@ -26,12 +26,12 @@ export default function chats(state = initialState, action = {}) {
         list: equal(state.list, newList) ? state.list : newList,
         isLoading: false,
       };
-    case ActionTypes.POST_MESSAGE_SUCCESS:
+    case ActionTypes.POST_ADMIN_MESSAGE_SUCCESS:
       return {
         ...state,
         list: newChatList(state.list, action.chat),
       };
-    case ActionTypes.MESSAGE_WAS_READ:
+    case ActionTypes.ADMIN_MESSAGE_WAS_READ:
       return {
         ...state,
         list: newChatList(state.list, action.chat),

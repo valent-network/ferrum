@@ -52,7 +52,7 @@ export function initiateChatRoom(adId, userId, name) {
       dispatch({ type: ActionTypes.GET_ADS_LISTS_AD_FRIENDS_SUCCESS, adFriends: data });
 
       dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: data.chat_room.id });
-      serverChannel.connectToChatRoomChannel(data.chat_room.id);
+      serverChannel.connectToChatRoomChannel(data.chat_room.id, 'user');
       dispatch(getMessages(data.chat_room.id));
     });
   };
@@ -66,7 +66,7 @@ export function initiateSystemChatRoom() {
     API.initiateSystemChatRoom().then(({ data }) => {
       dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: data.chat_room_id });
       Navigation.navigate('ChatRoomScreen', { chat: {}, chatRoomId: data.chat_room_id });
-      serverChannel.connectToChatRoomChannel(data.chat_room_id);
+      serverChannel.connectToChatRoomChannel(data.chat_room_id, 'user');
       dispatch(getMessages(data.chat_room_id));
     });
   };
@@ -120,7 +120,7 @@ function goToChat(chat, dispatch) {
   dispatch(getMessages(chat.id));
 
   serverChannel.disconnectChatRoomChannel();
-  serverChannel.connectToChatRoomChannel(chat.id);
+  serverChannel.connectToChatRoomChannel(chat.id, 'user');
 }
 
 export function newMessage(chat, myMessage = false) {

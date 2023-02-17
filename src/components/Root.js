@@ -27,7 +27,7 @@ import { getProfile } from 'actions/profile';
 import { getSettings } from 'actions/settings';
 
 import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnread } from 'actions/chat';
-import { newAdminMessage } from 'actions/adminChat';
+import { newAdminMessage, adminReadUpdate } from 'actions/adminChat';
 
 import { activeColor, spinnerColor, primaryColor } from 'colors';
 
@@ -126,6 +126,7 @@ class Root extends React.Component {
     onNewMessage: this.props.newMessage,
     onNewAdminMessage: this.props.newAdminMessage,
     onReadUpdate: this.props.readUpdate,
+    onAdminReadUpdate: this.props.adminReadUpdate,
     onUnreadMessage: this.props.updateUnreadMessagesCount,
     onDeleteMessage: this.props.deleteMessage,
   };
@@ -264,6 +265,7 @@ function mapDispatchToProps(dispatch) {
     newMessage: (chat, myMessage) => dispatch(newMessage(chat, myMessage)),
     newAdminMessage: (chat, myMessage) => dispatch(newAdminMessage(chat, myMessage)),
     readUpdate: (chat) => dispatch(readUpdate(chat)),
+    adminReadUpdate: (chat) => dispatch(adminReadUpdate(chat)),
     updateUnreadMessagesCount: (count, systemCount) => dispatch(updateUnread(count, systemCount)),
     deleteMessage: (id, chat_room_id, updated_at) => dispatch(deleteMessageFinished(id, chat_room_id, updated_at)),
   };

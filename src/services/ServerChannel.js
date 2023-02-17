@@ -46,7 +46,7 @@ class ServerChannel {
       });
   }
 
-  connectToChatRoomChannel(chatRoomId) {
+  connectToChatRoomChannel(chatRoomId, from) {
     this.cable = this.cable || this.authenticate(cachedToken);
 
     if (!this.cable) {
@@ -56,7 +56,7 @@ class ServerChannel {
     this.chatRoomChannel =
       this.chatRoomChannel ||
       this.cable.subscriptions.create(
-        { channel: 'ApplicationCable::ChatRoomChannel', chat_room_id: chatRoomId },
+        { channel: 'ApplicationCable::ChatRoomChannel', from, chat_room_id: chatRoomId },
         {
           received: (data) => console.warn(data),
           subscribed: (data) => console.warn(data),
@@ -78,8 +78,15 @@ class ServerChannel {
   }
 
   processMessage = (payload, callbacks) => {
-    const { onContactsProcessed, onNewMessage, onNewAdminMessage, onReadUpdate, onUnreadMessage, onDeleteMessage } =
-      callbacks;
+    const {
+      onContactsProcessed,
+      onNewMessage,
+      onNewAdminMessage,
+      onReadUpdate,
+      onAdminReadUpdate,
+      onUnreadMessage,
+      onDeleteMessage,
+    } = callbacks;
 
     switch (payload.type) {
       case 'contacts':
@@ -97,6 +104,9 @@ class ServerChannel {
         break;
       case 'read_update':
         onReadUpdate(payload.chat);
+        break;
+      case 'admin_read_update':
+        onAdminReadUpdate(payload.chat);
         break;
       case 'unread_update':
         onUnreadMessage(payload.count, payload.system_count);

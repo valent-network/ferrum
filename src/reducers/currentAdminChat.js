@@ -28,14 +28,14 @@ export default function currentChat(state = initialState, action = {}) {
         ...state,
         messages: action.messages,
       };
-    case ActionTypes.POST_MESSAGE:
+    case ActionTypes.POST_ADMIN_MESSAGE:
       return {
         ...state,
         messages: mergeArraysKeepNew([...state.messages, action.message], (it) => it._id).sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         ),
       };
-    case ActionTypes.POST_MESSAGE_SUCCESS:
+    case ActionTypes.POST_ADMIN_MESSAGE_SUCCESS:
       if (action.chat.id !== state.id) {
         return state;
       }

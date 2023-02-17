@@ -9,8 +9,8 @@ import uk from 'dayjs/locale/uk';
 import en from 'dayjs/locale/en-gb';
 
 import { SET_CURRENT_ADMIN_CHAT, RESET_CURRENT_ADMIN_CHAT } from 'actions/types';
-import { postMessage, deleteMessage, onMessageLongPress } from 'actions/chat';
-import { getAdminMessages } from 'actions/adminChat';
+import { deleteMessage, onMessageLongPress } from 'actions/chat';
+import { getAdminMessages, postAdminMessage } from 'actions/adminChat';
 import { textColor, primaryColor, secondaryColor, spinnerColor } from 'colors';
 import { localizedSystemMessage } from 'utils';
 import { serverChannel } from 'services/ServerChannel';
@@ -52,7 +52,7 @@ function AdminChatRoomScreen({
     if (typeof chatRoomId === 'undefined') return;
 
     setCurrentChat(chatRoomId);
-    serverChannel.connectToChatRoomChannel(chatRoomId);
+    serverChannel.connectToChatRoomChannel(chatRoomId, 'admin');
     getMessages(chatRoomId);
   }, [chatRoomId]);
 
@@ -114,7 +114,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSend: (message, chatRoomId) => dispatch(postMessage(message, chatRoomId)),
+    onSend: (message, chatRoomId) => dispatch(postAdminMessage(message, chatRoomId)),
     onDelete: (message) => dispatch(deleteMessage(message)),
     getMessages: (chatRoomId, offset) => dispatch(getAdminMessages(chatRoomId, offset)),
     setCurrentChat: (chatRoomId) => dispatch({ type: SET_CURRENT_ADMIN_CHAT, chatRoomId: chatRoomId }),

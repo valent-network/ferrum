@@ -39,7 +39,7 @@ function goToAdminChat(chat, dispatch) {
   dispatch(getAdminMessages(chat.id));
 
   serverChannel.disconnectChatRoomChannel();
-  serverChannel.connectToChatRoomChannel(chat.id);
+  serverChannel.connectToChatRoomChannel(chat.id, 'admin');
 }
 
 export function newAdminMessage(chat, myMessage = false) {
@@ -66,7 +66,7 @@ export function newAdminMessage(chat, myMessage = false) {
 
     if (currentChatId === chat.id || currentAdminChatId === chat.id) {
       if (messageUserId !== currentUserId) {
-        serverChannel.chatRoomChannel.perform('read');
+        serverChannel.chatRoomChannel.perform('admin_read');
       }
     } else {
       if (shouldShowUINoitifcation) {
@@ -96,6 +96,23 @@ export function newAdminMessage(chat, myMessage = false) {
       }
     }
 
-    dispatch({ type: ActionTypes.POST_MESSAGE_SUCCESS, chat: chat });
+    dispatch({ type: ActionTypes.POST_ADMIN_MESSAGE_SUCCESS, chat: chat });
+  };
+}
+
+export function postAdminMessage(message, chatRoomId) {
+  return function (dispatch) {
+    message.pending = true;
+    message.chat_room_id = chatRoomId;
+    // chat.messages = [message, ...chat.messages];
+
+    dispatch({ type: ActionTypes.POST_ADMIN_MESSAGE, chatRoomId: chatRoomId, message: message });
+    serverChannel.chatRoomChannel.send({ message });
+  };
+}
+
+export function adminReadUpdate(chat) {
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ADMIN_MESSAGE_WAS_READ, chat: chat });
   };
 }
