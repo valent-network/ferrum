@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { ActionSheet } from 'native-base';
 import * as ActionTypes from 'actions/types';
 import API from 'services/API';
-import { localizedSystemMessage, notification as UINotification } from 'utils';
+import { localizedSystemMessage, notification as UINotification, LOGO_URL } from 'utils';
 import Navigation from 'services/Navigation';
 import { serverChannel } from 'services/ServerChannel';
 import { displayError } from 'actions/errors';
@@ -139,6 +139,9 @@ export function newMessage(chat, myMessage = false) {
 
     const shouldShowUINoitifcation = !myMessage && messageUserId !== currentUserId;
 
+    const chatPhoto = chat.system ? LOGO_URL : chatPhoto;
+    const chatTitle = chat.system ? message.user.name : chat.title;
+
     if (currentChatId === chat.id) {
       if (messageUserId !== currentUserId) {
         serverChannel.chatRoomChannel.perform('read');
@@ -149,18 +152,18 @@ export function newMessage(chat, myMessage = false) {
           UINotification.ref.show({
             message: {
               message: messageBody,
-              photo: chat.photo,
+              photo: chatPhoto,
               name: isServiceMessage ? '' : message.user?.name,
-              title: chat.title,
+              title: chatTitle,
             },
             onPress: () => goToChat(chat, dispatch),
           });
         } else {
           PushNotification.localNotification({
-            title: chat.title,
+            title: chatTitle,
             message: messageBody,
-            largeIconUrl: chat.photo,
-            bigPictureUrl: chat.photo,
+            largeIconUrl: chatPhoto,
+            bigPictureUrl: chatPhoto,
             channelId: 'messages',
             userInfo: {
               chat_room_id: chat.id,
@@ -194,10 +197,10 @@ export function deleteMessageFinished(id, chat_room_id, updated_at) {
   };
 }
 
-export function updateUnread(count) {
+export function updateUnread(count, systemCount) {
   return (dispatch) => {
     PushNotification.setApplicationIconBadgeNumber(count);
-    dispatch({ type: ActionTypes.UPDATE_UNREAD_MESSAGES_COUNT, count: count });
+    dispatch({ type: ActionTypes.UPDATE_UNREAD_MESSAGES_COUNT, count: count, systemCount: systemCount });
   };
 }
 

@@ -18,6 +18,7 @@ import {
   ActionSheet,
   Item,
   Label,
+  Badge,
 } from 'native-base';
 
 import UserAvatar from 'react-native-user-avatar';
@@ -215,7 +216,7 @@ class ProfileScreen extends React.PureComponent {
 
                 {!user.referrer.refcode && (
                   <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
-                    <Text style={{ color: activeTextColor }}>{t('profile.actions.enterRefCode')}</Text>
+                    <Text style={styles.activeTextColor}>{t('profile.actions.enterRefCode')}</Text>
                   </Button>
                 )}
 
@@ -341,6 +342,30 @@ class ProfileScreen extends React.PureComponent {
                     <Icon style={styles.mainColor} name="chatbubbles-outline" />
                   </Right>
                 </ListItem>
+                {user.admin && (
+                  <ListItem
+                    style={[styles.itemContainer, styles.withBorderBottom]}
+                    noIndent
+                    onPress={() => this.props.navigation.push('AdminChatRoomsListScreen')}
+                    activeOpacity={1}
+                    underlayColor="transparent"
+                  >
+                    <Left>
+                      <Text style={{ color: textColor }}>{t('profile.labels.adminChatRoomsList')}</Text>
+                      {user.unreadAdminMessagesCount > 0 && (
+                        <Badge style={styles.unreadBadge}>
+                          <Text style={styles.activeTextColor}>{user.unreadAdminMessagesCount}</Text>
+                        </Badge>
+                      )}
+                    </Left>
+                    <Right>
+                      <Icon
+                        style={styles.mainColor}
+                        name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'}
+                      />
+                    </Right>
+                  </ListItem>
+                )}
                 <ListItem
                   noIndent
                   onPress={onTosPress}
@@ -494,5 +519,13 @@ styles = StyleSheet.create({
   },
   bottomLinks: {
     color: textColor,
+  },
+  activeTextColor: {
+    color: activeTextColor,
+  },
+  unreadBadge: {
+    backgroundColor: deletedColor,
+    transform: [{ scale: 0.6 }],
+    alignItems: 'center',
   },
 });

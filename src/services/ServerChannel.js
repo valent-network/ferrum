@@ -78,7 +78,8 @@ class ServerChannel {
   }
 
   processMessage = (payload, callbacks) => {
-    const { onContactsProcessed, onNewMessage, onReadUpdate, onUnreadMessage, onDeleteMessage } = callbacks;
+    const { onContactsProcessed, onNewMessage, onNewAdminMessage, onReadUpdate, onUnreadMessage, onDeleteMessage } =
+      callbacks;
 
     switch (payload.type) {
       case 'contacts':
@@ -86,6 +87,9 @@ class ServerChannel {
         break;
       case 'chat':
         onNewMessage(payload.chat);
+        break;
+      case 'admin_chat':
+        onNewAdminMessage(payload.chat);
         break;
       case 'initiate_chat':
         onNewMessage(payload.chat, true);
@@ -95,7 +99,7 @@ class ServerChannel {
         onReadUpdate(payload.chat);
         break;
       case 'unread_update':
-        onUnreadMessage(payload.count);
+        onUnreadMessage(payload.count, payload.system_count);
         break;
       case 'delete_message':
         onDeleteMessage(payload.id, payload.chat_room_id, payload.updated_at);

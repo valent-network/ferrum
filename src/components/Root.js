@@ -27,6 +27,7 @@ import { getProfile } from 'actions/profile';
 import { getSettings } from 'actions/settings';
 
 import { getChatRooms, newMessage, readUpdate, deleteMessageFinished, updateUnread } from 'actions/chat';
+import { newAdminMessage } from 'actions/adminChat';
 
 import { activeColor, spinnerColor, primaryColor } from 'colors';
 
@@ -75,7 +76,11 @@ class Root extends React.Component {
     // }
 
     if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
-      setTimeout(() => Navigation.navigate('ChatRoomScreen', { chatRoomId }), 500);
+      Navigation.navigate('ChatRoomsListScreen');
+      Navigation.popToTop();
+      setTimeout(() => {
+        Navigation.navigate('ChatRoomScreen', { chatRoomId });
+      }, 500);
     }
   }
 
@@ -119,6 +124,7 @@ class Root extends React.Component {
   userChannelCallbacks = {
     onContactsProcessed: this.onContactsProcessed,
     onNewMessage: this.props.newMessage,
+    onNewAdminMessage: this.props.newAdminMessage,
     onReadUpdate: this.props.readUpdate,
     onUnreadMessage: this.props.updateUnreadMessagesCount,
     onDeleteMessage: this.props.deleteMessage,
@@ -256,8 +262,9 @@ function mapDispatchToProps(dispatch) {
     getSettings: () => dispatch(getSettings()),
     updateContactsFinished: () => dispatch({ type: ActionTypes.UPDATE_CONTACTS_FINISHED }),
     newMessage: (chat, myMessage) => dispatch(newMessage(chat, myMessage)),
+    newAdminMessage: (chat, myMessage) => dispatch(newAdminMessage(chat, myMessage)),
     readUpdate: (chat) => dispatch(readUpdate(chat)),
-    updateUnreadMessagesCount: (count) => dispatch(updateUnread(count)),
+    updateUnreadMessagesCount: (count, systemCount) => dispatch(updateUnread(count, systemCount)),
     deleteMessage: (id, chat_room_id, updated_at) => dispatch(deleteMessageFinished(id, chat_room_id, updated_at)),
   };
 }

@@ -165,6 +165,10 @@ export default class API {
     return apiService.get(`/v1/chat_rooms?offset=${offset}`);
   }
 
+  static getAdminChatRooms(offset = 0) {
+    return apiService.get(`/v1/admin_system_chat_rooms?offset=${offset}`);
+  }
+
   static initiateChatRoom(adId, userId, name) {
     return apiService.post('/v1/chat_rooms', { ad_id: adId, user_id: userId, name: name });
   }
@@ -183,6 +187,10 @@ export default class API {
 
   static getMessages(chatRoomId, offset) {
     return apiService.get(`/v1/messages?chat_room_id=${chatRoomId}&offset=${offset}`);
+  }
+
+  static getAdminMessages(chatRoomId, offset) {
+    return apiService.get(`/v1/admin_system_messages?chat_room_id=${chatRoomId}&offset=${offset}`);
   }
 
   static getReferrer(refcode) {

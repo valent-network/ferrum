@@ -17,6 +17,8 @@ import FeedAdScreen from 'components/Feed/AdScreenContainer';
 import ChatRoomScreen from 'components/Chat/ChatRoomScreen';
 import ChatRoomSettingsScreen from 'components/Chat/ChatRoomSettingsScreen';
 import ChatRoomsListScreen from 'components/Chat/ChatRoomsListScreen';
+import AdminChatRoomsListScreen from 'components/AdminChat/AdminChatRoomsListScreen';
+import AdminChatRoomScreen from 'components/AdminChat/AdminChatRoomScreen';
 import AdsListsAdScreen from 'components/AdsLists/AdScreenContainer';
 import AdsListsScreen from 'components/AdsLists/AdsListsScreen';
 import BottomTabChatIcon from 'components/BottomTabChatIcon';
@@ -89,6 +91,14 @@ const ProfileNavigator = createStackNavigator(
         headerShown: false,
       },
     },
+    AdminChatRoomsListScreen: {
+      screen: AdminChatRoomsListScreen,
+      path: '',
+    },
+    AdminChatRoomScreen: {
+      screen: AdminChatRoomScreen,
+      path: '',
+    },
     LanguageScreen: {
       screen: LanguageScreen,
       path: '',
@@ -106,6 +116,20 @@ const ProfileNavigator = createStackNavigator(
     defaultNavigationOptions: defaultNavigationOptions,
   },
 );
+
+ProfileNavigator.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+
+  const route = navigation.state.routes[navigation.state.routes.length - 1];
+
+  if (route.routeName === 'AdminChatRoomScreen') {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 const AdsListsNavigator = createStackNavigator(
   {

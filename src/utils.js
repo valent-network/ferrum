@@ -127,3 +127,5 @@ export function animateHeaderHelper() {
 
   return [onScroll, setCalculatedHeaderHeight, bgInterpolation, textInterpolation];
 }
+
+export const LOGO_URL = 'https://assets.recar.io/logo.png';

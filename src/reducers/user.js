@@ -8,6 +8,7 @@ const initialState = {
   avatar: '',
   contactsProcessed: true,
   unreadMessagesCount: 0,
+  unreadAdminMessagesCount: 0,
 };
 
 export default function user(state = initialState, action = {}) {
@@ -28,7 +29,9 @@ export default function user(state = initialState, action = {}) {
         referrer: action.user.referrer,
         userContactsCount: action.user.user_contacts_count,
         unreadMessagesCount: action.user.unread_messages_count,
+        unreadAdminMessagesCount: action.user.unread_admin_messages_count,
         isLoading: false,
+        admin: action.user.admin,
       };
     case ActionTypes.GET_PROFILE_FAILED:
       return {
@@ -55,6 +58,7 @@ export default function user(state = initialState, action = {}) {
       return {
         ...state,
         unreadMessagesCount: action.count,
+        unreadAdminMessagesCount: action.systemCount === 0 ? 0 : action.systemCount || state.unreadAdminMessagesCount, // 0 == false <3 JS
       };
     case ActionTypes.SIGN_OUT_SUCCESS:
       return initialState;

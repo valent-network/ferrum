@@ -11,7 +11,9 @@ import userContacts from './userContacts';
 import filters from './filters';
 import adsListsAd from './adsListsAd';
 import chats from './chats';
+import adminChats from './adminChats';
 import currentChat from './currentChat';
+import currentAdminChat from './currentAdminChat';
 import settings from './settings';
 
 const rootReducer = combineReducers({
@@ -27,7 +29,9 @@ const rootReducer = combineReducers({
   filters,
   adsListsAd,
   chats,
+  adminChats,
   currentChat,
+  currentAdminChat,
   settings,
 });
 
