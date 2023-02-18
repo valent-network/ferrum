@@ -73,6 +73,8 @@ function AdminChatRoomScreen({
   };
 
   useEffect(() => {
+    if (typeof chatRoomId === 'undefined') return;
+
     const focusListener = navigation.addListener('willFocus', onConnect);
     const blurListener = navigation.addListener('willBlur', onDisconnect);
     AppState.addEventListener('change', appStateHandle);
@@ -87,7 +89,7 @@ function AdminChatRoomScreen({
       onDisconnect();
       AppState.removeEventListener('change', appStateHandle);
     };
-  }, []);
+  }, [chatRoomId]);
 
   if (!chat.id || !chatRoomId || typeof chatRoomId === 'undefined' || typeof chat.id === 'undefined') {
     return <SpinnerScreen />;
