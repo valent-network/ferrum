@@ -52,7 +52,7 @@ export default function currentChat(state = initialState, action = {}) {
         ...state,
         isLoadingSettings: true,
       };
-    case ActionTypes.SYNC_MESSAGES_SUCCESS:
+    case ActionTypes.SYNC_ADMIN_MESSAGES_SUCCESS:
       const newMessages = mergeArraysKeepNew([...state.messages, ...action.messages], (it) => it._id).sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );

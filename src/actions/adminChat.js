@@ -24,9 +24,9 @@ export function getAdminChatRooms(offset = 0) {
 
 export function getAdminMessages(chatRoomId, offset = 0) {
   return function (dispatch) {
-    dispatch({ type: ActionTypes.SYNC_MESSAGES_STARTED, chatRoomId: chatRoomId });
+    dispatch({ type: ActionTypes.SYNC_ADMIN_MESSAGES_STARTED, chatRoomId: chatRoomId });
     API.getAdminMessages(chatRoomId, offset).then(({ data }) => {
-      dispatch({ type: ActionTypes.SYNC_MESSAGES_SUCCESS, chat: data.chat, messages: data.messages });
+      dispatch({ type: ActionTypes.SYNC_ADMIN_MESSAGES_SUCCESS, chat: data.chat, messages: data.messages });
     });
   };
 }

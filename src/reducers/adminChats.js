@@ -44,7 +44,7 @@ export default function chats(state = initialState, action = {}) {
         ...state,
         list: newChatList(state.list, chat),
       };
-    case ActionTypes.SYNC_MESSAGES_SUCCESS:
+    case ActionTypes.SYNC_ADMIN_MESSAGES_SUCCESS:
       return {
         ...state,
         list: newChatList(state.list, action.chat),
