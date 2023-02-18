@@ -10,6 +10,7 @@ import {
   clearAuthPhone,
 } from 'services/AsyncStorage';
 import i18n from 'services/i18n';
+import { serverChannel } from 'services/ServerChannel';
 
 export function signIn(phone, code) {
   return function (dispatch) {
@@ -66,6 +67,7 @@ export function signOut(all) {
           clearAuthPhone().then((phone) => {
             dispatch({ type: ActionTypes.SIGN_OUT_SUCCESS });
           });
+          serverChannel.disconnect();
         }
       })
       .catch((error) => {
