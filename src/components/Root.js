@@ -65,6 +65,9 @@ class Root extends React.Component {
       case 'open_chat_room':
         this.openChatRoom(notification.data.chat_room_id);
         break;
+      case 'open_admin_chat_room':
+        this.openAdminChatRoom(notification.data.chat_room_id);
+        break;
       default:
         console.warn(notification);
     }
@@ -80,6 +83,20 @@ class Root extends React.Component {
       Navigation.popToTop();
       setTimeout(() => {
         Navigation.navigate('ChatRoomScreen', { chatRoomId });
+      }, 500);
+    }
+  }
+
+  openAdminChatRoom(chatRoomId) {
+    // if (this.props.currentChatId?.toString() != chatRoomId.toString()) {
+    //   setTimeout(() => Navigation.navigate('ChatRoomScreen', {chatRoomId}), 500);
+    // }
+
+    if (this.props.currentAdminChatId?.toString() != chatRoomId.toString()) {
+      Navigation.navigate('ProfileScreen');
+      Navigation.popToTop();
+      setTimeout(() => {
+        Navigation.navigate('AdminChatRoomScreen', { chatRoomId });
       }, 500);
     }
   }
@@ -242,6 +259,7 @@ function mapStateToProps(state) {
     wizardDone: state.auth.wizardDone,
     isLoading: state.auth.isLoading,
     currentChatId: state.currentChat.id,
+    currentAdminChatId: state.currentAdminChat.id,
   };
 }
 
