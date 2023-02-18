@@ -37,9 +37,6 @@ function goToAdminChat(chat, dispatch) {
   dispatch({ type: ActionTypes.RESET_CURRENT_ADMIN_CHAT });
   dispatch({ type: ActionTypes.SET_CURRENT_ADMIN_CHAT, chatRoomId: chat.id });
   dispatch(getAdminMessages(chat.id));
-
-  serverChannel.disconnectChatRoomChannel();
-  serverChannel.connectToChatRoomChannel(chat.id, 'admin');
 }
 
 export function newAdminMessage(chat, myMessage = false) {

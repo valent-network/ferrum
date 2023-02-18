@@ -21,7 +21,6 @@ function AdminChatRoomScreen({
   userId,
   messages,
   chat,
-  currentChatId,
   shouldLoadEarlier,
   navigation,
   onSend,
@@ -79,9 +78,7 @@ function AdminChatRoomScreen({
     const blurListener = navigation.addListener('willBlur', onDisconnect);
     AppState.addEventListener('change', appStateHandle);
 
-    if (!currentChatId) {
-      onConnect();
-    }
+    onConnect();
 
     return () => {
       focusListener.remove();
@@ -110,7 +107,6 @@ function mapStateToProps(state, ownProps) {
     messages: state.currentAdminChat.messages.map((m) => {
       return { ...m, user: { ...m.user, _id: m.user._id || 'system' } }; // If GiftedChat doesn't have ID for user, it doesn't always render messages correctly
     }),
-    currentChatId: state.currentAdminChat.id,
   };
 }
 

@@ -116,9 +116,6 @@ function goToChat(chat, dispatch) {
   dispatch({ type: ActionTypes.RESET_CURRENT_CHAT });
   dispatch({ type: ActionTypes.SET_CURRENT_CHAT, chatRoomId: chat.id });
   dispatch(getMessages(chat.id));
-
-  serverChannel.disconnectChatRoomChannel();
-  serverChannel.connectToChatRoomChannel(chat.id, 'user');
 }
 
 export function newMessage(chat, myMessage = false) {
