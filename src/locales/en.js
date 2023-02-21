@@ -1,6 +1,7 @@
 export default {
   listNotFound: 'Not found',
   noUserName: 'No Name',
+  top: 'TOP',
   nav: {
     titles: {
       feed: 'Feed',
@@ -11,6 +12,7 @@ export default {
       language: 'Language',
       createAd: 'Create Ad',
       ads: 'Ads',
+      userStats: 'Statistics',
     },
   },
   actions: {
@@ -30,9 +32,26 @@ export default {
     invite: 'Invite',
     listNotfoundInviteFriends: 'Invite Friends',
   },
+  stats: {
+    potential_reach: 'Potential reach',
+    activity_percentage: 'activity',
+    popularity_percentage: 'citation',
+    adoption_percentage: 'registered',
+    top_regions: 'The most popular region',
+  },
+  statsDescriptions: {
+    potential_reach: 'Number of people who can see your ads through your friends & mates',
+    activity_percentage:
+      'Percentage of users more active than you. Activity is measured through different actions done in Recario — your ads creation, visiting of other peopleʼs ads',
+    popularity_percentage:
+      'Percentage of users more cited than you. Citation is a sum of various metrics: your ad visits, their discussion with friends & mates etc ',
+    adoption_percentage: 'Percentage of users who signed up before you',
+    top_regions: 'The biggest part of the ads you can see through your friends & mates are from this region',
+  },
   feed: {
     permissionBoxText:
       'Recario requiers access to contacts book in order to show your friends who active ads right now',
+    permissionBoxHeader: 'Contacts Book Access Denied',
     permissionBoxSubmit: 'Grant',
     contactsProcessingText: 'Processing contacts book...',
     search: {
@@ -61,6 +80,7 @@ export default {
     restore: 'Restore',
     addImages: 'Add Images',
     assign_as_main_image: 'Cover',
+    stats: 'Statistics',
     alerts: {
       confirm_delete: 'Are you sure you want to delete this ad? This action is irreversible',
       confirm_archive:
