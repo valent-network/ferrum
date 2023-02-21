@@ -52,6 +52,24 @@ export default styles = StyleSheet.create({
     fontSize: 24,
     color: textColor,
   },
+  statText: {
+    color: textColor,
+    fontSize: 16,
+    paddingHorizontal: 4,
+  },
+  statBlock: {
+    flexDirection: 'row',
+    marginRight: 16,
+  },
+  stats: {
+    padding: 16,
+    marginVertical: 8,
+    backgroundColor: secondaryColor,
+    borderRadius: 4,
+    minWidth: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   price: {
     color: priceColor,
     fontSize: 18,

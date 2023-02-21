@@ -27,7 +27,7 @@ import OptionsList from './OptionsList';
 import Navigation from 'services/Navigation';
 
 import styles from './Styles';
-import { activeColor, textColor, spinnerColor, secondaryColor, primaryColor, activeTextColor } from 'colors';
+import { spinnerColor } from 'colors';
 
 import i18n from 'services/i18n';
 
@@ -210,6 +210,28 @@ export default function AdScreen({
               {ad.description}
             </Text>
           </View>
+
+          {ad.my_ad && Object.keys(ad.stats).length > 0 && <Text style={styles.title}>{t('ad.stats')}</Text>}
+          {ad.my_ad && Object.keys(ad.stats).length > 0 && (
+            <View style={styles.stats}>
+              <View style={styles.statBlock}>
+                <Icon name="eye-outline" style={styles.statText} />
+                <Text style={styles.statText}>{ad.stats.visits_count}</Text>
+              </View>
+              <View style={styles.statBlock}>
+                <Icon name="heart" style={styles.statText} />
+                <Text style={styles.statText}>{ad.stats.favorites_count}</Text>
+              </View>
+              <View style={styles.statBlock}>
+                <Icon name="mail" style={styles.statText} />
+                <Text style={styles.statText}>{ad.stats.messages_count}</Text>
+              </View>
+              <View style={styles.statBlock}>
+                <Icon name="chatbubbles" style={styles.statText} />
+                <Text style={styles.statText}>{ad.stats.chat_rooms_count}</Text>
+              </View>
+            </View>
+          )}
         </View>
       </ScrollView>
     </Container>
