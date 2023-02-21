@@ -28,10 +28,13 @@ class PermissionsBox extends React.PureComponent {
 
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.mainText}>
+        <View style={styles.headerContainer}>
           <Icon name="alert-circle" style={styles.info} />
-          {t('feed.permissionBoxText')}
-        </Text>
+          <Text style={styles.header} t>
+            {t('feed.permissionBoxHeader')}
+          </Text>
+        </View>
+        <Text style={styles.mainText}>{t('feed.permissionBoxText')}</Text>
         <Button block style={styles.button} onPress={this.onPress}>
           <Text style={styles.buttonText}>{t('feed.permissionBoxSubmit')}</Text>
         </Button>
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     backgroundColor: primaryColor,
     paddingHorizontal: 16,
   },
+  headerContainer: { flexDirection: 'row', justifyContent: 'flex-start' },
+  header: { color: textColor, alignSelf: 'center', fontWeight: 'bold' },
   button: {
     backgroundColor: activeColor,
     marginTop: 16,
