@@ -214,6 +214,26 @@ class ProfileScreen extends React.PureComponent {
                   <Text style={styles.readOnlyText}>{user.phoneNumber}</Text>
                 </ListItem>
 
+                {!!user.stats && !!Object.keys(user.stats).length > 0 && (
+                  <ListItem
+                    style={[styles.itemContainer, styles.withBorderBottom]}
+                    noIndent
+                    onPress={() => this.props.navigation.push('UserStatsScreen', { stats: user.stats })}
+                    activeOpacity={1}
+                    underlayColor="transparent"
+                  >
+                    <Left>
+                      <Text style={{ color: textColor }}>{t('nav.titles.userStats')}</Text>
+                    </Left>
+                    <Right>
+                      <Icon
+                        style={styles.mainColor}
+                        name={Platform.OS === 'android' ? 'arrow-forward-outline' : 'chevron-forward-outline'}
+                      />
+                    </Right>
+                  </ListItem>
+                )}
+
                 {!user.referrer.refcode && (
                   <Button style={styles.referrerButton} onPress={this.openSetReferrerModal} block>
                     <Text style={styles.activeTextColor}>{t('profile.actions.enterRefCode')}</Text>

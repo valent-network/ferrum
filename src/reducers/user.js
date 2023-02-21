@@ -9,6 +9,7 @@ const initialState = {
   contactsProcessed: true,
   unreadMessagesCount: 0,
   unreadAdminMessagesCount: 0,
+  stats: {},
 };
 
 export default function user(state = initialState, action = {}) {
@@ -32,6 +33,7 @@ export default function user(state = initialState, action = {}) {
         unreadAdminMessagesCount: action.user.unread_admin_messages_count,
         isLoading: false,
         admin: action.user.admin,
+        stats: action.user.stats,
       };
     case ActionTypes.GET_PROFILE_FAILED:
       return {

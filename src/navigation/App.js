@@ -11,6 +11,7 @@ import EditAdScreen from 'components/Ad/EditAdScreen';
 import UserContactsScreen from 'components/UserContacts/UserContactsScreen';
 import ProfileScreen from 'components/Profile/ProfileScreen';
 import LanguageScreen from 'components/Profile/LanguageScreen';
+import UserStatsScreen from 'components/Profile/UserStatsScreen';
 import InviteFriendsScreen from 'components/Profile/InviteFriendsScreen';
 import FeedScreen from 'components/Feed/FeedScreen';
 import FeedAdScreen from 'components/Feed/AdScreenContainer';
@@ -101,6 +102,10 @@ const ProfileNavigator = createStackNavigator(
     },
     LanguageScreen: {
       screen: LanguageScreen,
+      path: '',
+    },
+    UserStatsScreen: {
+      screen: UserStatsScreen,
       path: '',
     },
     UserContactsScreen: {
