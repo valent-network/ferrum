@@ -5,17 +5,19 @@ import { useTranslation } from 'react-i18next';
 
 import { secondaryColor, activeColor, textColor, activeTextColor } from 'colors';
 
+const LOGO = require('assets/logo.png');
+
 export default ({ onPress }) => {
   const { t } = useTranslation();
 
   return (
     <View style={styles.mutualFriendBox}>
-      <Image style={styles.noAvatar} source={require('assets/logo.png')} />
+      <Image style={styles.noAvatar} source={LOGO} />
       <Text note style={styles.smallFont}>
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
       <Button style={styles.button} onPress={onPress}>
-        <Text style={{ color: activeTextColor }}>{t('ad.buttons.selectFriend')}</Text>
+        <Text style={styles.activeTextColor}>{t('ad.buttons.selectFriend')}</Text>
       </Button>
     </View>
   );
@@ -48,4 +50,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: textColor,
   },
+  activeTextColor: { color: activeTextColor },
 });

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Image, TouchableOpacity, View, StyleSheet } from 'react-native';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 
 import { Text, Icon } from 'native-base';
@@ -21,99 +21,97 @@ import ImageGallery from 'components/Ad/ImageGallery';
 
 import API from 'services/API';
 
-import i18n from 'services/i18n';
+const updatedAtFormatted = (updatedAtRaw, language) => {
+  let updatedAt = dayjs(dayjs().startOf('day')).isBefore(updatedAtRaw)
+    ? dayjs(updatedAtRaw).locale(language).format('HH:mm')
+    : dayjs(updatedAtRaw).locale(language).format('D MMMM');
+  updatedAt =
+    dayjs().year() === parseInt(dayjs(updatedAtRaw).format('YYYY'))
+      ? updatedAt
+      : `${updatedAt} ${dayjs(updatedAtRaw).format('YYYY')}`;
 
-class AdsListItem extends React.PureComponent {
-  onPress = () => this.props.onPress(this.props.ad);
+  return updatedAt;
+};
 
-  favAction = () => {
-    const { ad, likeAd, unlikeAd } = this.props;
+const knowsTextFormatted = (friend_name_and_total, t) => {
+  let knowsText, handsCountString;
 
-    ad.favorite ? unlikeAd(ad) : likeAd(ad);
-  };
-
-  render() {
-    const { title, image, price, short_description, friend_name_and_total, category_currency } = this.props.ad;
-
-    const { t, ad } = this.props;
-
-    let updatedAt = dayjs(dayjs().startOf('day')).isBefore(ad.updated_at)
-      ? dayjs(ad.updated_at).locale(i18n.language).format('HH:mm')
-      : dayjs(ad.updated_at).locale(i18n.language).format('D MMMM');
-    updatedAt =
-      dayjs().year() === parseInt(dayjs(ad.updated_at).format('YYYY'))
-        ? updatedAt
-        : `${updatedAt} ${dayjs(ad.updated_at).format('YYYY')}`;
-
-    let knowsText, handsCountString;
-
-    if (friend_name_and_total) {
-      if (friend_name_and_total.friend_hands === 1) {
-        knowsText = `${t('ad.postedBy')} ${friend_name_and_total.name}`;
-        // friend_name_and_total.count > 0
-        //   ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
-        //       'ads.knowsMorePostfix',
-        //     )}...`
-        //   : `${t('ad.postedBy')} ${friend_name_and_total.name}`;
-      } else {
-        knowsText =
-          friend_name_and_total.count > 0
-            ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
-                'ads.knowsMorePostfix',
-              )}...`
-            : `${t('ads.knows')} ${friend_name_and_total.name}`;
-      }
-      handsCountString = '🤝'.repeat(friend_name_and_total.friend_hands);
-      knowsText = `${handsCountString} ${knowsText}`;
+  if (friend_name_and_total) {
+    if (friend_name_and_total.friend_hands === 1) {
+      knowsText = `${t('ad.postedBy')} ${friend_name_and_total.name}`;
+      // friend_name_and_total.count > 0
+      //   ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
+      //       'ads.knowsMorePostfix',
+      //     )}...`
+      //   : `${t('ad.postedBy')} ${friend_name_and_total.name}`;
+    } else {
+      knowsText =
+        friend_name_and_total.count > 0
+          ? `${t('ads.knows')} ${friend_name_and_total.name} ${t('ads.knowsMore')} ${friend_name_and_total.count}${t(
+              'ads.knowsMorePostfix',
+            )}...`
+          : `${t('ads.knows')} ${friend_name_and_total.name}`;
     }
+    handsCountString = '🤝'.repeat(friend_name_and_total.friend_hands);
 
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.imagePreviewContainer}>
-          <ImageGallery ad={ad} onPress={this.onPress} withModal={false} />
-          {!image && <View style={styles.imagePlaceholder}></View>}
-          <View style={styles.detailsContainer}>
-            <TouchableOpacity activeOpacity={1} onPress={this.onPress}>
-              <View style={styles.detailsRow}>
-                <Text style={styles.title}>{title}</Text>
-                {ad.deleted && (
-                  <View style={styles.deletedContainer}>
-                    <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
-                  </View>
-                )}
-              </View>
-              <View style={styles.detailsRow}>
-                <Text style={styles.price}>
-                  {price} {category_currency}
-                </Text>
-              </View>
-              <Text style={styles.option}>{knowsText}</Text>
-              <Text style={styles.option}>{short_description}</Text>
+    return `${handsCountString} ${knowsText}`;
+  }
+};
 
-              <View style={styles.actionsContainer}>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon
-                    name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
-                    onPress={this.favAction}
-                    style={[{ marginRight: 16 }, ad.favorite ? { color: activeColor } : { color: textColor }]}
-                  />
-                  <Icon name="paper-plane" onPress={this.props.openChat} style={{ color: textColor }} />
+export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openChat }) {
+  const { t, i18n } = useTranslation();
+
+  const goToAd = useCallback(() => onPress(ad), [ad]);
+
+  const favAction = useCallback(() => {
+    ad.favorite ? unlikeAd(ad) : likeAd(ad);
+  }, [ad.favorite, likeAd, unlikeAd]);
+
+  const updatedAt = updatedAtFormatted(ad.updatedAt, i18n.language);
+  const knowsText = knowsTextFormatted(ad.friend_name_and_total, t);
+
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.imagePreviewContainer}>
+        <ImageGallery ad={ad} onPress={goToAd} withModal={false} />
+        {!ad.image && <View style={styles.imagePlaceholder}></View>}
+        <View style={styles.detailsContainer}>
+          <TouchableOpacity activeOpacity={1} onPress={goToAd}>
+            <View style={styles.detailsRow}>
+              <Text style={styles.title}>{ad.title}</Text>
+              {ad.deleted && (
+                <View style={styles.deletedContainer}>
+                  <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
                 </View>
-                {ad.region ? (
-                  <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
-                ) : (
-                  <Text style={styles.notes}>{updatedAt}</Text>
-                )}
+              )}
+            </View>
+            <View style={styles.detailsRow}>
+              <Text style={styles.price}>{`${ad.price} ${ad.category_currency}`}</Text>
+            </View>
+            <Text style={styles.option}>{knowsText}</Text>
+            <Text style={styles.option}>{ad.short_description}</Text>
+
+            <View style={styles.actionsContainer}>
+              <View style={styles.flexRow}>
+                <Icon
+                  name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
+                  onPress={favAction}
+                  style={ad.favorite ? styles.activeFavIcon : styles.favIcon}
+                />
+                <Icon name="paper-plane" onPress={openChat} style={styles.textColor} />
               </View>
-            </TouchableOpacity>
-          </View>
+              {ad.region ? (
+                <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
+              ) : (
+                <Text style={styles.notes}>{updatedAt}</Text>
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
-
-export default withTranslation()(AdsListItem);
 
 AdsListItem.propTypes = {};
 
@@ -134,6 +132,7 @@ const styles = StyleSheet.create({
   detailsContainer: {
     padding: 10,
   },
+  flexRow: { flexDirection: 'row' },
   option: {
     marginBottom: 12,
     color: textColor,
@@ -182,4 +181,8 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: disabledColor,
   },
+  textColor: { color: textColor },
+  activeColor: { color: activeColor },
+  favIcon: { marginRight: 16, color: textColor },
+  activeFavIcon: { color: activeColor, marginRight: 16 },
 });

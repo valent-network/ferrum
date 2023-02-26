@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Icon } from 'native-base';
@@ -23,12 +23,19 @@ function FriendPickerModal({
 }) {
   const [invitationVisible, setInvitationVisible] = useState(false);
   const [friend, setFriend] = useState({});
-  const onUserPress = (f) => {
-    onClose();
-    setFriend(f);
-    setInvitationVisible(true);
-  };
-  const renderItem = ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />;
+  const onInvitationModalClose = useCallback(() => setInvitationVisible(false), []);
+  const onUserPress = useCallback(
+    (f) => {
+      onClose();
+      setFriend(f);
+      setInvitationVisible(true);
+    },
+    [onClose],
+  );
+  const renderItem = useCallback(
+    ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />,
+    [onUserPress],
+  );
 
   return (
     <>
@@ -52,12 +59,7 @@ function FriendPickerModal({
           </View>
         </View>
       </Modal>
-      <InvitationModal
-        visible={invitationVisible}
-        friend={friend}
-        adId={adId}
-        onClose={() => setInvitationVisible(false)}
-      />
+      <InvitationModal visible={invitationVisible} friend={friend} adId={adId} onClose={onInvitationModalClose} />
     </>
   );
 }

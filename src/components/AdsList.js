@@ -47,6 +47,7 @@ function AdsList({
 }) {
   const [pickerVisible, setPickerVisible] = useState(false);
   const [currentAdId, setCurrentAdId] = useState();
+  const onFriendPickerModalClose = useCallback(() => setPickerVisible(false), []);
   const refreshControl = (
     <RefreshControl
       refreshing={isLoading}
@@ -59,19 +60,13 @@ function AdsList({
     fromFeed ? loadMoreFeedAds() : loadMoreAds[currentTab]();
   };
 
-  const openPicker = (adId) => {
+  const openPicker = useCallback((adId) => {
     setCurrentAdId(adId);
     setPickerVisible(true);
-  };
+  }, []);
 
   const _renderItem = ({ item, index }) => (
-    <AdsListItem
-      ad={item}
-      onPress={onAdOpened}
-      likeAd={likeAd}
-      unlikeAd={unlikeAd}
-      openChat={() => openPicker(item.id)}
-    />
+    <AdsListItem ad={item} onPress={onAdOpened} likeAd={likeAd} unlikeAd={unlikeAd} openChat={openPicker} />
   );
 
   useEffect(() => {
@@ -99,7 +94,7 @@ function AdsList({
         onEndReached={_onEndReached}
         renderItem={_renderItem}
       />
-      <FriendPickerModal visible={pickerVisible} adId={currentAdId} onClose={() => setPickerVisible(false)} />
+      <FriendPickerModal visible={pickerVisible} adId={currentAdId} onClose={onFriendPickerModalClose} />
     </>
   );
 }

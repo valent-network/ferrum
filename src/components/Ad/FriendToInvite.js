@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import UserAvatar from 'react-native-user-avatar';
 
@@ -12,6 +12,10 @@ import { invitationalSMS } from 'utils';
 
 export default ({ friend, onPress }) => {
   const { t } = useTranslation();
+  const onSubmit = useCallback(() => {
+    friend.user_id ? onPress(friend) : invitationalSMS(friend.phone_number, t('ad.invitationText'));
+  }, [friend.phone_number]);
+  const buttonText = friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend');
 
   return (
     <View style={styles.mutualFriendBox} key={friend.id}>
@@ -27,15 +31,8 @@ export default ({ friend, onPress }) => {
       <Text note style={styles.smallFont}>
         {friend.phone_number}
       </Text>
-      <Button
-        style={styles.button}
-        onPress={
-          friend.user_id ? () => onPress(friend) : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
-        }
-      >
-        <Text style={{ color: activeTextColor }}>
-          {friend.user_id ? t('ad.buttons.askFriend') : t('ad.buttons.inviteFriend')}
-        </Text>
+      <Button style={styles.button} onPress={onSubmit}>
+        <Text style={styles.activeTextColor}>{buttonText}</Text>
       </Button>
     </View>
   );
@@ -62,5 +59,8 @@ const styles = StyleSheet.create({
   smallFont: {
     fontSize: 12,
     color: textColor,
+  },
+  activeTextColor: {
+    color: activeTextColor,
   },
 });

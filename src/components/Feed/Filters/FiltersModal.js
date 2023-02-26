@@ -42,8 +42,9 @@ const FiltersModal = ({
     localized_name: t('feed.filters.headers.category'),
     values: categoriesValues,
   };
-  const categoryOptsMultipicker = (
-    <MultiPicker name={categoryOpts.name} localized_name={categoryOpts.localized_name} values={categoryOpts.values} />
+  const categoryOptsMultipicker = useCallback(
+    <MultiPicker name={categoryOpts.name} localized_name={categoryOpts.localized_name} values={categoryOpts.values} />,
+    [categoryOpts.name, categoryOpts.values.join('')],
   );
 
   applyMinPrice = (event) => applyFilter('min_price', event.nativeEvent.text);
@@ -72,9 +73,12 @@ const FiltersModal = ({
   );
   const close = <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />;
 
-  const mapper = useCallback((opt) => (
-    <MultiPicker key={`opt-${opt.id}`} name={opt.name} localized_name={opt.localized_name} values={opt.values} />
-  ));
+  const mapper = useCallback(
+    (opt) => (
+      <MultiPicker key={`opt-${opt.id}`} name={opt.name} localized_name={opt.localized_name} values={opt.values} />
+    ),
+    [],
+  );
 
   const submitButton = useCallback(
     <View style={styles.submitButtonWrapper}>
@@ -99,47 +103,41 @@ const FiltersModal = ({
           bounces={false}
           extraHeight={296}
         >
-          <View>
-            <Content>
-              <Form style={styles.filtersForm}>
-                {categoryOpts.values.length > 0 ? categoryOptsMultipicker : <Spinner color={spinnerColor} />}
+          <Form style={styles.filtersForm}>
+            {categoryOpts.values.length > 0 ? categoryOptsMultipicker : <Spinner color={spinnerColor} />}
 
-                {!!currentCategory && (
-                  <>
-                    <H2 style={styles.filterTitle}>
-                      {`${t('feed.filters.headers.price')}, ${currentCategory.currency}`}
-                    </H2>
-                    <View style={styles.rangeItemWrapper}>
-                      <Item style={styles.rangeItem}>
-                        <Label>{t('feed.filters.from')}</Label>
-                        <Input
-                          style={styles.inputTextColor}
-                          keyboardType="numeric"
-                          defaultValue={min_price.toString()}
-                          onEndEditing={applyMinPrice}
-                          onChangeText={setMinPrice}
-                          returnKeyType={'done'}
-                        />
-                      </Item>
-                      <Item style={styles.rangeItem}>
-                        <Label>{t('feed.filters.to')}</Label>
-                        <Input
-                          style={styles.inputTextColor}
-                          keyboardType="numeric"
-                          defaultValue={max_price.toString()}
-                          onEndEditing={applyMaxPrice}
-                          onChangeText={setMaxPrice}
-                          returnKeyType={'done'}
-                        />
-                      </Item>
-                    </View>
-                  </>
-                )}
+            {!!currentCategory && (
+              <>
+                <H2 style={styles.filterTitle}>{`${t('feed.filters.headers.price')}, ${currentCategory.currency}`}</H2>
+                <View style={styles.rangeItemWrapper}>
+                  <Item style={styles.rangeItem}>
+                    <Label>{t('feed.filters.from')}</Label>
+                    <Input
+                      style={styles.inputTextColor}
+                      keyboardType="numeric"
+                      defaultValue={min_price.toString()}
+                      onEndEditing={applyMinPrice}
+                      onChangeText={setMinPrice}
+                      returnKeyType={'done'}
+                    />
+                  </Item>
+                  <Item style={styles.rangeItem}>
+                    <Label>{t('feed.filters.to')}</Label>
+                    <Input
+                      style={styles.inputTextColor}
+                      keyboardType="numeric"
+                      defaultValue={max_price.toString()}
+                      onEndEditing={applyMaxPrice}
+                      onChangeText={setMaxPrice}
+                      returnKeyType={'done'}
+                    />
+                  </Item>
+                </View>
+              </>
+            )}
 
-                {!!pickerOpts && pickerOpts.sort(positionSorter).map(mapper)}
-              </Form>
-            </Content>
-          </View>
+            {!!pickerOpts && pickerOpts.sort(positionSorter).map(mapper)}
+          </Form>
         </KeyboardAwareScrollView>
         {submitButton}
       </SafeAreaView>

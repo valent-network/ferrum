@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import UserAvatar from 'react-native-user-avatar';
 
@@ -12,6 +12,14 @@ import Navigation from 'services/Navigation';
 export default ({ chat }) => {
   const { t } = useTranslation();
   const firstUser = chat.chat_room_users[1] || chat.chat_room_users[0];
+  const goToChat = useCallback(() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id }), [chat.id]);
+  const lastMessage = chat.messages[0];
+  let chatPreview = [];
+
+  if (!lastMessage.system) chatPreview.push(`${lastMessage.user.name}: `);
+  chatPreview.push(lastMessage.text.replace(/\n/g, ' ').substring(0, 15));
+  if (lastMessage.text.length > 15) chatPreview.push('...');
+  chatPreview.push('\n');
 
   return (
     <View style={styles.mutualFriendBox} key={chat.id}>
@@ -21,13 +29,10 @@ export default ({ chat }) => {
         {chat.chat_room_users.map((cru) => cru.name).join(', ')}
       </Text>
       <Text note style={styles.smallFont}>
-        {!chat.messages[0].system && `${chat.messages[0].user.name}: `}
-        {chat.messages[0].text.replace(/\n/g, ' ').substring(0, 15)}
-        {chat.messages[0].text.length > 15 && '...'}
-        {'\n'}
+        {chatPreview.join('')}
       </Text>
-      <Button style={styles.button} onPress={() => Navigation.navigate('ChatRoomScreen', { chatRoomId: chat.id })}>
-        <Text style={{ color: activeTextColor }}>{t('ad.buttons.continueChat')}</Text>
+      <Button style={styles.button} onPress={goToChat}>
+        <Text style={styles.activeTextColor}>{t('ad.buttons.continueChat')}</Text>
       </Button>
     </View>
   );
@@ -55,4 +60,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: textColor,
   },
+  activeTextColor: { color: activeTextColor },
 });

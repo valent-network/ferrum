@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -25,10 +25,10 @@ function InvitationModal({ user, initiateChat, updateUserName, friend, visible, 
   const [name, setName] = useState(friend.name);
   const [userName, setUserName] = useState();
   const possibleIntroNames = [friend.user_name, friend.name].filter((n) => n && n.length);
-  const onFinish = () => {
+  const onFinish = useCallback(() => {
     initiateChat(adId, friend.user_id, name);
     onClose();
-  };
+  }, [adId, friend, name, onClose]);
   const userNamePresent = !!user.name?.length;
   useEffect(() => setName(friend.name), [friend.name]);
   return (
@@ -50,13 +50,13 @@ function InvitationModal({ user, initiateChat, updateUserName, friend, visible, 
               <UserAvatar size={48} name={friend.name || ''} src={friend.avatar} bgColor={activeColor} />
             </View>
             <Text style={styles.friendInfo}>
-              <Text style={{ color: textColor, fontSize: 22 }}>{friend.name}</Text>
+              <Text style={styles.friendNameText}>{friend.name}</Text>
               {'\n'}
               {friend.phone_number}
             </Text>
             {!userNamePresent && (
               <View style={styles.emptyUserNameContainer}>
-                <Text style={{ color: textColor }}>{t('chat.nameYourselfText')}</Text>
+                <Text style={styles.textColor}>{t('chat.nameYourselfText')}</Text>
                 <Item>
                   <Input
                     style={styles.nameInput}
@@ -73,7 +73,7 @@ function InvitationModal({ user, initiateChat, updateUserName, friend, visible, 
                   onPress={() => updateUserName(userName)}
                   style={!userName || !userName.length ? styles.disabledSubmitButton : styles.activeSubmitButton}
                 >
-                  <Text style={{ color: textColor }}>{t('chat.buttons.setMyName')}</Text>
+                  <Text style={styles.textColor}>{t('chat.buttons.setMyName')}</Text>
                 </Button>
               </View>
             )}
@@ -83,7 +83,7 @@ function InvitationModal({ user, initiateChat, updateUserName, friend, visible, 
               <TouchableOpacity key={n} onPress={() => setName(n)}>
                 <View style={styles.introduceNameContainer}>
                   <Icon name={name === n ? 'ellipse' : 'ellipse-outline'} style={styles.introduceOption} />
-                  <Text style={{ color: textColor }}>{n}</Text>
+                  <Text style={styles.textColor}>{n}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -106,7 +106,7 @@ function InvitationModal({ user, initiateChat, updateUserName, friend, visible, 
               style={userNamePresent && name ? styles.activeSubmitButton : styles.disabledSubmitButton}
               onPress={onFinish}
             >
-              <Text style={{ color: activeTextColor }}>{t('chat.buttons.addFriend')}</Text>
+              <Text style={styles.activeTextColor}>{t('chat.buttons.addFriend')}</Text>
             </Button>
           </View>
         </View>
@@ -169,6 +169,9 @@ const styles = StyleSheet.create({
     width: 48,
     alignSelf: 'center',
   },
+  activeTextColor: { color: activeTextColor },
+  textColor: { color: textColor },
+  friendNameText: { color: textColor, fontSize: 22 },
 });
 
 function mapStateToProps(state) {

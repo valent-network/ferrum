@@ -124,7 +124,7 @@ export default function AdScreen({
         <Header
           noShadow={true}
           iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
-          style={[styles.header]}
+          style={styles.header}
         >
           <Left>
             <AnimatedIcon
@@ -161,20 +161,28 @@ export default function AdScreen({
           {ad.my_ad && !actionsLoading && (
             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} contentContainerStyle={styles.actions}>
               {!ad.deleted && (
-                <Text style={styles.actionText} onPress={archiveAdAction}>
-                  <Icon style={styles.actionIcon} name="eye-off-outline" /> {t('actions.archive')}
-                </Text>
+                <>
+                  <Icon style={styles.actionIcon} name="eye-off-outline" />
+                  <Text style={styles.actionText} onPress={archiveAdAction}>
+                    {t('actions.archive')}
+                  </Text>
+                </>
               )}
               {ad.deleted && (
-                <Text style={styles.actionText} onPress={unarchiveAdAction}>
-                  <Icon style={styles.actionIcon} name="eye-outline" /> {t('actions.unarchive')}
-                </Text>
+                <>
+                  <Icon style={styles.actionIcon} name="eye-outline" />
+                  <Text style={styles.actionText} onPress={unarchiveAdAction}>
+                    {t('actions.unarchive')}
+                  </Text>
+                </>
               )}
+              <Icon style={styles.actionIcon} name="trash-outline" />
               <Text style={styles.actionText} onPress={deleteAdAction}>
-                <Icon style={styles.actionIcon} name="trash-outline" /> {t('actions.delete')}
+                {t('actions.delete')}
               </Text>
+              <Icon style={styles.actionIcon} name="create-outline" />
               <Text style={styles.actionText} onPress={editAdAction}>
-                <Icon style={styles.actionIcon} name="create-outline" /> {t('actions.edit')}
+                {t('actions.edit')}
               </Text>
             </ScrollView>
           )}
@@ -185,7 +193,7 @@ export default function AdScreen({
           <View style={styles.oldPricesContainer}>
             {ad.prices.map((v, index) => (
               <Text key={v[1]} style={styles.priceVersion}>
-                {v[1]} ${ad.prices.length === index + 1 ? null : ', '}
+                {`${v[1]} ${ad.prices.length === index + 1 ? null : ', '}`}
               </Text>
             ))}
           </View>
