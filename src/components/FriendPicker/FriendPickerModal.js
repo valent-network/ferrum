@@ -1,39 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Icon } from 'native-base';
 
 import UserContactsList from 'components/UserContacts/UserContactsList';
+import InvitationModal from 'components/Chat/InvitationModal';
 import UsersListItem from './UsersListItem';
 
 import { loadMoreUserContacts, getAll } from 'actions/userContacts';
 
 import { textColor, secondaryColor } from 'colors';
 
-function FriendPickerModal({ userContacts, isLoading, onRefresh, loadMoreUserContacts, onClose, onUserPress }) {
+function FriendPickerModal({
+  userContacts,
+  isLoading,
+  onRefresh,
+  loadMoreUserContacts,
+  visible,
+  adId,
+  onSubmit,
+  onClose,
+}) {
+  const [invitationVisible, setInvitationVisible] = useState(false);
+  const [friend, setFriend] = useState({});
+  const onUserPress = (f) => {
+    onClose();
+    setFriend(f);
+    setInvitationVisible(true);
+  };
   const renderItem = ({ item, index }) => <UsersListItem contact={item} onUserPress={onUserPress} />;
 
   return (
-    <Modal animationType="slide" transparent={true} visible={true} animationType="slide">
-      <View style={styles.modalWrapper} bounces={false} extraHeight={96}>
-        <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
-        <View style={styles.wrp}>
-          <View style={styles.modalControlsContainer}>
-            <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />
-          </View>
+    <>
+      <Modal animationType="slide" transparent={true} visible={visible} animationType="slide">
+        <View style={styles.modalWrapper} bounces={false} extraHeight={96}>
+          <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
+          <View style={styles.wrp}>
+            <View style={styles.modalControlsContainer}>
+              <Icon name="close-outline" onPress={onClose} style={styles.closeIcon} />
+            </View>
 
-          <View style={styles.contentContainer}>
-            <UserContactsList
-              userContacts={userContacts}
-              isLoading={isLoading}
-              loadMoreUserContacts={loadMoreUserContacts}
-              onRefresh={onRefresh}
-              renderItem={renderItem}
-            />
+            <View style={styles.contentContainer}>
+              <UserContactsList
+                userContacts={userContacts}
+                isLoading={isLoading}
+                loadMoreUserContacts={loadMoreUserContacts}
+                onRefresh={onRefresh}
+                renderItem={renderItem}
+              />
+            </View>
           </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+      <InvitationModal
+        visible={invitationVisible}
+        friend={friend}
+        adId={adId}
+        onClose={() => setInvitationVisible(false)}
+      />
+    </>
   );
 }
 

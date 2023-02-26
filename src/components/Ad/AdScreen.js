@@ -142,7 +142,7 @@ export default function AdScreen({
             <AnimatedIcon
               onPress={favAction}
               style={ad.favorite ? styles.activeColor : { color: textInterpolation }}
-              name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
+              name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
             />
           </Right>
         </Header>
@@ -194,7 +194,7 @@ export default function AdScreen({
             (askFriendsIsLoading ? (
               <Spinner color={spinnerColor} />
             ) : (
-              <AskFriend ad={ad} currentAdFriends={currentAdFriends} />
+              <AskFriend ad={ad} friends={currentAdFriends.friends} chats={currentAdFriends.chats} />
             ))}
 
           {ad.deleted && (

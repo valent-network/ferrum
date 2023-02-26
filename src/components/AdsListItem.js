@@ -91,11 +91,14 @@ class AdsListItem extends React.PureComponent {
               <Text style={styles.option}>{short_description}</Text>
 
               <View style={styles.actionsContainer}>
-                <Icon
-                  name={ad.favorite ? 'heart-circle-sharp' : 'heart-circle-outline'}
-                  onPress={this.favAction}
-                  style={[{}, ad.favorite ? { color: activeColor } : { color: textColor }]}
-                />
+                <View style={{ flexDirection: 'row' }}>
+                  <Icon
+                    name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
+                    onPress={this.favAction}
+                    style={[{ marginRight: 16 }, ad.favorite ? { color: activeColor } : { color: textColor }]}
+                  />
+                  <Icon name="paper-plane" onPress={this.props.openChat} style={{ color: textColor }} />
+                </View>
                 {ad.region ? (
                   <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
                 ) : (

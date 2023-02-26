@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { secondaryColor, activeColor, primaryColor, textColor, activeTextColor } from 'colors';
 import { invitationalSMS } from 'utils';
 
-export default ({ friend, prepareInvitation }) => {
+export default ({ friend, onPress }) => {
   const { t } = useTranslation();
 
   return (
@@ -30,9 +30,7 @@ export default ({ friend, prepareInvitation }) => {
       <Button
         style={styles.button}
         onPress={
-          friend.user_id
-            ? () => prepareInvitation(friend)
-            : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
+          friend.user_id ? () => onPress(friend) : () => invitationalSMS(friend.phone_number, t('ad.invitationText'))
         }
       >
         <Text style={{ color: activeTextColor }}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FlatList, RefreshControl } from 'react-native';
@@ -9,6 +9,7 @@ import { activeColor, textColor, spinnerColor } from 'colors';
 
 import AdsListItem from './AdsListItem';
 import ListNotFound from './ListNotFound';
+import FriendPickerModal from 'components/FriendPicker/FriendPickerModal';
 
 import { loadMoreAds as loadMoreAdsFavorite, getAll as getAllFavorite } from 'actions/favoriteAds';
 import { loadMoreAds as loadMoreAdsMyAds, getAll as getAllMyAds } from 'actions/myAds';
@@ -16,69 +17,91 @@ import { loadMoreAds as loadMoreAdsVisited, getAll as getAllVisited } from 'acti
 
 import { likeAd, unlikeAd } from 'actions/favoriteAds';
 
-class AdsList extends React.PureComponent {
-  _keyExtractor = (item) => item.id.toString();
+// https://github.com/facebook/react-native/issues/26610
+const flatListBugFix = { right: 1 };
 
-  coverPhotos = (coverPhotos = this.props.ads.flatMap((ad) =>
+const _keyExtractor = (item) => item.id.toString();
+
+const coverPhotos = (ads) =>
+  ads.flatMap((ad) =>
     ad.images
       .filter((i) => i.position === 0)
       .map((i) => {
         return { uri: i.url };
       }),
-  ));
+  );
 
-  _onEndReached = async () => {
-    this.props.fromFeed ? this.props.loadMoreFeedAds() : this.props.loadMoreAds[this.props.currentTab]();
-  };
-
-  componentDidUpdate = () => {
-    FastImage.preload(this.coverPhotos);
-  };
-
-  componentDidMount = () => {
-    FastImage.preload(this.coverPhotos);
-  };
-
-  refreshControl = (isLoading) => (
+function AdsList({
+  ads,
+  isLoading,
+  fromFeed,
+  initialContactsProcessing,
+  currentTab,
+  loadMoreFeedAds,
+  onRefreshFeed,
+  onRefresh,
+  onAdOpened,
+  likeAd,
+  unlikeAd,
+  loadMoreAds,
+}) {
+  const [pickerVisible, setPickerVisible] = useState(false);
+  const [currentAdId, setCurrentAdId] = useState();
+  const refreshControl = (
     <RefreshControl
       refreshing={isLoading}
       tintColor={spinnerColor}
-      onRefresh={this.props.fromFeed ? this.props.onRefreshFeed : this.props.onRefresh[this.props.currentTab]}
+      onRefresh={fromFeed ? onRefreshFeed : onRefresh[currentTab]}
     />
   );
 
-  // https://github.com/facebook/react-native/issues/26610
-  flatListBugFix = { right: 1 };
+  const _onEndReached = async () => {
+    fromFeed ? loadMoreFeedAds() : loadMoreAds[currentTab]();
+  };
 
-  _renderItem = ({ item, index }) => (
-    <AdsListItem ad={item} onPress={this.props.onAdOpened} likeAd={this.props.likeAd} unlikeAd={this.props.unlikeAd} />
+  const openPicker = (adId) => {
+    setCurrentAdId(adId);
+    setPickerVisible(true);
+  };
+
+  const _renderItem = ({ item, index }) => (
+    <AdsListItem
+      ad={item}
+      onPress={onAdOpened}
+      likeAd={likeAd}
+      unlikeAd={unlikeAd}
+      openChat={() => openPicker(item.id)}
+    />
   );
 
-  render() {
-    const { ads, isLoading, fromFeed, initialContactsProcessing } = this.props;
+  useEffect(() => {
+    FastImage.preload(coverPhotos(ads));
+  }, [ads]);
 
-    if (fromFeed && initialContactsProcessing) return null;
+  if (fromFeed && initialContactsProcessing) return null;
 
-    if (ads.length === 0) {
-      return isLoading ? (
-        <Spinner color={spinnerColor} />
-      ) : (
-        <ListNotFound refreshControl={this.refreshControl(isLoading)} fromFeed={fromFeed} />
-      );
-    }
+  if (ads.length === 0) {
+    return isLoading ? (
+      <Spinner color={spinnerColor} />
+    ) : (
+      <ListNotFound refreshControl={refreshControl} fromFeed={fromFeed} />
+    );
+  }
 
-    return (
+  return (
+    <>
       <FlatList
         data={ads}
         initialNumToRender={3}
-        scrollIndicatorInsets={this.flatListBugFix}
-        refreshControl={this.refreshControl(isLoading)}
-        keyExtractor={this._keyExtractor}
-        onEndReached={this._onEndReached}
-        renderItem={this._renderItem}
+        scrollIndicatorInsets={flatListBugFix}
+        refreshControl={refreshControl}
+        keyExtractor={_keyExtractor}
+        onEndReached={_onEndReached}
+        renderItem={_renderItem}
       />
-    );
-  }
+      <FriendPickerModal visible={pickerVisible} adId={currentAdId} onClose={() => setPickerVisible(false)} />
+    </>
+  );
 }
 
 function mapStateToProps(state) {

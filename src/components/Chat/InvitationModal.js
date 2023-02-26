@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import UserAvatar from 'react-native-user-avatar';
 
 import { updateUserName } from 'actions/profile';
+import { initiateChatRoom } from 'actions/chat';
 
 import {
   textColor,
@@ -19,19 +20,19 @@ import {
   activeTextColor,
 } from 'colors';
 
-function InvitationModal({ user, updateUserName, friend, onClose, onSubmit }) {
+function InvitationModal({ user, initiateChat, updateUserName, friend, visible, onClose, adId }) {
   const { t } = useTranslation();
   const [name, setName] = useState(friend.name);
   const [userName, setUserName] = useState();
   const possibleIntroNames = [friend.user_name, friend.name].filter((n) => n && n.length);
   const onFinish = () => {
-    onSubmit(friend.user_id, name);
+    initiateChat(adId, friend.user_id, name);
     onClose();
   };
   const userNamePresent = !!user.name?.length;
   useEffect(() => setName(friend.name), [friend.name]);
   return (
-    <Modal animationType="slide" transparent={true} visible={true} animationType="slide">
+    <Modal animationType="slide" transparent={true} visible={visible} animationType="slide">
       <KeyboardAwareScrollView
         contentContainerStyle={styles.modalWrapper}
         bounces={false}
@@ -179,6 +180,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateUserName: (name) => dispatch(updateUserName(name)),
+    initiateChat: (adId, userId, name) => dispatch(initiateChatRoom(adId, userId, name)),
   };
 }
 

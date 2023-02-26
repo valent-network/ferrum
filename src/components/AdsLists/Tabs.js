@@ -24,7 +24,7 @@ export default function Tabs({ currentTab, setCurrentTab }) {
         style={currentTab == 'favoriteAds' ? styles.activeTabButton : styles.tabButton}
         active={currentTab == 'favoriteAds'}
       >
-        <Icon style={{ color: currentTab === 'favoriteAds' ? activeColor : textColor }} name="heart-circle-outline" />
+        <Icon style={{ color: currentTab === 'favoriteAds' ? activeColor : textColor }} name="heart-outline" />
       </Button>
       <Button
         onPress={() => setCurrentTab('myAds')}

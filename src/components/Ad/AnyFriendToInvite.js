@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { secondaryColor, activeColor, textColor, activeTextColor } from 'colors';
 
-export default ({ openFriendPickerModal }) => {
+export default ({ onPress }) => {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ export default ({ openFriendPickerModal }) => {
       <Text note style={styles.smallFont}>
         {`\n${t('ad.discussWithFriend')}\n`}
       </Text>
-      <Button style={styles.button} onPress={openFriendPickerModal}>
+      <Button style={styles.button} onPress={onPress}>
         <Text style={{ color: activeTextColor }}>{t('ad.buttons.selectFriend')}</Text>
       </Button>
     </View>
