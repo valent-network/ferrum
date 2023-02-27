@@ -153,9 +153,11 @@ function mapStateToProps(state) {
     max_price: state.filters.max_price,
     filtersPresent: Object.values(state.filters).filter((f) => f.length > 0).length > 0,
     currentCategory: state.settings.categories.filter((c) => c.id == state.filters.category_id)[0],
-    categoriesValues: state.settings.categories?.map((c) => {
-      return { name: c.name, id: c.id };
-    }),
+    categoriesValues: state.settings.categories
+      ?.sort((a, b) => a.position - b.position)
+      .map((c) => {
+        return { name: c.name, id: c.id };
+      }),
     modalVisible: state.feed.modalOpened,
   };
 }
