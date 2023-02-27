@@ -35,6 +35,7 @@ import { getCachedLocale, getAccessToken, getWizardDone, getPushToken } from 'se
 
 import API from 'services/API';
 import { serverChannel } from 'services/ServerChannel';
+import deepLinksRouter from 'services/deepLinksRouter';
 
 import Notification from 'services/Notification';
 
@@ -49,16 +50,6 @@ class Root extends React.Component {
   }
 
   appRef = (navigatorRef) => Navigation.setTopLevelNavigator(navigatorRef);
-
-  handleDeepLink(e) {
-    const route = e.url.replace(/.*?:\/\//g, '');
-
-    if (/^visited\/ads\/\d+\/$/i.test(route)) {
-      const adId = route.replace(/[^\d]/gi, '');
-      Navigation.navigate('AdsLists');
-      Navigation.push('Ad', { id: adId });
-    }
-  }
 
   pushNotificationRouter = (notification) => {
     switch (notification.data.notification_action) {
@@ -215,13 +206,13 @@ class Root extends React.Component {
       this.refreshAndPopualteApp();
     }
 
-    Linking.addEventListener('url', this.handleDeepLink);
+    Linking.addEventListener('url', deepLinksRouter);
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.refreshApp);
     serverChannel.disconnect();
-    Linking.removeEventListener('url', this.handleDeepLink);
+    Linking.removeEventListener('url', deepLinksRouter);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

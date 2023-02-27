@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Platform, Linking, Animated, Appearance } from 'react-native';
 
 import i18n from 'services/i18n';
+import deepLinksRouter from 'services/deepLinksRouter';
 
 export const notification = { ref: {} };
 
@@ -129,3 +130,11 @@ export function animateHeaderHelper() {
 }
 
 export const LOGO_URL = 'https://assets.recar.io/logo.png';
+
+export const parseChatMessagesPatterns = (linkStyle) => [
+  {
+    type: 'url',
+    style: linkStyle,
+    onPress: (url, index) => (url.match(/recar\.io/g) ? deepLinksRouter({ url }) : Linking.openURL(url)),
+  },
+];

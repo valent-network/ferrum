@@ -33,7 +33,7 @@ class AdScreenContainer extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const { ad, navigation, shouldPopToTopOnFocus, loadAd, isLoading } = this.props;
+    const { navigation, shouldPopToTopOnFocus } = this.props;
 
     this.focusListener = navigation.addListener('didFocus', () => {
       if (shouldPopToTopOnFocus) {
@@ -42,11 +42,11 @@ class AdScreenContainer extends React.PureComponent {
       }
     });
 
-    if (isLoading || shouldPopToTopOnFocus) return;
+    // if (isLoading || shouldPopToTopOnFocus) return;
 
-    if (parseInt(ad.id) == parseInt(navigation.state.params.id)) return;
+    // if (parseInt(ad.id) == parseInt(navigation.state.params.id)) return;
 
-    loadAd(navigation.state.params.id);
+    // loadAd(navigation.state.params.id);
   }
 
   componentWillUnmount() {

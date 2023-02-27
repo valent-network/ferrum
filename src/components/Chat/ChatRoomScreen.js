@@ -11,7 +11,7 @@ import en from 'dayjs/locale/en-gb';
 import { SET_CURRENT_CHAT, RESET_CURRENT_CHAT } from 'actions/types';
 import { postMessage, getMessages, deleteMessage, onMessageLongPress } from 'actions/chat';
 import { textColor, primaryColor, secondaryColor, spinnerColor } from 'colors';
-import { localizedSystemMessage } from 'utils';
+import { localizedSystemMessagem, parseChatMessagesPatterns } from 'utils';
 import { serverChannel } from 'services/ServerChannel';
 
 import { commonGiftedChatOptions } from './commonGiftedChatOptions';
@@ -47,6 +47,7 @@ function ChatRoomScreen({
 
       return <SystemMessage {...props} />;
     },
+    parsePatterns: parseChatMessagesPatterns,
   };
 
   const onConnect = useCallback(() => {
