@@ -154,6 +154,11 @@ export default function AdScreen({
         scrollEventThrottle={16}
         onScroll={onScroll}
       >
+        {ad.deleted && (
+          <View style={styles.deletedContainer} pointerEvents="none">
+            <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
+          </View>
+        )}
         <ImageGallery ad={ad} badgeStyle={styles.badgeStyleForAdScreen} withModal={true} />
         <View style={styles.contentContainer}>
           {ad.my_ad && actionsLoading && <Spinner color={spinnerColor} />}
@@ -204,12 +209,6 @@ export default function AdScreen({
             ) : (
               <AskFriend ad={ad} friends={currentAdFriends.friends} chats={currentAdFriends.chats} />
             ))}
-
-          {ad.deleted && (
-            <View style={styles.deletedContainer}>
-              <Text style={styles.deleted}>{t('ad.deleted')}</Text>
-            </View>
-          )}
 
           {Object.keys(ad.options).length > 0 && <OptionsList ad={ad} />}
 

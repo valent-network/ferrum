@@ -15,11 +15,14 @@ import {
   activeColor,
   errorColor,
   superActiveColor,
+  activeTextColor,
 } from 'colors';
 
 import ImageGallery from 'components/Ad/ImageGallery';
 
 import API from 'services/API';
+
+import { AD_IMAGE_HEIGHT } from 'utils';
 
 const updatedAtFormatted = (updatedAtRaw, language) => {
   let updatedAt = dayjs(dayjs().startOf('day')).isBefore(updatedAtRaw)
@@ -73,17 +76,21 @@ export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openChat })
   return (
     <View style={styles.mainContainer}>
       <View style={styles.imagePreviewContainer}>
-        <ImageGallery ad={ad} onPress={goToAd} withModal={false} />
-        {!ad.image && <View style={styles.imagePlaceholder}></View>}
+        {ad.deleted && (
+          <View style={styles.deletedContainer} pointerEvents="none">
+            <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
+          </View>
+        )}
+        {!ad.image && (
+          <TouchableOpacity activeOpacity={1} onPress={goToAd}>
+            <View style={styles.imagePlaceholder}></View>
+          </TouchableOpacity>
+        )}
+        {ad.image && <ImageGallery ad={ad} onPress={goToAd} withModal={false} />}
         <View style={styles.detailsContainer}>
           <TouchableOpacity activeOpacity={1} onPress={goToAd}>
             <View style={styles.detailsRow}>
               <Text style={styles.title}>{ad.title}</Text>
-              {ad.deleted && (
-                <View style={styles.deletedContainer}>
-                  <Text style={styles.deletedText}>{t('ad.deleted')}</Text>
-                </View>
-              )}
             </View>
             <View style={styles.detailsRow}>
               <Text style={styles.price}>{`${ad.price} ${ad.category_currency}`}</Text>
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imagePreviewContainer: {
-    flex: 1,
+    width: '100%',
     backgroundColor: 'transparent',
     borderRadius: 0,
   },
@@ -149,11 +156,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   mainContainer: {
-    height: 500,
-    marginBottom: 24,
     padding: 0,
     paddingRight: 0,
     backgroundColor: primaryColor,
+    marginBottom: 24,
   },
   actionsContainer: {
     color: primaryColor,
@@ -162,23 +168,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   deletedContainer: {
-    backgroundColor: secondaryColor,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    width: '100%',
+    position: 'absolute',
+    zIndex: 10,
+    height: AD_IMAGE_HEIGHT,
     justifyContent: 'center',
-    marginRight: 0,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    alignItems: 'center',
   },
-  deletedText: {
-    color: errorColor,
-    fontSize: 12,
-  },
+  deletedText: { color: activeTextColor, fontSize: 48, textTransform: 'uppercase' },
   detailsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   imagePlaceholder: {
     width: '100%',
-    height: '100%',
+    height: AD_IMAGE_HEIGHT,
     backgroundColor: disabledColor,
   },
   textColor: { color: textColor },

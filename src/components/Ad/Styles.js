@@ -45,7 +45,11 @@ export default styles = StyleSheet.create({
     borderRadius: 4,
   },
   contentContainer: {
-    padding: 12,
+    padding: 16,
+    backgroundColor: primaryColor,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    marginTop: -16,
   },
   title: {
     textAlign: 'left',
@@ -91,16 +95,16 @@ export default styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
-  deleted: {
-    textAlign: 'center',
-    paddingVertical: 16,
-    color: deletedColor,
-  },
   deletedContainer: {
-    backgroundColor: secondaryColor,
-    borderRadius: 4,
-    marginTop: 8,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    width: '100%',
+    position: 'absolute',
+    zIndex: 10,
+    height: AD_IMAGE_HEIGHT,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  deletedText: { color: activeTextColor, fontSize: 48, textTransform: 'uppercase' },
   descriptionText: {
     fontSize: 15,
     lineHeight: 15 * 1.5,
@@ -185,7 +189,7 @@ export default styles = StyleSheet.create({
   imageModalIndex: { color: textColor },
   imageModalIndexCloseIcon: { color: textColor },
   imageModalCloseIcon: { color: textColor },
-  badgeStyleForAdScreen: { right: 8, top: 312, position: 'absolute' },
+  badgeStyleForAdScreen: { right: 8, top: 296, position: 'absolute' },
   imageProcessingPlaceholder: {
     height: AD_IMAGE_HEIGHT,
     backgroundColor: secondaryColor,

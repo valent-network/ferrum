@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
   wrp: {
     backgroundColor: secondaryColor,
     paddingVertical: 16,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
     height: '95%',
   },
   emptyArea: {
