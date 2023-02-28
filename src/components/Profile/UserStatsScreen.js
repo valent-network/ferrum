@@ -89,7 +89,7 @@ UserStatsScreen.navigationOptions = ({ navigation }) => {
       <>
         <Title style={{ color: textColor }}>{i18n.t('nav.titles.userStats')}</Title>
         <Subtitle style={{ color: textColor }}>
-          {dayjs(stats.updated_at).locale(i18n.language).format('D MMMM, HH:mm')}
+          {dayjs(stats.updated_at).locale(i18n.language).format('D MMMM')}
         </Subtitle>
       </>
     ),

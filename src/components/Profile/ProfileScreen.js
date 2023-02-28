@@ -214,7 +214,7 @@ class ProfileScreen extends React.PureComponent {
                   <Text style={styles.readOnlyText}>{user.phoneNumber}</Text>
                 </ListItem>
 
-                {!!user.stats && !!Object.keys(user.stats).length > 0 && (
+                {!!user.stats?.updated_at && (
                   <ListItem
                     style={[styles.itemContainer, styles.withBorderBottom]}
                     noIndent
