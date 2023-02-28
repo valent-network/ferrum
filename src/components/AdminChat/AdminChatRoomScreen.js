@@ -88,10 +88,6 @@ function AdminChatRoomScreen({
     };
   }, [chatRoomId]);
 
-  if (!chat.id || !chatRoomId || typeof chatRoomId === 'undefined' || typeof chat.id === 'undefined') {
-    return <SpinnerScreen />;
-  }
-
   return (
     <Container style={styles.mainContainer}>
       <GiftedChat {...commonGiftedChatOptions} {...giftedChatOptions} />
@@ -142,20 +138,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: secondaryColor,
   },
-  spinnerContainer: {
-    backgroundColor: primaryColor,
-  },
   title: {
     color: textColor,
   },
 });
-
-const SpinnerScreen = () => {
-  return (
-    <Container style={styles.spinnerContainer}>
-      <Content>
-        <Spinner color={spinnerColor} />
-      </Content>
-    </Container>
-  );
-};

@@ -39,6 +39,7 @@ export default function currentChat(state = initialState, action = {}) {
 
       return {
         ...state,
+        messages: state.messages.filter((msg) => parseInt(msg.chat_room_id) === parseInt(action.chatRoomId)),
         id: parseInt(action.chatRoomId),
       };
     case ActionTypes.ADD_MESSAGES:
@@ -98,7 +99,7 @@ export default function currentChat(state = initialState, action = {}) {
         };
       }
     case ActionTypes.RESET_CURRENT_CHAT:
-      return initialState;
+      return { ...initialState, messages: state.messages };
     case ActionTypes.SIGN_OUT_SUCCESS:
       return initialState;
     default:

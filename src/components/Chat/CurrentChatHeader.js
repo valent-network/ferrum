@@ -12,18 +12,14 @@ import { spinnerColor, textColor } from 'colors';
 import Navigation from 'services/Navigation';
 
 const HeaderTitle = ({ chat, isLoading, navigation }) => {
-  if (!chat.id) {
-    return null;
+  if (isLoading || typeof chat.id === 'undefined' || !chat.id) {
+    return <Spinner color={spinnerColor} />;
   }
 
   const { t } = useTranslation();
   const chatRoomUsersCount = chat.chat_room_users?.length || 0;
   const membersWord = decOfNum(chatRoomUsersCount, [t('chat.oneMember'), t('chat.twoMembers'), t('chat.threeMembers')]);
   onPress = () => Navigation.push('ChatRoomSettingsScreen', { chat: chat });
-
-  if (isLoading) {
-    return <Spinner color={spinnerColor} />;
-  }
 
   return (
     <TouchableOpacity onPress={onPress}>
