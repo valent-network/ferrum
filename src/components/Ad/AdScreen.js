@@ -198,7 +198,7 @@ export default function AdScreen({
           <View style={styles.oldPricesContainer}>
             {ad.prices.map((v, index) => (
               <Text key={v[1]} style={styles.priceVersion}>
-                {`${v[1]} ${ad.prices.length === index + 1 ? null : ', '}`}
+                {`${v[1]} ${ad.prices.length === index + 1 ? '' : ', '}`}
               </Text>
             ))}
           </View>
