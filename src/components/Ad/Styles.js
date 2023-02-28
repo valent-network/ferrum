@@ -49,7 +49,8 @@ export default styles = StyleSheet.create({
     backgroundColor: primaryColor,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    marginTop: -16,
+    marginTop: -24,
+    zIndex: 100,
   },
   title: {
     textAlign: 'left',
@@ -64,6 +65,7 @@ export default styles = StyleSheet.create({
   statBlock: {
     flexDirection: 'row',
     marginRight: 16,
+    alignItems: 'center',
   },
   stats: {
     padding: 16,
@@ -120,6 +122,7 @@ export default styles = StyleSheet.create({
     borderRadius: 4,
     minWidth: '100%',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   actionText: {
     color: activeColor,
@@ -189,7 +192,7 @@ export default styles = StyleSheet.create({
   imageModalIndex: { color: textColor },
   imageModalIndexCloseIcon: { color: textColor },
   imageModalCloseIcon: { color: textColor },
-  badgeStyleForAdScreen: { right: 8, top: 296, position: 'absolute' },
+  badgeStyleForAdScreen: { right: 8, top: 288, position: 'absolute' },
   imageProcessingPlaceholder: {
     height: AD_IMAGE_HEIGHT,
     backgroundColor: secondaryColor,

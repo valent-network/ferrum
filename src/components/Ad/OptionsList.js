@@ -17,9 +17,9 @@ class OptionsList extends React.PureComponent {
         {options &&
           Object.keys(options).map((opt, index) => (
             <View key={index} style={styles.optionContainer}>
-              <Text style={styles.optionType}>{`${options[opt][0]}:`}</Text>
+              <Text style={styles.optionType}>{`${options[opt][0]}: `}</Text>
               <Text selectable style={styles.optionValue}>
-                {` ${options[opt][1]}`}
+                {options[opt][1]}
               </Text>
             </View>
           ))}
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     padding: 8,
     color: textColor,
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   sourceIcon: {
     fontSize: 15,
