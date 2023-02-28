@@ -67,7 +67,7 @@ export default {
       },
       from: 'from',
       to: 'to',
-      submit: 'Search',
+      submit: 'Show',
     },
   },
   ad: {

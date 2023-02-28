@@ -67,7 +67,7 @@ export default {
       },
       from: 'від',
       to: 'до',
-      submit: 'Шукати',
+      submit: 'Показати',
     },
   },
   ad: {
@@ -248,7 +248,7 @@ export default {
     didntReceive: 'Не отримали код?',
     tryAgain: 'Відправити знову',
     buttons: {
-      getCode: 'Отримати Код',
+      getCode: 'Отримати код',
       signIn: 'Увійти',
     },
     headers: {

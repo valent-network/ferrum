@@ -41,10 +41,10 @@ export default StyleSheet.create({
   modalControlsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 48,
     paddingHorizontal: 16,
-    borderRadius: 16,
+    paddingTop: 16,
   },
+  emptyArea: { height: '100%' },
   closeIcon: {
     color: textColor,
     fontSize: 48,
@@ -79,7 +79,7 @@ export default StyleSheet.create({
   activeFilterBox: {
     borderColor: activeBorderColor,
     borderWidth: 1,
-    borderRadius: 32,
+    borderRadius: 8,
     padding: 8,
     backgroundColor: activeColor,
     flexDirection: 'row',
@@ -90,7 +90,7 @@ export default StyleSheet.create({
   filterBox: {
     borderColor: activeColor,
     borderWidth: 1,
-    borderRadius: 32,
+    borderRadius: 8,
     padding: 8,
     backgroundColor: secondaryColor,
     flexDirection: 'row',
@@ -119,7 +119,7 @@ export default StyleSheet.create({
   },
   safeArea: {
     backgroundColor: secondaryColor,
-    height: '95%',
+    height: '85%',
     marginTop: 'auto',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

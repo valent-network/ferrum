@@ -93,7 +93,7 @@ UserContactsListItem.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: secondaryColor,
     backgroundColor: primaryColor,
   },

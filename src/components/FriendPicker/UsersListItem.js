@@ -60,7 +60,7 @@ UsersListItem.propTypes = {};
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0,
     borderBottomColor: primaryColor,
     backgroundColor: secondaryColor,
   },

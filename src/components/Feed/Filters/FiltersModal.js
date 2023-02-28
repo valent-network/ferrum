@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Modal, SafeAreaView } from 'react-native';
+import { Modal, SafeAreaView, TouchableOpacity } from 'react-native';
 import { View, Text, Item, Icon, Input, Button, H1, H2, H3, Form, Label, Content, Spinner } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useTranslation } from 'react-i18next';
@@ -91,6 +91,7 @@ const FiltersModal = ({
 
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <TouchableOpacity style={styles.emptyArea} onPress={onClose}></TouchableOpacity>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.modalControlsContainer}>
           <H1 style={styles.filtersHeader}>{t('feed.filters.headers.main')}</H1>

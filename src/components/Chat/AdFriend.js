@@ -60,7 +60,7 @@ export default function AdFriend({ friend, chat, openInviteFriendModal, friendPh
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: secondaryColor,
     padding: 0,
     margin: 0,

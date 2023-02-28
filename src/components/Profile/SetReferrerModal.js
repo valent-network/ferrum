@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    height: '95%',
+    height: '85%',
   },
   emptyArea: {
     height: '100%',

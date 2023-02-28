@@ -20,8 +20,10 @@ const FiltersToggler = ({ filtersPresent, switchModalVisible }) => {
 };
 
 function mapStateToProps(state) {
+  const searchFilters = (({ query, hops_count, ...o }) => o)(state.filters);
+
   return {
-    filtersPresent: Object.values(state.filters).filter((f) => f.length > 0).length > 0,
+    filtersPresent: Object.values(searchFilters).filter((f) => f.length > 0).length > 0,
   };
 }
 

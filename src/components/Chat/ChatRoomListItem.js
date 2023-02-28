@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   chatRow: {
     paddingBottom: 8,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: secondaryColor,
     flex: 1,
     backgroundColor: primaryColor,
