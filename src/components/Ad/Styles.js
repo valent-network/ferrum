@@ -179,7 +179,7 @@ export default styles = StyleSheet.create({
     borderRadius: 16,
   },
   imageGalleryBadgeText: {
-    color: activeTextColor,
+    color: primaryColor,
     fontSize: 14,
   },
   imagePlaceholder: {
