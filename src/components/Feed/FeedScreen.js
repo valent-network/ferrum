@@ -81,7 +81,7 @@ const FeedScreen = ({
         fromFeed={true}
       />
       <FiltersModal />
-      <HopsFilter onPress={applyHopsCountFilter} hopsCount={hopsCount} />
+      <HopsFilter isLoading={isLoading} onPress={applyHopsCountFilter} hopsCount={hopsCount} />
     </Container>
   );
 };

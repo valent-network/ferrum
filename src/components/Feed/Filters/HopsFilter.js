@@ -3,10 +3,10 @@ import { Platform, StyleSheet, TouchableOpacity, View, Text } from 'react-native
 
 import { activeBorderColor, activeColor, secondaryColor, activeTextColor, primaryColor } from 'colors';
 
-export default function HopsFilter({ hopsCount, onPress }) {
+export default function HopsFilter({ isLoading, hopsCount, onPress }) {
   return (
-    <TouchableOpacity activeOpacity={1} onPress={onPress} style={styles.mainContainer}>
-      <View key={'hopsCountF'} style={[hopsCount >= 0 ? styles.activeFilterBox : styles.filterBox]}>
+    <TouchableOpacity activeOpacity={0.5} onPress={isLoading ? null : onPress} style={styles.mainContainer}>
+      <View key={'hopsCountF'} style={[{ opacity: isLoading ? 0.5 : 1 }, styles.contentContainer]}>
         <Text style={hopsCount >= 0 ? activeHandStyle : handStyle}>🤝</Text>
         <Text style={hopsCount >= 1 ? activeHandStyle : handStyle}>🤝</Text>
       </View>
@@ -15,19 +15,8 @@ export default function HopsFilter({ hopsCount, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { zIndex: 100000, marginRight: 0, position: 'absolute', bottom: 8, right: 0, zIndex: 1000 },
-  activeFilterBox: {
-    borderColor: activeTextColor,
-    borderWidth: 1,
-    borderRadius: 32,
-    padding: 8,
-    backgroundColor: activeColor,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 8,
-  },
-  filterBox: {
+  mainContainer: { marginRight: 0, position: 'absolute', bottom: 8, right: 0, zIndex: 1000 },
+  contentContainer: {
     borderColor: activeTextColor,
     borderWidth: 1,
     borderRadius: 32,

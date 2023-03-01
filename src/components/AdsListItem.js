@@ -189,5 +189,5 @@ const styles = StyleSheet.create({
   textColor: { color: textColor },
   activeColor: { color: activeColor },
   favIcon: { marginRight: 16, color: textColor },
-  activeFavIcon: { color: activeColor, marginRight: 16 },
+  activeFavIcon: { color: superActiveColor, marginRight: 16 },
 });

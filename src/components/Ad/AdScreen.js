@@ -133,16 +133,18 @@ export default function AdScreen({
               onPress={Navigation.popToTop}
             />
           </Left>
+          <Body>
+            <AnimatedIcon
+              onPress={favAction}
+              style={ad.favorite ? styles.superActiveColor : { color: textInterpolation }}
+              name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
+            />
+          </Body>
           <Right style={styles.actionButtonsContainer}>
             <AnimatedIcon
               style={{ color: textInterpolation, marginRight: 16 }}
               onPress={shareAction}
               name="share-outline"
-            />
-            <AnimatedIcon
-              onPress={favAction}
-              style={ad.favorite ? styles.activeColor : { color: textInterpolation }}
-              name={ad.favorite ? 'heart-sharp' : 'heart-outline'}
             />
           </Right>
         </Header>

@@ -135,6 +135,9 @@ export default styles = StyleSheet.create({
   activeColor: {
     color: activeColor,
   },
+  superActiveColor: {
+    color: superActiveColor,
+  },
   activeTextColor: {
     color: activeTextColor,
   },

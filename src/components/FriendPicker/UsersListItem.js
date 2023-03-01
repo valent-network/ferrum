@@ -49,7 +49,7 @@ export default class UsersListItem extends React.PureComponent {
           <Text style={styles.contactPhoneStyle}>{contact.phone}</Text>
         </Body>
         <Right>
-          <Icon name="chevron-forward-outline" />
+          <Icon name="chevron-forward-outline" style={styles.arrow} />
         </Right>
       </ListItem>
     );
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
   },
   contactPhoneStyle: {
     fontSize: 12,
+    color: textColor,
+  },
+  arrow: {
     color: textColor,
   },
 });
