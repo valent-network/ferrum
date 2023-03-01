@@ -20,6 +20,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderBottomWidth: 0,
     borderRadius: 0,
+    alignItems: 'center',
   },
   activeTabButton: {
     width: '33.3333%',
@@ -28,5 +29,6 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: superActiveColor,
     borderRadius: 0,
+    alignItems: 'center',
   },
 });

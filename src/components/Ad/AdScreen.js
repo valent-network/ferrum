@@ -126,14 +126,14 @@ export default function AdScreen({
           iosBarStyle={Appearance.getColorScheme() === 'light' ? 'dark-content' : 'light-content'}
           style={styles.header}
         >
-          <Left>
+          <Left style={styles.backButtonsContainer}>
             <AnimatedIcon
               name={Platform.OS === 'android' ? 'arrow-back-circle-sharp' : 'chevron-back-circle-sharp'}
               style={{ color: textInterpolation }}
               onPress={Navigation.popToTop}
             />
           </Left>
-          <Body>
+          <Body style={styles.centerButtonsContainer}>
             <AnimatedIcon
               onPress={favAction}
               style={ad.favorite ? styles.superActiveColor : { color: textInterpolation }}
@@ -141,11 +141,7 @@ export default function AdScreen({
             />
           </Body>
           <Right style={styles.actionButtonsContainer}>
-            <AnimatedIcon
-              style={{ color: textInterpolation }}
-              onPress={shareAction}
-              name="share-outline"
-            />
+            <AnimatedIcon style={{ color: textInterpolation }} onPress={shareAction} name="share-outline" />
           </Right>
         </Header>
       </Animated.View>

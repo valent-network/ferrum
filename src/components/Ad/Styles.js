@@ -114,6 +114,14 @@ export default styles = StyleSheet.create({
   },
   actionButtonsContainer: {
     flexDirection: 'row',
+    flex: null,
+  },
+  backButtonsContainer: {
+    flex: null,
+  },
+  centerButtonsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   actions: {
     padding: 16,
@@ -171,7 +179,7 @@ export default styles = StyleSheet.create({
     borderRadius: 16,
   },
   imageGalleryBadgeText: {
-    color: secondaryColor,
+    color: activeTextColor,
     fontSize: 14,
   },
   imagePlaceholder: {
