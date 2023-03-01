@@ -133,7 +133,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 44
-        versionName "44.13"
+        versionName "44.14"
         multiDexEnabled true
         dexOptions {
             javaMaxHeapSize "4g"
