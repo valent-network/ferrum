@@ -142,7 +142,7 @@ export default function AdScreen({
           </Body>
           <Right style={styles.actionButtonsContainer}>
             <AnimatedIcon
-              style={{ color: textInterpolation, marginRight: 16 }}
+              style={{ color: textInterpolation }}
               onPress={shareAction}
               name="share-outline"
             />
