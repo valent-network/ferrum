@@ -63,8 +63,8 @@ function ChatRoomsSettingsScreen({
   const closeModal = () => setModalVisible(false);
 
   const onShow = useCallback(() => {
-    // navigation.popToTop(); // TODO: Don't know why its here, maybe it was breaking something
     navigation.navigate('AdsLists');
+    navigation.popToTop();
     navigation.push('Ad', { id: chat.ad_id });
   }, [chat.ad_id]);
   const onLeave = useCallback(() => {
