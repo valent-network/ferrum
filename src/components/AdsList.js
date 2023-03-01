@@ -66,7 +66,7 @@ function AdsList({
   }, []);
 
   const _renderItem = ({ item, index }) => (
-    <AdsListItem ad={item} onPress={onAdOpened} likeAd={likeAd} unlikeAd={unlikeAd} openChat={openPicker} />
+    <AdsListItem ad={item} onPress={onAdOpened} likeAd={likeAd} unlikeAd={unlikeAd} openPicker={openPicker} />
   );
 
   useEffect(() => {

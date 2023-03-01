@@ -36,7 +36,13 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(FiltersToggler);
 
 const styles = StyleSheet.create({
-  mainContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
+  mainContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    paddingHorizontal: 8,
+  },
   text: { color: textColor },
   filtersPresentIcon: { color: activeColor, fontSize: 8, marginLeft: 2 },
 });

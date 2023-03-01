@@ -8,6 +8,8 @@ export default {
       chats: 'Чати',
       systemChats: 'Системні чати',
       myAds: 'Мої оголошення',
+      favoriteAds: 'Вподобані оголошення',
+      visitedAds: 'Відвідані оголошення',
       inviteFriends: 'Запросити друзів',
       language: 'Налаштування мови',
       createAd: 'Нове оголошення',

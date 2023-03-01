@@ -35,7 +35,9 @@ const AdsListsScreen = ({ ads, isLoading, navigation, currentTab, setCurrentTab 
         noShadow={true}
         style={styles.header}
       >
-        <Title style={styles.title}>{t('nav.titles.ads')}</Title>
+        <Title style={styles.title}>
+          {Platform.OS === 'android' ? t(`nav.titles.${currentTab}`) : t('nav.titles.ads')}
+        </Title>
         {Platform.OS !== 'android' && (
           <View style={{ marginBottom: 24 }}>
             {Platform.OS === 'android' ? <Tabs {...tabProps} /> : <SegmentTabs {...tabProps} />}

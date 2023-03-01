@@ -8,6 +8,8 @@ export default {
       chats: 'Chats',
       systemChats: 'System Chats',
       myAds: 'My Ads',
+      favoriteAds: 'Favorite Ads',
+      visitedAds: 'Visited Ads',
       inviteFriends: 'Invite Friends',
       language: 'Language',
       createAd: 'Create Ad',

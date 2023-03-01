@@ -52,9 +52,11 @@ const Chats = ({ chats }) => chats.map((c) => <ChatToContinue chat={c} key={`cha
 
 const Friends = ({ friends, openInvitation }) => (
   <>
-    {friends.map((f) => (
-      <FriendToInvite friend={f} key={`friend-${f.id}-hops-${f.idx}`} onPress={openInvitation} />
-    ))}
+    {friends
+      .sort((a, b) => a.idx - b.idx)
+      .map((f) => (
+        <FriendToInvite friend={f} key={`friend-${f.id}-hops-${f.idx}`} onPress={openInvitation} />
+      ))}
   </>
 );
 

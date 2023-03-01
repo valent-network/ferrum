@@ -61,7 +61,7 @@ const knowsTextFormatted = (friend_name_and_total, t) => {
   }
 };
 
-export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openChat }) {
+export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openPicker }) {
   const { t, i18n } = useTranslation();
 
   const goToAd = useCallback(() => onPress(ad), [ad]);
@@ -69,6 +69,7 @@ export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openChat })
   const favAction = useCallback(() => {
     ad.favorite ? unlikeAd(ad) : likeAd(ad);
   }, [ad.favorite, likeAd, unlikeAd]);
+  const onSend = useCallback(() => openPicker(ad.id), [openPicker, ad.id]);
 
   const updatedAt = updatedAtFormatted(ad.updatedAt, i18n.language);
   const knowsText = knowsTextFormatted(ad.friend_name_and_total, t);
@@ -105,7 +106,7 @@ export default function AdsListItem({ ad, onPress, likeAd, unlikeAd, openChat })
                   onPress={favAction}
                   style={ad.favorite ? styles.activeFavIcon : styles.favIcon}
                 />
-                <Icon name="paper-plane" onPress={openChat} style={styles.textColor} />
+                <Icon name="paper-plane" onPress={onSend} style={styles.textColor} />
               </View>
               {ad.region ? (
                 <Text style={styles.notes}>{`${ad.region}, ${updatedAt}`}</Text>
