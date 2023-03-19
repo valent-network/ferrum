@@ -24,8 +24,11 @@ jobs:
     - name: Copy android/app/src/main/res/values/strings.xml
       run: echo ${{ secrets.STRINGS_XML }} | base64 --decode > android/app/src/main/res/values/strings.xml
 
+    - name: Install yarn
+      run: npm install -g yarn
+
     - name: Install Dependencies
-      run: npm install
+      run: yarn install
 
     - name: Deploy to Codepush (Android)
       uses: NishanthShankar/codepush-action@master
