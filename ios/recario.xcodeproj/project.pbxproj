@@ -13,8 +13,7 @@
 		A8D0D8F524D978A6007FFD8C /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8D0D8F424D978A6007FFD8C /* AppCenter-Config.plist */; };
 		FA0AC4B629380890002F91C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC4B829380890002F91C8 /* InfoPlist.strings */; };
 		FA3CB53A2938955C006BB223 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3CB5392938955C006BB223 /* LaunchScreen.xib */; };
-		FA71B3F6297CB5A100DBB6ED /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FA71B3F5297CB5A100DBB6ED /* logo.png */; };
-		FA71B3F8297CBA1E00DBB6ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */; };
+		FA578ADC29C64FAC00401E91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA578ADB29C64FAC00401E91 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +35,7 @@
 		FA0AC4B729380890002F91C8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA0AC4B929380896002F91C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA3CB5392938955C006BB223 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = recario/LaunchScreen.xib; sourceTree = "<group>"; };
+		FA578ADB29C64FAC00401E91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = recario/Images.xcassets; sourceTree = "<group>"; };
 		FA71B3F5297CB5A100DBB6ED /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "../../../Downloads/Logo Valent/PNG/logo.png"; sourceTree = "<group>"; };
 		FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../Downloads/AppIcons/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +80,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				FA71B3F7297CBA1E00DBB6ED /* Images.xcassets */,
+				FA578ADB29C64FAC00401E91 /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				FA0AC4B829380890002F91C8 /* InfoPlist.strings */,
@@ -198,9 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3CB53A2938955C006BB223 /* LaunchScreen.xib in Resources */,
-				FA71B3F6297CB5A100DBB6ED /* logo.png in Resources */,
+				FA578ADC29C64FAC00401E91 /* Images.xcassets in Resources */,
 				FA0AC4B629380890002F91C8 /* InfoPlist.strings in Resources */,
-				FA71B3F8297CBA1E00DBB6ED /* Images.xcassets in Resources */,
 				A8D0D8F524D978A6007FFD8C /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +375,7 @@
 			baseConfigurationReference = F8D7604BB147F97104F5C47B /* Pods-recario.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = recario/recario.entitlements;
 				CURRENT_PROJECT_VERSION = 16;
