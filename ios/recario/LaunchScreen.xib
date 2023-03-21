@@ -13,13 +13,33 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="428" height="869"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="spatial" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lc3-jF-oQ0">
+                    <rect key="frame" x="103.66666666666669" y="341" width="221" height="187"/>
+                    <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="lc3-jF-oQ0" secondAttribute="height" multiplier="13:11" id="lWL-vj-MMX"/>
+                        <constraint firstAttribute="height" constant="187" id="s4g-s6-wAM"/>
+                        <constraint firstAttribute="width" constant="221" id="tUR-Dx-SA7"/>
+                    </constraints>
+                </imageView>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBlueColor"/>
+            <constraints>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2Ks-oU-cc4"/>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CEe-BA-T5b"/>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CsI-17-zg8"/>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EaT-K8-bZn"/>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ssi-5J-JSp"/>
+                <constraint firstItem="lc3-jF-oQ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="znT-uA-oJ6"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="172.42990654205607" y="339.52483801295898"/>
         </view>
     </objects>
     <resources>
+        <image name="logo.png" width="220.75" height="186.25"/>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
