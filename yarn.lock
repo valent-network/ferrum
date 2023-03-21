@@ -6465,11 +6465,6 @@ react-native@0.64.4:
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
 
-react-navigation-animated-switch@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/react-navigation-animated-switch/-/react-navigation-animated-switch-0.6.5.tgz#128054d8e3d68b2d644d73766a091d8311d450fe"
-  integrity sha512-TvoFZqzGMrgPNydsQEfjN8wADiq+Y6yZ9+j1qaAuuO0ApmnrYfY5Bb/sFVw4RuLfOKr0tEPF+HwcyWLB8d9/YQ==
-
 react-navigation-stack@2.10.4:
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-2.10.4.tgz#377fd6533f8ae0cf5ca5a435a0115851f010306a"
