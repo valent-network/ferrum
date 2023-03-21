@@ -28,6 +28,8 @@ import { Platform, TouchableOpacity, Image, StyleSheet, RefreshControl, SafeArea
 
 import ImagePicker from 'react-native-image-crop-picker';
 
+import { getReadableVersion } from 'react-native-device-info';
+
 import { withTranslation } from 'react-i18next';
 
 import { updateUserName, updateUserAvatar, getProfile } from 'actions/profile';
@@ -431,6 +433,7 @@ class ProfileScreen extends React.PureComponent {
               </List>
             </View>
           </View>
+          <Text style={styles.buildVersion}>v{getReadableVersion()}</Text>
           {referrerModalVisible && <SetReferrerModal onClose={this.closeSetReferrerModal} />}
         </Content>
       </Container>
@@ -507,8 +510,16 @@ styles = StyleSheet.create({
     backgroundColor: primaryColor,
   },
   withBorderBottom: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     borderBottomColor: secondaryColor,
+  },
+  buildVersion: {
+    backgroundColor: primaryColor,
+    color: disabledColor,
+    fontSize: 10,
+    width: '100%',
+    textAlign: 'center',
+    paddingVertical: 16,
   },
   changeAvatarButton: {
     marginTop: 12,
