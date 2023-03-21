@@ -43,7 +43,9 @@ export default function chats(state = initialState, action = {}) {
       };
     case ActionTypes.MESSAGE_IS_DELETING:
       const chat = state.list.filter((c) => c.id === action.message.chat_room_id)[0];
-      if (typeof chat === 'undefined') { return state; }
+      if (typeof chat === 'undefined') {
+        return state;
+      }
 
       chat.messages = chat.messages.map((m) => (m._id === action.message._id ? { ...m, pending: true } : m));
 
