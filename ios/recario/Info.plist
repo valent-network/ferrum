@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSContactsUsageDescription</key>
+	<string>Доступ до контактної книги необхідний, щоб знайти друзів та знайомих, що використовують Рекаріо, а також для допомоги друзям під час вибору автомобіля. Ваші контакти будут час від часу синхронізовуватися з нашими серверами. Чим більше ваших друзів у Рекаріо — тим корисніше Рекаріо буде для вас. Ви можете видалити ваші контакти з наших серверів будь-якої миті.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Доступ до камери необхідний задля того, щоб робити фото для профіля та оголошення</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Доступ до фото у галереї необхідний задля того, щоб обирати існуючі фото профіля та додавати фото до оголошення</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>uk</string>
 	<key>CFBundleDisplayName</key>
