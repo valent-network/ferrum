@@ -49,7 +49,10 @@ const App = () => {
     );
   }
 
-export default codePush(App);
+// TODO: Adjust Codepush to new Appcenter workflow
+// export default codePush(App);
+
+export default App;
 
 const styles = StyleSheet.create({
   mainContainer: {
