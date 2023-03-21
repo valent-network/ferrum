@@ -1,6 +1,6 @@
 import React from 'react';
 
-import codePush from 'react-native-code-push';
+// import codePush from 'react-native-code-push';
 
 // if (process.env.NODE_ENV === 'development') {
 //   const whyDidYouRender = require('@welldone-software/why-did-you-render');

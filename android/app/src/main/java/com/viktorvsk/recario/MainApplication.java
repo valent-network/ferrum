@@ -10,10 +10,10 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
-import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
-import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
-import com.microsoft.codepush.react.CodePush;
+// import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
+// import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
+// import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
+// import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -39,10 +39,10 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         // https://github.com/microsoft/react-native-code-push/issues/1708
-        @Override
-        protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
-        }
+        // @Override
+        // protected String getJSBundleFile() {
+        //     return CodePush.getJSBundleFile();
+        // }
       };
 
   @Override
